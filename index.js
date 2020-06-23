@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-const port = 3000
+const port = 5000;
 
 //Router
 
@@ -16,12 +16,12 @@ const testRouter = require('./routes/test.route')
 const categoryRouter = require('./routes/category.route')
 
 app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/api/test', (req, res) => res.send('day la api test'))
 
 
 
-
-app.use('/admin', adminRouter);
-app.use('/category', categoryRouter);
+// app.use('/admin', adminRouter);
+// app.use('/category', categoryRouter);
 app.use('/test', testRouter);
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))

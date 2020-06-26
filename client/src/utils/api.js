@@ -9,13 +9,13 @@ const api = axios.create({
 
 api.interceptors.request.use(
     config => {
-        const token = localStorage.getItem('token')
-        if (token) {
-            config.headers['Authorization'] = 'Token ${token}'
+        const accessToken = localStorage.getItem('accessToken')
+        if (accessToken) {
+            config.headers['x-access-token'] = accessToken;
         }
         return config
     },
     error => Promise.reject(error)
 )
 
-export default api
+export default api;

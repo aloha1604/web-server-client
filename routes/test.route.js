@@ -12,8 +12,9 @@ const categoryController = require('../controller/category.controller');
 router.post("/admindangnhap", AuthController.loginAdmin);
 router.post("/refresh-token-admin", AuthController.refreshTokenAdmin);
 
+
 // Sử dụng authMiddleware.isAuth trước những api cần xác thực
-router.use(AuthMiddleWare.isAuth);
+router.use(AuthMiddleWare.isAuthAdmin);
 // List Protect APIs:
 router.get("/friends", FriendController.friendLists);
 

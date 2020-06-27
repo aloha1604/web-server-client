@@ -18,7 +18,7 @@ const categoryRouter = require('./routes/category.route')
 app.get('/', (req, res) => res.send('Hello World!'))
 app.get('/api/test', (req, res) => res.send('day la api test'))
 
-
+app.use('/apiAdmin', adminRouter)
 
 // app.use('/admin', adminRouter);
 // app.use('/category', categoryRouter);

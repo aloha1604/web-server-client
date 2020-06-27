@@ -5,7 +5,7 @@ const jwtHelper = require('../helpers/jwt.helper');
 const debug = console.log.bind(console);
 
 // Biến cục bộ trên server này sẽ lưu trữ tạm danh sách token
-let tokenList = {};
+
 
 // Thời gian sống của token
 const accessTokenLife = process.env.ACCESS_TOKEN_LIFE || "1h";
@@ -65,6 +65,19 @@ let loginAdmin = async (req, res) => {
                 })
             })
         }
+
+        var updateAccessToken = function (accesstoken, id) {
+            return new Promise((resolve, reject) => {
+                admin.updateAccessTokenAdmin(accesstoken, id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+
         var adminData = await adminIdD(userAdmin);
         // var a = await data();
         // console.log(adminData[0].refreshtoken);
@@ -78,12 +91,12 @@ let loginAdmin = async (req, res) => {
             const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecretAdmin, accessTokenLife);
             const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecretAdmin, refreshTokenLife);
 
-            tokenList[refreshToken] = { accessToken, refreshToken };
 
             const flagUpdateRefreshToken = await updateRefreshToken(refreshToken, adminData[0].admin_id);
+            const flagUpdateAccessToken = await updateAccessToken(accessToken, adminData[0].admin_id);
 
 
-            if (flagUpdateRefreshToken.changedRows > 0) {
+            if (flagUpdateRefreshToken.changedRows > 0 && flagUpdateAccessToken.changedRows > 0) {
                 // console.log(flagUpdateRefreshToken)
                 debug(`Gửi Token và Refresh Token về cho client...`);
                 return res.status(200).json({ userFakeData, accessToken, refreshToken })

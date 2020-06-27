@@ -53,7 +53,21 @@ exports.updateRefreshTokenAdmin = (refreshtoken, admin_id, result) => {
             result(null, err);
             return;
         } else {
+            console.log('update RefreshToken success');
+            result(null, res);
+        }
+    })
+}
 
+exports.updateAccessTokenAdmin = (accesstoken, admin_id, result) => {
+    const sql = "UPDATE admin SET accesstoken = ? WHERE admin_id = ?";
+    con.query(sql, [accesstoken, admin_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            console.log('update AccessToken success');
             result(null, res);
         }
     })

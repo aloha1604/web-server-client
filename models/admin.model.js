@@ -17,8 +17,8 @@ exports.getAdminById = (adminId, result) => {
 }
 
 exports.getByAdminUserNameAndPassWord = (userAdmin, result) => {
-    const sql = "SELECT * FROM admin WHERE username=? AND password=?";
-    con.query(sql, [userAdmin.username, userAdmin.password], (err, res) => {
+    const sql = "SELECT * FROM admin WHERE username=? ";
+    con.query(sql, [userAdmin.username], (err, res) => {
         if (err) {
             console.log("error:", err);
             result(null, err);

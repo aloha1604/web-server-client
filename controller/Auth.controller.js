@@ -4,6 +4,11 @@ const jwtHelper = require('../helpers/jwt.helper');
 
 const debug = console.log.bind(console);
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+
+
 // Biến cục bộ trên server này sẽ lưu trữ tạm danh sách token
 
 
@@ -40,7 +45,7 @@ let loginAdmin = async (req, res) => {
             username: req.body.username,
             password: req.body.password
         }
-
+        // get data admin username and password
         var adminIdD = function (userAdmin) {
             return new Promise((resolve, reject) => {
                 admin.getByAdminUserNameAndPassWord(userAdmin, (err, data) => {
@@ -80,6 +85,10 @@ let loginAdmin = async (req, res) => {
         }
 
         var adminData = await adminIdD(userAdmin);
+
+        // so sanh mat khau
+        const flagHash = bcrypt.compareSync(userAdmin.password, adminData[0].password);
+
         // var a = await data();
         // console.log(adminData[0].refreshtoken);
         const userFakeData = {
@@ -88,7 +97,7 @@ let loginAdmin = async (req, res) => {
         };
 
 
-        if (adminData.length > 0) {
+        if (adminData.length > 0 && flagHash) {
             const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecretAdmin, accessTokenLife);
             const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecretAdmin, refreshTokenLife);
 

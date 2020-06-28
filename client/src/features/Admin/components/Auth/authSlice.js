@@ -5,7 +5,7 @@ import api from '../../../../utils/api'
 
 const initiaAdmin = localStorage.getItem('admin')
     ? JSON.parse(localStorage.getItem('admin'))
-    : null
+    : { logged: false }
 
 const slice = createSlice({
     name: 'admin',
@@ -15,11 +15,11 @@ const slice = createSlice({
     reducers: {
         loginSuccess: (state, action) => {
             state.admin = action.payload;
-
-            localStorage.setItem('accessToken', JSON.stringify(action.payload.accessToken))
+            state.admin.logged = true;
+            localStorage.setItem('admin', JSON.stringify(action.payload))
         },
         logoutSuccess: (state, action) => {
-            state.user = null;
+            state.admin = { logged: false }
             localStorage.removeItem('admin')
         },
     },
@@ -33,9 +33,9 @@ const { loginSuccess, logoutSuccess } = slice.actions
 
 export const login = ({ username, password }) => async dispatch => {
     try {
-        const res = await api.post('test/admindangnhap', { username, password })
-        console.log(res);
-        dispatch(loginSuccess(res));
+        const res = await api.post('apiAdmin/admindangnhap', { username, password })
+
+        dispatch(loginSuccess(res.data));
     } catch (e) {
         return console.error(e.message);
     }

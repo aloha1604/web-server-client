@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import auth from '../Auth/auth'
-import { useDispatch, useSelector } from 'react-redux';
+
+import { useSelector } from 'react-redux';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-    const admin = useSelector(state => state.admin); // get admin in reducer
+    const adminReducer = useSelector(state => state.adminAuth); // get admin in reducer
     return (
         <Route {...rest}
             render={props => {
-                if (admin) {
+
+                if (adminReducer.admin.logged) {
                     return <Component {...props} />;
                 } else {
                     return <Redirect to={{

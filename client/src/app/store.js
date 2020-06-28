@@ -1,9 +1,10 @@
 // config redux
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { combineReducers } from 'redux';
 
 //some Reducer
-import adminReducer from '../features/Admin/adminSlice';
+import adminAuth from '../features/Admin/components/Auth/authSlice';
+
 
 
 //root Reducer
@@ -12,12 +13,15 @@ import adminReducer from '../features/Admin/adminSlice';
 // }
 
 const rootReducer = combineReducers({
-    adminReducer
+    adminAuth
 })
 
 //config store
 const store = configureStore({
     reducer: rootReducer,
+    middleware: getDefaultMiddleware({
+        serializableCheck: false,
+    }),
 });
 
 export default store;

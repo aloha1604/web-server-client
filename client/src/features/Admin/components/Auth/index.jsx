@@ -58,7 +58,7 @@ function AuthLogin(props) {
         const value = { username, password };
         const action = login(value);
         dispatch(action);
-        // history.replace(`${math.url}/dashBoard`)
+        history.replace(`${math.url}/dashBoard`)
     }
 
 

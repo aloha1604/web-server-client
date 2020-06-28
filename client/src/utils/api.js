@@ -9,9 +9,9 @@ const api = axios.create({
 
 api.interceptors.request.use(
     config => {
-        const accessToken = localStorage.getItem('accessToken')
-        if (accessToken) {
-            config.headers['x-access-token'] = accessToken;
+        const admin = JSON.parse(localStorage.getItem('admin'))
+        if (admin) {
+            config.headers['x-access-token'] = admin.accessToken;
         }
         return config
     },

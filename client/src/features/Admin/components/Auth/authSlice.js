@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import api from '../../../../utils/api'
 
+
 // Slice
 
 const initiaAdmin = localStorage.getItem('admin')
@@ -16,7 +17,14 @@ const slice = createSlice({
         loginSuccess: (state, action) => {
             state.admin = action.payload;
             state.admin.logged = true;
-            localStorage.setItem('admin', JSON.stringify(action.payload))
+            localStorage.setItem('admin', JSON.stringify(state.admin))
+
+        },
+        loginFail: (state, action) => {
+            state.admin = action.payload;
+            state.admin.logged = false;
+            localStorage.setItem('admin', JSON.stringify(state.admin))
+
         },
         logoutSuccess: (state, action) => {
             state.admin = { logged: false }
@@ -29,13 +37,18 @@ export default slice.reducer
 
 //Actions
 
-const { loginSuccess, logoutSuccess } = slice.actions
+const { loginSuccess, logoutSuccess, loginFail } = slice.actions
 
 export const login = ({ username, password }) => async dispatch => {
     try {
         const res = await api.post('apiAdmin/admindangnhap', { username, password })
+        console.log(res.data)
+        if (res.data.error) {
+            dispatch(loginFail(res.data));
+        } else {
+            dispatch(loginSuccess(res.data));
+        }
 
-        dispatch(loginSuccess(res.data));
     } catch (e) {
         return console.error(e.message);
     }

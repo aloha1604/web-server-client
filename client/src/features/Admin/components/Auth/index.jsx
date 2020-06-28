@@ -17,12 +17,10 @@ function AuthLogin(props) {
     const [password, setPassword] = useState('');
     const [validatetionMsg, setValidatetionMsg] = useState({});
 
-    const admin = useSelector(state => state.admin); // get admin in reducer
-    if (admin) {
+    const adminReducer = useSelector(state => state.adminAuth); // get admin in reducer
+    if (adminReducer.admin.logged) {
         // nếu có admin thì sẽ đưa về dashBoard
-        return (
-            history.replace(`${math.url}/dashBoard`)
-        )
+        history.push(`/admin/dashBoard`)
     }
 
     const onChangeEmail = (event) => {
@@ -58,7 +56,8 @@ function AuthLogin(props) {
         const value = { username, password };
         const action = login(value);
         dispatch(action);
-        history.replace(`${math.url}/dashBoard`)
+
+        history.replace(`/admin`);
     }
 
 
@@ -90,6 +89,7 @@ function AuthLogin(props) {
                         onChange={onChangePassword}
                     />
                     <p className="error">{validatetionMsg.password}</p>
+                    <p className="error">{adminReducer.admin.error}</p>
                 </FormGroup>
                 <FormGroup className="form-login-submit">
                     <Button

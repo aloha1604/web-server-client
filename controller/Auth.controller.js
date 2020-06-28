@@ -111,10 +111,10 @@ let loginAdmin = async (req, res) => {
                 debug(`Gửi Token và Refresh Token về cho client...`);
                 return res.status(200).json({ userFakeData, accessToken, refreshToken })
             } else {
-                return res.status(500).json('luu refreshToken that bai');
+                return res.status(500).json({ error: 'Luu token that bai' });
             }
         } else {
-            return res.status(500).json('sai tai khoant mat khau');
+            return res.status(200).json({ error: 'Sai tài khoản hoặc mật khẩu' });
         }
 
     } catch (error) {

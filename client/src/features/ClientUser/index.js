@@ -5,17 +5,20 @@ import './ClientUser.scss';
 
 const Header = React.lazy(() => import('./components/Header'));
 const Footer = React.lazy(() => import('./components/Footer'));
+const Main = React.lazy(() => import('./pages/main'));
 
 function ClienUser(props) {
     return (
-        <div className="wrapper">
-            <p>client end</p>
+        <div >
             <Suspense fallback={<div>Loading ...</div>}>
                 <Header />
+                <div className="container">
+                    <Main />
+                </div>
 
-                <switch>
+                {/* <switch>
                     <Route />
-                </switch>
+                </switch> */}
                 <Footer />
             </Suspense>
         </div>

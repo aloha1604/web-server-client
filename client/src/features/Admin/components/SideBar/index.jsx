@@ -33,14 +33,14 @@ const SideBar = ({ isOpen, toggle }, props) => {
                     <NavItem>
                         <NavLink tag={Link} to={'/about'}>
                             <FontAwesomeIcon icon={faBriefcase} className="mr-2" />
-                            About
+                            Loại sản phẩm
                         </NavLink>
                     </NavItem>
                     <SubMenu title="Pages" icon={faCopy} items={submenus[1]} />
                     <NavItem>
                         <NavLink tag={Link} to={"/pages"}>
                             <FontAwesomeIcon icon={faImage} className="mr-2" />
-                            Portfolio
+                             Nhóm sản phẩm
                         </NavLink>
                     </NavItem>
                     <NavItem>

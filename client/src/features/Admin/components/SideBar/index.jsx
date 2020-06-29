@@ -29,26 +29,18 @@ const SideBar = ({ isOpen, toggle }, props) => {
             <div className="side-menu">
                 <Nav vertical className="list-unstyled pb-3">
                     <p>Quy nam le</p>
-                    <SubMenu title="Home" icon={faHome} items={submenus[0]} />
-                    <NavItem>
-                        <NavLink tag={Link} to={'/about'}>
-                            <FontAwesomeIcon icon={faBriefcase} className="mr-2" />
-                            Loại sản phẩm
-                        </NavLink>
-                    </NavItem>
-                    <SubMenu title="Pages" icon={faCopy} items={submenus[1]} />
-                    <NavItem>
-                        <NavLink tag={Link} to={"/pages"}>
-                            <FontAwesomeIcon icon={faImage} className="mr-2" />
-                             Nhóm sản phẩm
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
+                    <SubMenu title="Admin" icon={faHome} items={submenus[0]} />
+                    <SubMenu title="QLDanh mục" icon={faCopy} items={submenus[1]} />
+                    <SubMenu title="QL Nhóm" icon={faCopy} items={submenus[1]} />
+                    <SubMenu title="QL Đăng Tin" icon={faCopy} items={submenus[1]} />
+                    <SubMenu title="QL UserClient" icon={faCopy} items={submenus[1]} />
+
+                    {/* <NavItem>
                         <NavLink tag={Link} to={"/faq"}>
                             <FontAwesomeIcon icon={faQuestion} className="mr-2" />
                             FAQ
                         </NavLink>
-                    </NavItem>
+                    </NavItem> */}
                     {/* <NavItem>
                         <NavLink tag={Link} to={"/contact"}>
                             <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
@@ -69,20 +61,28 @@ const SideBar = ({ isOpen, toggle }, props) => {
 const submenus = [
     [
         {
-            title: "Home 1",
-            target: "Home-1",
+            title: "Đăng xuất",
+            target: "/admin/dangxuat",
+        },
+    ],
+    [
+        {
+            title: "Thêm danh mục",
+            target: "/admin/themdanhmuc",
         },
         {
-            title: "Home 2",
-            target: "Home-2",
+            title: "Page 2",
+            target: "Page-2",
+        },
+    ],
+    [
+        {
+            title: "Page 1",
+            target: "Page-1",
         },
         {
-            title: "Home 3",
-            target: "Home-3",
-        },
-        {
-            title: "Home 4",
-            target: "Home-4",
+            title: "Page 2",
+            target: "Page-2",
         },
     ],
     [

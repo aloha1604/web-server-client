@@ -7,6 +7,8 @@ const Content = (props) => {
 
     return (
         <Container fluid className="content">
+            <p>hello</p>
+            {/* mỗi page cần 1 cái cần tent */}
             <Switch>
                 <Route exact path="/" component={() => "Hello"} />
                 <Route exact path="/about" component={() => "About"} />

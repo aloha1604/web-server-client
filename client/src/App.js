@@ -6,6 +6,7 @@ import NotFound from './components/NotFound';
 
 // Lazy load - Code splitting
 const Admin = React.lazy(() => import('./features/Admin'));
+const ClientUser = React.lazy(() => import('./features/ClientUser'));
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Switch>
             <Redirect exact from="/" to="/Home" />
 
+            <Route path="/Home" component={ClientUser} />
             <Route path="/admin" component={Admin} />
             <Route component={NotFound} />
           </Switch>

@@ -16,7 +16,7 @@ function ClienUser(props) {
                 <div className="container">
                     <Main />
                     <switch>
-                        <Route path='/Home' component={Main} />
+                        <Route path={`${math.url}`} component={Main} />
                         <Route path={`${math.url}/dangky`} component={Main} />
                         <Route path={`${math.url}/dangnhap`} component={Main} />
                         <Route path={`${math.url}/dangxuat`} component={Main} />

@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-main.propTypes = {
+Main.propTypes = {
 
 };
 
-function main(props) {
+function Main(props) {
     return (
         <div>
-            main
+
         </div>
     );
 }
 
-export default main;
+export default Main;

@@ -1,19 +1,16 @@
 import React, { Suspense } from 'react';
-import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 
-import MainPage from './pages/Main';
-import NotFound from './components/NotFound';
-import SideBar from "./components/SideBar"
-import Auth from './components/Auth'
 import ProtectedRoute from './components/ProtectedRoute'
 import './Admin.scss';
 
 
 
 // Lazy load - Code splitting
-const QlLoaiSanPham = React.lazy(() => import('./QlLoaiSanPham'));
-const QlSanPham = React.lazy(() => import('./QlSanPham'));
+const Auth = React.lazy(() => import('./components/Auth'));
+const MainPage = React.lazy(() => import('./pages/Main'));
+const NotFound = React.lazy(() => import('./components/NotFound'));
 
 function Admin(props) {
     const match = useRouteMatch();

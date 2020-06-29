@@ -1,13 +1,11 @@
 import React, { Suspense, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
+
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import Content from '../components/Content/Content'
 import NotFound from '../components/NotFound'
-import auth from '../components/Auth/auth'
-Main.propTypes = {
 
-};
+
 
 function Main(props) {
     const [sidebarIsOpen, setSidebarOpen] = useState(true);

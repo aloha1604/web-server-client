@@ -8,7 +8,7 @@ Header.propTypes = {
 function Header(props) {
     return (
         <div>
-
+            day la header
         </div>
     );
 }

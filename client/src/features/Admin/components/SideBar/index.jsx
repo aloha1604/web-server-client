@@ -14,8 +14,8 @@ import { Link, Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import SubMenu from "./SubMenu.jsx";
 
-import auth from '../Auth/auth'
-const SideBar = ({ isOpen, toggle }, props) => {
+
+const SideBar = ({ isOpen, toggle, nameAdmin }) => {
     const match = useRouteMatch();
 
     return (
@@ -28,12 +28,12 @@ const SideBar = ({ isOpen, toggle }, props) => {
             </div>
             <div className="side-menu">
                 <Nav vertical className="list-unstyled pb-3">
-                    <p>Quy nam le</p>
+                    <p>Chào mừng {nameAdmin} đến với admin</p>
                     <SubMenu title="Admin" icon={faHome} items={submenus[0]} />
                     <SubMenu title="QLDanh mục" icon={faCopy} items={submenus[1]} />
-                    <SubMenu title="QL Nhóm" icon={faCopy} items={submenus[1]} />
-                    <SubMenu title="QL Đăng Tin" icon={faCopy} items={submenus[1]} />
-                    <SubMenu title="QL UserClient" icon={faCopy} items={submenus[1]} />
+                    <SubMenu title="QL Nhóm" icon={faCopy} items={submenus[2]} />
+                    <SubMenu title="QL Đăng Tin" icon={faCopy} items={submenus[3]} />
+                    <SubMenu title="QL UserClient" icon={faCopy} items={submenus[3]} />
 
                     {/* <NavItem>
                         <NavLink tag={Link} to={"/faq"}>
@@ -61,6 +61,10 @@ const SideBar = ({ isOpen, toggle }, props) => {
 const submenus = [
     [
         {
+            title: "Cập nhập mật khẩu",
+            target: "/admin/capnhatmatkhau",
+        },
+        {
             title: "Đăng xuất",
             target: "/admin/dangxuat",
         },
@@ -71,28 +75,42 @@ const submenus = [
             target: "/admin/themdanhmuc",
         },
         {
-            title: "Page 2",
-            target: "Page-2",
+            title: "Tất cả danh mục",
+            target: "/admin/alldanhmuc",
         },
     ],
     [
         {
-            title: "Page 1",
-            target: "Page-1",
+            title: "Thêm nhóm",
+            target: "/admin/themnhom",
         },
         {
-            title: "Page 2",
-            target: "Page-2",
+            title: "Tất cả nhóm",
+            target: "/admin/allnhom",
         },
     ],
     [
         {
-            title: "Page 1",
-            target: "Page-1",
+            title: "Tin đăng chờ duyệt",
+            target: "/admin/tindangchoduyet",
         },
         {
-            title: "Page 2",
-            target: "Page-2",
+            title: "Tin vi phạm",
+            target: "/admin/tinvipham",
+        },
+        {
+            title: "Tin đã duyệt",
+            target: "/admin/tindaduyet",
+        },
+    ],
+    [
+        {
+            title: "User vi phạm",
+            target: "/admin/tindangchoduyet",
+        },
+        {
+            title: "Tất cả user",
+            target: "/admin/tinvipham",
         },
     ],
 ];

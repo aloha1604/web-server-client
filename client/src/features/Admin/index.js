@@ -27,16 +27,15 @@ function Admin(props) {
 
             <Suspense fallback={<div>Loading ...</div>}>
                 <div className="App wrapper">
-                    {adminReducer.admin.logged ? <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} /> : null}
+                    {adminReducer.admin.logged ? <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} nameAdmin={adminReducer.admin.userFakeData.name} /> : null}
 
                     <Switch>
                         <Route exact path='/admin' component={Auth} />
-                        <Route exact path={'/admin/themdanhmuc'} component={() => "themdanhmuc"} />
-                        {/* <ProtectedRoute
-                        exact
-                        path={`${match.url}/quanly`}
-                        component={() => "Home-1"}
-                    /> */}
+                        <ProtectedRoute
+                            exact
+                            path={`${match.url}/themdanhmuc`}
+                            component={() => "themdanhmucaaaa"}
+                        />
                         <ProtectedRoute
                             exact
                             path={`${match.url}/dashBoard`}

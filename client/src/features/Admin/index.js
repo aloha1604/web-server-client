@@ -10,8 +10,9 @@ import './Admin.scss';
 import SideBar from './components/SideBar'
 // Lazy load - Code splitting
 const Auth = React.lazy(() => import('./components/Auth'));
-// const MainPage = React.lazy(() => import('./pages/Main'));
 const NotFound = React.lazy(() => import('./components/NotFound'));
+const TatCaDanhMuc = React.lazy(() => import('./components/DanhMucSanPham/TatCaDanhMuc'));
+const ThemDanhMuc = React.lazy(() => import('./components/DanhMucSanPham/ThemDanhMuc'));
 
 function Admin(props) {
     const match = useRouteMatch();
@@ -32,12 +33,12 @@ function Admin(props) {
                         <ProtectedRoute
                             exact
                             path={`${match.url}/themdanhmuc`}
-                            component={() => "themdanhmucaaaa"}
+                            component={ThemDanhMuc}
                         />
                         <ProtectedRoute
                             exact
-                            path={`${match.url}/dashBoard`}
-                            component={() => "themdanhmuc"}
+                            path={`${match.url}/tatcadanhmuc`}
+                            component={TatCaDanhMuc}
                         />
                         {/* phải dùng cách proteced 1 router thì xài 1 pagecomponent và bỏ side bar vào */}
                         <Route path="/admin/*" component={NotFound} />

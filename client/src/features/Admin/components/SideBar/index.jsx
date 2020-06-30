@@ -76,7 +76,7 @@ const submenus = [
         },
         {
             title: "Tất cả danh mục",
-            target: "/admin/alldanhmuc",
+            target: "/admin/tatcadanhmuc",
         },
     ],
     [
@@ -86,7 +86,7 @@ const submenus = [
         },
         {
             title: "Tất cả nhóm",
-            target: "/admin/allnhom",
+            target: "/admin/tatcanhom",
         },
     ],
     [

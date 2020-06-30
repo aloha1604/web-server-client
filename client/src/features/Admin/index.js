@@ -7,8 +7,6 @@ import ProtectedRoute from './components/ProtectedRoute'
 import './Admin.scss';
 
 
-import MainPage from './pages/Main'
-import Content from './components/Content/Content'
 import SideBar from './components/SideBar'
 // Lazy load - Code splitting
 const Auth = React.lazy(() => import('./components/Auth'));

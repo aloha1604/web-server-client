@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Table, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, FormText, CardImg, ModalFooter } from "reactstrap";
 import { useRouteMatch } from 'react-router-dom'
 
-const TatCaDanhMuc = (props) => {
+const UserChuaActive = (props) => {
 
 
     const [modal, setModal] = useState(false);
@@ -16,13 +16,13 @@ const TatCaDanhMuc = (props) => {
         <Container fluid className="content">
             <Breadcrumb tag="nav" listTag="div">
                 <BreadcrumbItem active tag="span">Admin</BreadcrumbItem>
-                <BreadcrumbItem tag="a" href={math.url} active >Tất cả danh mục</BreadcrumbItem>
+                <BreadcrumbItem tag="a" href={math.url} active >User đã đăng ký chưa xác nhận email</BreadcrumbItem>
             </Breadcrumb>
             <Table striped>
                 <thead>
                     <tr>
-                        <th>ID Tin</th>
-                        <th>Tiêu đề</th>
+                        <th>ID User</th>
+                        <th>Tên user</th>
                         <th>Hình ảnh</th>
                         <th>Chi tiết</th>
                         <th>Chức năng</th>
@@ -116,23 +116,23 @@ const TatCaDanhMuc = (props) => {
                             </Modal>
                         </td>
                         <td>
-                            <Button color="success">Duyệt tin</Button>{' '}
-                            <Button color="warning" onClick={toggleTow}>vi phạm</Button>
+
+                            <Button color="warning" onClick={toggleTow}>Lý do</Button>{' '}
                             <Modal isOpen={modalTow} toggle={toggleTow} >
                                 <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
                                 <ModalBody>
                                     <Form>
                                         <FormGroup>
                                             <Label for="exampleText">Text Area</Label>
-                                            <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" />
+                                            <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" disabled />
                                         </FormGroup>
                                     </Form>
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button color="primary" onClick={toggleTow}>Vi phạm</Button>{' '}
                                     <Button color="secondary" onClick={toggleTow}>Thoát</Button>
                                 </ModalFooter>
                             </Modal>
+                            <Button color="danger">Xóa tin</Button>
                         </td>
                     </tr>
                     <tr >
@@ -143,7 +143,23 @@ const TatCaDanhMuc = (props) => {
                             height: '4rem'
                         }}><CardImg top width="40rem" height="50rem" src="https://picsum.photos/id/237/200/300" alt="Card image cap" /></td>
                         <td><Button color="info">xem chi tiêt</Button></td>
-                        <td><Button color="success">Duyệt tin</Button>{' '}<Button color="warning">Vi phạm</Button>{' '}</td>
+                        <td>
+                            <Button color="warning" onClick={toggleTow}>Lý do</Button>{' '}
+                            <Modal isOpen={modalTow} toggle={toggleTow} >
+                                <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
+                                <ModalBody>
+                                    <Form>
+                                        <FormGroup>
+                                            <Label for="exampleText">Text Area</Label>
+                                            <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" disabled />
+                                        </FormGroup>
+                                    </Form>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button color="secondary" onClick={toggleTow}>Thoát</Button>
+                                </ModalFooter>
+                            </Modal>
+                            <Button color="danger">Xóa tin</Button></td>
                     </tr>
                     <tr >
 
@@ -154,7 +170,23 @@ const TatCaDanhMuc = (props) => {
                             height: '4rem'
                         }}><CardImg top width="40rem" height="50rem" src="https://picsum.photos/id/237/200/300" alt="Card image cap" /></td>
                         <td><Button color="info">xem chi tiêt</Button></td>
-                        <td><Button color="success">Duyệt tin</Button>{' '}<Button color="warning">Vi phạm</Button>{' '}</td>
+                        <td>
+                            <Button color="warning" onClick={toggleTow}>Lý do</Button>{' '}
+                            <Modal isOpen={modalTow} toggle={toggleTow} >
+                                <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
+                                <ModalBody>
+                                    <Form>
+                                        <FormGroup>
+                                            <Label for="exampleText">Text Area</Label>
+                                            <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" disabled />
+                                        </FormGroup>
+                                    </Form>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button color="secondary" onClick={toggleTow}>Thoát</Button>
+                                </ModalFooter>
+                            </Modal>
+                            <Button color="danger">Xóa tin</Button></td>
                     </tr>
                 </tbody>
             </Table>
@@ -163,4 +195,4 @@ const TatCaDanhMuc = (props) => {
     );
 }
 
-export default TatCaDanhMuc;
+export default UserChuaActive;

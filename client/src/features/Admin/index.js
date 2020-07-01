@@ -16,6 +16,11 @@ const ThemDanhMuc = React.lazy(() => import('./components/DanhMucSanPham/ThemDan
 const TatCaNhom = React.lazy(() => import('./components/NhomSanPham/TatCaNhom'));
 const ThemNhom = React.lazy(() => import('./components/NhomSanPham/ThemNhom'));
 const TinDangChoDuyet = React.lazy(() => import('./components/QuanLyTinDang/TinDangChoDuyet'));
+const TinViPham = React.lazy(() => import('./components/QuanLyTinDang/TinViPham'));
+const TinDaDuyet = React.lazy(() => import('./components/QuanLyTinDang/TinDaDuyet'));
+const UserViPham = React.lazy(() => import('./components/QuanLyUser/UserViPham'));
+const UserChuaActive = React.lazy(() => import('./components/QuanLyUser/UserChuaActive'));
+const UserDaActive = React.lazy(() => import('./components/QuanLyUser/UserDaActive'))
 
 function Admin(props) {
     const match = useRouteMatch();
@@ -64,6 +69,31 @@ function Admin(props) {
                             exact
                             path={`${match.url}/tindangchoduyet`}
                             component={TinDangChoDuyet}
+                        />
+                        <ProtectedRoute
+                            exact
+                            path={`${match.url}/tinvipham`}
+                            component={TinViPham}
+                        />
+                        <ProtectedRoute
+                            exact
+                            path={`${match.url}/tindaduyet`}
+                            component={TinDaDuyet} uservipham
+                        />
+                        <ProtectedRoute
+                            exact
+                            path={`${match.url}/uservipham`}
+                            component={UserViPham} userchuaactive
+                        />
+                        <ProtectedRoute
+                            exact
+                            path={`${match.url}/userchuaactive`}
+                            component={UserChuaActive}
+                        />
+                        <ProtectedRoute
+                            exact
+                            path={`${match.url}/userdaactive`}
+                            component={UserDaActive}
                         />
 
 

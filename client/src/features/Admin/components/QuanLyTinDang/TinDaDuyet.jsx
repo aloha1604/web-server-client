@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Table, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, FormText, CardImg, ModalFooter } from "reactstrap";
 import { useRouteMatch } from 'react-router-dom'
 
-const TatCaDanhMuc = (props) => {
+const TinDaDuyet = (props) => {
 
 
     const [modal, setModal] = useState(false);
@@ -16,7 +16,7 @@ const TatCaDanhMuc = (props) => {
         <Container fluid className="content">
             <Breadcrumb tag="nav" listTag="div">
                 <BreadcrumbItem active tag="span">Admin</BreadcrumbItem>
-                <BreadcrumbItem tag="a" href={math.url} active >Tất cả danh mục</BreadcrumbItem>
+                <BreadcrumbItem tag="a" href={math.url} active >Tin đã duyệt</BreadcrumbItem>
             </Breadcrumb>
             <Table striped>
                 <thead>
@@ -116,7 +116,7 @@ const TatCaDanhMuc = (props) => {
                             </Modal>
                         </td>
                         <td>
-                            <Button color="success">Duyệt tin</Button>{' '}
+                            <Button color="danger">Xóa</Button>{' '}
                             <Button color="warning" onClick={toggleTow}>vi phạm</Button>
                             <Modal isOpen={modalTow} toggle={toggleTow} >
                                 <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
@@ -143,7 +143,7 @@ const TatCaDanhMuc = (props) => {
                             height: '4rem'
                         }}><CardImg top width="40rem" height="50rem" src="https://picsum.photos/id/237/200/300" alt="Card image cap" /></td>
                         <td><Button color="info">xem chi tiêt</Button></td>
-                        <td><Button color="success">Duyệt tin</Button>{' '}<Button color="warning">Vi phạm</Button>{' '}</td>
+                        <td><Button color="danger">Xóa</Button>{' '}<Button color="warning">Vi phạm</Button>{' '}</td>
                     </tr>
                     <tr >
 
@@ -154,7 +154,7 @@ const TatCaDanhMuc = (props) => {
                             height: '4rem'
                         }}><CardImg top width="40rem" height="50rem" src="https://picsum.photos/id/237/200/300" alt="Card image cap" /></td>
                         <td><Button color="info">xem chi tiêt</Button></td>
-                        <td><Button color="success">Duyệt tin</Button>{' '}<Button color="warning">Vi phạm</Button>{' '}</td>
+                        <td><Button color="danger">Xóa</Button>{' '}<Button color="warning">Vi phạm</Button>{' '}</td>
                     </tr>
                 </tbody>
             </Table>
@@ -163,4 +163,4 @@ const TatCaDanhMuc = (props) => {
     );
 }
 
-export default TatCaDanhMuc;
+export default TinDaDuyet;

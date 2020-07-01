@@ -33,7 +33,7 @@ const SideBar = ({ isOpen, toggle, nameAdmin }) => {
                     <SubMenu title="QLDanh mục" icon={faCopy} items={submenus[1]} />
                     <SubMenu title="QL Nhóm" icon={faCopy} items={submenus[2]} />
                     <SubMenu title="QL Đăng Tin" icon={faCopy} items={submenus[3]} />
-                    <SubMenu title="QL UserClient" icon={faCopy} items={submenus[3]} />
+                    <SubMenu title="QL UserClient" icon={faCopy} items={submenus[4]} />
 
                     {/* <NavItem>
                         <NavLink tag={Link} to={"/faq"}>
@@ -106,11 +106,15 @@ const submenus = [
     [
         {
             title: "User vi phạm",
-            target: "/admin/tindangchoduyet",
+            target: "/admin/uservipham",
         },
         {
-            title: "Tất cả user",
-            target: "/admin/tinvipham",
+            title: "User chưa active",
+            target: "/admin/userchuaactive",
+        },
+        {
+            title: "User đã active",
+            target: "/admin/userdaactive",
         },
     ],
 ];

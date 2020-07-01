@@ -1,16 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faHome,
-    faBriefcase,
-    faPaperPlane,
-    faQuestion,
-    faImage,
+
+    faSignOutAlt,
     faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
-import { Link, Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import SubMenu from "./SubMenu.jsx";
 
@@ -29,7 +26,8 @@ const SideBar = ({ isOpen, toggle, nameAdmin }) => {
             <div className="side-menu">
                 <Nav vertical className="list-unstyled pb-3">
                     <p>Chào mừng {nameAdmin} đến với admin</p>
-                    <SubMenu title="Admin" icon={faHome} items={submenus[0]} />
+
+                    {/* <SubMenu title="Admin" icon={faHome} items={submenus[0]} /> */}
                     <SubMenu title="QLDanh mục" icon={faCopy} items={submenus[1]} />
                     <SubMenu title="QL Nhóm" icon={faCopy} items={submenus[2]} />
                     <SubMenu title="QL Đăng Tin" icon={faCopy} items={submenus[3]} />
@@ -52,6 +50,12 @@ const SideBar = ({ isOpen, toggle, nameAdmin }) => {
                             >logout</button>
                         </NavLink>
                     </NavItem> */}
+                    <NavItem>
+                        <NavLink tag={Link} to={"/admin/thoat"}>
+                            <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
+                            Thoát
+                        </NavLink>
+                    </NavItem>
                 </Nav>
             </div>
         </div>)

@@ -23,13 +23,13 @@ function Header(props) {
     return (
         <Container>
             <div>
-                <Navbar color="light" light expand="md">
-                    <NavbarBrand href="/">Ebay classifieds</NavbarBrand>
+                <Navbar color="light" light expand="lg">
+                    <NavbarBrand href="/">QuýNam.vn</NavbarBrand>
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="mr-auto" >
                         </Nav>
-                        <NavbarText> <Nav className="ml-auto" navbar>
+                        <NavbarText> <Nav className="ml-auto " navbar>
                             <NavItem style={{
                                 display: 'flex'
                             }}>
@@ -41,6 +41,9 @@ function Header(props) {
 
                             </NavItem>
                             {/* ở đây sau này viết nếu chưa đăng nhập sẽ hiện Đăng ký/đăng nhập, nếu đăng nhập rồi thì sẽ Tài Khoản */}
+                            <NavItem>
+                                <NavLink href="/components/">Đăng tin</NavLink>
+                            </NavItem>
                             <NavItem>
                                 <NavLink href="/components/">Đăng ký</NavLink>
                             </NavItem>

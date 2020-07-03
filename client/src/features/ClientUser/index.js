@@ -5,7 +5,7 @@ import './ClientUser.scss';
 
 const Header = React.lazy(() => import('./components/Header'));
 const Footer = React.lazy(() => import('./components/Footer'));
-const Main = React.lazy(() => import('./pages/Main'));
+
 const HomeMain = React.lazy(() => import('./components/HomeMain/HomeMain'));
 
 const MainUser = React.lazy(() => import('./components/QuanLyUser/MainUser'));
@@ -26,7 +26,7 @@ function ClienUser(props) {
                         <Route exact path={`${math.url}`} component={HomeMain} />
                         <Route exact path={`${math.url}/mainuser`} component={MainUser} />
                         <Route path={`${math.url}/quanlydangtin`} component={QuanLyTin} />
-                        <Route path={`${math.url}/dangxuat`} component={Main} />
+                        {/* <Route path={`${math.url}/dangxuat`} component={Main} /> */}
                     </Switch>
 
                 </div>

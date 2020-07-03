@@ -14,28 +14,33 @@ function HomeMain(props) {
                                     <h6 className="group-header icon-group building">Bất động sản</h6>
                                     <div className="row building">
                                         <div className="col-6 col-md-5">
-                                            <h6><a href="/mua-ban-nha-dat" title="Mua bán nhà đất">Mua bán nhà đất</a></h6> <a href="http://raovat.vnexpress.net/mua-ban-nha-dat/can-ho-chung-cu" alt="Căn hộ chung cư">Căn hộ chung cư</a><a href="http://raovat.vnexpress.net/mua-ban-nha-dat/nha-trong-ngo" alt="Nhà trong ngõ">Nhà trong ngõ</a>
+                                            <h6><a href="/mua-ban-nha-dat" title="Mua bán nhà đất">Mua bán nhà đất</a></h6>
+                                            <a href="http://raovat.vnexpress.net/mua-ban-nha-dat/can-ho-chung-cu" alt="Căn hộ chung cư">Căn hộ chung cư</a>
+                                            <a href="http://raovat.vnexpress.net/mua-ban-nha-dat/nha-trong-ngo" alt="Nhà trong ngõ">Nhà trong ngõ</a>
                                             <a
-                                                href="http://raovat.vnexpress.net/mua-ban-nha-dat/nha-mat-pho" alt="Nhà mặt phố">Nhà mặt phố</a><a href="http://raovat.vnexpress.net/mua-ban-nha-dat/biet-thu-lien-ke-phan-lo" alt="Biệt thự, liền kề, phân lô">Biệt thự, liền kề, phân lô</a><a href="http://raovat.vnexpress.net/mua-ban-nha-dat/dat-nen-du-an"
-                                                    alt="Đất, nền dự án">Đất, nền dự án</a><a href="http://raovat.vnexpress.net/mua-ban-nha-dat/kho-bai-nha-xuong" alt="Kho bãi, nhà xưởng">Kho bãi, nhà xưởng</a> </div>
+                                                href="http://raovat.vnexpress.net/mua-ban-nha-dat/nha-mat-pho" alt="Nhà mặt phố">Nhà mặt phố</a>
+                                            <a href="http://raovat.vnexpress.net/mua-ban-nha-dat/biet-thu-lien-ke-phan-lo" alt="Biệt thự, liền kề, phân lô">Biệt thự, liền kề, phân lô</a>
+                                            <a href="http://raovat.vnexpress.net/mua-ban-nha-dat/dat-nen-du-an"
+                                                alt="Đất, nền dự án">Đất, nền dự án</a>
+                                            <a href="http://raovat.vnexpress.net/mua-ban-nha-dat/kho-bai-nha-xuong" alt="Kho bãi, nhà xưởng">Kho bãi, nhà xưởng</a>
+                                        </div>
                                         <div className="col-6 col-md-7">
-                                            <h6><a href="/thue-nha-dat" title="Thuê nhà đất">Thuê nhà đất</a></h6>
+                                            {/* render nếu array [5]  thi rrender cột khác*/}
+                                            <h6><a style={{ paddingLeft: '15px' }} href="/thue-nha-dat" title="Thuê nhà đất">Thuê nhà đất</a></h6>
                                             <div className="row building">
                                                 <div className="col-md-7">
-                                                    <a href="http://raovat.vnexpress.net/thue-nha-dat/can-ho-chung-cu" alt="Căn hộ chung cư">Căn hộ chung cư</a><a href="http://raovat.vnexpress.net/thue-nha-dat/nha-trong-ngo" alt="Nhà trong ngõ">Nhà trong ngõ</a>
-                                                    <a
-                                                        href="http://raovat.vnexpress.net/thue-nha-dat/nha-mat-pho" alt="Nhà mặt phố">Nhà mặt phố</a><a href="http://raovat.vnexpress.net/thue-nha-dat/biet-thu-lien-ke-phan-lo" alt="Biệt thự, liền kề, phân lô">Biệt thự, liền kề, phân lô</a><a href="http://raovat.vnexpress.net/thue-nha-dat/phong-tro"
-                                                            alt="Phòng trọ">Phòng trọ</a><a href="http://raovat.vnexpress.net/thue-nha-dat/kho-bai-nha-xuong" alt="Kho bãi, nhà xưởng">Kho bãi, nhà xưởng</a>
+                                                    <a href="http://raovat.vnexpress.net/thue-nha-dat/can-ho-chung-cu" alt="Căn hộ chung cư">Căn hộ chung cư</a>
+                                                    <a href="http://raovat.vnexpress.net/thue-nha-dat/nha-trong-ngo" alt="Nhà trong ngõ">Nhà trong ngõ</a>
+                                                    <a href="http://raovat.vnexpress.net/thue-nha-dat/nha-mat-pho" alt="Nhà mặt phố">Nhà mặt phố</a>
+                                                    <a href="http://raovat.vnexpress.net/thue-nha-dat/biet-thu-lien-ke-phan-lo" alt="Biệt thự, liền kề, phân lô">Biệt thự, liền kề, phân lô</a>
+                                                    <a href="http://raovat.vnexpress.net/thue-nha-dat/phong-tro" alt="Phòng trọ">Phòng trọ</a>
+                                                    <a href="http://raovat.vnexpress.net/thue-nha-dat/kho-bai-nha-xuong" alt="Kho bãi, nhà xưởng">Kho bãi, nhà xưởng</a>
                                                 </div>
                                                 <div className="col-md-5">
                                                     <a href="http://raovat.vnexpress.net/thue-nha-dat/van-phong" alt="Văn phòng">Văn phòng</a>
                                                     <a href="http://raovat.vnexpress.net/thue-nha-dat/cua-hang" alt="Cửa hàng">Cửa hàng</a>
-                                                    <a href="http://raovat.vnexpress.net/thue-nha-dat/cac-loai-bds-khac"
-                                                        alt="Các loại BĐS khác">Các loại BĐS khác</a>
+                                                    <a href="http://raovat.vnexpress.net/thue-nha-dat/cac-loai-bds-khac" alt="Các loại BĐS khác">Các loại BĐS khác</a>
                                                 </div>
-
-
-
                                             </div>
                                         </div>
                                     </div>

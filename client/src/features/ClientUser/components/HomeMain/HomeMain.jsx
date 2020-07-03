@@ -154,7 +154,7 @@ function HomeMain(props) {
                 <div id="top-vip">
                     <div className="list-grid paragraph">
                         <div className="row">
-                            <div className="col-lg-3 col-md-3 col-sm-6 producthovercover">
+                            <div className="col-lg-3 col-md-3 col-sm-6 ">
                                 <a className="product" href="/tp-ho-chi-minh-quan-9/mua-ban-nha-dat-biet-thu-lien-ke-phan-lo/nha-pho-biet-thu-1-tret-2-lau-1-ap-mai-q9-5x20-8x20-da-xay-dung-2228540.html">
                                     <div className="thumb"><img src="https://imgraovat.vnecdn.net/images/300_180/2020/03/16/6da53997f6f2c15921e6485c23514573.jpeg" className="img-fluid img-thumbnail" />
                                     </div>

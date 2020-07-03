@@ -12,13 +12,22 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText, Input, Button
+    NavbarText, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, FormText, Alert
 } from 'reactstrap';
 
 
 function Header(props) {
     const [isOpen, setIsOpen] = useState(false);
+    const {
+        buttonLabel,
+        className
+    } = props;
 
+    const [modalDangNhap, setModalDangNhap] = useState(false);
+    const [modalDangKy, setModalDangKy] = useState(false);
+
+    const toggleModalDangNhap = () => setModalDangNhap(!modalDangNhap);
+    const toggleModalDangky = () => setModalDangKy(!modalDangKy);
     const toggle = () => setIsOpen(!isOpen);
     return (
         <Container>
@@ -45,10 +54,61 @@ function Header(props) {
                                 <NavLink href="/components/">Đăng tin</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/components/">Đăng ký</NavLink>
+                                <NavLink onClick={toggleModalDangky}>Đăng ký</NavLink>
+                                {/* <Button color="danger" onClick={toggleModalDangNhap}>dang nhap</Button> */}
+                                <Modal isOpen={modalDangKy} toggle={toggleModalDangky} >
+                                    <ModalHeader toggle={toggleModalDangky}>Đăng ký</ModalHeader>
+                                    <ModalBody>
+                                        <Form>
+                                            <FormGroup>
+                                                <Label for="exampleEmail">Email</Label>
+                                                <Input type="email" name="email" id="exampleEmail" placeholder="Nhập email" />
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Label for="examplePassword">Password</Label>
+                                                <Input type="password" name="password" id="examplePassword" placeholder="Nhập password" />
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Alert color="primary">
+                                                    Đăng ký xong hãy vào email xác nhận !
+                                                </Alert>
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Button color="primary" size="sm">Đăng ký</Button>{' '}
+
+                                            </FormGroup>
+                                        </Form>
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button color="secondary" onClick={toggleModalDangky}>Cancel</Button>
+                                    </ModalFooter>
+                                </Modal>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">Đăng nhập</NavLink>
+                                <NavLink onClick={toggleModalDangNhap}>Đăng nhập</NavLink>
+                                {/* <Button color="danger" onClick={toggleModalDangNhap}>dang nhap</Button> */}
+                                <Modal isOpen={modalDangNhap} toggle={toggleModalDangNhap} >
+                                    <ModalHeader toggle={toggleModalDangNhap}>Đăng nhập</ModalHeader>
+                                    <ModalBody>
+                                        <Form>
+                                            <FormGroup>
+                                                <Label for="exampleEmail">Email</Label>
+                                                <Input type="email" name="email" id="exampleEmail" placeholder="Nhập email" />
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Label for="examplePassword">Password</Label>
+                                                <Input type="password" name="password" id="examplePassword" placeholder="Nhập password" />
+                                            </FormGroup>
+                                            <FormGroup>
+                                                <Button color="primary" size="sm">Đăng nhập</Button>{' '}
+                                                <Button color="secondary" size="sm">Quên mật khẩu</Button>
+                                            </FormGroup>
+                                        </Form>
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button color="secondary" onClick={toggleModalDangNhap}>Cancel</Button>
+                                    </ModalFooter>
+                                </Modal>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
@@ -61,10 +121,10 @@ function Header(props) {
                                     <DropdownItem>
                                         Quản lý tin đăng
                                     </DropdownItem>
-                                    <DropdownItem divider />
                                     <DropdownItem>
                                         Tin lưu trữ
                                     </DropdownItem>
+                                    <DropdownItem divider />
                                     <DropdownItem>
                                         Thoát tài khoản
                                     </DropdownItem>

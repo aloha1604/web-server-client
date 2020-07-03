@@ -8,23 +8,29 @@ const Footer = React.lazy(() => import('./components/Footer'));
 const Main = React.lazy(() => import('./pages/Main'));
 const HomeMain = React.lazy(() => import('./components/HomeMain/HomeMain'));
 
+const MainUser = React.lazy(() => import('./components/QuanLyUser/MainUser'));
+
+
+
 function ClienUser(props) {
     const math = useRouteMatch();
     return (
         <div >
             <Suspense fallback={<div>Loading ...</div>}>
                 <Header />
-                <HomeMain />
-                <div className="container">
-                    <Main />
+
+                <div className="appclient">
+
                     <Switch>
-                        <Route path={`${math.url}`} component={Main} />
-                        <Route path={`${math.url}/dangky`} component={Main} />
+                        <Route exact path={`${math.url}`} component={HomeMain} />
+                        <Route exact path={`${math.url}/mainuser`} component={MainUser} />
                         <Route path={`${math.url}/dangnhap`} component={Main} />
                         <Route path={`${math.url}/dangxuat`} component={Main} />
                     </Switch>
+
                 </div>
                 <Footer />
+
             </Suspense>
         </div>
     );

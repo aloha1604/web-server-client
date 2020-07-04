@@ -10,16 +10,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 import {
-    faUser, faMapMarkerAlt, faCalendarAlt, faFileAlt, faKey, faPhone, faFlag
+    faUser, faMapMarkerAlt, faCalendarAlt, faPhone, faFlag
 } from "@fortawesome/free-solid-svg-icons";
 
 function ShowOneTin(props) {
     const math = useRouteMatch();
-    const {
-        buttonLabel,
-        className
-    } = props;
-
     const [modal, setModal] = useState(false);
     const [modalViPham, setModalViPham] = useState(false);
 
@@ -31,8 +26,8 @@ function ShowOneTin(props) {
             <Row>
                 <Col>
                     <Breadcrumb>
-                        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
-                        <BreadcrumbItem active>Library</BreadcrumbItem>
+                        <BreadcrumbItem><a href="/">Home</a></BreadcrumbItem>
+                        <BreadcrumbItem active><a href={math.url}>Hiển thị tin</a></BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
             </Row>

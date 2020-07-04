@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import './ClientUser.scss';
 
@@ -10,7 +10,7 @@ const HomeMain = React.lazy(() => import('./components/HomeMain/HomeMain'));
 
 const MainUser = React.lazy(() => import('./components/QuanLyUser/MainUser'));
 const QuanLyTin = React.lazy(() => import('./components/QuanlyDangTin/index'));
-const ShowOneTin = React.lazy(() => import('./components/HomeMain/ShowOneTin'));
+const ShowOneTin = React.lazy(() => import('./components/QuanlyDangTin/ShowOneTin'));
 
 
 function ClienUser(props) {

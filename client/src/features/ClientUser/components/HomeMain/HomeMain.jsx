@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'reactstrap'
-import ShowTin from './ShowTin'
+import ShowTin from '../QuanlyDangTin/ShowTin'
 
 function HomeMain(props) {
     return (

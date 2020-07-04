@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Container, Button, Form, FormGroup, Label, Input, FormText, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import { Container, Button, Form, FormGroup, Label, Input, Breadcrumb, BreadcrumbItem } from "reactstrap";
 
 const HeaderUser = React.lazy(() => import('./HeaderUser'));
 function MainUser(props) {
@@ -9,7 +9,7 @@ function MainUser(props) {
 
             <Container >
                 <Breadcrumb >
-                    <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                    <BreadcrumbItem><a href="#/">Home</a></BreadcrumbItem>
                     <BreadcrumbItem active>Thông tin tai khoản</BreadcrumbItem>
                 </Breadcrumb>
                 <Form>
@@ -40,17 +40,29 @@ function MainUser(props) {
 
                     <FormGroup>
                         <Label for="exampleTinhThanh">Tỉnh/Thành</Label>
-                        <Input type="text" name="txtTinhThanh" id="exampleTinhThanh" placeholder="Điền tỉnh thành" />
+                        <Input type="select" name="selectTinhThanh" id="exampleTinhThanh">
+                            <option active>Tất cả</option>
+                            <option>Tphcm</option>
+                            <option>Hà nội</option>
+                        </Input>
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="exampleQuanHuyen">Quận/Huyện</Label>
-                        <Input type="text" name="txtQuanHuyen" id="exampleQuanHuyen" placeholder="Điền quận huyện" />
+                        <Input type="select" name="selectQuanHuyen" id="exampleQuanHuyen">
+                            <option active>Tất cả</option>
+                            <option>Quận 1</option>
+                            <option>Quận 2</option>
+                        </Input>
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="examplePhuongXa">Phường/Xã</Label>
-                        <Input type="text" name="txtPhuongXa" id="examplePhuongXa" placeholder="Điền tỉnh thành" />
+                        <Input type="select" name="selectPhuongXa" id="examplePhuongXa">
+                            <option active>Tất cả</option>
+                            <option>Bình trị đông a</option>
+                            <option>Bình Trị đông b</option>
+                        </Input>
                     </FormGroup>
 
                     <FormGroup>

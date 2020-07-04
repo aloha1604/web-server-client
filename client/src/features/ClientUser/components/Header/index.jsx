@@ -12,16 +12,13 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-    NavbarText, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, FormText, Alert
+    NavbarText, Input, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Alert
 } from 'reactstrap';
 
 
 function Header(props) {
     const [isOpen, setIsOpen] = useState(false);
-    const {
-        buttonLabel,
-        className
-    } = props;
+
 
     const [modalDangNhap, setModalDangNhap] = useState(false);
     const [modalDangKy, setModalDangKy] = useState(false);
@@ -43,7 +40,7 @@ function Header(props) {
                             <NavItem style={{
                                 display: 'flex'
                             }}>
-                                <Input type="email" name="email" id="exampleEmail" placeholder="Nhập nội dung cần tìm " />
+                                <Input type="text" name="textSearch" id="exampleSearch" placeholder="Nhập nội dung cần tìm " />
                                 <Button color="primary" style={{ marginLeft: '3px' }}>Tìm </Button>
 
                             </NavItem>
@@ -52,7 +49,7 @@ function Header(props) {
                             </NavItem>
                             {/* ở đây sau này viết nếu chưa đăng nhập sẽ hiện Đăng ký/đăng nhập, nếu đăng nhập rồi thì sẽ Tài Khoản */}
                             <NavItem>
-                                <NavLink href="/components/">Đăng tin</NavLink>
+                                <NavLink href="/Home/dangtin">Đăng tin</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={toggleModalDangky}>Đăng ký</NavLink>
@@ -80,9 +77,7 @@ function Header(props) {
                                             </FormGroup>
                                         </Form>
                                     </ModalBody>
-                                    <ModalFooter>
-                                        <Button color="secondary" onClick={toggleModalDangky}>Cancel</Button>
-                                    </ModalFooter>
+
                                 </Modal>
                             </NavItem>
                             <NavItem>
@@ -106,9 +101,6 @@ function Header(props) {
                                             </FormGroup>
                                         </Form>
                                     </ModalBody>
-                                    <ModalFooter>
-                                        <Button color="secondary" onClick={toggleModalDangNhap}>Cancel</Button>
-                                    </ModalFooter>
                                 </Modal>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>

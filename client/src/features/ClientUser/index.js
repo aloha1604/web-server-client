@@ -10,7 +10,7 @@ const HomeMain = React.lazy(() => import('./components/HomeMain/HomeMain'));
 
 const MainUser = React.lazy(() => import('./components/QuanLyUser/MainUser'));
 const QuanLyTin = React.lazy(() => import('./components/QuanlyDangTin/index'));
-
+const ShowOneTin = React.lazy(() => import('./components/HomeMain/ShowOneTin'));
 
 
 function ClienUser(props) {
@@ -24,6 +24,7 @@ function ClienUser(props) {
 
                     <Switch>
                         <Route exact path={`${math.url}`} component={HomeMain} />
+                        <Route exact path={`${math.url}/showonetin`} component={ShowOneTin} />
                         <Route exact path={`${math.url}/mainuser`} component={MainUser} />
                         <Route path={`${math.url}/quanlydangtin`} component={QuanLyTin} />
                         {/* <Route path={`${math.url}/dangxuat`} component={Main} /> */}

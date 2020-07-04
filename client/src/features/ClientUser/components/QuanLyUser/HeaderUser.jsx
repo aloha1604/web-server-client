@@ -26,7 +26,7 @@ function HeaderUser(props) {
                 </div>
                 <div className="headeruser-left">
                     <div className="headeruser-left-infor">
-                        <h6><span><FontAwesomeIcon icon={faCalendarAlt} />{' '}</span>16/04/1998</h6>
+                        <h6><span><FontAwesomeIcon icon={faCalendarAlt} />{' '}</span>16/04/2020</h6>
                         <h6><span><FontAwesomeIcon icon={faMapMarkerAlt} />{' '}</span>địa chỉ</h6>
                         <h6><span><FontAwesomeIcon icon={faKey} />{' '}</span>Trạng thái: {' '}active</h6>
                     </div>

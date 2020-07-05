@@ -11,8 +11,11 @@ api.interceptors.request.use(
     config => {
         const admin = JSON.parse(localStorage.getItem('admin'))
         const user = JSON.parse(localStorage.getItem('user'));
-        if (admin || user) {
+        if (admin) {
             config.headers['x-access-token'] = admin.accessToken;
+
+        }
+        if (user) {
             config.headers['y-access-token'] = user.accessToken;
         }
         return config

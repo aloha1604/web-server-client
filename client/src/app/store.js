@@ -4,16 +4,14 @@ import { combineReducers } from 'redux';
 
 //some Reducer
 import adminAuth from '../features/Admin/components/Auth/authSlice';
+import userAuth from '../features/ClientUser/reducer/userSlice';
+
 
 
 
 //root Reducer
-// const rootReducer = {
-//     admin: adminReducer,
-// }
-
 const rootReducer = combineReducers({
-    adminAuth
+    adminAuth, userAuth
 })
 
 //config store

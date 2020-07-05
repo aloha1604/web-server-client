@@ -90,16 +90,16 @@ let userDangky = async (req, res) => {
 
                 let from = 'webdoan20192019@gmail.com';// Địa chỉ email của người gửi
                 let to = userData.email; // Địa chỉ email của người gửi
-                let subject = 'Thư được gửi bằng Node.js'; // Tiêu đề mail
-                let text = 'Gửi mail luận văn tốt nghiệp';// Nội dung mail dạng text
-                let html = '<h1>Luận văn tốt nghiệp</h1>'; // Nội dung mail dạng html
+                let subject = 'Thư gửi để xác nhận tài khoản'; // Tiêu đề mail
+                let text = "Nhấp vào link để xác nhận tài khoản, cảm ơn bạn đã tham gia sàn thương mại của chúng tôi !!!";// Nội dung mail dạng text
+                let html = `<p>Nhấp vào link để xác nhận tài khoản, cảm ơn bạn đã tham gia sàn thương mại của chúng tôi !!!</p><a href="http://localhost:5000/apiUser/activeuser/${insertUserData.insertId}">Link</a>`; // Nội dung mail dạng html
 
                 const createMail = nodeMail.createMail(from, to, subject, text, html);
 
                 const sendMailer = nodeMail.sendMailer(createMail, createTransportMail);
 
                 console.log('đã tới được mục mail');
-                return res.status(200).json({ message: 'đăng ký thành công xác nhận email để mở tài khoản' })
+                return res.status(200).json({ message: 'Đăng ký thành công xác nhận email để mở tài khoản' })
             } else {
                 return res.status(500).json({ error: 'insert user thất bại' });
             }
@@ -207,8 +207,8 @@ let loginUser = async (req, res) => {
             email: req.body.email,
             password: req.body.password
         }
-        console.log(req.body.email)
-        console.log(req.body.password)
+        // console.log(req.body.email)
+        // console.log(req.body.password)
         // get data user username and password
 
         var getEmail = function (email) {
@@ -251,10 +251,14 @@ let loginUser = async (req, res) => {
         }
 
         const getEmailData = await getEmail(userData.email);
-        console.log(getEmailData);
+        if (getEmailData[0].active === 0) {
+            return res.status(200).json({ error: 'Tài khoản chưa xác nhận mail' });
+        }
+        // console.log(getEmailData);
         // so sanh mat khau
         const flagHash = bcrypt.compareSync(userData.password, getEmailData[0].password);
-        console.log(flagHash)
+
+        // console.log(flagHash)
         // var a = await data();
         // console.log(adminData[0].refreshtoken);
         const userFakeData = {
@@ -278,14 +282,14 @@ let loginUser = async (req, res) => {
                 debug(`Gửi Token và Refresh Token về cho client...`);
                 return res.status(200).json({ userFakeData, accessToken, refreshToken })
             } else {
-                return res.status(500).json({ error: 'Luu token that bai' });
+                return res.status(200).json({ error: 'Luu token that bai' });
             }
         } else {
             return res.status(200).json({ error: 'Sai tài khoản hoặc mật khẩu' });
         }
 
     } catch (error) {
-        return res.status(500).json(error);
+        return res.status(200).json(error);
     }
 }
 
@@ -356,70 +360,40 @@ let refreshTokenAdmin = async (req, res) => {
     }
 };
 
-// let refreshTokenAdmin = async (req, res) => {
-//     // User gửi mã refresh token kèm theo trong body
-//     const refreshTokenFromClient = req.body.refreshToken;
+let updateAciveUser = async (req, res) => {
+    const user_id = req.params.user_id;
+    try {
+        var flagActive = function (user_id) {
+            return new Promise((resolve, reject) => {
+                userModel.updateActiveUser(user_id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+        const dataFlagActive = await flagActive(user_id);
+        if (dataFlagActive.changedRows > 0) {
+            return res.status(200).json({ message: 'Mở tài Active user thành công !!' })
+            //  res.redirect('http://localhost:3000/');
+        } else {
+            return res.status(200).json({ error: 'Mở tài Active user thành công !!' })
+            //  res.redirect('http://localhost:3000/');
+        }
+    } catch (error) {
+        return res.status(500).json(error);
+    }
 
 
+}
 
-//     // debug("tokenList: ", tokenList);
-
-//     // Nếu như tồn tại refreshToken truyền lên và nó cũng trong trong user list
-//     if (refreshTokenFromClient) {
-//         try {
-//             const decoded = await jwtHelper.verifyToken(refreshTokenFromClient, refreshTokenSecret);
-
-//             const userFakeData = decoded.data;
-//             const userAdmin = {
-//                 username: userFakeData.name,
-//                 admin_id: userFakeData._id,
-//             }
-
-//             var adminIdD = function (userAdmin) {
-//                 return new Promise((resolve, reject) => {
-//                     admin.getRefreshTokenById(userAdmin.admin_id, (err, data) => {
-//                         if (err)
-//                             reject(err);
-//                         else {
-//                             resolve(data);
-//                         }
-
-//                     })
-//                 })
-//             }
-
-//             var adminData = await adminIdD(userAdmin);
-
-//             // set 2 refreshtoken de so sanh
-//             var str1 = adminData[0].refreshtoken;
-//             var str2 = refreshTokenFromClient;
-
-//             if (str1.localeCompare(str2) === 0) {
-//                 const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife);
-//                 // gửi token mới về cho người dùng
-//                 return res.status(200).json({ accessToken });
-//             } else {
-//                 res.status(403).json({
-//                     message: 'Invalid refresh token.',
-//                 });
-//             }
-
-//         } catch (error) {
-//             res.status(403).json({
-//                 message: 'Invalid refresh token',
-//             });
-//         }
-//     } else {
-//         // Không tìm thấy token trong request
-//         return res.status(403).send({
-//             message: 'No token provided.',
-//         });
-//     }
-// };
 
 module.exports = {
     userDangky: userDangky,
     loginAdmin: loginAdmin,
     loginUser: loginUser,
+    updateAciveUser: updateAciveUser,
     refreshTokenAdmin: refreshTokenAdmin
 }

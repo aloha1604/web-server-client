@@ -1,4 +1,5 @@
 const admin = require('../models/admin.model');
+const userModel = require('../models/user.model');
 
 const jwtHelper = require('../helpers/jwt.helper');
 
@@ -6,6 +7,8 @@ const debug = console.log.bind(console);
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
+const nodeMail = require('../helpers/nodeMail');
 
 
 
@@ -36,8 +39,82 @@ const refreshTokenSecretAdmin = process.env.REFRESH_TOKEN_SECRET_ADMIN || "refre
  * @param {*} req 
  * @param {*} res 
  */
+// dang ky user
+let userDangky = async (req, res) => {
+    let userData = {
+        email: req.body.email,
+        password: req.body.password
+    }
+    // console.log(userData) kiem tra du lieu
+
+    if (userData.email && userData.password) {
+
+        try {
+            var getEmail = function (email) {
+                return new Promise((resolve, reject) => {
+                    userModel.getEmail(email, (err, data) => {
+                        if (err)
+                            reject(err);
+                        else {
+                            resolve(data);
+                        }
+
+                    })
+                })
+            }
+            const getEmailData = await getEmail(userData.email);
 
 
+            if (getEmailData.length > 0 && getEmailData[0].email === userData.email) {
+                return res.status(200).json({ error: 'Email đã tồn tại' });
+            }
+
+            const hash = bcrypt.hashSync(userData.password, saltRounds);
+            var insertUser = function (mail, password) {
+                return new Promise((resolve, reject) => {
+                    userModel.insert(mail, password, (err, data) => {
+                        if (err)
+                            reject(err);
+                        else {
+                            resolve(data);
+                        }
+
+                    })
+                })
+            }
+
+            const insertUserData = await insertUser(userData.email, hash);
+            if (insertUserData.affectedRows > 0) {
+                const option = nodeMail.createOption();
+                const createTransportMail = nodeMail.createTransportMail(option);
+
+                let from = 'webdoan20192019@gmail.com';// Địa chỉ email của người gửi
+                let to = userData.email; // Địa chỉ email của người gửi
+                let subject = 'Thư được gửi bằng Node.js'; // Tiêu đề mail
+                let text = 'Gửi mail luận văn tốt nghiệp';// Nội dung mail dạng text
+                let html = '<h1>Luận văn tốt nghiệp</h1>'; // Nội dung mail dạng html
+
+                const createMail = nodeMail.createMail(from, to, subject, text, html);
+
+                const sendMailer = nodeMail.sendMailer(createMail, createTransportMail);
+
+                console.log('đã tới được mục mail');
+                return res.status(200).json({ message: 'đăng ký thành công xác nhận email để mở tài khoản' })
+            } else {
+                return res.status(500).json({ error: 'insert user thất bại' });
+            }
+        } catch (error) {
+            return res.status(500).json(error);
+        }
+
+
+    } else {
+        return res.status(403).send({
+            message: 'không tìm thấy mail and password trong request',
+        });
+    }
+
+}
 
 let loginAdmin = async (req, res) => {
     try {
@@ -319,6 +396,7 @@ let refreshTokenAdmin = async (req, res) => {
 // };
 
 module.exports = {
+    userDangky: userDangky,
     loginAdmin: loginAdmin,
     refreshTokenAdmin: refreshTokenAdmin
 }

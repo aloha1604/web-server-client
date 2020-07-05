@@ -11,14 +11,16 @@ const port = 5000;
 
 //Router
 
-const adminRouter = require('./routes/admin.route')
-const testRouter = require('./routes/test.route')
-const categoryRouter = require('./routes/category.route')
+const adminRouter = require('./routes/admin.route');
+const userRouter = require('./routes/user.route');
+const testRouter = require('./routes/test.route');
+const categoryRouter = require('./routes/category.route');
 
 app.get('/', (req, res) => res.send('Hello World!'))
 app.get('/api/test', (req, res) => res.send('day la api test'))
 
-app.use('/apiAdmin', adminRouter)
+app.use('/apiAdmin', adminRouter);
+app.use('/apiUser', userRouter);
 
 // app.use('/admin', adminRouter);
 // app.use('/category', categoryRouter);

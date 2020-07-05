@@ -10,8 +10,10 @@ const api = axios.create({
 api.interceptors.request.use(
     config => {
         const admin = JSON.parse(localStorage.getItem('admin'))
-        if (admin) {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (admin || user) {
             config.headers['x-access-token'] = admin.accessToken;
+            config.headers['y-access-token'] = user.accessToken;
         }
         return config
     },

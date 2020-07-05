@@ -32,6 +32,9 @@ router.get('/testt', (req, res) => {
 });
 router.post('/userdangky', AuthController.userDangky);
 router.post("/userdangnhap", AuthController.loginUser);
+router.use(AuthMiddleWare.isAuth);
+// //category router
+router.get('/getAllCategory', categoryController.getAllCategory);
 
 
 

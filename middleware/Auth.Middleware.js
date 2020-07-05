@@ -15,7 +15,7 @@ const accessTokenSecretAdmin = process.env.ACCESS_TOKEN_SECRET_ADMIN || "access-
 
 let isAuth = async (req, res, next) => {
     // Lấy token được gửi lên từ phía client, thông thường tốt nhất là các bạn nên truyền token vào header
-    const tokenFromClient = req.body.token || req.query.token || req.headers["x-access-token"];
+    const tokenFromClient = req.body.token || req.query.token || req.headers["y-access-token"];
     if (tokenFromClient) {
         // Nếu tồn tại token
         try {

@@ -201,71 +201,93 @@ let loginAdmin = async (req, res) => {
 
 
 
-// let loginAdmin = async (req, res) => {
-//     try {
-//         let userAdmin = {
-//             username: req.body.username,
-//             password: req.body.password
-//         }
+let loginUser = async (req, res) => {
+    try {
+        let userData = {
+            email: req.body.email,
+            password: req.body.password
+        }
+        console.log(req.body.email)
+        console.log(req.body.password)
+        // get data user username and password
 
-//         var adminIdD = function (userAdmin) {
-//             return new Promise((resolve, reject) => {
-//                 admin.getByAdminUserNameAndPassWord(userAdmin, (err, data) => {
-//                     if (err)
-//                         reject(err);
-//                     else {
-//                         resolve(data);
-//                     }
+        var getEmail = function (email) {
+            return new Promise((resolve, reject) => {
+                userModel.getEmail(email, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
 
-//                 })
-//             })
-//         }
-
-
-//         var updateRefreshToken = function (refreshToken, id) {
-//             return new Promise((resolve, reject) => {
-//                 admin.updateRefreshTokenAdmin(refreshToken, id, (err, data) => {
-//                     if (err)
-//                         reject(err);
-//                     else {
-//                         resolve(data);
-//                     }
-//                 })
-//             })
-//         }
-//         var adminData = await adminIdD(userAdmin);
-//         // var a = await data();
-//         // console.log(adminData[0].refreshtoken);
-//         const userFakeData = {
-//             _id: adminData[0].admin_id,
-//             name: adminData[0].username,
-//         };
+                })
+            })
+        }
 
 
-//         if (adminData.length > 0) {
-//             const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife);
-//             const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife);
 
-//             tokenList[refreshToken] = { accessToken, refreshToken };
+        var updateRefreshToken = function (refreshToken, id) {
+            return new Promise((resolve, reject) => {
+                userModel.updateRefreshTokenUser(refreshToken, id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
 
-//             const flagUpdateRefreshToken = await updateRefreshToken(refreshToken, adminData[0].admin_id);
+        var updateAccessToken = function (accesstoken, id) {
+            return new Promise((resolve, reject) => {
+                userModel.updateAccessTokenUser(accesstoken, id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+
+        const getEmailData = await getEmail(userData.email);
+        console.log(getEmailData);
+        // so sanh mat khau
+        const flagHash = bcrypt.compareSync(userData.password, getEmailData[0].password);
+        console.log(flagHash)
+        // var a = await data();
+        // console.log(adminData[0].refreshtoken);
+        const userFakeData = {
+            _id: getEmailData[0].user_id,
+            email: getEmailData[0].email,
+        };
 
 
-//             if (flagUpdateRefreshToken.changedRows > 0) {
-//                 // console.log(flagUpdateRefreshToken)
-//                 debug(`Gửi Token và Refresh Token về cho client...`);
-//                 return res.status(200).json({ accessToken, refreshToken })
-//             } else {
-//                 return res.status(500).json('luu refreshToken that bai');
-//             }
-//         } else {
-//             return res.status(500).json('sai tai khoant mat khau');
-//         }
+        if (getEmailData.length > 0 && flagHash) {
+            // tạo ra accesstoken and refreshtoken
+            const accessToken = await jwtHelper.generateToken(userFakeData, accessTokenSecret, accessTokenLife);
+            const refreshToken = await jwtHelper.generateToken(userFakeData, refreshTokenSecret, refreshTokenLife);
 
-//     } catch (error) {
-//         return res.status(500).json(error);
-//     }
-// }
+            // update accesstoken and refreshtoken vào dtb
+            const flagUpdateRefreshToken = await updateRefreshToken(refreshToken, getEmailData[0].user_id);
+            const flagUpdateAccessToken = await updateAccessToken(accessToken, getEmailData[0].user_id);
+
+            // kiểm tra có thêm vào được chưa
+            if (flagUpdateRefreshToken.changedRows > 0 && flagUpdateAccessToken.changedRows > 0) {
+                // console.log(flagUpdateRefreshToken)
+                debug(`Gửi Token và Refresh Token về cho client...`);
+                return res.status(200).json({ userFakeData, accessToken, refreshToken })
+            } else {
+                return res.status(500).json({ error: 'Luu token that bai' });
+            }
+        } else {
+            return res.status(200).json({ error: 'Sai tài khoản hoặc mật khẩu' });
+        }
+
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
 
 /**
  * controller refreshToken
@@ -398,5 +420,6 @@ let refreshTokenAdmin = async (req, res) => {
 module.exports = {
     userDangky: userDangky,
     loginAdmin: loginAdmin,
+    loginUser: loginUser,
     refreshTokenAdmin: refreshTokenAdmin
 }

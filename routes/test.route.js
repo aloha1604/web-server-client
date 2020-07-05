@@ -31,6 +31,7 @@ router.get('/testt', (req, res) => {
     res.send('testaaaaa')
 });
 router.post('/userdangky', AuthController.userDangky);
+router.post("/userdangnhap", AuthController.loginUser);
 
 
 

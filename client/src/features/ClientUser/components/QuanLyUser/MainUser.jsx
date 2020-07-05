@@ -24,7 +24,7 @@ function MainUser(props) {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="examplePhone">Họ tên</Label>
+                        <Label for="examplePhone">Số điện thoại</Label>
                         <Input type="text" name="txtPhone" id="examplePhone" placeholder="Điền số điện thoại" />
                     </FormGroup>
 

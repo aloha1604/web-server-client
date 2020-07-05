@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Button, Form, FormGroup, Label, Input, Container } from "reactstrap";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { isEmpty } from "validator";
 import { login } from './authSlice';
 import './auth.scss';
@@ -11,7 +11,7 @@ import './auth.scss';
 function AuthLogin(props) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const math = useRouteMatch();
+
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

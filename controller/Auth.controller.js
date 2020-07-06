@@ -254,6 +254,10 @@ let loginUser = async (req, res) => {
         if (getEmailData[0].active === 0) {
             return res.status(200).json({ error: 'Tài khoản chưa xác nhận mail' });
         }
+
+        if (getEmailData[0].vipham === 1) {
+            return res.status(200).json({ error: 'Tài khoản đang bị vi phạm , và đang bị khóa' });
+        }
         // console.log(getEmailData);
         // so sanh mat khau
         const flagHash = bcrypt.compareSync(userData.password, getEmailData[0].password);

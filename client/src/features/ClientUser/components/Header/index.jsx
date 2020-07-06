@@ -17,7 +17,7 @@ import {
 
 import { isEmpty } from "validator";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { login, singIn, logout } from '../../reducer/userSlice';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,6 +27,8 @@ function Header(props) {
     const dispatch = useDispatch();
     const history = useHistory();
     const userReducer = useSelector(state => state.userAuth); // get admin in reducer
+    const math = useRouteMatch();
+    console.log(math.url);
 
 
 
@@ -209,10 +211,16 @@ function Header(props) {
                                         </DropdownToggle>
                                         <DropdownMenu right>
                                             <DropdownItem>
-                                                Thông tin cá nhân
+                                                <NavLink href={`${math.url}/mainuser`}>Thông tin cá nhân</NavLink>
                                             </DropdownItem>
                                             <DropdownItem>
-                                                Quản lý tin đăng
+                                                <NavLink href={`${math.url}/quanlydangtin/tindadang`}>Quản lý tin đăng</NavLink>
+                                            </DropdownItem>
+                                            <DropdownItem>
+                                                <NavLink href={`${math.url}/quanlydangtin/tindangchoduyet`}>Quản lý tin đăng duyệt</NavLink>
+                                            </DropdownItem>
+                                            <DropdownItem>
+                                                <NavLink href={`${math.url}/quanlydangtin/tinbiloi`}>Quản lý tin lỗi</NavLink>
                                             </DropdownItem>
                                             <DropdownItem>
                                                 Tin lưu trữ

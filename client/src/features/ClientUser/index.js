@@ -10,6 +10,7 @@ const MainUser = React.lazy(() => import('./components/QuanLyUser/MainUser'));
 const QuanLyTin = React.lazy(() => import('./components/QuanlyDangTin/index'));
 const ShowOneTin = React.lazy(() => import('./components/QuanlyDangTin/ShowOneTin'));
 const DangTin = React.lazy(() => import('./components/QuanlyDangTin/DangTin'));
+const ProtectedRouteUser = React.lazy(() => import('./components/ProtectedRouteUser'));
 
 
 function ClienUser(props) {
@@ -24,9 +25,12 @@ function ClienUser(props) {
                     <Switch>
                         <Route exact path={`${math.url}`} component={HomeMain} />
                         <Route exact path={`${math.url}/showonetin`} component={ShowOneTin} />
-                        <Route exact path={`${math.url}/mainuser`} component={MainUser} />
-                        <Route path={`${math.url}/quanlydangtin`} component={QuanLyTin} />
-                        <Route path={`${math.url}/dangtin`} component={DangTin} />
+                        {/* <Route exact path={`${math.url}/mainuser`} component={MainUser} /> */}
+                        <ProtectedRouteUser exact path={`${math.url}/mainuser`} component={MainUser} />
+                        {/* <Route path={`${math.url}/quanlydangtin`} component={QuanLyTin} /> */}
+                        <ProtectedRouteUser path={`${math.url}/quanlydangtin`} component={QuanLyTin} />
+                        {/* <Route path={`${math.url}/dangtin`} component={DangTin} /> */}
+                        <ProtectedRouteUser path={`${math.url}/dangtin`} component={DangTin} />
                         {/* <Route path={`${math.url}/dangxuat`} component={Main} /> */}
                     </Switch>
 

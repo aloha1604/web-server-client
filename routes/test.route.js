@@ -45,6 +45,10 @@ router.put('/updateDanhMuc/:id/:danhmuc_ten', danhMucController.updateDanhMuc);
 router.delete('/deleteDanhMuc/:id', danhMucController.deleteDanhMuc);
 
 // nhóm
+router.get('/getAllNhomByIdDanhMuc/:danhmuc_id', NhomController.getAllNhomByIdDanhMuc);
+// router.post('/addDanhMuc', danhMucController.addDanhMuc);
+// router.put('/updateDanhMuc/:id/:danhmuc_ten', danhMucController.updateDanhMuc);
+// router.delete('/deleteDanhMuc/:id', danhMucController.deleteDanhMuc);
 
 
 

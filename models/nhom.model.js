@@ -43,7 +43,7 @@ exports.remove = (nhom_id, result) => {
     })
 }
 
-exports.update = (nhom_id, nhom_ten, result) => {
+exports.updateNhomByIdNhom = (nhom_id, nhom_ten, result) => {
     const sql = "UPDATE tbl_nhom set nhom_ten = ? WHERE nhom_id = ?"
     con.query(sql, [nhom_ten, nhom_id], (err, res) => {
         if (err) {

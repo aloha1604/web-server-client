@@ -47,7 +47,7 @@ router.delete('/deleteDanhMuc/:id', danhMucController.deleteDanhMuc);
 // nhóm
 router.get('/getAllNhomByIdDanhMuc/:danhmuc_id', nhomController.getAllNhomByIdDanhMuc);
 router.post('/addNhomByIdDanhMuc', nhomController.addNhomByIdDanhMuc); // { body: danhmuc_id, nhom_ten }
-// router.put('/updateDanhMuc/:id/:danhmuc_ten', danhMucController.updateDanhMuc);
+router.put('/updateNhomByIdNhom/:id/:nhom_ten', nhomController.updateNhomByIdNhom);
 // router.delete('/deleteDanhMuc/:id', danhMucController.deleteDanhMuc);
 
 

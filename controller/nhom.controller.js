@@ -43,9 +43,9 @@ exports.addNhomByIdDanhMuc = async (req, res) => {
                 })
             })
         }
-        var dataDanhMuc = await flagAdd(danhMuc_id, nhom_ten);
+        var dataNhom = await flagAdd(danhMuc_id, nhom_ten);
         // console.log(dataDanhMuc)
-        if (dataDanhMuc.affectedRows > 0) {
+        if (dataNhom.affectedRows > 0) {
             return res.status(200).json({ message: 'Thêm nhóm theo danh mục id thành công !!' })
         } else {
             return res.status(200).json({ error: 'Thêm nhóm theo danh muc id vào mục vào dtb thất bại!!' })
@@ -56,22 +56,22 @@ exports.addNhomByIdDanhMuc = async (req, res) => {
     }
 }
 
-//http://localhost:5000/api.../updateDanhMuc/:id/:danhmuc_ten
-exports.updateDanhMuc = async (req, res) => {
-    let danhMuc_ten = req.params.danhmuc_ten;
-    let danhMuc_id = req.params.id;
+//http://localhost:5000/api.../updateNhomByIdNhom/:id/:nhom_ten
+exports.updateNhomByIdNhom = async (req, res) => {
+    let nhom_ten = req.params.nhom_ten;
+    let nhom_id = req.params.id;
 
-    console.log(req.body.danhmuc_ten);
-    console.log(req.body.id);
+    // console.log(req.params.nhom_ten);
+    // console.log(req.params.id);
 
-    if (!danhMuc_ten && !danhMuc_id) {
-        return res.status(200).json({ error: 'Không tìm thấy danhmuc_ten hoặc id' })
+    if (!nhom_ten && !nhom_id) {
+        return res.status(200).json({ error: 'Không tìm thấy nhom_ten hoặc id' })
     }
 
     try {
-        const flagUpdate = (danhMuc_id, danhMuc_ten) => {
+        const flagUpdate = (nhom_id, nhom_ten) => {
             return new Promise((resolve, reject) => {
-                danhMucModel.update(danhMuc_id, danhMuc_ten, (err, data) => {
+                nhomModel.updateNhomByIdNhom(nhom_id, nhom_ten, (err, data) => {
                     if (err)
                         reject(err);
                     else {
@@ -80,12 +80,12 @@ exports.updateDanhMuc = async (req, res) => {
                 })
             })
         }
-        var dataDanhMuc = await flagUpdate(danhMuc_id, danhMuc_ten);
+        var dataNhom = await flagUpdate(nhom_id, nhom_ten);
         // console.log(dataDanhMuc)
-        if (dataDanhMuc.affectedRows > 0) {
-            return res.status(200).json({ message: 'Sữa danh mục thành công !!' })
+        if (dataNhom.affectedRows > 0) {
+            return res.status(200).json({ message: 'Sữa nhóm thành công !!' })
         } else {
-            return res.status(200).json({ error: 'Sữa danh vào mục vào dtb thất bại!!' })
+            return res.status(200).json({ error: 'Sữa nhóm vào mục vào dtb thất bại!!' })
         }
 
     } catch (error) {

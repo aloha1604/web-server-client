@@ -52,7 +52,7 @@ let isAuthAdmin = async (req, res, next) => {
             const decoded = await jwtHelper.verifyToken(tokenFromClient, accessTokenSecretAdmin);
             // Nếu token hợp lệ, lưu thông tin giải mã được vào đối tượng req, dùng cho các xử lý ở phía sau.
             req.jwtDecoded = decoded;
-            console.log(req.jwtDecoded)
+            // console.log(req.jwtDecoded)
             // Cho phép req đi tiếp sang controller.
             next();
         } catch (error) {

@@ -16,7 +16,7 @@ const nodeMail = require('../helpers/nodeMail');
 
 
 // Thời gian sống của token
-const accessTokenLife = process.env.ACCESS_TOKEN_LIFE || "1h";
+const accessTokenLife = process.env.ACCESS_TOKEN_LIFE || "2h";
 
 // Thời gian sống của refreshToken
 const refreshTokenLife = process.env.REFRESH_TOKEN_LIFE || "3650d";

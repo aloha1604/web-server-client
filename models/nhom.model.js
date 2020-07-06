@@ -15,7 +15,7 @@ exports.getAllNhomByIdDanhMuc = (danhmuc_id, result) => {
     })
 }
 
-exports.add = (danhmuc_id, nhom_ten, result) => {
+exports.addNhomByIdDanhMuc = (danhmuc_id, nhom_ten, result) => {
     const sql = "INSERT INTO tbl_nhom (danhmuc_id,nhom_ten,create_at,update_at) VALUES (?,?,?,?)"
     con.query(sql, [danhmuc_id, nhom_ten, moment.mysqlTimestamp, moment.mysqlTimestamp], (err, res) => {
         if (err) {

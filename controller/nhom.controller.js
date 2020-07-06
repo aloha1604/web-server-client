@@ -2,7 +2,7 @@
 
 const nhomModel = require('../models/nhom.model');
 
-//http://localhost:5000/api.../getAllNhomByIdDanhMuc/:danhmuc_id/
+// GET :http://localhost:5000/api.../getAllNhomByIdDanhMuc/:danhmuc_id/
 exports.getAllNhomByIdDanhMuc = (req, res) => {
     let danhMuc_id = req.params.danhmuc_id;
     if (!danhMuc_id) {
@@ -21,18 +21,20 @@ exports.getAllNhomByIdDanhMuc = (req, res) => {
     })
 
 }
+//POST : http://localhost:5000/api.../addNhomByIdDanhMuc {body:danhmuc_id ,nhom_ten}
+exports.addNhomByIdDanhMuc = async (req, res) => {
+    let nhom_ten = req.body.nhom_ten;
+    let danhMuc_id = req.body.danhmuc_id;
 
-exports.addDanhMuc = async (req, res) => {
-    let danhMuc_ten = req.body.danhmuc_ten;
     // console.log(req.body.danhmuc_ten);
-    if (!danhMuc_ten) {
-        return res.status(200).json({ error: 'Không tìm thấy danhmuc_ten' })
+    if (!nhom_ten && !danhMuc_id) {
+        return res.status(200).json({ error: 'Không tìm thấy nhom_ten hoặc danhmuc_id' })
     }
 
     try {
-        const flagAdd = (danhMuc_ten) => {
+        const flagAdd = (danhMuc_id, nhom_ten) => {
             return new Promise((resolve, reject) => {
-                danhMucModel.add(danhMuc_ten, (err, data) => {
+                nhomModel.addNhomByIdDanhMuc(danhMuc_id, nhom_ten, (err, data) => {
                     if (err)
                         reject(err);
                     else {
@@ -41,12 +43,12 @@ exports.addDanhMuc = async (req, res) => {
                 })
             })
         }
-        var dataDanhMuc = await flagAdd(danhMuc_ten);
+        var dataDanhMuc = await flagAdd(danhMuc_id, nhom_ten);
         // console.log(dataDanhMuc)
         if (dataDanhMuc.affectedRows > 0) {
-            return res.status(200).json({ message: 'Thêm danh mục thành công !!' })
+            return res.status(200).json({ message: 'Thêm nhóm theo danh mục id thành công !!' })
         } else {
-            return res.status(200).json({ error: 'Thêm danh vào mục vào dtb thất bại!!' })
+            return res.status(200).json({ error: 'Thêm nhóm theo danh muc id vào mục vào dtb thất bại!!' })
         }
 
     } catch (error) {

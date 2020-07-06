@@ -7,7 +7,7 @@ const FriendController = require("../controller/FriendController")
 const categoryController = require('../controller/category.controller');
 const nodeMail = require("../helpers/nodeMail");
 const danhMucController = require('../controller/danhMuc.controller');
-const NhomController = require('../controller/nhom.controller');
+const nhomController = require('../controller/nhom.controller');
 
 
 // // router.post("/login", AuthController.login);
@@ -45,8 +45,8 @@ router.put('/updateDanhMuc/:id/:danhmuc_ten', danhMucController.updateDanhMuc);
 router.delete('/deleteDanhMuc/:id', danhMucController.deleteDanhMuc);
 
 // nhóm
-router.get('/getAllNhomByIdDanhMuc/:danhmuc_id', NhomController.getAllNhomByIdDanhMuc);
-// router.post('/addDanhMuc', danhMucController.addDanhMuc);
+router.get('/getAllNhomByIdDanhMuc/:danhmuc_id', nhomController.getAllNhomByIdDanhMuc);
+router.post('/addNhomByIdDanhMuc', nhomController.addNhomByIdDanhMuc); // { body: danhmuc_id, nhom_ten }
 // router.put('/updateDanhMuc/:id/:danhmuc_ten', danhMucController.updateDanhMuc);
 // router.delete('/deleteDanhMuc/:id', danhMucController.deleteDanhMuc);
 

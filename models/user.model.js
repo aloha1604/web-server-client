@@ -11,7 +11,7 @@ exports.insert = (mail, password, result) => {
             result(null, err);
             return;
         } else {
-            // console.log(res);
+            console.log('insert user');
             result(null, res);
         }
     })
@@ -25,7 +25,7 @@ exports.getEmail = (email, result) => {
             result(null, err);
             return;
         } else {
-            // console.log(res);
+            console.log('lấy ra all user get all user');
             result(null, res);
         }
     })
@@ -39,7 +39,7 @@ exports.updateActiveUser = (user_id, result) => {
             result(null, err);
             return;
         } else {
-            // console.log(res);
+            console.log('update active tài khoản');
             result(null, res);
         }
     })
@@ -69,6 +69,49 @@ exports.updateAccessTokenUser = (accesstoken, user_id, result) => {
             return;
         } else {
             console.log('update AccessToken success');
+            result(null, res);
+        }
+    })
+}
+
+// get user_id,email,active,vipham,create_at,update_at,hinhanh,hoten,phone,diachi,ngaysinh,tinhthanh,quanhuyen,phuongxa,gioitinh,ngaycap
+exports.getAllUser = (result) => {
+    const sql = "SELECT user_id,email,active,vipham,create_at,update_at,hinhanh,hoten,phone,diachi,ngaysinh,tinhthanh,quanhuyen,phuongxa,gioitinh,ngaycap FROM user"
+    con.query(sql, (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            console.log('get All user');
+            result(null, res);
+        }
+    })
+}
+
+exports.baoCaoViPhamUser = (user_id, result) => {
+    const sql = "UPDATE user set vipham = ? WHERE user_id = ?"
+    con.query(sql, [1, user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            console.log('get All user');
+            result(null, res);
+        }
+    })
+}
+
+exports.baoCaoHetViPhamUser = (user_id, result) => {
+    const sql = "UPDATE user set vipham = ? WHERE user_id = ?"
+    con.query(sql, [0, user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            console.log('get All user');
             result(null, res);
         }
     })

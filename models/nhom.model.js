@@ -29,7 +29,7 @@ exports.addNhomByIdDanhMuc = (danhmuc_id, nhom_ten, result) => {
     })
 }
 
-exports.remove = (nhom_id, result) => {
+exports.deleteNhomByIdNhom = (nhom_id, result) => {
     const sql = "DELETE FROM tbl_nhom WHERE nhom_id = ?"
     con.query(sql, [nhom_id], (err, res) => {
         if (err) {

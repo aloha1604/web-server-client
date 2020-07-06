@@ -93,19 +93,19 @@ exports.updateNhomByIdNhom = async (req, res) => {
     }
 }
 
-//http://localhost:5000/api.../deleteDanhMuc/:id/
-exports.deleteDanhMuc = async (req, res) => {
-    let danhMuc_id = req.params.id;
-    console.log(req.body.id);
+//http://localhost:5000/api.../deleteNhomByIdNhom/:id/
+exports.deleteNhomByIdNhom = async (req, res) => {
+    let nhom_id = req.params.id;
+    // console.log(req.params.id);
 
-    if (!danhMuc_id) {
+    if (!nhom_id) {
         return res.status(200).json({ error: 'Không tìm thấy id' })
     }
 
     try {
-        const flagUpdate = (danhMuc_id) => {
+        const flagdelete = (nhom_id) => {
             return new Promise((resolve, reject) => {
-                danhMucModel.delete(danhMuc_id, (err, data) => {
+                nhomModel.deleteNhomByIdNhom(nhom_id, (err, data) => {
                     if (err)
                         reject(err);
                     else {
@@ -114,12 +114,12 @@ exports.deleteDanhMuc = async (req, res) => {
                 })
             })
         }
-        var dataDanhMuc = await flagUpdate(danhMuc_id);
+        var dataNhom = await flagdelete(nhom_id);
         // console.log(dataDanhMuc)
-        if (dataDanhMuc.affectedRows > 0) {
-            return res.status(200).json({ message: 'Xóa danh mục thành công !!' })
+        if (dataNhom.affectedRows > 0) {
+            return res.status(200).json({ message: 'Xóa danh nhóm thành công !!' })
         } else {
-            return res.status(200).json({ error: 'Xóa danh mục trong  dtb thất bại!!' })
+            return res.status(200).json({ error: 'Xóa danh nhóm trong  dtb thất bại!!' })
         }
 
     } catch (error) {

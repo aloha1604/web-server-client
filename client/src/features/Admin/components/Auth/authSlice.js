@@ -42,7 +42,7 @@ const { loginSuccess, logoutSuccess, loginFail } = slice.actions
 export const login = ({ username, password }) => async dispatch => {
     try {
         const res = await api.post('apiAdmin/admindangnhap', { username, password })
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.error) {
             dispatch(loginFail(res.data));
         } else {

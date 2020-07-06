@@ -6,20 +6,17 @@ exports.getAllDanhMuc = (req, res) => {
 
     danhMucModel.getAllDanhMuc((err, data) => {
         if (err) {
-            res.status(500).send({
-                message:
-                    err.message || "lỗi get all danh mục"
-            });
+            return res.status(200).json({ error: 'Không thể get all data danh mục!!' })
         } else {
-            res.json({ dataDanhMuc: data });
+            return res.json({ dataDanhMuc: data });
         }
     })
 
 }
-
+//http://localhost:5000/api.../addDanhMuc/ body:danhmuc_ten
 exports.addDanhMuc = async (req, res) => {
     let danhMuc_ten = req.body.danhmuc_ten;
-    // console.log(req.body.danhmuc_ten);
+    console.log(req.body.danhmuc_ten);
     if (!danhMuc_ten) {
         return res.status(200).json({ error: 'Không tìm thấy danhmuc_ten' })
     }
@@ -49,13 +46,13 @@ exports.addDanhMuc = async (req, res) => {
     }
 }
 
-//http://localhost:5000/api.../updateDanhMuc/:id/:danhmuc_ten
+//http://localhost:5000/api.../updateDanhMuc/:danhmuc_id/:danhmuc_ten
 exports.updateDanhMuc = async (req, res) => {
     let danhMuc_ten = req.params.danhmuc_ten;
-    let danhMuc_id = req.params.id;
+    let danhMuc_id = req.params.danhmuc_id;
 
     console.log(req.body.danhmuc_ten);
-    console.log(req.body.id);
+    console.log(req.body.danhmuc_id);
 
     if (!danhMuc_ten && !danhMuc_id) {
         return res.status(200).json({ error: 'Không tìm thấy danhmuc_ten hoặc id' })
@@ -86,10 +83,10 @@ exports.updateDanhMuc = async (req, res) => {
     }
 }
 
-//http://localhost:5000/api.../deleteDanhMuc/:id/
+//http://localhost:5000/api.../deleteDanhMuc/:danhmuc_id/
 exports.deleteDanhMuc = async (req, res) => {
-    let danhMuc_id = req.params.id;
-    console.log(req.body.id);
+    let danhMuc_id = req.params.danhmuc_id;
+    console.log(req.params.danhmuc_id);
 
     if (!danhMuc_id) {
         return res.status(200).json({ error: 'Không tìm thấy id' })

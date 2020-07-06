@@ -13,6 +13,7 @@ const Auth = React.lazy(() => import('./components/Auth'));
 const NotFound = React.lazy(() => import('./components/NotFound'));
 const TatCaDanhMuc = React.lazy(() => import('./components/DanhMucSanPham/TatCaDanhMuc'));
 const ThemDanhMuc = React.lazy(() => import('./components/DanhMucSanPham/ThemDanhMuc'));
+const SuaDanhMuc = React.lazy(() => import('./components/DanhMucSanPham/SuaDanhMuc'));
 const TatCaNhom = React.lazy(() => import('./components/NhomSanPham/TatCaNhom'));
 const ThemNhom = React.lazy(() => import('./components/NhomSanPham/ThemNhom'));
 const TinDangChoDuyet = React.lazy(() => import('./components/QuanLyTinDang/TinDangChoDuyet'));
@@ -25,7 +26,6 @@ const UserDaActive = React.lazy(() => import('./components/QuanLyUser/UserDaActi
 function Admin(props) {
     const match = useRouteMatch();
     const adminReducer = useSelector(state => state.adminAuth); // get admin in reducer
-    console.log(match)
 
     const [sidebarIsOpen, setSidebarOpen] = useState(true);
     const toggleSidebar = () => setSidebarOpen(!sidebarIsOpen);
@@ -45,6 +45,11 @@ function Admin(props) {
                             exact
                             path={`${match.url}/themdanhmuc`}
                             component={ThemDanhMuc}
+                        />
+                        <ProtectedRoute
+                            exact
+                            path={`${match.url}/suadanhmuc/:danhmuc_id/:danhmucten`}
+                            component={SuaDanhMuc}
                         />
                         <ProtectedRoute
                             exact

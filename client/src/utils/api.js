@@ -13,7 +13,6 @@ api.interceptors.request.use(
         const user = JSON.parse(localStorage.getItem('user'));
         if (admin) {
             config.headers['x-access-token'] = admin.accessToken;
-
         }
         if (user) {
             config.headers['y-access-token'] = user.accessToken;

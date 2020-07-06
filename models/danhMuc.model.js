@@ -42,7 +42,7 @@ exports.add = (danhmuc_ten, result) => {
     })
 }
 
-exports.remove = (danhmuc_id, result) => {
+exports.delete = (danhmuc_id, result) => {
     const sql = "DELETE FROM tbl_danhmuc WHERE danhmuc_id = ?"
     con.query(sql, [danhmuc_id], (err, res) => {
         if (err) {

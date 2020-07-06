@@ -38,10 +38,14 @@ router.get('/testt', (req, res) => {
 // // //category router
 // router.get('/getAllCategory', categoryController.getAllCategory);
 
+// danh mục
 router.get('/getAllDanhMuc', danhMucController.getAllDanhMuc);
 router.post('/addDanhMuc', danhMucController.addDanhMuc);
-// router.put('/updateDanhMuc/:id',)
-// router.delete('/deleteDanhMuc/:id,)
+router.put('/updateDanhMuc/:id/:danhmuc_ten', danhMucController.updateDanhMuc);
+router.delete('/deleteDanhMuc/:id', danhMucController.deleteDanhMuc);
+
+// nhóm
+
 
 
 

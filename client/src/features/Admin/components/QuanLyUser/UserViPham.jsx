@@ -92,7 +92,7 @@ const UserChuaActive = (props) => {
                                         <Button color="secondary" onClick={toggleTow}>Thoát</Button>
                                     </ModalFooter>
                                 </Modal>
-                                <Button color="danger">Block</Button>
+                                <Button color="success"> Mở Block</Button>
                             </td>
                         </tr>
                         );

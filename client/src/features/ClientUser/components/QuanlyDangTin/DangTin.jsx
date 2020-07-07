@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 
-import { Container, Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Badge, FormText, Col, Row, CustomInput } from 'reactstrap'
+import { useDispatch, useSelector } from 'react-redux';
 
+import { Container, Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Badge, FormText, Col, Row, CustomInput } from 'reactstrap'
+import { getAllNhom } from '../../../Admin/components/NhomSanPham/nhomSlice';
+import { getAllDanhMuc } from '../../../Admin/components/DanhMucSanPham/danhMucSlice';
 function DangTin(props) {
     const math = useRouteMatch();
+    const dispatch = useDispatch();
+    const danhMucList = useSelector(state => state.danhMuc); // get admin in reducer
+    const nhomList = useSelector(state => state.nhom); // get nhom in reducer
+
+
+    const [danhmuc_id, setDanhmuc_id] = useState(12);
+
+    const onChangeSelectedDanhMuc = (event) => {
+        var index = event.nativeEvent.target.selectedIndex;
+        var value = event.nativeEvent.target[index].value;
+        console.log(value)
+        setDanhmuc_id(value);
+    }
+
+
+
+    useEffect(() => {
+        dispatch(getAllDanhMuc());
+        dispatch(getAllNhom());
+    }, [])
+    console.log(danhmuc_id)
+
     return (
         <Container className="mt-3">
 
@@ -16,21 +41,26 @@ function DangTin(props) {
                 <h4>1.<Badge color="primary">Danh mục</Badge></h4>
                 <FormGroup>
                     <Label for="exampleSelectDanhMuc">Danh mục</Label>
-                    <Input type="select" name="selectDanhMuc" id="exampleSelectDanhMuc">
-                        <option>Nhà đất</option>
-                        <option>xe máy</option>
-                        <option>Vi tính</option>
+                    <Input type="select" name="selectDanhMuc" id="exampleSelectDanhMuc" onChange={onChangeSelectedDanhMuc}>
+                        {
+                            danhMucList.danhMuc.map(danhmuc => (
+                                <option value={danhmuc.danhmuc_id}>{danhmuc.danhmuc_ten}</option>
+                            ))
 
+                        }
                     </Input>
                 </FormGroup>
                 <FormGroup>
                     <Label for="exampleSelectNhom">Nhóm</Label>
                     <Input type="select" name="selectNhom" id="exampleSelectNhom">
-                        <option>Mua bán</option>
-                        <option>ádsd</option>
-                        <option>ádz</option>
-                        <option>à</option>
-                        <option>ầ</option>
+                        {
+                            nhomList.nhom.map(nhom => {
+                                if (nhom.danhmuc_id === parseInt(danhmuc_id))
+                                    return (
+                                        <option value={nhom.nhom_id}>{nhom.nhom_ten}</option>
+                                    )
+                            })
+                        }
                     </Input>
                 </FormGroup>
 

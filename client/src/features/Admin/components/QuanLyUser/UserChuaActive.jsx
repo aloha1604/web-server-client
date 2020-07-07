@@ -77,7 +77,7 @@ const UserChuaActive = (props) => {
                             </td>
                             <td>
 
-                                <Button color="warning" onClick={toggleTow}>Thông báo</Button>{' '}
+                                <Button color="warning" onClick={toggleTow}>Gửi mail</Button>{' '}
                                 <Modal isOpen={modalTow} toggle={toggleTow} >
                                     <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
                                     <ModalBody>
@@ -92,7 +92,6 @@ const UserChuaActive = (props) => {
                                         <Button color="secondary" onClick={toggleTow}>Thoát</Button>
                                     </ModalFooter>
                                 </Modal>
-                                <Button color="danger">Block</Button>
                             </td>
                         </tr>
                         );

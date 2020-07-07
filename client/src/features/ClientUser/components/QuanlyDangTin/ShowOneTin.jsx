@@ -57,10 +57,10 @@ function ShowOneTin(props) {
                             textAlign: 'center',
                             marginRight: '10px',
                             marginTop: "10px"
-
-                        }
-                    }
-                        color="danger" onClick={toggle}><img width="40%" height="36%" src="https://picsum.photos/200/300?grayscale" alt="" /></a>
+                        }}
+                        href="/"
+                        color="danger" onClick={toggle} >
+                        <img width="40%" height="36%" src="https://picsum.photos/200/300?grayscale" alt="" /></a>
                     <Modal isOpen={modal} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }}
                         toggle={toggle} >
                         <ModalHeader toggle={toggle}>Hình ảnh </ModalHeader>

@@ -10,11 +10,15 @@ const categoryController = require('../controller/category.controller');//tesst
 const danhMucController = require('../controller/danhMuc.controller');
 const nhomController = require('../controller/nhom.controller');
 const userController = require('../controller/user.controller');
-
+// *********************************************************** pulic router ******************
 router.post("/admindangnhap", AuthController.loginAdmin);
 router.post("/refresh-token-admin", AuthController.refreshTokenAdmin);
+// danh mục
+router.get('/getAllDanhMuc', danhMucController.getAllDanhMuc);
+// nhóm
+router.get('/getAllNhom', nhomController.getAllNhom);
 
-
+// ***************************************************** Private route *************
 // Sử dụng authMiddleware.isAuth trước những api cần xác thực
 router.use(AuthMiddleWare.isAuthAdmin);
 // List Protect APIs:
@@ -28,7 +32,7 @@ router.put('/updateCategory', categoryController.UpdateCategory);
 router.delete('/deleteCategory', categoryController.deleteCategory);
 
 // danh mục
-router.get('/getAllDanhMuc', danhMucController.getAllDanhMuc);
+// router.get('/getAllDanhMuc', danhMucController.getAllDanhMuc);
 router.post('/addDanhMuc', danhMucController.addDanhMuc);// { body:  danhmuc_ten }
 router.put('/updateDanhMuc/:danhmuc_id/:danhmuc_ten', danhMucController.updateDanhMuc);
 router.delete('/deleteDanhMuc/:danhmuc_id', danhMucController.deleteDanhMuc);

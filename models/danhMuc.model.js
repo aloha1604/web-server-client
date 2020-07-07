@@ -2,7 +2,7 @@ const con = require("./db");
 const moment = require('../lib/moment.lib');
 
 exports.getAllDanhMuc = (result) => {
-    const sql = "SELECT * FROM tbl_danhmuc"
+    const sql = "SELECT * FROM tbl_danhmuc "
     con.query(sql, (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -43,7 +43,17 @@ exports.add = (danhmuc_ten, result) => {
 }
 
 exports.delete = (danhmuc_id, result) => {
-    const sql = "DELETE FROM tbl_danhmuc WHERE danhmuc_id = ?"
+    const sql = "DELETE FROM tbl_danhmuc WHERE danhmuc_id = ?";
+    const sql1 = "DELETE FROM tbl_nhom WHERE danhmuc_id = ?";
+    con.query(sql1, [danhmuc_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            return;
+        } else {
+            // console.log(res);
+            return;
+        }
+    })
     con.query(sql, [danhmuc_id], (err, res) => {
         if (err) {
             console.log("error:", err);

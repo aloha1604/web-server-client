@@ -17,7 +17,7 @@ import {
 
 import { isEmpty } from "validator";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import { login, singIn, logout } from '../../reducer/userSlice';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,7 +25,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Header(props) {
     const dispatch = useDispatch();
-    const history = useHistory();
     const userReducer = useSelector(state => state.userAuth); // get admin in reducer
     const math = useRouteMatch();
     console.log(math.url);
@@ -113,7 +112,7 @@ function Header(props) {
     return (
 
         <Container>
-            <ToastContainer autoClose={8000} />
+            <ToastContainer autoClose={1000} />
             <div>
                 <Navbar color="light" light expand="lg">
                     <NavbarBrand href="/">  QuýNam.vn </NavbarBrand>
@@ -206,7 +205,7 @@ function Header(props) {
 
                                     <UncontrolledDropdown nav inNavbar>
                                         <DropdownToggle nav caret>
-                                            <ToastContainer autoClose={8000} />
+                                            {/* <ToastContainer autoClose={1000} /> */}
                                             Tài khoản
                                         </DropdownToggle>
                                         <DropdownMenu right>

@@ -1,197 +1,107 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Table, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, FormText, CardImg, ModalFooter } from "reactstrap";
-import { useRouteMatch } from 'react-router-dom'
+import { useRouteMatch, useHistory } from 'react-router-dom';
+import imgUserNone from '../../../../asset/images/usernone.jpg';
+import { getAllUser } from './userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const UserDaActive = (props) => {
-
-
+    const history = useHistory();
+    const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
     const [modalTow, setModalTow] = useState(false);
+    const userList = useSelector(state => state.user); // get danhmuc in reducer
 
     const toggle = () => setModal(!modal);
     const toggleTow = () => setModalTow(!modalTow);
     const math = useRouteMatch();
+    useEffect(() => {
+        dispatch(getAllUser());
+    }, [])
 
     return (
         <Container fluid className="content">
             <Breadcrumb tag="nav" listTag="div">
-                <BreadcrumbItem active tag="span">Admin</BreadcrumbItem>
+                <BreadcrumbItem active tag="a" href={'/admin'}>Admin</BreadcrumbItem>
                 <BreadcrumbItem tag="a" href={math.url} active >User đang hoạt động</BreadcrumbItem>
             </Breadcrumb>
             <Table striped>
                 <thead>
                     <tr>
                         <th>ID User</th>
-                        <th>Tên user</th>
+                        <th>Email</th>
                         <th>Hình ảnh</th>
                         <th>Chi tiết</th>
                         <th>Chức năng</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr >
-                        <td >02</td>
-                        <td >tieude1</td>
-                        <td style={{
-                            width: '10rem',
-                            height: '4rem'
-                        }}><CardImg top width="40rem" height="50rem" src="https://picsum.photos/seed/picsum/200/300" alt="Card image cap" /></td>
-                        <td>
-                            <Button color="info" onClick={toggle}>xem chi tiêt</Button>
-                            <Modal isOpen={modal} toggle={toggle} >
-                                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
-                                <ModalBody>
-                                    {/* form chi tiet */}
-                                    <Form>
-                                        <FormGroup>
-                                            <Label for="exampleEmail">Email</Label>
-                                            <Input type="email" name="email" id="exampleEmail" placeholder="with a placeholder" />
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label for="examplePassword">Password</Label>
-                                            <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" />
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label for="exampleSelect">Select</Label>
-                                            <Input type="select" name="select" id="exampleSelect">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </Input>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label for="exampleSelectMulti">Select Multiple</Label>
-                                            <Input type="select" name="selectMulti" id="exampleSelectMulti" multiple>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </Input>
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label for="exampleText">Text Area</Label>
-                                            <Input type="textarea" name="text" id="exampleText" />
-                                        </FormGroup>
-                                        <FormGroup>
-                                            <Label for="exampleFile">File</Label>
-                                            <Input type="file" name="file" id="exampleFile" />
-                                            <FormText color="muted">
-                                                This is some placeholder block-level help text for the above input.
-                                                It's a bit lighter and easily wraps to a new line.
-                                             </FormText>
-                                        </FormGroup>
-                                        <FormGroup tag="fieldset">
-                                            <legend>Radio Buttons</legend>
-                                            <FormGroup check>
-                                                <Label check>
-                                                    <Input type="radio" name="radio1" />{' '}
-                                                     Option one is this and that—be sure to include why it's great
-                                                 </Label>
+                    {userList.user.map(user => {
+                        return (<tr>
+                            <td >{user.user_id}</td>
+                            <td >{user.email}</td>
+                            <td style={{
+                                width: '10rem',
+                                height: '4rem'
+                            }}><CardImg top width="40rem" height="50rem" src={user.hinhanh ? user.hinhanh : imgUserNone} alt="Card image cap" /></td>
+                            <td>
+                                <Button color="info" onClick={toggle}>xem chi tiêt</Button>
+                                <Modal isOpen={modal} toggle={toggle} >
+                                    <ModalHeader toggle={toggle}>Chi tiết user</ModalHeader>
+                                    <ModalBody>
+                                        {/* form chi tiet */}
+                                        <Form>
+                                            <FormGroup>
+                                                <p>
+                                                    <Label for="exampleText"><h6>ID User</h6> {user.user_id}</Label><br />
+                                                    <Label for="exampleText"><h6>Email</h6> {user.email}</Label><br />
+                                                    <Label for="exampleText"><h6>Trạng thái</h6> {user.active}</Label><br />
+                                                    <Label for="exampleText"><h6>Vi phạm</h6> {user.vipham === 0 ? 'Tài khoản tốt ' : 'Tài khoản bị vi phạm'}</Label><br />
+                                                    <Label for="exampleText"><h6>Họ tên</h6> {user.hoten}</Label><br />
+                                                    <Label for="exampleText"><h6>Phone</h6> {user.phone}</Label><br />
+                                                    <Label for="exampleText"><h6>Đia chỉ</h6> {user.diachi}</Label><br />
+                                                    <Label for="exampleText"><h6>Ngày sinh</h6> {user.ngaysinh}</Label><br />
+                                                    <Label for="exampleText"><h6>Tỉnh thành</h6> {user.tinhthanh}</Label><br />
+                                                    <Label for="exampleText"><h6>Quận huyện</h6> {user.quanhuyen}</Label><br />
+                                                    <Label for="exampleText"><h6>Phường xã</h6> {user.phuongxa}</Label><br />
+                                                    <Label for="exampleText"><h6>Giới tính</h6> {user.gioitinh === 0 ? 'Nam' : 'Nữ'}</Label><br />
+                                                    <Label for="exampleText"><h6>CMND/Passport</h6> {user.cmnd}</Label><br />
+                                                    <Label for="exampleText"><h6>Ngày cấp</h6> {user.ngaycap}</Label><br />
+                                                    <Label for="exampleText"><h6>Nơi cấp</h6> {user.noicap}</Label><br />
+                                                </p>
                                             </FormGroup>
-                                            <FormGroup check>
-                                                <Label check>
-                                                    <Input type="radio" name="radio1" />{' '}
-                                                    Option two can be something else and selecting it will deselect option one
-                                                </Label>
-                                            </FormGroup>
-                                            <FormGroup check disabled>
-                                                <Label check>
-                                                    <Input type="radio" name="radio1" disabled />{' '}
-                                                    Option three is disabled
-                                                </Label>
-                                            </FormGroup>
-                                        </FormGroup>
-                                        <FormGroup check>
-                                            <Label check>
-                                                <Input type="checkbox" />{' '}
-                                            Check me out
-                                            </Label>
-                                        </FormGroup>
-                                    </Form>
-                                    {/* end form xem chi tiet */}
-                                </ModalBody>
-                            </Modal>
-                        </td>
-                        <td>
+                                        </Form>
+                                        {/* end form xem chi tiet */}
+                                    </ModalBody>
+                                </Modal>
+                            </td>
+                            <td>
 
-                            <Button color="warning" onClick={toggleTow}>Lý do</Button>{' '}
-                            <Modal isOpen={modalTow} toggle={toggleTow} >
-                                <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
-                                <ModalBody>
-                                    <Form>
-                                        <FormGroup>
-                                            <Label for="exampleText">Text Area</Label>
-                                            <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" disabled />
-                                        </FormGroup>
-                                    </Form>
-                                </ModalBody>
-                                <ModalFooter>
-                                    <Button color="secondary" onClick={toggleTow}>Thoát</Button>
-                                </ModalFooter>
-                            </Modal>
-                            <Button color="danger">Xóa tin</Button>
-                        </td>
-                    </tr>
-                    <tr >
-                        <td>04</td>
-                        <td>tieude2</td>
-                        <td style={{
-                            width: '10rem',
-                            height: '4rem'
-                        }}><CardImg top width="40rem" height="50rem" src="https://picsum.photos/id/237/200/300" alt="Card image cap" /></td>
-                        <td><Button color="info">xem chi tiêt</Button></td>
-                        <td>
-                            <Button color="warning" onClick={toggleTow}>Lý do</Button>{' '}
-                            <Modal isOpen={modalTow} toggle={toggleTow} >
-                                <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
-                                <ModalBody>
-                                    <Form>
-                                        <FormGroup>
-                                            <Label for="exampleText">Text Area</Label>
-                                            <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" disabled />
-                                        </FormGroup>
-                                    </Form>
-                                </ModalBody>
-                                <ModalFooter>
-                                    <Button color="secondary" onClick={toggleTow}>Thoát</Button>
-                                </ModalFooter>
-                            </Modal>
-                            <Button color="danger">Xóa tin</Button></td>
-                    </tr>
-                    <tr >
+                                <Button color="warning" onClick={toggleTow}>Thông báo</Button>{' '}
+                                <Modal isOpen={modalTow} toggle={toggleTow} >
+                                    <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
+                                    <ModalBody>
+                                        <Form>
+                                            <FormGroup>
+                                                <Label for="exampleText">Text Area</Label>
+                                                <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" disabled />
+                                            </FormGroup>
+                                        </Form>
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button color="secondary" onClick={toggleTow}>Thoát</Button>
+                                    </ModalFooter>
+                                </Modal>
+                                <Button color="danger">Block</Button>
+                            </td>
+                        </tr>
+                        );
+                    })}
 
-                        <td>434</td>
-                        <td>tieude3</td>
-                        <td style={{
-                            width: '10rem',
-                            height: '4rem'
-                        }}><CardImg top width="40rem" height="50rem" src="https://picsum.photos/id/237/200/300" alt="Card image cap" /></td>
-                        <td><Button color="info">xem chi tiêt</Button></td>
-                        <td>
-                            <Button color="warning" onClick={toggleTow}>Lý do</Button>{' '}
-                            <Modal isOpen={modalTow} toggle={toggleTow} >
-                                <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
-                                <ModalBody>
-                                    <Form>
-                                        <FormGroup>
-                                            <Label for="exampleText">Text Area</Label>
-                                            <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" disabled />
-                                        </FormGroup>
-                                    </Form>
-                                </ModalBody>
-                                <ModalFooter>
-                                    <Button color="secondary" onClick={toggleTow}>Thoát</Button>
-                                </ModalFooter>
-                            </Modal>
-                            <Button color="danger">Xóa tin</Button></td>
-                    </tr>
                 </tbody>
             </Table>
 
-        </Container>
+        </Container >
     );
 }
 

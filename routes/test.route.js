@@ -54,6 +54,8 @@ router.delete('/deleteNhomByIdNhom/:id/', nhomController.deleteNhomByIdNhom);
 
 // get all user 
 router.get('/getAllUser', userController.getAllUser);
+router.get('/getAllUserChuaActive', userController.getAllUserChuaActive);
+router.get('/getAllUserViPham', userController.getAllUserViPham);
 router.put('/baoCaoViPhamUser/:id', userController.baoCaoViPhamUser);
 router.put('/baoCaoHetViPhamUser/:id', userController.baoCaoHetViPhamUser);
 // router.get('/baoCaoViPhamUser',)

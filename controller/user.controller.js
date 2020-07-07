@@ -8,7 +8,36 @@ exports.getAllUser = (req, res) => {
         if (err) {
             res.status(500).send({
                 message:
-                    err.message || "Lỗi get all user"
+                    err.message || "Lỗi get all user active!!"
+            });
+        } else {
+            res.json({ dataUser: data });
+        }
+    })
+}
+
+//controller module
+// GET :http://localhost:5000/api.../getAllUserChuaActive
+exports.getAllUserChuaActive = (req, res) => {
+    userModel.getAllUserChuaActive((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message:
+                    err.message || "Lỗi get all user chưa active!!"
+            });
+        } else {
+            res.json({ dataUser: data });
+        }
+    })
+}
+
+// GET :http://localhost:5000/api.../getAllUserViPham
+exports.getAllUserViPham = (req, res) => {
+    userModel.getAllUserViPham((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message:
+                    err.message || "Lỗi get all user Vi phạm!!"
             });
         } else {
             res.json({ dataUser: data });

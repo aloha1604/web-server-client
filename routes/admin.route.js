@@ -9,6 +9,7 @@ const FriendController = require("../controller/FriendController");//test
 const categoryController = require('../controller/category.controller');//tesst
 const danhMucController = require('../controller/danhMuc.controller');
 const nhomController = require('../controller/nhom.controller');
+const userController = require('../controller/user.controller');
 
 router.post("/admindangnhap", AuthController.loginAdmin);
 router.post("/refresh-token-admin", AuthController.refreshTokenAdmin);
@@ -38,8 +39,11 @@ router.get('/getAllNhomByIdDanhMuc/:danhmuc_id', nhomController.getAllNhomByIdDa
 router.post('/addNhomByIdDanhMuc', nhomController.addNhomByIdDanhMuc); // { body: danhmuc_id, nhom_ten }
 router.put('/updateNhomByIdNhom/:id/:nhom_ten', nhomController.updateNhomByIdNhom);
 router.delete('/deleteNhomByIdNhom/:id/', nhomController.deleteNhomByIdNhom);
+
 // Ql user
 router.get('/getAllUser', userController.getAllUser);
+router.get('/getAllUserChuaActive', userController.getAllUserChuaActive);
+router.get('/getAllUserViPham', userController.getAllUserViPham);
 router.put('/baoCaoViPhamUser/:id', userController.baoCaoViPhamUser);
 router.put('/baoCaoHetViPhamUser/:id', userController.baoCaoHetViPhamUser);
 

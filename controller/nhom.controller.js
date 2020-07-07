@@ -11,12 +11,31 @@ exports.getAllNhomByIdDanhMuc = (req, res) => {
 
     nhomModel.getAllNhomByIdDanhMuc(danhMuc_id, (err, data) => {
         if (err) {
-            res.status(500).send({
-                message:
-                    err.message || "Lấy nhóm theo id danh mục không thành công!!"
-            });
+            return res.status(200).json({ error: 'Không thể get all data nhom by danh muc id !!' })
         } else {
-            res.json({ dataDanhMuc: data });
+            res.json({ dataNhom: data });
+        }
+    })
+
+}
+
+// GET :http://localhost:5000/api.../getAllNhom
+exports.getAllNhom = (req, res) => {
+
+
+    nhomModel.getAllNhom((err, data) => {
+        if (err) {
+            return res.status(200).json({ error: 'Không thể get all data nhom  !!' })
+        } else {
+            // let data1 = data.map(function (item) {
+            //     var arr = [];
+            //     arr.push({ danhmuc_id: item.danhmuc_ten });
+            //     arr.push({ nhom_id: item.nhom_id });
+            //     arr.push({ nhom_ten: item.nhom_ten });
+            //     return arr;
+            // })
+
+            res.json({ dataNhom: data });
         }
     })
 

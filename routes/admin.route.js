@@ -33,6 +33,7 @@ router.put('/updateDanhMuc/:danhmuc_id/:danhmuc_ten', danhMucController.updateDa
 router.delete('/deleteDanhMuc/:danhmuc_id', danhMucController.deleteDanhMuc);
 
 // nhóm
+router.get('/getAllNhom', nhomController.getAllNhom);
 router.get('/getAllNhomByIdDanhMuc/:danhmuc_id', nhomController.getAllNhomByIdDanhMuc);
 router.post('/addNhomByIdDanhMuc', nhomController.addNhomByIdDanhMuc); // { body: danhmuc_id, nhom_ten }
 router.put('/updateNhomByIdNhom/:id/:nhom_ten', nhomController.updateNhomByIdNhom);

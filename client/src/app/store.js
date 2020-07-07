@@ -10,11 +10,14 @@ import user from '../features/Admin/components/QuanLyUser/userSlice';
 
 //some Reducer client
 import userAuth from '../features/ClientUser/reducer/userSlice';
+import tinhThanh from '../features/ClientUser/reducer/apiTinhThanhSlice';
+import quanHuyen from '../features/ClientUser/reducer/apiQuanHuyenSlice';
+import phuongXa from '../features/ClientUser/reducer/apiPhuongXaSlice';
 
 
 //root Reducer
 const rootReducer = combineReducers({
-    adminAuth, danhMuc, nhom, user, userAuth,
+    adminAuth, danhMuc, nhom, user, userAuth, tinhThanh, quanHuyen, phuongXa
 })
 
 //config store

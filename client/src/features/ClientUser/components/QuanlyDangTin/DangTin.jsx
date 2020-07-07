@@ -6,29 +6,56 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Container, Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Badge, FormText, Col, Row, CustomInput } from 'reactstrap'
 import { getAllNhom } from '../../../Admin/components/NhomSanPham/nhomSlice';
 import { getAllDanhMuc } from '../../../Admin/components/DanhMucSanPham/danhMucSlice';
+import { getAllTinhThanh } from '../../../ClientUser/reducer/apiTinhThanhSlice';
+import { getAllQuanHuyen } from '../../../ClientUser/reducer/apiQuanHuyenSlice';
+import { getAllPhuongXa } from '../../../ClientUser/reducer/apiPhuongXaSlice';
+
 function DangTin(props) {
     const math = useRouteMatch();
     const dispatch = useDispatch();
     const danhMucList = useSelector(state => state.danhMuc); // get admin in reducer
     const nhomList = useSelector(state => state.nhom); // get nhom in reducer
+    const tinhThanhList = useSelector(state => state.tinhThanh); // get nhom in reducer
+    const quanHuyenList = useSelector(state => state.quanHuyen); // get nhom in reducer
+    const phuongXaList = useSelector(state => state.phuongXa); // get nhom in reducer
 
 
     const [danhmuc_id, setDanhmuc_id] = useState(12);
 
+    const [tinhThanh_id, settinhThanh_id] = useState(201);
+    const [quanHuyen_id, setQuanHuyen_id] = useState(1542);
+
+
+
     const onChangeSelectedDanhMuc = (event) => {
         var index = event.nativeEvent.target.selectedIndex;
         var value = event.nativeEvent.target[index].value;
-        console.log(value)
         setDanhmuc_id(value);
     }
+
+    const onChangeSelectedTinhThanh = (event) => {
+        var index = event.nativeEvent.target.selectedIndex;
+        var value = event.nativeEvent.target[index].value;
+        settinhThanh_id(value);
+    }
+    const onChangeSelectedQuanHuyen = (event) => {
+        var index = event.nativeEvent.target.selectedIndex;
+        var value = event.nativeEvent.target[index].value;
+        setQuanHuyen_id(value);
+    }
+    console.log(quanHuyen_id);
 
 
 
     useEffect(() => {
         dispatch(getAllDanhMuc());
         dispatch(getAllNhom());
+        dispatch(getAllTinhThanh());
+        dispatch(getAllQuanHuyen());
+        dispatch(getAllPhuongXa());
+
     }, [])
-    console.log(danhmuc_id)
+
 
     return (
         <Container className="mt-3">
@@ -36,15 +63,15 @@ function DangTin(props) {
             <Form>
                 <Breadcrumb>
                     <BreadcrumbItem><a href="/">Home</a></BreadcrumbItem>
-                    <BreadcrumbItem active><a href={math.url}>Đăng tin</a></BreadcrumbItem>
+                    <BreadcrumbItem ><a href={math.url}>Đăng tin</a></BreadcrumbItem>
                 </Breadcrumb>
                 <h4>1.<Badge color="primary">Danh mục</Badge></h4>
                 <FormGroup>
                     <Label for="exampleSelectDanhMuc">Danh mục</Label>
                     <Input type="select" name="selectDanhMuc" id="exampleSelectDanhMuc" onChange={onChangeSelectedDanhMuc}>
                         {
-                            danhMucList.danhMuc.map(danhmuc => (
-                                <option value={danhmuc.danhmuc_id}>{danhmuc.danhmuc_ten}</option>
+                            danhMucList.danhMuc.map((danhmuc, i) => (
+                                <option key={i} value={danhmuc.danhmuc_id}>{danhmuc.danhmuc_ten}</option>
                             ))
 
                         }
@@ -54,10 +81,10 @@ function DangTin(props) {
                     <Label for="exampleSelectNhom">Nhóm</Label>
                     <Input type="select" name="selectNhom" id="exampleSelectNhom">
                         {
-                            nhomList.nhom.map(nhom => {
+                            nhomList.nhom.map((nhom, i) => {
                                 if (nhom.danhmuc_id === parseInt(danhmuc_id))
                                     return (
-                                        <option value={nhom.nhom_id}>{nhom.nhom_ten}</option>
+                                        <option key={i} value={nhom.nhom_id}>{nhom.nhom_ten}</option>
                                     )
                             })
                         }
@@ -90,20 +117,28 @@ function DangTin(props) {
                     <Col md={4}>
                         <FormGroup>
                             <Label for="exampleTinhThanh">Tỉnh/Thành</Label>
-                            <Input type="select" name="selectTinhThanh" id="exampleTinhThanh">
-                                <option active>Tất cả</option>
-                                <option>Tphcm</option>
-                                <option>Hà nội</option>
+                            <Input type="select" name="selectTinhThanh" id="exampleTinhThanh" onChange={onChangeSelectedTinhThanh}>
+                                {
+                                    tinhThanhList.tinhThanh.map((tinhthanh, i) => (
+                                        <option key={i} value={tinhthanh.ProvinceID} >{tinhthanh.ProvinceName}</option>
+                                    ))
+                                }
                             </Input>
                         </FormGroup>
                     </Col>
                     <Col md={4}>
                         <FormGroup>
                             <Label for="exampleQuanHuyen">Quận/Huyện</Label>
-                            <Input type="select" name="selectQuanHuyen" id="exampleQuanHuyen">
-                                <option active>Tất cả</option>
-                                <option>Quận 1</option>
-                                <option>Quận 2</option>
+                            <Input type="select" name="selectQuanHuyen" id="exampleQuanHuyen" onChange={onChangeSelectedQuanHuyen}>
+                                {
+
+                                    quanHuyenList.quanHuyen.map((quanhuyen, i) => {
+                                        if (quanhuyen.ProvinceID === parseInt(tinhThanh_id))
+                                            return (
+                                                <option key={i} value={quanhuyen.DistrictID} >{quanhuyen.DistrictName}</option>
+                                            )
+                                    })
+                                }
                             </Input>
                         </FormGroup>
 
@@ -111,10 +146,15 @@ function DangTin(props) {
                     <Col md={4}>
                         <FormGroup>
                             <Label for="examplePhuongXa">Phường/Xã</Label>
-                            <Input type="select" name="selectPhuongXa" id="examplePhuongXa">
-                                <option active>Tất cả</option>
-                                <option>Bình trị đông a</option>
-                                <option>Bình Trị đông b</option>
+                            <Input type="select" name="selectPhuongXa" id="examplePhuongXa" >
+                                {
+                                    phuongXaList.phuongXa.map((phuongxa, i) => {
+                                        if (phuongxa.DistrictID === parseInt(quanHuyen_id))
+                                            return (
+                                                <option key={i} value={phuongxa.WardCode} >{phuongxa.WardName}</option>
+                                            )
+                                    })
+                                }
                             </Input>
                         </FormGroup>
 

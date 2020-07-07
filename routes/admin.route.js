@@ -38,8 +38,10 @@ router.get('/getAllNhomByIdDanhMuc/:danhmuc_id', nhomController.getAllNhomByIdDa
 router.post('/addNhomByIdDanhMuc', nhomController.addNhomByIdDanhMuc); // { body: danhmuc_id, nhom_ten }
 router.put('/updateNhomByIdNhom/:id/:nhom_ten', nhomController.updateNhomByIdNhom);
 router.delete('/deleteNhomByIdNhom/:id/', nhomController.deleteNhomByIdNhom);
-
-
+// Ql user
+router.get('/getAllUser', userController.getAllUser);
+router.put('/baoCaoViPhamUser/:id', userController.baoCaoViPhamUser);
+router.put('/baoCaoHetViPhamUser/:id', userController.baoCaoHetViPhamUser);
 
 
 module.exports = router;

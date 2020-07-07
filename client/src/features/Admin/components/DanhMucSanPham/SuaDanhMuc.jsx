@@ -53,7 +53,7 @@ const SuaDanhMuc = (props) => {
                     />
                 </FormGroup>
                 <FormGroup className="text-center">
-                    <Button color="primary" className="ml-auto mr-auto" onClick={handleClickUpdate}>Sữa</Button>
+                    <Button color="primary" className="ml-auto mr-auto" onClick={handleClickUpdate}>Update</Button>
                 </FormGroup>
 
             </Form>

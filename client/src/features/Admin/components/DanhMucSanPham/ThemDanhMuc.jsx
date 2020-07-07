@@ -43,7 +43,7 @@ const ThemDanhMuc = (props) => {
                     />
                 </FormGroup>
                 <FormGroup className="text-center">
-                    <Button color="primary" className="ml-auto mr-auto" onClick={handleClickThemDanhMuc}>Thêm</Button>
+                    <Button color="primary" className="ml-auto mr-auto" onClick={handleClickThemDanhMuc}>Add</Button>
                 </FormGroup>
 
             </Form>

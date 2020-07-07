@@ -53,8 +53,8 @@ const TatCaDanhMuc = (props) => {
                             <td>{danhmuc.danhmuc_id}</td>
                             <td>{danhmuc.danhmuc_ten}</td>
                             <td>
-                                <Button color="primary" onClick={() => handleClickSua(danhmuc.danhmuc_id, danhmuc.danhmuc_ten)}>Sữa</Button>{' '}
-                                <Button color="danger" onClick={() => handleClickXoa(danhmuc.danhmuc_id)}>Xóa</Button>
+                                <Button color="primary" onClick={() => handleClickSua(danhmuc.danhmuc_id, danhmuc.danhmuc_ten)}>Update</Button>{' '}
+                                <Button color="danger" onClick={() => handleClickXoa(danhmuc.danhmuc_id)}>Delete</Button>
                             </td>
                         </tr>
                     ))}

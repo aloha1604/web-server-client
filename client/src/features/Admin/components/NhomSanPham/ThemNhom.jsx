@@ -32,7 +32,7 @@ const ThemNhom = (props) => {
                     />
                 </FormGroup>
                 <FormGroup className="text-center">
-                    <Button color="primary" className="ml-auto mr-auto">Thêm</Button>
+                    <Button color="primary" className="ml-auto mr-auto">Add</Button>
                 </FormGroup>
 
             </Form>

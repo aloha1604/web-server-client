@@ -16,6 +16,7 @@ const ThemDanhMuc = React.lazy(() => import('./components/DanhMucSanPham/ThemDan
 const SuaDanhMuc = React.lazy(() => import('./components/DanhMucSanPham/SuaDanhMuc'));
 const TatCaNhom = React.lazy(() => import('./components/NhomSanPham/TatCaNhom'));
 const ThemNhom = React.lazy(() => import('./components/NhomSanPham/ThemNhom'));
+const SuaNhom = React.lazy(() => import('./components/NhomSanPham/SuaNhom'));
 const TinDangChoDuyet = React.lazy(() => import('./components/QuanLyTinDang/TinDangChoDuyet'));
 const TinViPham = React.lazy(() => import('./components/QuanLyTinDang/TinViPham'));
 const TinDaDuyet = React.lazy(() => import('./components/QuanLyTinDang/TinDaDuyet'));
@@ -60,14 +61,20 @@ function Admin(props) {
                         {/* route Quản lý nhóm */}
                         <ProtectedRoute
                             exact
-                            path={`${match.url}/tatcanhom`}
-                            component={TatCaNhom}
-                        />
-                        <ProtectedRoute
-                            exact
                             path={`${match.url}/themnhom`}
                             component={ThemNhom}
                         />
+                        <ProtectedRoute
+                            exact
+                            path={`${match.url}/suanhom/:nhom_id/:nhomten`}
+                            component={SuaNhom}
+                        />
+                        <ProtectedRoute
+                            exact
+                            path={`${match.url}/tatcanhom`}
+                            component={TatCaNhom}
+                        />
+
 
                         {/* route Quản lý tin */}
                         <ProtectedRoute

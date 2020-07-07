@@ -13,27 +13,27 @@ const slice = createSlice({
             state.nhom = action.payload.dataNhom;
             toast.success("Đã load thành công tất cả nhóm !!");
         },
-        // add: (state, action) => {
-        //     toast.success(action.payload.message);
-        // },
-        // remove: (state, action) => {
-        //     toast.success(action.payload.message);
-        // },
-        // update: (state, action) => {
-        //     // const newAdmin = action.payload;
-        //     toast.success(action.payload.message);
+        add: (state, action) => {
+            toast.success(action.payload.message);
+        },
+        remove: (state, action) => {
+            toast.success(action.payload.message);
+        },
+        update: (state, action) => {
+            // const newAdmin = action.payload;
+            toast.success(action.payload.message);
 
-        // },
-        // addFail: (state, action) => {
-        //     toast.warn(action.payload.error);
-        // },
-        // removeFail: (state, action) => {
-        //     toast.warn(action.payload.error);
-        // },
-        // updateFail: (state, action) => {
-        //     toast.warn(action.payload.error);
+        },
+        addFail: (state, action) => {
+            toast.warn(action.payload.error);
+        },
+        removeFail: (state, action) => {
+            toast.warn(action.payload.error);
+        },
+        updateFail: (state, action) => {
+            toast.warn(action.payload.error);
 
-        // },
+        },
         getAllFail: (state, action) => {
             toast.warn("Load thất bại tất cả nhóm!!!");
         }
@@ -77,20 +77,20 @@ export const getAllNhom = () => async dispatch => {
 //     }
 // }
 
-// export const updateDanhMuc = ({ danhmuc_id, danhmuc_ten }) => async dispatch => {
-//     try {
-//         const res = await api.put(`apiAdmin/updateDanhMuc/${danhmuc_id}/${danhmuc_ten}`)
-//         console.log(res.data)
-//         if (res.data.error) {
-//             dispatch(updateFail(res.data));
-//         } else {
-//             dispatch(update(res.data));
-//         }
+export const updateNhom = ({ nhom_id, nhom_ten }) => async dispatch => {
+    try {
+        const res = await api.put(`apiAdmin/updateNhomByIdNhom/${nhom_id}/${nhom_ten}`)
+        console.log(res.data)
+        if (res.data.error) {
+            dispatch(updateFail(res.data));
+        } else {
+            dispatch(update(res.data));
+        }
 
-//     } catch (e) {
-//         return console.error(e.message);
-//     }
-// }
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
 
 // export const removeDanhMuc = ({ danhmuc_id }) => async dispatch => {
 //     try {

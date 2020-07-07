@@ -62,20 +62,20 @@ export const getAllNhom = () => async dispatch => {
     }
 }
 
-// export const addDanhMuc = ({ danhmuc_ten }) => async dispatch => {
-//     try {
-//         const res = await api.post('apiAdmin/addDanhMuc', { danhmuc_ten })
-//         console.log(res.data)
-//         if (res.data.error) {
-//             dispatch(addFail(res.data));
-//         } else {
-//             dispatch(add(res.data));
-//         }
+export const addNhom = ({ danhmuc_id, nhom_ten }) => async dispatch => {
+    try {
+        const res = await api.post('apiAdmin/addNhomByIdDanhMuc', { danhmuc_id, nhom_ten })
+        console.log(res.data)
+        if (res.data.error) {
+            dispatch(addFail(res.data));
+        } else {
+            dispatch(add(res.data));
+        }
 
-//     } catch (e) {
-//         return console.error(e.message);
-//     }
-// }
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
 
 export const updateNhom = ({ nhom_id, nhom_ten }) => async dispatch => {
     try {
@@ -92,17 +92,17 @@ export const updateNhom = ({ nhom_id, nhom_ten }) => async dispatch => {
     }
 }
 
-// export const removeDanhMuc = ({ danhmuc_id }) => async dispatch => {
-//     try {
-//         const res = await api.delete(`apiAdmin/deleteDanhMuc/${danhmuc_id}`)
-//         console.log(res.data)
-//         if (res.data.error) {
-//             dispatch(removeFail(res.data));
-//         } else {
-//             dispatch(remove(res.data));
-//         }
+export const removeNhom = ({ nhom_id }) => async dispatch => {
+    try {
+        const res = await api.delete(`apiAdmin/deleteNhomByIdNhom/${nhom_id}`)
+        console.log(res.data)
+        if (res.data.error) {
+            dispatch(removeFail(res.data));
+        } else {
+            dispatch(remove(res.data));
+        }
 
-//     } catch (e) {
-//         return console.error(e.message);
-//     }
-// }
+    } catch (e) {
+        return console.error(e.message);
+    }
+}

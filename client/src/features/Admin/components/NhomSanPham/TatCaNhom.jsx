@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDanhMuc } from '../DanhMucSanPham/danhMucSlice';
-import { getAllNhom } from './nhomSlice'
+import { getAllNhom, removeNhom } from './nhomSlice'
 const TatCaNhom = (props) => {
 
     const math = useRouteMatch();
@@ -28,17 +28,17 @@ const TatCaNhom = (props) => {
     }
 
     const handleClickXoa = (nhom_id) => {
-        // const action = removeNhom({ nhom_id });
-        // dispatch(action);
-        // const action2 = getAllDanhMuc();
-        // dispatch(action2);
+        const action = removeNhom({ nhom_id });
+        dispatch(action);
+        dispatch(getAllDanhMuc());
+        dispatch(getAllNhom());
     }
 
     return (
         <Container fluid className="content">
             <ToastContainer autoClose={2000} />
             <Breadcrumb tag="nav" listTag="div">
-                <BreadcrumbItem active ag="a" href={'/admin'}>Admin</BreadcrumbItem>
+                <BreadcrumbItem active tag="a" href={'/admin'}>Admin</BreadcrumbItem>
                 <BreadcrumbItem tag="a" href={math.url} active >Tất cả Nhóm</BreadcrumbItem>
             </Breadcrumb>
             {danhMucList.danhMuc.map(danhmuc => (

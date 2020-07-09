@@ -17,6 +17,9 @@ router.post('/userdangnhap', AuthController.loginUser);
 // //category router
 router.get('/getAllCategory', categoryController.getAllCategory);
 
+
+// dangTinController.dangTin
+
 // dang images
 
 const DIR = './public';
@@ -44,7 +47,12 @@ var upload = multer({
 });
 
 router.post('/upload-images', upload.array('imgCollection', 6), dangTinController.insertHinhAnh);
+router.post('/upload-imagestest', upload.array('imgCollection', 6), function (req, res) {
+    res.send(req.files)
+});
 router.get("/gethinhanh", dangTinController.getHinhAnh);
+router.post('/dangtin', upload.array('imgCollection', 6), dangTinController.dangTin);
+
 
 
 

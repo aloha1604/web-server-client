@@ -16,7 +16,7 @@ exports.getAllDanhMuc = (req, res) => {
 //http://localhost:5000/api.../addDanhMuc/ body:danhmuc_ten
 exports.addDanhMuc = async (req, res) => {
     let danhMuc_ten = req.body.danhmuc_ten;
-    console.log(req.body.danhmuc_ten);
+    // console.log(req.body.danhmuc_ten);
     if (!danhMuc_ten) {
         return res.status(200).json({ error: 'Không tìm thấy danhmuc_ten' })
     }

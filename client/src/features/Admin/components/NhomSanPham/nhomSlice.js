@@ -11,7 +11,7 @@ const slice = createSlice({
     reducers: {
         getAll: (state, action) => {
             state.nhom = action.payload.dataNhom;
-            toast.success("Đã load thành công tất cả nhóm !!");
+            // toast.success("Đã load thành công tất cả nhóm !!");
         },
         add: (state, action) => {
             toast.success(action.payload.message);

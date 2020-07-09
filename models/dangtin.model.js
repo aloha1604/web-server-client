@@ -63,3 +63,35 @@ exports.getAllTinDaDuyet = (result) => {
         }
     })
 }
+
+
+exports.updateTinDangActive = (tindang_id, result) => {
+
+    const sql = "UPDATE tbl_tindang SET dangtin_active=? WHERE dangtin_id = ? "
+    con.query(sql, [1, tindang_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
+exports.updateTinDangViPham = (tindang_id, result) => {
+
+    const sql = "UPDATE tbl_tindang SET dangtin_vipham=? WHERE dangtin_id = ? "
+    con.query(sql, [1, tindang_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+

@@ -53,9 +53,39 @@ export const getAllTinChoDuyet = () => async dispatch => {
     }
 }
 
-export const getAllTinViPham = () => async dispatch => {
+// export const getAllTinViPham = () => async dispatch => {
+//     try {
+//         const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
+//         if (!res.data) {
+//             dispatch(getAllFail(res.data));
+//         } else {
+//             dispatch(getAll(res.data));
+
+//         }
+
+//     } catch (e) {
+//         return console.error(e.message);
+//     }
+// }
+
+// export const getAllTinDaDuyet = () => async dispatch => {
+//     try {
+//         const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
+//         if (!res.data) {
+//             dispatch(getAllFail(res.data));
+//         } else {
+//             dispatch(getAll(res.data));
+
+//         }
+
+//     } catch (e) {
+//         return console.error(e.message);
+//     }
+// }
+
+export const addTinDang = (value) => async dispatch => {
     try {
-        const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
+        const res = await api.post('apiUser/dangtin', value)
         if (!res.data) {
             dispatch(getAllFail(res.data));
         } else {
@@ -68,50 +98,20 @@ export const getAllTinViPham = () => async dispatch => {
     }
 }
 
-export const getAllTinDaDuyet = () => async dispatch => {
-    try {
-        const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
-        if (!res.data) {
-            dispatch(getAllFail(res.data));
-        } else {
-            dispatch(getAll(res.data));
+// export const updateTinDang = () => async dispatch => {
+//     try {
+//         const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
+//         if (!res.data) {
+//             dispatch(getAllFail(res.data));
+//         } else {
+//             dispatch(getAll(res.data));
 
-        }
+//         }
 
-    } catch (e) {
-        return console.error(e.message);
-    }
-}
-
-export const addTinDang = () => async dispatch => {
-    try {
-        const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
-        if (!res.data) {
-            dispatch(getAllFail(res.data));
-        } else {
-            dispatch(getAll(res.data));
-
-        }
-
-    } catch (e) {
-        return console.error(e.message);
-    }
-}
-
-export const updateTinDang = () => async dispatch => {
-    try {
-        const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
-        if (!res.data) {
-            dispatch(getAllFail(res.data));
-        } else {
-            dispatch(getAll(res.data));
-
-        }
-
-    } catch (e) {
-        return console.error(e.message);
-    }
-}
+//     } catch (e) {
+//         return console.error(e.message);
+//     }
+// }
 
 
 

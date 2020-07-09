@@ -39,24 +39,26 @@ exports.getHinhAnh = (req, res, next) => {
 exports.dangTin = async (req, res) => {
     //get du lieu
     const nhom_id = req.body.nhom_id;
-    const dangTin_tieuDe = req.body.dangtin_tieude;
-    const dangtin_gia = req.body.dangtin_gia;
-    const tindang_tukhoa = req.body.tindang_tukhoa;
-    const tindang_tinhthanh = req.body.tindang_tinhthanh;
-    const tindang_quanhuyen = req.body.tindang_quanhuyen;
-    const tindang_phuongxa = req.body.tindang_phuongxa;
-    const tindang_noidung = req.body.tindang_noidung;
-    const tindang_linkyoutube = req.body.tindang_linkyoutube;
-    const tindang_hoten = req.body.tindang_hoten;
-    const tindang_email = req.body.tindang_email;
-    const tindang_phone = req.body.tindang_phone;
-    const tindang_diachi = req.body.tindang_diachi;
-    const tindang_thoigianlienhe = req.body.tindang_thoigianlienhe;
+    const user_id = req.body.user_id
+    const dangTin_tieuDe = req.body.tieude;
+    const dangtin_gia = req.body.gia;
+    const tindang_tukhoa = req.body.tuKhoa;
+    const tindang_tinhthanh = req.body.tinhThanh;
+    const tindang_quanhuyen = req.body.quanHuyen;
+    const tindang_phuongxa = req.body.phuongXa;
+    const tindang_noidung = req.body.noiDung;
+    const tindang_linkyoutube = req.body.linkYoutube;
+    const tindang_hoten = req.body.hoTen;
+    const tindang_email = req.body.email;
+    const tindang_phone = req.body.phone;
+    const tindang_diachi = req.body.diachi;
+    const tindang_thoigianlienhe = req.body.thoiGianLienHe;
     const tindang_active = 0;
     const tindang_vipham = 0;
 
     const dataTinDang1 = [];
     dataTinDang1.push(nhom_id)
+    dataTinDang1.push(user_id)
     dataTinDang1.push(dangTin_tieuDe)
     dataTinDang1.push(dangtin_gia)
     dataTinDang1.push(tindang_tukhoa)
@@ -73,6 +75,7 @@ exports.dangTin = async (req, res) => {
     dataTinDang1.push(tindang_active)
     dataTinDang1.push(tindang_vipham)
 
+    console.log(dataTinDang1);
 
     try {
         const flagInsert = (data) => {
@@ -96,7 +99,7 @@ exports.dangTin = async (req, res) => {
             reqFiles.push([dataDangTin.insertId, url + '/public/' + req.files[i].filename])
         }
 
-
+        console.log(req.files);
         const flagInsertHinhAnhByIdTin = (data) => {
             return new Promise((resolve, reject) => {
                 hinhAnhModel.insertHinhAnhByIdTin(data, (err, data) => {
@@ -112,6 +115,7 @@ exports.dangTin = async (req, res) => {
 
         var dataHinhAnh = await flagInsertHinhAnhByIdTin(reqFiles);
 
+        console.log(dataHinhAnh);
 
         if (dataDangTin.affectedRows > 0 && dataHinhAnh.affectedRows > 0) {
             return res.status(200).json({ message: 'Đăng tin thành công !!', data: dataDangTin.insertId })

@@ -51,7 +51,13 @@ router.post('/upload-imagestest', upload.array('imgCollection', 6), function (re
     res.send(req.files)
 });
 router.get("/gethinhanh", dangTinController.getHinhAnh);
+//quan ly tin dangtin, xoatin, getAllTin user
+// post dang tim gòm body: tbl_tindang and iduser
 router.post('/dangtin', upload.array('imgCollection', 6), dangTinController.dangTin);
+// router.post('/dangtin', upload.array('imgCollection', 6), function (req, res) {
+//     res.send(req.body.imgCollection)
+// });
+
 
 
 

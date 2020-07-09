@@ -9,7 +9,9 @@ import { getAllDanhMuc } from '../../../Admin/components/DanhMucSanPham/danhMucS
 import { getAllTinhThanh } from '../../../ClientUser/reducer/apiTinhThanhSlice';
 import { getAllQuanHuyen } from '../../../ClientUser/reducer/apiQuanHuyenSlice';
 import { getAllPhuongXa } from '../../../ClientUser/reducer/apiPhuongXaSlice';
+import { addTinDang } from '../../../../features/Admin/components/QuanLyTinDang/dangTinSlice';
 import { isEmpty, isEmail } from "validator";
+import api from '../../../../utils/api'
 
 function DangTin(props) {
     const math = useRouteMatch();
@@ -19,9 +21,12 @@ function DangTin(props) {
     const tinhThanhList = useSelector(state => state.tinhThanh); // get nhom in reducer
     const quanHuyenList = useSelector(state => state.quanHuyen); // get nhom in reducer
     const phuongXaList = useSelector(state => state.phuongXa); // get nhom in reducer
+    const user = JSON.parse(localStorage.getItem('user'));
+    const user_id = user.userFakeData._id;
 
     const [validatetionMsg, setValidatetionMsg] = useState({});
     const [danhmuc_id, setDanhmuc_id] = useState(12);
+    const [nhom_id, setNhom_id] = useState('');
     const [tinhThanh_id, settinhThanh_id] = useState(201);
     const [quanHuyen_id, setQuanHuyen_id] = useState(1542);
     const [tieude, setTieude] = useState('');
@@ -39,28 +44,11 @@ function DangTin(props) {
     const [diachi, setDiaChi] = useState('');
     const [thoiGianLienHe, setThoiGianLienHe] = useState('');
 
-    const validateAll = () => {
-        const msg = {};
-        if (isEmpty(tieude)
-            && isEmpty(gia)
-            && isEmpty(tuKhoa)
-            && isEmpty(noiDung)
-            && isEmpty(imgCollection)
-            && isEmpty(linkYoutube)
-            && isEmpty(hoTen)
-            && isEmpty(phone)
-            && isEmpty(email)
-            && isEmpty(diachi)
-            && isEmpty(thoiGianLienHe)
-        ) {
-            msg.empty = 'Bạn không được trống thông tin yêu cầu!!!'
-        }
-        if (!isEmail(email)) {
-            msg.email = 'Email không được trống!!!'
-        }
-        setValidatetionMsg(msg);
-        if (Object.keys(msg).length > 0) return false;
-        return true;
+
+    const onChangeNhom = (event) => {
+        var index = event.nativeEvent.target.selectedIndex;
+        var value = event.nativeEvent.target[index].value;
+        setNhom_id(value);
     }
 
     const onChangeTieuDe = (event) => {
@@ -84,7 +72,9 @@ function DangTin(props) {
     }
 
     const onChangeHinhAnh = (event) => {
-        const value = event.target.value;
+        const value = event.target.files;
+        // // const data = {'imgCollection':}
+        // setImgCollection({ imgCollection: [...event.target.files] })
         setImgCollection(value);
     }
 
@@ -146,11 +136,64 @@ function DangTin(props) {
         setPhuongXa(text);
     }
 
+    const validateAll = () => {
+        const msg = {};
+        if (isEmpty(tieude)
+            && isEmpty(gia)
+            && isEmpty(tuKhoa)
+            && isEmpty(noiDung)
+            && isEmpty(imgCollection)
+            && isEmpty(linkYoutube)
+            && isEmpty(hoTen)
+            && isEmpty(phone)
+            && isEmpty(email)
+            && isEmpty(diachi)
+            && isEmpty(thoiGianLienHe)
+        ) {
+            msg.empty = 'Bạn không được trống thông tin yêu cầu!!!'
+        }
+        if (!isEmail(email)) {
+            msg.email = 'Email không được trống!!!'
+        }
+        setValidatetionMsg(msg);
+        if (Object.keys(msg).length > 0) return false;
+        return true;
+    }
+
     const submitForm = (event) => {
         event.preventDefault();
 
         const isValidate = validateAll();
         if (!isValidate) return;
+
+        var formData = new FormData();
+
+        for (const key of Object.keys(imgCollection)) {
+            formData.append('imgCollection', imgCollection[key])
+        }
+        formData.append('nhom_id', nhom_id);
+        formData.append('user_id', user_id)
+        formData.append('tieude', tieude)
+        formData.append('gia', gia)
+        formData.append('tuKhoa', tuKhoa)
+        formData.append('tinhThanh', tinhThanh)
+        formData.append('quanHuyen', quanHuyen)
+        formData.append('phuongXa', phuongXa)
+        formData.append('noiDung', nhom_id)
+        formData.append('linkYoutube', nhom_id)
+        formData.append('hoTen', hoTen)
+        formData.append('email', email)
+        formData.append('phone', phone)
+        formData.append('thoiGianLienHe', thoiGianLienHe)
+        formData.append('diachi', diachi)
+
+
+        // api.post('apiUser/dangtin', formData)
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        dispatch(addTinDang(formData));
+
     }
 
 
@@ -189,7 +232,7 @@ function DangTin(props) {
                 </FormGroup>
                 <FormGroup>
                     <Label for="exampleSelectNhom">Nhóm</Label>
-                    <Input type="select" name="selectNhom" id="exampleSelectNhom">
+                    <Input type="select" name="selectNhom" id="exampleSelectNhom" onChange={onChangeNhom}>
                         {
                             nhomList.nhom.map((nhom, i) => {
                                 if (nhom.danhmuc_id === parseInt(danhmuc_id))
@@ -219,8 +262,8 @@ function DangTin(props) {
                     </Col>
                     <Col md={6}>
                         <FormGroup>
-                            <Label for="examplePassword">Từ khóa</Label>
-                            <Input type="password" name="password" id="examplePassword" placeholder="Nhập từ khóa muốn khách hàng tìm thấy" onChange={ongChangeTuKhoa} />
+                            <Label for="exampleTuKhoa">Từ khóa</Label>
+                            <Input type="text" name="textTuKhoa" id="exampleTuKhoa" placeholder="Nhập từ khóa muốn khách hàng tìm thấy" onChange={ongChangeTuKhoa} />
                             <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                             <FormText>Gợi ý: Hỗ trợ tìm kiếm, Ví dụ: iphone, iphone 6</FormText>
                         </FormGroup>
@@ -286,7 +329,7 @@ function DangTin(props) {
                 <FormGroup>
                     <FormText>Ghi chú: Dung lượng hình ảnh cho phép tối đa 5MB. Số lượng hình ảnh tối đa cho phép 6 hình ảnh.</FormText>
                     <Label for="exampleCustomFileBrowser">File Browser</Label>
-                    <CustomInput type="file" multiple id="exampleCustomFileBrowser" name="customFile" onChange={onChangeHinhAnh} />
+                    <CustomInput type="file" multiple id="exampleCustomFileBrowser" name="imgCollection" onChange={onChangeHinhAnh} />
                     <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                 </FormGroup>
                 <FormGroup>

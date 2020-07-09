@@ -12,7 +12,9 @@ router.get('/findCategoryById', categoryController.findOneCategoryById);
 router.post('/addCategory', categoryController.addCategory);
 router.put('/updateCategory', categoryController.UpdateCategory);
 router.delete('/deleteCategory', categoryController.deleteCategory);
+
 //router-post
+
 
 
 

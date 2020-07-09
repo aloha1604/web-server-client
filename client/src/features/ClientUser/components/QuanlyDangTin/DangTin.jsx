@@ -9,6 +9,7 @@ import { getAllDanhMuc } from '../../../Admin/components/DanhMucSanPham/danhMucS
 import { getAllTinhThanh } from '../../../ClientUser/reducer/apiTinhThanhSlice';
 import { getAllQuanHuyen } from '../../../ClientUser/reducer/apiQuanHuyenSlice';
 import { getAllPhuongXa } from '../../../ClientUser/reducer/apiPhuongXaSlice';
+import { isEmpty, isEmail } from "validator";
 
 function DangTin(props) {
     const math = useRouteMatch();
@@ -19,13 +20,103 @@ function DangTin(props) {
     const quanHuyenList = useSelector(state => state.quanHuyen); // get nhom in reducer
     const phuongXaList = useSelector(state => state.phuongXa); // get nhom in reducer
 
-
+    const [validatetionMsg, setValidatetionMsg] = useState({});
     const [danhmuc_id, setDanhmuc_id] = useState(12);
-
     const [tinhThanh_id, settinhThanh_id] = useState(201);
     const [quanHuyen_id, setQuanHuyen_id] = useState(1542);
+    const [tieude, setTieude] = useState('');
+    const [gia, setGia] = useState('');
+    const [tuKhoa, setTuKhoa] = useState('');
+    const [tinhThanh, setTinhThanh] = useState('');
+    const [quanHuyen, setQuanHuyen] = useState('');
+    const [phuongXa, setPhuongXa] = useState('');
+    const [noiDung, setNoiDung] = useState('');
+    const [imgCollection, setImgCollection] = useState('');
+    const [linkYoutube, setLinkYoutube] = useState('');
+    const [hoTen, setHoTen] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [diachi, setDiaChi] = useState('');
+    const [thoiGianLienHe, setThoiGianLienHe] = useState('');
 
+    const validateAll = () => {
+        const msg = {};
+        if (isEmpty(tieude)
+            && isEmpty(gia)
+            && isEmpty(tuKhoa)
+            && isEmpty(noiDung)
+            && isEmpty(imgCollection)
+            && isEmpty(linkYoutube)
+            && isEmpty(hoTen)
+            && isEmpty(phone)
+            && isEmpty(email)
+            && isEmpty(diachi)
+            && isEmpty(thoiGianLienHe)
+        ) {
+            msg.empty = 'Bạn không được trống thông tin yêu cầu!!!'
+        }
+        if (!isEmail(email)) {
+            msg.email = 'Email không được trống!!!'
+        }
+        setValidatetionMsg(msg);
+        if (Object.keys(msg).length > 0) return false;
+        return true;
+    }
 
+    const onChangeTieuDe = (event) => {
+        const value = event.target.value;
+        setTieude(value);
+    }
+
+    const onChangeGia = (event) => {
+        const value = event.target.value;
+        setGia(value);
+    }
+
+    const ongChangeTuKhoa = (event) => {
+        const value = event.target.value;
+        setTuKhoa(value);
+    }
+
+    const onChangeNoiDung = (event) => {
+        const value = event.target.value;
+        setNoiDung(value);
+    }
+
+    const onChangeHinhAnh = (event) => {
+        const value = event.target.value;
+        setImgCollection(value);
+    }
+
+    const onChangeLinkYoutube = (event) => {
+        const value = event.target.value;
+        setLinkYoutube(value);
+    }
+
+    const onChangeHoten = (event) => {
+        const value = event.target.value;
+        setHoTen(value);
+    }
+
+    const onChangePhone = (event) => {
+        const value = event.target.value;
+        setPhone(value);
+    }
+
+    const onChangeEmail = (event) => {
+        const value = event.target.value;
+        setEmail(value);
+    }
+
+    const onChangeDiaChi = (event) => {
+        const value = event.target.value;
+        setDiaChi(value);
+    }
+
+    const onChangeThoiGianLienHe = (event) => {
+        const value = event.target.value;
+        setThoiGianLienHe(value);
+    }
 
     const onChangeSelectedDanhMuc = (event) => {
         var index = event.nativeEvent.target.selectedIndex;
@@ -36,14 +127,31 @@ function DangTin(props) {
     const onChangeSelectedTinhThanh = (event) => {
         var index = event.nativeEvent.target.selectedIndex;
         var value = event.nativeEvent.target[index].value;
+        var text = event.nativeEvent.target[index].text;
+        setTinhThanh(text);
         settinhThanh_id(value);
     }
+
     const onChangeSelectedQuanHuyen = (event) => {
         var index = event.nativeEvent.target.selectedIndex;
         var value = event.nativeEvent.target[index].value;
+        var text = event.nativeEvent.target[index].text;
+        setQuanHuyen(text);
         setQuanHuyen_id(value);
     }
-    console.log(quanHuyen_id);
+
+    const onChangeSelectedPhuongXa = (event) => {
+        var index = event.nativeEvent.target.selectedIndex;
+        var text = event.nativeEvent.target[index].text;
+        setPhuongXa(text);
+    }
+
+    const submitForm = (event) => {
+        event.preventDefault();
+
+        const isValidate = validateAll();
+        if (!isValidate) return;
+    }
 
 
 
@@ -60,7 +168,9 @@ function DangTin(props) {
     return (
         <Container className="mt-3">
 
-            <Form>
+            <Form onSubmit={(event) => {
+                submitForm(event)
+            }} >
                 <Breadcrumb>
                     <BreadcrumbItem><a href="/">Home</a></BreadcrumbItem>
                     <BreadcrumbItem ><a href={math.url}>Đăng tin</a></BreadcrumbItem>
@@ -94,21 +204,24 @@ function DangTin(props) {
                 <h4>2.<Badge color="primary">Tiêu đề & giá</Badge></h4>
                 <FormGroup>
                     <Label for="exampleTieude">Tiêu đề*</Label>
-                    <Input type="text" name="txtTieuDe" id="exampleTieude" placeholder="Diền tiêu đề" />
+                    <Input type="text" name="txtTieuDe" id="exampleTieude" placeholder="Diền tiêu đề" onChange={onChangeTieuDe} />
+                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                     <FormText>Lưu ý: Tối thiểu 10 ký tự, tối đa 70 ký tự. Không nhập số điện thoại, giá tiền. Không nhập [mua], [bán].</FormText>
                 </FormGroup>
                 <Row form>
                     <Col md={6}>
                         <FormGroup>
                             <Label for="exampleGia">Giá</Label>
-                            <Input type="text" name="textGia" id="exampleGia" placeholder="Chỉ nhập số (VD:200000)" />
+                            <Input type="text" name="textGia" id="exampleGia" placeholder="Chỉ nhập số (VD:200000)" onChange={onChangeGia} />
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                             <FormText>Thương lượng</FormText>
                         </FormGroup>
                     </Col>
                     <Col md={6}>
                         <FormGroup>
                             <Label for="examplePassword">Từ khóa</Label>
-                            <Input type="password" name="password" id="examplePassword" placeholder="Nhập từ khóa muốn khách hàng tìm thấy" />
+                            <Input type="password" name="password" id="examplePassword" placeholder="Nhập từ khóa muốn khách hàng tìm thấy" onChange={ongChangeTuKhoa} />
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                             <FormText>Gợi ý: Hỗ trợ tìm kiếm, Ví dụ: iphone, iphone 6</FormText>
                         </FormGroup>
                     </Col>
@@ -146,7 +259,7 @@ function DangTin(props) {
                     <Col md={4}>
                         <FormGroup>
                             <Label for="examplePhuongXa">Phường/Xã</Label>
-                            <Input type="select" name="selectPhuongXa" id="examplePhuongXa" >
+                            <Input type="select" name="selectPhuongXa" id="examplePhuongXa" onChange={onChangeSelectedPhuongXa} >
                                 {
                                     phuongXaList.phuongXa.map((phuongxa, i) => {
                                         if (phuongxa.DistrictID === parseInt(quanHuyen_id))
@@ -165,14 +278,16 @@ function DangTin(props) {
                     <Label for="exampleText">Text Area</Label>
                     <Input style={{
                         height: '250px',
-                    }} type="textarea" name="text" id="exampleText" />
+                    }} type="textarea" name="text" id="exampleText" onChange={onChangeNoiDung} />
+                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                     <FormText>Nội dung tối đa 1000 ký tự</FormText>
                 </FormGroup>
                 <h4>4.<Badge color="primary">Hình ảnh & Video</Badge></h4>
                 <FormGroup>
                     <FormText>Ghi chú: Dung lượng hình ảnh cho phép tối đa 5MB. Số lượng hình ảnh tối đa cho phép 6 hình ảnh.</FormText>
                     <Label for="exampleCustomFileBrowser">File Browser</Label>
-                    <CustomInput type="file" multiple id="exampleCustomFileBrowser" name="customFile" />
+                    <CustomInput type="file" multiple id="exampleCustomFileBrowser" name="customFile" onChange={onChangeHinhAnh} />
+                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                 </FormGroup>
                 <FormGroup>
                     <Label for="exampleLinkVideo">Video youtube</Label>
@@ -181,7 +296,9 @@ function DangTin(props) {
                         name="txtLinkVideo"
                         id="exampleLinkVideo"
                         placeholder="Dán link video youtube vào đây, VD: https://www.youtube.com/watch?v=**********"
+                        onChange={onChangeLinkYoutube}
                     />
+                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                 </FormGroup>
                 <h4>5.<Badge color="primary">Thông tin liên hệ</Badge></h4>
                 <Row form >
@@ -193,7 +310,9 @@ function DangTin(props) {
                                 name="txtLinkVideo"
                                 id="exampleHoTen"
                                 placeholder="Điền họ tên"
+                                onChange={onChangeHoten}
                             />
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                         </FormGroup>
 
                     </Col>
@@ -205,7 +324,9 @@ function DangTin(props) {
                                 name="txtLinkVideo"
                                 id="examplePhone"
                                 placeholder="Điền số điện thoại"
+                                onChange={onChangePhone}
                             />
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                         </FormGroup>
 
                     </Col>
@@ -217,7 +338,10 @@ function DangTin(props) {
                                 name="txtEmail"
                                 id="exampleEmail"
                                 placeholder="Điền email"
+                                onChange={onChangeEmail}
                             />
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                         </FormGroup>
 
                     </Col>
@@ -226,18 +350,20 @@ function DangTin(props) {
                     <Col md={6}>
                         <FormGroup>
                             <Label for="exampleDiaChi">Địa chỉ</Label>
-                            <Input type="text" name="txtDiachi" id="exampleDiaChi" placeholder="Nhập địa chỉ" />
+                            <Input type="text" name="txtDiachi" id="exampleDiaChi" placeholder="Nhập địa chỉ" onChange={onChangeDiaChi} />
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                         </FormGroup>
                     </Col>
                     <Col md={6}>
                         <FormGroup>
                             <Label for="exampleLienHe">Thời gian liên hệ tốt nhất</Label>
-                            <Input type="text" name="textLienhe" id="exampleLienHe" placeholder="Điền thời gian liên hệ" />
+                            <Input type="text" name="textLienhe" id="exampleLienHe" placeholder="Điền thời gian liên hệ" onChange={onChangeThoiGianLienHe} />
+                            <p style={{ color: 'red' }}>{validatetionMsg.email}</p>
                         </FormGroup>
                     </Col>
                 </Row>
                 <FormGroup style={{ textAlign: 'center' }}>
-                    <Button color="success">Đăng tin</Button>
+                    <Button type="submit" color="success">Đăng tin</Button>
                 </FormGroup>
             </Form>
 

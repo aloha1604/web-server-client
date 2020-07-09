@@ -12,7 +12,7 @@ const slice = createSlice({
     reducers: {
         getAll: (state, action) => {
             state.danhMuc = action.payload.dataDanhMuc;
-            toast.success("Đã load thành công tất cả danh mục !!");
+            // toast.success("Đã load thành công tất cả danh mục !!");
         },
         add: (state, action) => {
             toast.success(action.payload.message);

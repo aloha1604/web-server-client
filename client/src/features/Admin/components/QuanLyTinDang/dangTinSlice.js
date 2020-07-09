@@ -36,9 +36,9 @@ const slice = createSlice({
 const { reducer, actions } = slice;
 export default reducer;
 //lấy ra các action
-export const { getAllTinChoDuyet, getAllTinViPham, getAllTinDaDuyet, addTin, updateTin, deleteTin, getAllFail } = actions;
+export const { getAll, addTin, updateTin, deleteTin, getAllFail } = actions;
 
-export const getAll = () => async dispatch => {
+export const getAllTinChoDuyet = () => async dispatch => {
     try {
         const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
         if (!res.data) {
@@ -52,5 +52,66 @@ export const getAll = () => async dispatch => {
         return console.error(e.message);
     }
 }
+
+export const getAllTinViPham = () => async dispatch => {
+    try {
+        const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getAll(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
+export const getAllTinDaDuyet = () => async dispatch => {
+    try {
+        const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getAll(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
+export const addTinDang = () => async dispatch => {
+    try {
+        const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getAll(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
+export const updateTinDang = () => async dispatch => {
+    try {
+        const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getAll(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
 
 

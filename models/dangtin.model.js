@@ -82,7 +82,7 @@ exports.updateTinDangActive = (tindang_id, result) => {
 
 exports.updateTinDangViPham = (tindang_id, result) => {
 
-    const sql = "UPDATE tbl_tindang SET dangtin_vipham=? WHERE dangtin_id = ? "
+    const sql = "UPDATE tbl_tindang SET dangtin_vipham= ? WHERE dangtin_id = ? "
     con.query(sql, [1, tindang_id], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -95,3 +95,17 @@ exports.updateTinDangViPham = (tindang_id, result) => {
     })
 }
 
+exports.deleteTinDang = (tindang_id, result) => {
+
+    const sql = "DELETE FROM tbl_tindang WHERE tindang_id =? "
+    con.query(sql, tindang_id, (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}

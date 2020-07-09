@@ -72,7 +72,7 @@ exports.dangTin = async (req, res) => {
     dataTinDang1.push(tindang_thoigianlienhe)
     dataTinDang1.push(tindang_active)
     dataTinDang1.push(tindang_vipham)
-    console.log(dataTinDang1)
+
 
     try {
         const flagInsert = (data) => {

@@ -189,9 +189,9 @@ function DangTin(props) {
 
 
         // api.post('apiUser/dangtin', formData)
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ', ' + pair[1]);
+        // }
         dispatch(addTinDang(formData));
 
     }

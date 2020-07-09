@@ -18,3 +18,48 @@ exports.add = (tinDang, result) => {
         }
     })
 }
+
+exports.getAllTinChoDuyet = (result) => {
+
+    const sql = "SELECT * FROM tbl_tinDang WHERE tindang_active = ? AND tindang_vipham = ?"
+    con.query(sql, [0, 0], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
+exports.getAllTinViPham = (result) => {
+
+    const sql = "SELECT * FROM tbl_tinDang WHERE tindang_active = ? AND tindang_vipham = ?"
+    con.query(sql, [1, 1], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
+exports.getAllTinDaDuyet = (result) => {
+
+    const sql = "SELECT * FROM tbl_tinDang WHERE tindang_active = ? AND tindang_vipham = ?"
+    con.query(sql, [1, 0], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}

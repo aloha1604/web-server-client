@@ -47,7 +47,7 @@ const ThemNhom = (props) => {
                     <Input type="select" name="select" id="exampleSelect" onChange={onChangeSelected} >
                         <option value="N/A">Tất cả</option>
                         {danhMucList.danhMuc.map(danhmuc => (
-                            <option value={danhmuc.danhmuc_id}>{danhmuc.danhmuc_ten}</option>
+                            <option key={danhmuc.danhmuc_id} value={danhmuc.danhmuc_id}>{danhmuc.danhmuc_ten}</option>
                         ))}
                     </Input>
                 </FormGroup>

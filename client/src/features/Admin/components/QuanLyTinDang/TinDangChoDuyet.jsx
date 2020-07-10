@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Table, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, FormText, CardImg, ModalFooter } from "reactstrap";
+import { Container, Table, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, CardImg, ModalFooter } from "reactstrap";
 import { useRouteMatch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTinChoDuyet } from './dangTinSlice';
@@ -8,12 +8,17 @@ const TinDangChoDuyet = (props) => {
 
     const dispatch = useDispatch();
     const tinDangList = useSelector(state => state.tinDang); // get danhmuc in reducer
+    const [tinDang_id, settinDang_id] = useState('')
 
 
     const [modal, setModal] = useState(false);
     const [modalTow, setModalTow] = useState(false);
 
-    const toggle = () => setModal(!modal);
+    const toggle = (event) => {
+        let value = event.target.value;
+        settinDang_id(value)
+        setModal(!modal)
+    };
     const toggleTow = () => setModalTow(!modalTow);
     const math = useRouteMatch();
 
@@ -39,93 +44,105 @@ const TinDangChoDuyet = (props) => {
                 </thead>
                 <tbody>
                     {
-                        tinDangList.tinDang.map(tindang => (
-                            <tr key={tindang.tindang_id}>
-                                <td >{tindang.tindang_id}</td>
-                                <td >{tindang.tindang_tieude}</td>
-                                <td style={{
-                                    width: '10rem',
-                                    height: '4rem'
-                                }}><CardImg top width="40rem" height="50rem" src={tindang.hinhanh[0] ? tindang.hinhanh[0] : imgUserNone} alt="image tin " /></td>
-                                <td>
-                                    <Button color="info" onClick={toggle}>xem chi tiêt</Button>
-                                    <Modal isOpen={modal} toggle={toggle} >
-                                        <ModalHeader toggle={toggle}>{tindang.tindang_tieude}</ModalHeader>
-                                        <ModalBody>
-                                            {/* form chi tiet */}
-                                            <Form>
-                                                <FormGroup>
-                                                    <Label for="exampleText"><h6>Danh mục</h6>{tindang.danhmuc_ten}</Label><br />
-                                                    <Label for="exampleText"><h6>Nhóm</h6>{tindang.nhom_ten}</Label><br />
-                                                    <Label for="exampleText"><h6>Tiêu đề</h6>{tindang.tindang_tieude}</Label><br />
-                                                    <Label for="exampleText"><h6>Id Tin</h6>{tindang.tindang_id}</Label><br />
-                                                    <Label for="exampleText"><h6>Giá</h6>{tindang.tindang_gia}</Label><br />
-                                                    <Label for="exampleText"><h6>Từ khóa</h6>{tindang.tindang_tukhoa}</Label><br />
-                                                    <Label for="exampleText"><h6>Tỉnh Thành</h6>{tindang.tindang_tinhthanh}</Label><br />
-                                                    <Label for="exampleText"><h6>Quận Huyện</h6>{tindang.tindang_quanhuyen}</Label><br />
-                                                    <Label for="exampleText"><h6>Phường Xã</h6>{tindang.tindang_phuongxa}</Label><br />
-                                                    <Label for="exampleText"><h6>Nội Dung</h6>{tindang.tindang_noidung}</Label><br />
-                                                    <Label for="exampleText"><h6>Link youtube</h6>{tindang.tindang_linkyoutube}</Label><br />
-                                                    <Label for="exampleText"><h6>Email</h6>{tindang.tindang_email}</Label><br />
-                                                    <Label for="exampleText"><h6>Địa chỉ</h6>{tindang.tindang_diachi}</Label><br />
-                                                    <Label for="exampleText"><h6>Thời gian liên hệ</h6>{tindang.tindang_thoigianlienhe}</Label><br />
-                                                    <Label for="exampleText"><h6>Trạng thái</h6>{tindang.tindang_active === 0 ? 'Chờ duyệt' : null}</Label><br />
-                                                    <Label for="exampleText"><h6>Ngày tạo</h6>{new Date(tindang.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</Label><br />
-                                                    <Label for="exampleText"><h6>Hình ảnh</h6>{tindang.tindang_tieude}</Label><br />
-                                                    <div style={{
-                                                        display: 'flex',
-                                                        flexDirection: 'column'
-                                                    }} >
-                                                        <div style={{
-                                                            width: '100%',
+                        tinDangList.tinDang.map((tin, i) => {
+                            let tindang = { ...tin }
+                            return (
+                                <tr key={i}>
+                                    <td >{tindang.tindang_id}</td>
+                                    <td >{tindang.tindang_tieude}</td>
+                                    <td style={{
+                                        width: '10rem',
+                                        height: '4rem'
+                                    }}><CardImg top width="40rem" height="50rem" src={tindang.hinhanh[0] ? tindang.hinhanh[0] : imgUserNone} alt="image tin " /></td>
+                                    <td >
+                                        <Button color="info" onClick={toggle} value={tindang.tindang_id}>xem chi tiêt</Button>
 
-                                                            margin: '5px'
-                                                        }}><CardImg top width="100%" src={tindang.hinhanh[0] ? tindang.hinhanh[0] : imgUserNone} alt="image tin " />
-                                                        </div>
-                                                        <div style={{
-                                                            width: '100%',
+                                        <Modal isOpen={modal} toggle={toggle} >
+                                            {
+                                                tinDangList.tinDang.map((item) => {
 
-                                                            margin: '10px 5px'
-                                                        }}><CardImg top width="100%" src={tindang.hinhanh[0] ? tindang.hinhanh[0] : imgUserNone} alt="image tin " />
-                                                        </div>
-                                                        <div style={{
-                                                            width: '100%',
-
-                                                            margin: '5px'
-                                                        }}><CardImg top width="100%" src={tindang.hinhanh[0] ? tindang.hinhanh[0] : imgUserNone} alt="image tin " />
-                                                        </div>
+                                                    if (item.tindang_id === parseInt(tinDang_id))
+                                                        return (<div>
+                                                            <ModalHeader toggle={toggle}>{item.tindang_tieude}</ModalHeader>
+                                                            <ModalBody>
 
 
-                                                    </div>
-                                                </FormGroup>
-                                            </Form>
-                                            {/* end form xem chi tiet */}
-                                        </ModalBody>
-                                    </Modal>
-                                </td>
-                                <td>
 
-                                    <Button color="warning" onClick={toggleTow}>Tin lỗi</Button>{' '}
-                                    <Modal isOpen={modalTow} toggle={toggleTow} >
-                                        <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
-                                        <ModalBody>
-                                            <Form>
-                                                <FormGroup>
-                                                    <Label for="exampleText">Text Area</Label>
-                                                    <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" />
-                                                </FormGroup>
-                                            </Form>
-                                        </ModalBody>
-                                        <ModalFooter>
-                                            <Button color="primary" onClick={toggleTow}>Vi phạm</Button>{' '}
-                                            <Button color="secondary" onClick={toggleTow}>Thoát</Button>
-                                        </ModalFooter>
+                                                                <Form>
 
-                                    </Modal>
-                                    <Button color="success">Duyệt tin</Button>
-                                </td>
-                            </tr>
-                        ))
+                                                                    <FormGroup>
+                                                                        <Label for="exampleText"><h6>Danh mục</h6>{item.danhmuc_ten}</Label><br />
+                                                                        <Label for="exampleText"><h6>Nhóm</h6>{item.nhom_ten}</Label><br />
+                                                                        <Label for="exampleText"><h6>Tiêu đề</h6>{item.tindang_tieude}</Label><br />
+                                                                        <Label for="exampleText"><h6>Id Tin</h6>{item.tindang_id}</Label><br />
+                                                                        <Label for="exampleText"><h6>Giá</h6>{item.tindang_gia}</Label><br />
+                                                                        <Label for="exampleText"><h6>Từ khóa</h6>{item.tindang_tukhoa}</Label><br />
+                                                                        <Label for="exampleText"><h6>Tỉnh Thành</h6>{item.tindang_tinhthanh}</Label><br />
+                                                                        <Label for="exampleText"><h6>Quận Huyện</h6>{item.tindang_quanhuyen}</Label><br />
+                                                                        <Label for="exampleText"><h6>Phường Xã</h6>{item.tindang_phuongxa}</Label><br />
+                                                                        <Label for="exampleText"><h6>Nội Dung</h6>{item.tindang_noidung}</Label><br />
+                                                                        <Label for="exampleText"><h6>Link youtube</h6>{item.tindang_linkyoutube}</Label><br />
+                                                                        <Label for="exampleText"><h6>Email</h6>{item.tindang_email}</Label><br />
+                                                                        <Label for="exampleText"><h6>Địa chỉ</h6>{item.tindang_diachi}</Label><br />
+                                                                        <Label for="exampleText"><h6>Thời gian liên hệ</h6>{item.tindang_thoigianlienhe}</Label><br />
+                                                                        <Label for="exampleText"><h6>Trạng thái</h6>{item.tindang_active === 0 ? 'Chờ duyệt' : null}</Label><br />
+                                                                        <Label for="exampleText"><h6>Ngày tạo</h6>{new Date(item.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</Label><br />
+                                                                        <Label for="exampleText"><h6>Hình ảnh</h6>{item.tindang_tieude}</Label><br />
+                                                                        <div style={{
+                                                                            display: 'flex',
+                                                                            flexDirection: 'column'
+                                                                        }} >
+                                                                            <div style={{
+                                                                                width: '100%',
+
+                                                                                margin: '5px'
+                                                                            }}>
+                                                                                {item.hinhanh.map(hinhanh => (
+                                                                                    <CardImg top width="100%" src={hinhanh ? hinhanh : imgUserNone} alt="image tin " />
+                                                                                ))}
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </FormGroup>
+
+                                                                </Form>
+                                                                {/* end form xem chi tiet */}
+                                                            </ModalBody>
+                                                        </div>)
+                                                })
+                                            }
+
+
+
+                                        </Modal>
+
+                                    </td>
+                                    <td>
+
+                                        <Button color="warning" onClick={toggleTow}>Tin lỗi</Button>{' '}
+                                        <Modal isOpen={modalTow} toggle={toggleTow} >
+                                            <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
+                                            <ModalBody>
+                                                <Form>
+                                                    <FormGroup>
+                                                        <Label for="exampleText">Text Area</Label>
+                                                        <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" />
+                                                    </FormGroup>
+                                                </Form>
+                                            </ModalBody>
+                                            <ModalFooter>
+                                                <Button color="primary" onClick={toggleTow}>Vi phạm</Button>{' '}
+                                                <Button color="secondary" onClick={toggleTow}>Thoát</Button>
+                                            </ModalFooter>
+
+                                        </Modal>
+                                        <Button color="success">Duyệt tin</Button>
+                                    </td>
+                                </tr>
+                            )
+                        })
                     }
 
 

@@ -40,7 +40,7 @@ export const { getAll, addTin, updateTin, deleteTin, getAllFail } = actions;
 
 export const getAllTinChoDuyet = () => async dispatch => {
     try {
-        const res = await api.get('/apiDangTin/getAllTinChoDuyet')
+        const res = await api.get('apiDangTin/getAllTinChoDuyet')
         if (!res.data) {
             dispatch(getAllFail(res.data));
         } else {
@@ -53,35 +53,35 @@ export const getAllTinChoDuyet = () => async dispatch => {
     }
 }
 
-// export const getAllTinViPham = () => async dispatch => {
-//     try {
-//         const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
-//         if (!res.data) {
-//             dispatch(getAllFail(res.data));
-//         } else {
-//             dispatch(getAll(res.data));
+export const getAllTinViPham = () => async dispatch => {
+    try {
+        const res = await api.get('apiDangTin/getAllTinViPham')
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getAll(res.data));
 
-//         }
+        }
 
-//     } catch (e) {
-//         return console.error(e.message);
-//     }
-// }
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
 
-// export const getAllTinDaDuyet = () => async dispatch => {
-//     try {
-//         const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
-//         if (!res.data) {
-//             dispatch(getAllFail(res.data));
-//         } else {
-//             dispatch(getAll(res.data));
+export const getAllTinDaDuyet = () => async dispatch => {
+    try {
+        const res = await api.get('apiDangTin/getAllTinDaDuyet')
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getAll(res.data));
 
-//         }
+        }
 
-//     } catch (e) {
-//         return console.error(e.message);
-//     }
-// }
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
 
 export const addTinDang = (value) => async dispatch => {
     try {

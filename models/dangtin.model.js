@@ -21,7 +21,7 @@ exports.add = (tinDang, result) => {
 
 exports.getAllTinChoDuyet = (result) => {
 
-    const sql = "SELECT * FROM tbl_tinDang WHERE tindang_active = ? AND tindang_vipham = ?"
+    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ?"
     con.query(sql, [0, 0], (err, res) => {
         if (err) {
             console.log("error:", err);

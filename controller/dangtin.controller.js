@@ -140,7 +140,39 @@ exports.getAllTinChoDuyet = (req, res) => {
                     err.message || "Some error occurred while retrieving customers."
             });
         } else {
-            res.json({ dataTin: data });
+
+            // res.json({ dataTin: data });
+            let dataTin = [...data];
+            hinhAnhModel.getHinhAnh((err, dataa) => {
+                if (err) {
+                    res.status(500).send({
+                        message:
+                            err.message || "Some error occurred while retrieving customers."
+                    });
+                } else {
+                    let dataHinhAnh = [...dataa];
+                    var hinhAnh = [];
+
+                    let datanew = dataTin.map(tin => {
+                        let copytin = { ...tin }
+                        hinhAnh = [];
+                        copytin.hinhanh = [];
+                        copytin.hinhanh.length = 0;
+                        hinhAnh.length = 0;
+                        for (let i = 0; i < dataHinhAnh.length; i++) {
+                            if (copytin.tindang_id === dataHinhAnh[i].tindang_id) {
+                                hinhAnh.push(dataHinhAnh[i].hinhanh_ten)
+                            }
+                        }
+
+                        copytin.hinhanh = [...hinhAnh];
+                        return { ...copytin };
+                    })
+
+                    res.json({ dataTin: datanew });
+
+                }
+            })
         }
     })
 }

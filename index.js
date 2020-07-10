@@ -13,7 +13,9 @@ const port = 5000;
 
 const adminRouter = require('./routes/admin.route');
 const userRouter = require('./routes/user.route');
+const dangTinRouter = require('./routes/dangtin.route')
 const testRouter = require('./routes/test.route');
+
 const categoryRouter = require('./routes/category.route');
 
 
@@ -27,6 +29,7 @@ app.use('/public', express.static('./public'))
 
 app.use('/apiAdmin', adminRouter);
 app.use('/apiUser', userRouter);
+app.use('/apiDangTin', dangTinRouter);
 
 // app.use('/admin', adminRouter);
 // app.use('/category', categoryRouter);

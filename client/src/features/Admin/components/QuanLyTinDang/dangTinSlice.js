@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import api from '../../../../utils/api';
 import { toast } from "react-toastify";
 //khởi tạo sate
-const initialDangTin = [];
+const initialTinDang = [];
 const slice = createSlice({
-    name: 'dangTin',
+    name: 'tinDang',
     initialState: {
-        dangTin: initialDangTin,
+        tinDang: initialTinDang,
     },
     reducers: {
         getAll: (state, action) => {
@@ -40,7 +40,7 @@ export const { getAll, addTin, updateTin, deleteTin, getAllFail } = actions;
 
 export const getAllTinChoDuyet = () => async dispatch => {
     try {
-        const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
+        const res = await api.get('/apiDangTin/getAllTinChoDuyet')
         if (!res.data) {
             dispatch(getAllFail(res.data));
         } else {

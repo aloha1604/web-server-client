@@ -401,9 +401,58 @@ exports.deleteTinDang = async (req, res) => {
                 })
             })
         }
+
         var dataTinDang = await flagdelete(tinDang_id);
+
         // console.log(dataDanhMuc)
         if (dataTinDang.affectedRows > 0) {
+            return res.status(200).json({ message: 'Xóa tin thành công !!' })
+        } else {
+            return res.status(200).json({ error: 'Xóa tin thất bại!!' })
+        }
+
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
+exports.deleteTinDangViPham = async (req, res) => {
+    let tinDang_id = req.params.tindang_id;
+
+    if (!tinDang_id) {
+        return res.status(200).json({ error: 'Không tìm thấy dangtin_id' })
+    }
+
+    try {
+        const flagdelete = (tinDang_id) => {
+            return new Promise((resolve, reject) => {
+                dangTinModel.deleteTinDang(tinDang_id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+
+        const flagdelete1 = (tinDang_id) => {
+            return new Promise((resolve, reject) => {
+                ThongBaoViPhamModel.delete(tinDang_id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+        var dataThongBao = await flagdelete1(tinDang_id)
+
+        var dataTinDang = await flagdelete(tinDang_id);
+
+        // console.log(dataDanhMuc)
+        if (dataTinDang.affectedRows > 0 && dataThongBao.affectedRows > 0) {
             return res.status(200).json({ message: 'Xóa tin thành công !!' })
         } else {
             return res.status(200).json({ error: 'Xóa tin thất bại!!' })

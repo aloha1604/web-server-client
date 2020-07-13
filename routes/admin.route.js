@@ -58,7 +58,8 @@ router.put('/baoCaoHetViPhamUser/:id', userController.baoCaoHetViPhamUser);
 // Ql Tin dang
 router.put('/updateTinDangActive/:tindang_id', dangTinController.updateTinDangActive);
 router.put('/updateTinDangViPham/:tindang_id/:thongbaotinvipham_noidung', dangTinController.updateTinDangViPham);
-
+router.delete('/deleteTinDang/:tindang_id', dangTinController.deleteTinDang);
+router.delete('/deleteTinDangViPham/:tindang_id', dangTinController.deleteTinDangViPham);
 
 
 

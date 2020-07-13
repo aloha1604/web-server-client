@@ -31,7 +31,7 @@ const TinViPham = (props) => {
         <Container fluid className="content">
             <Breadcrumb tag="nav" listTag="div">
                 <BreadcrumbItem active tag="span">Admin</BreadcrumbItem>
-                <BreadcrumbItem tag="a" href={math.url} active >Tất cả danh mục</BreadcrumbItem>
+                <BreadcrumbItem tag="a" href={math.url} active >Tin Vi phạm</BreadcrumbItem>
             </Breadcrumb>
             <Table striped>
                 <thead>
@@ -124,18 +124,16 @@ const TinViPham = (props) => {
                                         <ModalBody>
                                             <Form>
                                                 <FormGroup>
-                                                    <Label for="exampleText">Text Area</Label>
                                                     <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" />
                                                 </FormGroup>
                                             </Form>
                                         </ModalBody>
                                         <ModalFooter>
-                                            <Button color="primary" onClick={toggleTow}>Vi phạm</Button>{' '}
                                             <Button color="secondary" onClick={toggleTow}>Thoát</Button>
                                         </ModalFooter>
 
                                     </Modal>
-                                    <Button color="success">Duyệt tin</Button>
+                                    <Button color="danger">Xóa tin</Button>
                                 </td>
                             </tr>
                         ))

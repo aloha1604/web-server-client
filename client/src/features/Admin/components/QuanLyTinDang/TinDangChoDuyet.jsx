@@ -46,7 +46,7 @@ const TinDangChoDuyet = (props) => {
             <ToastContainer autoClose={2000} />
             <Breadcrumb tag="nav" listTag="div">
                 <BreadcrumbItem active tag="span">Admin</BreadcrumbItem>
-                <BreadcrumbItem tag="a" href={math.url} active >Tất cả danh mục</BreadcrumbItem>
+                <BreadcrumbItem tag="a" href={math.url} active >Tin đang chờ duyệt</BreadcrumbItem>
             </Breadcrumb>
             <Table striped>
                 <thead>

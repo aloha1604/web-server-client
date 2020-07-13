@@ -31,7 +31,7 @@ const TinDaDuyet = (props) => {
         <Container fluid className="content">
             <Breadcrumb tag="nav" listTag="div">
                 <BreadcrumbItem active tag="span">Admin</BreadcrumbItem>
-                <BreadcrumbItem tag="a" href={math.url} active >Tất cả danh mục</BreadcrumbItem>
+                <BreadcrumbItem tag="a" href={math.url} active >Tin đã duyệt</BreadcrumbItem>
             </Breadcrumb>
             <Table striped>
                 <thead>
@@ -135,7 +135,7 @@ const TinDaDuyet = (props) => {
                                         </ModalFooter>
 
                                     </Modal>
-                                    <Button color="success">Duyệt tin</Button>
+                                    <Button color="danger                   ">Xóa tin</Button>
                                 </td>
                             </tr>
                         ))

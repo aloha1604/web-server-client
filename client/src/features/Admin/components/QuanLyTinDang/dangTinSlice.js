@@ -18,15 +18,20 @@ const slice = createSlice({
             toast.success("Thêm tin thành công !!");
         },
         updateTin: (state, action) => {
-            state.tinDang = action.payload.dataTin;
             toast.success("Đã update tin thành công !!");
         },
+        updateTinViPham: (state, action) => {
+            toast.warn("Đã đưa tin vào danh sách tin bị lỗi!!");
+        }
+        ,
         deleteTin: (state, action) => {
             state.tinDang = action.payload.dataTin;
             toast.success("Xóa tin Thành công !!");
         },
         getAllFail: (state, action) => {
             toast.warn("Load Tin thất bại !!!");
+        }, updateTinFail: (state, action) => {
+            toast.warn("Cập nhật tin tin thất bại !!");
         }
 
     }
@@ -36,7 +41,7 @@ const slice = createSlice({
 const { reducer, actions } = slice;
 export default reducer;
 //lấy ra các action
-export const { getAll, addTin, updateTin, deleteTin, getAllFail } = actions;
+export const { getAll, addTin, updateTin, deleteTin, getAllFail, updateTinFail, updateTinViPham } = actions;
 
 export const getAllTinChoDuyet = () => async dispatch => {
     try {
@@ -98,6 +103,36 @@ export const addTinDang = (value) => async dispatch => {
     }
 }
 
+export const updateTinDangActive = (tindang_idd) => async dispatch => {
+    try {
+        const res = await api.put(`apiAdmin/updateTinDangActive/${tindang_idd}`)
+        if (!res.data) {
+            dispatch(updateTinFail(res.data));
+        } else {
+            dispatch(updateTin(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
+export const updateTinDangViPham = (tindang_idd) => async dispatch => {
+    try {
+        const res = await api.put(`apiAdmin/updateTinDangViPham/${tindang_idd}`)
+        if (!res.data) {
+            dispatch(updateTinFail(res.data));
+        } else {
+            dispatch(updateTinViPham(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
 // export const updateTinDang = () => async dispatch => {
 //     try {
 //         const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')
@@ -112,6 +147,7 @@ export const addTinDang = (value) => async dispatch => {
 //         return console.error(e.message);
 //     }
 // }
+
 
 
 

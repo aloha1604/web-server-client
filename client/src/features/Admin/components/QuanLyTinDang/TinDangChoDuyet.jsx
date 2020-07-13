@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Container, Table, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, CardImg, ModalFooter } from "reactstrap";
 import { useRouteMatch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTinChoDuyet } from './dangTinSlice';
+import { getAllTinChoDuyet, updateTinDangActive, updateTinDangViPham } from './dangTinSlice';
 import imgUserNone from '../../../../asset/images/usernone.jpg';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const TinDangChoDuyet = (props) => {
 
     const dispatch = useDispatch();
@@ -26,8 +29,21 @@ const TinDangChoDuyet = (props) => {
         dispatch(getAllTinChoDuyet());
     }, [])
 
+    const handleClickDuyetTin = (event) => {
+        let tindang_idd = event.target.value;// get tindang_id tại dòng đó
+        dispatch(updateTinDangActive(tindang_idd));
+        dispatch(getAllTinChoDuyet());
+    }
+
+    const handleClickTinLoi = (event) => {
+        let tindang_idd = event.target.value;// get tindang_id tại dòng đó
+        dispatch(updateTinDangViPham(tindang_idd));
+        dispatch(getAllTinChoDuyet());
+    }
+
     return (
         <Container fluid className="content">
+            <ToastContainer autoClose={2000} />
             <Breadcrumb tag="nav" listTag="div">
                 <BreadcrumbItem active tag="span">Admin</BreadcrumbItem>
                 <BreadcrumbItem tag="a" href={math.url} active >Tất cả danh mục</BreadcrumbItem>
@@ -87,7 +103,7 @@ const TinDangChoDuyet = (props) => {
                                                                         <Label for="exampleText"><h6>Thời gian liên hệ</h6>{item.tindang_thoigianlienhe}</Label><br />
                                                                         <Label for="exampleText"><h6>Trạng thái</h6>{item.tindang_active === 0 ? 'Chờ duyệt' : null}</Label><br />
                                                                         <Label for="exampleText"><h6>Ngày tạo</h6>{new Date(item.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</Label><br />
-                                                                        <Label for="exampleText"><h6>Hình ảnh</h6>{item.item.hinhanh ? ':' : 'Không có hình ảnh'}</Label><br />
+                                                                        <Label for="exampleText"><h6>Hình ảnh</h6>{item.hinhanh ? ':' : 'Không có hình ảnh'}</Label><br />
                                                                         <div style={{
                                                                             display: 'flex',
                                                                             flexDirection: 'column'
@@ -138,7 +154,7 @@ const TinDangChoDuyet = (props) => {
                                             </ModalFooter>
 
                                         </Modal>
-                                        <Button color="success">Duyệt tin</Button>
+                                        <Button color="success" value={tindang.tindang_id} onClick={handleClickDuyetTin}>Duyệt tin</Button>
                                     </td>
                                 </tr>
                             )

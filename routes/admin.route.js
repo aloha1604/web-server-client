@@ -10,6 +10,10 @@ const categoryController = require('../controller/category.controller');//tesst
 const danhMucController = require('../controller/danhMuc.controller');
 const nhomController = require('../controller/nhom.controller');
 const userController = require('../controller/user.controller');
+const dangTinController = require('../controller/dangtin.controller');
+
+
+
 // *********************************************************** pulic router ******************
 router.post("/admindangnhap", AuthController.loginAdmin);
 router.post("/refresh-token-admin", AuthController.refreshTokenAdmin);
@@ -20,7 +24,7 @@ router.get('/getAllNhom', nhomController.getAllNhom);
 
 // ***************************************************** Private route *************
 // Sử dụng authMiddleware.isAuth trước những api cần xác thực
-router.use(AuthMiddleWare.isAuthAdmin);
+// router.use(AuthMiddleWare.isAuthAdmin);
 // List Protect APIs:
 router.get("/friends", FriendController.friendLists);
 
@@ -50,6 +54,11 @@ router.get('/getAllUserChuaActive', userController.getAllUserChuaActive);
 router.get('/getAllUserViPham', userController.getAllUserViPham);
 router.put('/baoCaoViPhamUser/:id', userController.baoCaoViPhamUser);
 router.put('/baoCaoHetViPhamUser/:id', userController.baoCaoHetViPhamUser);
+
+// Ql Tin dang
+router.put('/updateTinDangActive/:tindang_id', dangTinController.updateTinDangActive)
+router.put('/updateTinDangViPham/:tindang_id', dangTinController.updateTinDangViPham)
+
 
 
 module.exports = router;

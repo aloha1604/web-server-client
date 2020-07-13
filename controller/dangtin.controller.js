@@ -330,8 +330,10 @@ exports.updateTinDangViPham = async (req, res) => {
         return res.status(500).json(error);
     }
 }
+
 exports.updateTinDangActive = async (req, res) => {
     let tinDang_id = req.params.tindang_id;
+    console.log(req.params.tindang_id)
 
     if (!tinDang_id) {
         return res.status(200).json({ error: 'Không tìm thấy dangtin_id' })

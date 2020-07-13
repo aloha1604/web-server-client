@@ -53,7 +53,10 @@ router.delete('/deleteDanhMuc/:id', danhMucController.deleteDanhMuc);
 router.get('/getAllNhom', nhomController.getAllNhom);
 router.get('/getAllNhomByIdDanhMuc/:danhmuc_id', nhomController.getAllNhomByIdDanhMuc);
 router.post('/addNhomByIdDanhMuc', nhomController.addNhomByIdDanhMuc); // { body: danhmuc_id, nhom_ten }
-router.put('/updateNhomByIdNhom/:id/:nhom_ten', nhomController.updateNhomByIdNhom);
+// router.put('/updateNhomByIdNhom/:id/:nhom_ten', nhomController.updateNhomByIdNhom);
+router.put('/updateNhomByIdNhom/:id/:nhom_ten', (req,res)=>{
+    res.send(req.params.id)
+});
 router.delete('/deleteNhomByIdNhom/:id/', nhomController.deleteNhomByIdNhom);
 
 // get all user 

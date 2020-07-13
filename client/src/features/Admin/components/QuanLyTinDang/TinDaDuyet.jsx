@@ -45,7 +45,7 @@ const TinDaDuyet = (props) => {
                 </thead>
                 <tbody>
                     {
-                        tinDangList.tinDang.map(tindang => (
+                        tinDangList.tinDaDuyet.map(tindang => (
                             <tr key={tindang.tindang_id}>
                                 <td >{tindang.tindang_id}</td>
                                 <td >{tindang.tindang_tieude}</td>
@@ -57,7 +57,7 @@ const TinDaDuyet = (props) => {
                                     <Button color="info" onClick={toggle} value={tindang.tindang_id}>xem chi tiêt</Button>
                                     <Modal isOpen={modal} toggle={toggle} >
                                         {
-                                            tinDangList.tinDang.map((item) => {
+                                            tinDangList.tinDaDuyet.map((item) => {
 
                                                 if (item.tindang_id === parseInt(tinDang_id))
                                                     return (<div>
@@ -117,25 +117,7 @@ const TinDaDuyet = (props) => {
                                     </Modal>
                                 </td>
                                 <td>
-
-                                    <Button color="warning" onClick={toggleTow}>Tin lỗi</Button>{' '}
-                                    <Modal isOpen={modalTow} toggle={toggleTow} >
-                                        <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
-                                        <ModalBody>
-                                            <Form>
-                                                <FormGroup>
-                                                    <Label for="exampleText">Text Area</Label>
-                                                    <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" />
-                                                </FormGroup>
-                                            </Form>
-                                        </ModalBody>
-                                        <ModalFooter>
-                                            <Button color="primary" onClick={toggleTow}>Vi phạm</Button>{' '}
-                                            <Button color="secondary" onClick={toggleTow}>Thoát</Button>
-                                        </ModalFooter>
-
-                                    </Modal>
-                                    <Button color="danger                   ">Xóa tin</Button>
+                                    <Button color="danger">Xóa tin</Button>
                                 </td>
                             </tr>
                         ))

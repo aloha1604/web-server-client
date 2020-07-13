@@ -20,7 +20,12 @@ const TinViPham = (props) => {
         setModal(!modal)
     };
 
-    const toggleTow = () => setModalTow(!modalTow);
+    const toggleTow = (event) => {
+        let value = event.target.value;
+        settinDang_id(value)
+        setModalTow(!modalTow)
+    };
+
     const math = useRouteMatch();
 
     useEffect(() => {
@@ -45,7 +50,7 @@ const TinViPham = (props) => {
                 </thead>
                 <tbody>
                     {
-                        tinDangList.tinDang.map(tindang => (
+                        tinDangList.tinViPham.map(tindang => (
                             <tr key={tindang.tindang_id}>
                                 <td >{tindang.tindang_id}</td>
                                 <td >{tindang.tindang_tieude}</td>
@@ -57,7 +62,7 @@ const TinViPham = (props) => {
                                     <Button color="info" onClick={toggle} value={tindang.tindang_id}>xem chi tiêt</Button>
                                     <Modal isOpen={modal} toggle={toggle} >
                                         {
-                                            tinDangList.tinDang.map((item) => {
+                                            tinDangList.tinViPham.map((item) => {
 
                                                 if (item.tindang_id === parseInt(tinDang_id))
                                                     return (<div>
@@ -118,22 +123,32 @@ const TinViPham = (props) => {
                                 </td>
                                 <td>
 
-                                    <Button color="warning" onClick={toggleTow}>Tin lỗi</Button>{' '}
+                                    <Button color="warning" onClick={toggleTow} value={tindang.tindang_id}>Lý do</Button>{' '}
                                     <Modal isOpen={modalTow} toggle={toggleTow} >
-                                        <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
-                                        <ModalBody>
-                                            <Form>
-                                                <FormGroup>
-                                                    <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" />
-                                                </FormGroup>
-                                            </Form>
-                                        </ModalBody>
-                                        <ModalFooter>
-                                            <Button color="secondary" onClick={toggleTow}>Thoát</Button>
-                                        </ModalFooter>
+                                        {
+
+
+                                            tinDangList.tinViPham.map((item) => {
+                                                if (item.tindang_id === parseInt(tinDang_id))
+                                                    return (
+                                                        <>
+                                                            <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
+                                                            <ModalBody>
+                                                                <Form>
+                                                                    <FormGroup>
+                                                                        <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" value={item.thongbaovipham_noidung} disabled />
+                                                                    </FormGroup>
+                                                                </Form>
+                                                            </ModalBody>
+                                                            <ModalFooter>
+                                                                <Button color="secondary" onClick={toggleTow}>Thoát</Button>
+                                                            </ModalFooter>
+                                                        </>
+                                                    );
+                                            })
+                                        }
 
                                     </Modal>
-                                    <Button color="danger">Xóa tin</Button>
                                 </td>
                             </tr>
                         ))

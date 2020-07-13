@@ -1,5 +1,6 @@
 const hinhAnhModel = require('../models/hinhAnh.model');
 const dangTinModel = require('../models/dangtin.model');
+const ThongBaoViPhamModel = require('../models/thongbaovipham.model');
 
 // dang tin
 exports.insertHinhAnh = (req, res, next) => {
@@ -300,10 +301,13 @@ exports.updateTinDangActive = async (req, res) => {
 }
 
 exports.updateTinDangViPham = async (req, res) => {
+    let thongBaoViPham_noidung = req.params.thongbaotinvipham_noidung;
     let tinDang_id = req.params.tindang_id;
 
-    if (!tinDang_id) {
-        return res.status(200).json({ error: 'Không tìm thấy dangtin_id' })
+    console.log(req.params.thongbaotinvipham_noidung);
+    console.log(req.params.tindang_id);
+    if (!tinDang_id && !thongBaoViPham_noidung) {
+        return res.status(200).json({ error: 'Không tìm thấy dangtin_id, noi dung' })
     }
 
     try {
@@ -318,9 +322,23 @@ exports.updateTinDangViPham = async (req, res) => {
                 })
             })
         }
+
+        const flagInsert = (tindang_id, thongBaoViPham_noidung) => {
+            return new Promise((resolve, reject) => {
+                ThongBaoViPhamModel.add(tindang_id, thongBaoViPham_noidung, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+        var dataThongBaoViPham = await flagInsert(tinDang_id, thongBaoViPham_noidung);
         var dataTinDang = await flagUpdate(tinDang_id);
+
         // console.log(dataDanhMuc)
-        if (dataTinDang.affectedRows > 0) {
+        if (dataTinDang.affectedRows > 0 && dataThongBaoViPham.affectedRows > 0) {
             return res.status(200).json({ message: 'Đã đưa tin vào tin vi phạm  !!' })
         } else {
             return res.status(200).json({ error: 'Không thể đưa vào tin vi phạm!!' })

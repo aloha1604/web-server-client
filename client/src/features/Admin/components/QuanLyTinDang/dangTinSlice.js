@@ -6,11 +6,21 @@ const initialTinDang = [];
 const slice = createSlice({
     name: 'tinDang',
     initialState: {
-        tinDang: initialTinDang,
+        tinViPham: initialTinDang,
+        tinChoDuyet: initialTinDang,
+        tinDaDuyet: initialTinDang,
     },
     reducers: {
-        getAll: (state, action) => {
-            state.tinDang = action.payload.dataTin;
+        getTinViPham: (state, action) => {
+            state.tinViPham = action.payload.dataTin;
+            // toast.success("Load tin thành công !!");
+        },
+        getTinChoDuyet: (state, action) => {
+            state.tinChoDuyet = action.payload.dataTin;
+            // toast.success("Load tin thành công !!");
+        },
+        getTinDaDuyet: (state, action) => {
+            state.tinDaDuyet = action.payload.dataTin;
             // toast.success("Load tin thành công !!");
         },
         addTin: (state, action) => {
@@ -21,7 +31,7 @@ const slice = createSlice({
             toast.success("Đã update tin thành công !!");
         },
         updateTinViPham: (state, action) => {
-            toast.warn("Đã đưa tin vào danh sách tin bị lỗi!!");
+            toast.success("Đã đưa tin vào danh sách tin bị lỗi!!");
         }
         ,
         deleteTin: (state, action) => {
@@ -41,7 +51,7 @@ const slice = createSlice({
 const { reducer, actions } = slice;
 export default reducer;
 //lấy ra các action
-export const { getAll, addTin, updateTin, deleteTin, getAllFail, updateTinFail, updateTinViPham } = actions;
+export const { getAll, addTin, updateTin, deleteTin, getAllFail, updateTinFail, updateTinViPham, getTinChoDuyet, getTinDaDuyet, getTinViPham } = actions;
 
 export const getAllTinChoDuyet = () => async dispatch => {
     try {
@@ -49,7 +59,7 @@ export const getAllTinChoDuyet = () => async dispatch => {
         if (!res.data) {
             dispatch(getAllFail(res.data));
         } else {
-            dispatch(getAll(res.data));
+            dispatch(getTinChoDuyet(res.data));
 
         }
 
@@ -64,7 +74,7 @@ export const getAllTinViPham = () => async dispatch => {
         if (!res.data) {
             dispatch(getAllFail(res.data));
         } else {
-            dispatch(getAll(res.data));
+            dispatch(getTinViPham(res.data));
 
         }
 
@@ -79,7 +89,7 @@ export const getAllTinDaDuyet = () => async dispatch => {
         if (!res.data) {
             dispatch(getAllFail(res.data));
         } else {
-            dispatch(getAll(res.data));
+            dispatch(getTinDaDuyet(res.data));
 
         }
 
@@ -118,9 +128,9 @@ export const updateTinDangActive = (tindang_idd) => async dispatch => {
     }
 }
 
-export const updateTinDangViPham = (tindang_idd) => async dispatch => {
+export const updateTinDangViPham = ({ tindang_idd, lyDoViPham }) => async dispatch => {
     try {
-        const res = await api.put(`apiAdmin/updateTinDangViPham/${tindang_idd}`)
+        const res = await api.put(`apiAdmin/updateTinDangViPham/${tindang_idd}/${lyDoViPham}`)
         if (!res.data) {
             dispatch(updateTinFail(res.data));
         } else {

@@ -11,7 +11,8 @@ const TinDangChoDuyet = (props) => {
 
     const dispatch = useDispatch();
     const tinDangList = useSelector(state => state.tinDang); // get danhmuc in reducer
-    const [tinDang_id, settinDang_id] = useState('')
+    const [tinDang_id, settinDang_id] = useState('');
+    const [lyDoViPham, setLyDoViPham] = useState('');
 
 
     const [modal, setModal] = useState(false);
@@ -22,7 +23,11 @@ const TinDangChoDuyet = (props) => {
         settinDang_id(value)
         setModal(!modal)
     };
-    const toggleTow = () => setModalTow(!modalTow);
+    const toggleTow = (event) => {
+        let value = event.target.value;
+        settinDang_id(value)
+        setModalTow(!modalTow)
+    };
     const math = useRouteMatch();
 
     useEffect(() => {
@@ -35,10 +40,19 @@ const TinDangChoDuyet = (props) => {
         dispatch(getAllTinChoDuyet());
     }
 
-    const handleClickTinLoi = (event) => {
+    const onchangeLyDoViPham = (event) => {
+        let value = event.target.value;// get tindang_id tại dòng đó
+        setLyDoViPham(value);
+
+    }
+
+    const handleClickGuiThongBaoLoi = (event) => {
         let tindang_idd = event.target.value;// get tindang_id tại dòng đó
-        dispatch(updateTinDangViPham(tindang_idd));
+        const value = { tindang_idd, lyDoViPham }
+
+        dispatch(updateTinDangViPham(value));
         dispatch(getAllTinChoDuyet());
+        setModalTow(!modalTow)
     }
 
     return (
@@ -60,7 +74,7 @@ const TinDangChoDuyet = (props) => {
                 </thead>
                 <tbody>
                     {
-                        tinDangList.tinDang.map((tin, i) => {
+                        tinDangList.tinChoDuyet.map((tin, i) => {
                             let tindang = { ...tin }
                             return (
                                 <tr key={i}>
@@ -75,7 +89,7 @@ const TinDangChoDuyet = (props) => {
 
                                         <Modal isOpen={modal} toggle={toggle} >
                                             {
-                                                tinDangList.tinDang.map((item) => {
+                                                tinDangList.tinChoDuyet.map((item) => {
 
                                                     if (item.tindang_id === parseInt(tinDang_id))
                                                         return (<div>
@@ -137,21 +151,34 @@ const TinDangChoDuyet = (props) => {
                                     </td>
                                     <td>
 
-                                        <Button color="warning" onClick={toggleTow}>Tin lỗi</Button>{' '}
+                                        <Button color="warning" onClick={toggleTow} value={tindang.tindang_id}>Tin lỗi</Button>{' '}
                                         <Modal isOpen={modalTow} toggle={toggleTow} >
-                                            <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
-                                            <ModalBody>
-                                                <Form>
-                                                    <FormGroup>
-                                                        <Label for="exampleText">Text Area</Label>
-                                                        <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" />
-                                                    </FormGroup>
-                                                </Form>
-                                            </ModalBody>
-                                            <ModalFooter>
-                                                <Button color="primary" onClick={toggleTow}>Vi phạm</Button>{' '}
-                                                <Button color="secondary" onClick={toggleTow}>Thoát</Button>
-                                            </ModalFooter>
+                                            {
+
+
+                                                tinDangList.tinChoDuyet.map((item) => {
+                                                    if (item.tindang_id === parseInt(tinDang_id))
+                                                        return (
+                                                            <>
+                                                                <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
+                                                                <ModalBody>
+                                                                    <Form>
+                                                                        <FormGroup>
+                                                                            <Label for="exampleText">Text Area</Label>
+                                                                            <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" onChange={onchangeLyDoViPham} />
+                                                                        </FormGroup>
+                                                                    </Form>
+                                                                </ModalBody>
+                                                                <ModalFooter>
+                                                                    <Button color="primary" value={item.tindang_id} onClick={handleClickGuiThongBaoLoi}>Gửi thông báo lỗi</Button>{' '}
+                                                                    <Button color="secondary" onClick={toggleTow}>Thoát</Button>
+                                                                </ModalFooter>
+                                                            </>
+                                                        );
+                                                })
+
+
+                                            }
 
                                         </Modal>
                                         <Button color="success" value={tindang.tindang_id} onClick={handleClickDuyetTin}>Duyệt tin</Button>
@@ -166,7 +193,7 @@ const TinDangChoDuyet = (props) => {
                 </tbody>
             </Table>
 
-        </Container>
+        </Container >
     );
 }
 

@@ -87,7 +87,7 @@ const TinDangChoDuyet = (props) => {
                                                                         <Label for="exampleText"><h6>Thời gian liên hệ</h6>{item.tindang_thoigianlienhe}</Label><br />
                                                                         <Label for="exampleText"><h6>Trạng thái</h6>{item.tindang_active === 0 ? 'Chờ duyệt' : null}</Label><br />
                                                                         <Label for="exampleText"><h6>Ngày tạo</h6>{new Date(item.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</Label><br />
-                                                                        <Label for="exampleText"><h6>Hình ảnh</h6>{item.tindang_tieude}</Label><br />
+                                                                        <Label for="exampleText"><h6>Hình ảnh</h6>{item.item.hinhanh ? ':' : 'Không có hình ảnh'}</Label><br />
                                                                         <div style={{
                                                                             display: 'flex',
                                                                             flexDirection: 'column'

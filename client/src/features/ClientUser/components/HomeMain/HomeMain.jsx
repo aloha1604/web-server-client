@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 // import ShowTin from '../QuanlyDangTin/ShowTin';
-import { Container, Col, ListGroup, ListGroupItem } from 'reactstrap'
+import { Container, ListGroup, ListGroupItem } from 'reactstrap'
 
 import { useDispatch, useSelector } from 'react-redux';
 

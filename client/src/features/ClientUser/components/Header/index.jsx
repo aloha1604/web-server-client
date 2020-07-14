@@ -27,7 +27,7 @@ function Header(props) {
     const dispatch = useDispatch();
     const userReducer = useSelector(state => state.userAuth); // get admin in reducer
     const math = useRouteMatch();
-    console.log(math.url);
+    // console.log(math.url);
 
 
 

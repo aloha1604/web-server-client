@@ -11,7 +11,6 @@ import { getAllQuanHuyen } from '../../../ClientUser/reducer/apiQuanHuyenSlice';
 import { getAllPhuongXa } from '../../../ClientUser/reducer/apiPhuongXaSlice';
 import { addTinDang } from '../../../../features/Admin/components/QuanLyTinDang/dangTinSlice';
 import { isEmpty, isEmail } from "validator";
-import api from '../../../../utils/api'
 
 function DangTin(props) {
     const math = useRouteMatch();

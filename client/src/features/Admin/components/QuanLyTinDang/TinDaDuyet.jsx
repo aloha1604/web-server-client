@@ -50,8 +50,8 @@ const TinDaDuyet = (props) => {
                 </thead>
                 <tbody>
                     {
-                        tinDangList.tinDaDuyet.map(tindang => (
-                            <tr key={tindang.tindang_id}>
+                        tinDangList.tinDaDuyet.map((tindang, i) => (
+                            <tr key={i}>
                                 <td >{tindang.tindang_id}</td>
                                 <td >{tindang.tindang_tieude}</td>
                                 <td style={{

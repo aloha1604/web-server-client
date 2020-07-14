@@ -56,8 +56,8 @@ const TinViPham = (props) => {
                 </thead>
                 <tbody>
                     {
-                        tinDangList.tinViPham.map(tindang => (
-                            <tr key={tindang.tindang_id}>
+                        tinDangList.tinViPham.map((tindang, i) => (
+                            <tr key={i}>
                                 <td >{tindang.tindang_id}</td>
                                 <td >{tindang.tindang_tieude}</td>
                                 <td style={{

@@ -48,8 +48,8 @@ const TatCaDanhMuc = (props) => {
                 </thead>
                 <tbody>
                     {/* rendering danhmuc list */}
-                    {danhMucList.danhMuc.map(danhmuc => (
-                        <tr key={danhmuc.danhmuc_id}>
+                    {danhMucList.danhMuc.map((danhmuc, i) => (
+                        <tr key={i}>
                             <td>{danhmuc.danhmuc_id}</td>
                             <td>{danhmuc.danhmuc_ten}</td>
                             <td>

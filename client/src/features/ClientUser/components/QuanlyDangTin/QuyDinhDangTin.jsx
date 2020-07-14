@@ -1,15 +1,11 @@
 import React from 'react';
 import {
-    faSignOutAlt,
-    faCopy,
-    faCheckSquare,
-    faCaretSquareRight,
     faSquare
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
-    Container, Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Badge, FormText, Col, Row, CustomInput, Card, CardHeader, CardBody,
+    Col, Card, CardHeader, CardBody,
     CardTitle, CardText
 } from 'reactstrap'
 

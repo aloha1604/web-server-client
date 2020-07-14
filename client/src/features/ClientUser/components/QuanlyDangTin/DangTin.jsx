@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import {
-    faSignOutAlt,
-    faCopy,
-    faCheckSquare,
-    faCaretSquareRight,
-    faSquare
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-    Container, Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Badge, FormText, Col, Row, CustomInput, Card, CardHeader, CardBody,
-    CardTitle, CardText
+    Container, Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Badge, FormText, Col, Row, CustomInput,
 } from 'reactstrap';
 import QuyDinhDangTin from './QuyDinhDangTin';
 import { getAllNhom } from '../../../Admin/components/NhomSanPham/nhomSlice';

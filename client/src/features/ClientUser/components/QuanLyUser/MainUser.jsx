@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Container, Button, Form, FormGroup, Label, Input, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import { Container, Button, Form, FormGroup, Label, Input, Breadcrumb, BreadcrumbItem, Col, Row } from "reactstrap";
 
 const HeaderUser = React.lazy(() => import('./HeaderUser'));
 function MainUser(props) {

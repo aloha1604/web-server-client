@@ -25,7 +25,7 @@ function HomeMain(props) {
                 danhMucList.danhMuc.map(danhmuc => (
                     <ListGroup className="mt-3">
                         <ListGroupItem active tag="a" href="#" action>{danhmuc.danhmuc_ten}</ListGroupItem>
-                        {nhomList.nhom.map(nhom => {
+                        {nhomList.nhom.map(async (nhom) => {
                             if (nhom.danhmuc_id === danhmuc.danhmuc_id)
                                 return (<ListGroupItem color="info" tag="a" href="#" action>{nhom.nhom_ten}</ListGroupItem>)
                         })}

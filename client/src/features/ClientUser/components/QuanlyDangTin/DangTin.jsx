@@ -233,7 +233,7 @@ function DangTin(props) {
                     <Label for="exampleSelectNhom">Nhóm</Label>
                     <Input type="select" name="selectNhom" id="exampleSelectNhom" onChange={onChangeNhom}>
                         {
-                            nhomList.nhom.map((nhom, i) => {
+                            nhomList.nhom.map(async (nhom, i) => {
                                 if (nhom.danhmuc_id === parseInt(danhmuc_id))
                                     return (
                                         <option key={i} value={nhom.nhom_id}>{nhom.nhom_ten}</option>
@@ -274,7 +274,7 @@ function DangTin(props) {
                             <Label for="exampleTinhThanh">Tỉnh/Thành</Label>
                             <Input type="select" name="selectTinhThanh" id="exampleTinhThanh" onChange={onChangeSelectedTinhThanh}>
                                 {
-                                    tinhThanhList.tinhThanh.map((tinhthanh, i) => (
+                                    tinhThanhList.tinhThanh.map(async (tinhthanh, i) => (
                                         <option key={i} value={tinhthanh.ProvinceID} >{tinhthanh.ProvinceName}</option>
                                     ))
                                 }
@@ -287,7 +287,7 @@ function DangTin(props) {
                             <Input type="select" name="selectQuanHuyen" id="exampleQuanHuyen" onChange={onChangeSelectedQuanHuyen}>
                                 {
 
-                                    quanHuyenList.quanHuyen.map((quanhuyen, i) => {
+                                    quanHuyenList.quanHuyen.map(async (quanhuyen, i) => {
                                         if (quanhuyen.ProvinceID === parseInt(tinhThanh_id))
                                             return (
                                                 <option key={i} value={quanhuyen.DistrictID} >{quanhuyen.DistrictName}</option>
@@ -303,7 +303,7 @@ function DangTin(props) {
                             <Label for="examplePhuongXa">Phường/Xã</Label>
                             <Input type="select" name="selectPhuongXa" id="examplePhuongXa" onChange={onChangeSelectedPhuongXa} >
                                 {
-                                    phuongXaList.phuongXa.map((phuongxa, i) => {
+                                    phuongXaList.phuongXa.map(async (phuongxa, i) => {
                                         if (phuongxa.DistrictID === parseInt(quanHuyen_id))
                                             return (
                                                 <option key={i} value={phuongxa.WardCode} >{phuongxa.WardName}</option>

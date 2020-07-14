@@ -13,8 +13,7 @@ const TatCaDanhMuc = (props) => {
     const danhMucList = useSelector(state => state.danhMuc); // get admin in reducer
 
     useEffect(() => {
-        const action = getAllDanhMuc();
-        dispatch(action);
+        dispatch(getAllDanhMuc());
     }, [])
 
 

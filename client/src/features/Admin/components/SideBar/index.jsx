@@ -6,13 +6,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import SubMenu from "./SubMenu.jsx";
 
 
 const SideBar = ({ isOpen, toggle, nameAdmin }) => {
-    const match = useRouteMatch();
+
 
     return (
         <div className={classNames("sidebar", { "is-open": isOpen })}>

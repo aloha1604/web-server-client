@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
+import {
+    faSignOutAlt,
+    faCopy,
+    faCheckSquare,
+    faCaretSquareRight,
+    faSquare
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Container, Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Badge, FormText, Col, Row, CustomInput } from 'reactstrap'
+import {
+    Container, Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Badge, FormText, Col, Row, CustomInput, Card, CardHeader, CardFooter, CardBody,
+    CardTitle, CardText
+} from 'reactstrap'
 import { getAllNhom } from '../../../Admin/components/NhomSanPham/nhomSlice';
 import { getAllDanhMuc } from '../../../Admin/components/DanhMucSanPham/danhMucSlice';
 import { getAllTinhThanh } from '../../../ClientUser/reducer/apiTinhThanhSlice';
@@ -210,204 +221,279 @@ function DangTin(props) {
     return (
         <Container className="mt-3">
 
-            <Form onSubmit={(event) => {
-                submitForm(event)
-            }} >
-                <Breadcrumb>
-                    <BreadcrumbItem><a href="/">Home</a></BreadcrumbItem>
-                    <BreadcrumbItem ><a href={math.url}>Đăng tin</a></BreadcrumbItem>
-                </Breadcrumb>
-                <h4>1.<Badge color="primary">Danh mục</Badge></h4>
-                <FormGroup>
-                    <Label for="exampleSelectDanhMuc">Danh mục</Label>
-                    <Input type="select" name="selectDanhMuc" id="exampleSelectDanhMuc" onChange={onChangeSelectedDanhMuc}>
-                        {
-                            danhMucList.danhMuc.map((danhmuc, i) => (
-                                <option key={i} value={danhmuc.danhmuc_id}>{danhmuc.danhmuc_ten}</option>
-                            ))
-
-                        }
-                    </Input>
-                </FormGroup>
-                <FormGroup>
-                    <Label for="exampleSelectNhom">Nhóm</Label>
-                    <Input type="select" name="selectNhom" id="exampleSelectNhom" onChange={onChangeNhom}>
-                        {
-                            nhomList.nhom.map(async (nhom, i) => {
-                                if (nhom.danhmuc_id === parseInt(danhmuc_id))
-                                    return (
-                                        <option key={i} value={nhom.nhom_id}>{nhom.nhom_ten}</option>
-                                    )
-                            })
-                        }
-                    </Input>
-                </FormGroup>
-
-                <h4>2.<Badge color="primary">Tiêu đề & giá</Badge></h4>
-                <FormGroup>
-                    <Label for="exampleTieude">Tiêu đề*</Label>
-                    <Input type="text" name="txtTieuDe" id="exampleTieude" placeholder="Diền tiêu đề" onChange={onChangeTieuDe} />
-                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
-                    <FormText>Lưu ý: Tối thiểu 10 ký tự, tối đa 70 ký tự. Không nhập số điện thoại, giá tiền. Không nhập [mua], [bán].</FormText>
-                </FormGroup>
-                <Row form>
-                    <Col md={6}>
+            <Row>
+                <Col md={{ size: 8, order: 0 }} sm={{ order: 1 }}>
+                    <Form onSubmit={(event) => {
+                        submitForm(event)
+                    }} >
+                        <Breadcrumb>
+                            <BreadcrumbItem><a href="/">Home</a></BreadcrumbItem>
+                            <BreadcrumbItem ><a href={math.url}>Đăng tin</a></BreadcrumbItem>
+                        </Breadcrumb>
+                        <h4>1.<Badge color="primary">Danh mục</Badge></h4>
                         <FormGroup>
-                            <Label for="exampleGia">Giá</Label>
-                            <Input type="text" name="textGia" id="exampleGia" placeholder="Chỉ nhập số (VD:200000)" onChange={onChangeGia} />
-                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
-                            <FormText>Thương lượng</FormText>
-                        </FormGroup>
-                    </Col>
-                    <Col md={6}>
-                        <FormGroup>
-                            <Label for="exampleTuKhoa">Từ khóa</Label>
-                            <Input type="text" name="textTuKhoa" id="exampleTuKhoa" placeholder="Nhập từ khóa muốn khách hàng tìm thấy" onChange={ongChangeTuKhoa} />
-                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
-                            <FormText>Gợi ý: Hỗ trợ tìm kiếm, Ví dụ: iphone, iphone 6</FormText>
-                        </FormGroup>
-                    </Col>
-                </Row>
-                <Row form style={{ border: '1px solid #ccc', padding: '10px' }}>
-                    <Col md={4}>
-                        <FormGroup>
-                            <Label for="exampleTinhThanh">Tỉnh/Thành</Label>
-                            <Input type="select" name="selectTinhThanh" id="exampleTinhThanh" onChange={onChangeSelectedTinhThanh}>
+                            <Label for="exampleSelectDanhMuc">Danh mục <span style={{ color: 'red' }}>*</span></Label>
+                            <Input type="select" name="selectDanhMuc" id="exampleSelectDanhMuc" onChange={onChangeSelectedDanhMuc}>
                                 {
-                                    tinhThanhList.tinhThanh.map(async (tinhthanh, i) => (
-                                        <option key={i} value={tinhthanh.ProvinceID} >{tinhthanh.ProvinceName}</option>
+                                    danhMucList.danhMuc.map((danhmuc, i) => (
+                                        <option key={i} value={danhmuc.danhmuc_id}>{danhmuc.danhmuc_ten}</option>
                                     ))
+
                                 }
                             </Input>
                         </FormGroup>
-                    </Col>
-                    <Col md={4}>
                         <FormGroup>
-                            <Label for="exampleQuanHuyen">Quận/Huyện</Label>
-                            <Input type="select" name="selectQuanHuyen" id="exampleQuanHuyen" onChange={onChangeSelectedQuanHuyen}>
+                            <Label for="exampleSelectNhom">Nhóm <span style={{ color: 'red' }}>*</span></Label>
+                            <Input type="select" name="selectNhom" id="exampleSelectNhom" onChange={onChangeNhom}>
                                 {
-
-                                    quanHuyenList.quanHuyen.map(async (quanhuyen, i) => {
-                                        if (quanhuyen.ProvinceID === parseInt(tinhThanh_id))
+                                    nhomList.nhom.map((nhom, i) => {
+                                        if (nhom.danhmuc_id === parseInt(danhmuc_id))
                                             return (
-                                                <option key={i} value={quanhuyen.DistrictID} >{quanhuyen.DistrictName}</option>
+                                                <option key={i} value={nhom.nhom_id}>{nhom.nhom_ten}</option>
                                             )
                                     })
                                 }
                             </Input>
                         </FormGroup>
 
-                    </Col>
-                    <Col md={4}>
+                        <h4>2.<Badge color="primary">Tiêu đề & giá</Badge></h4>
                         <FormGroup>
-                            <Label for="examplePhuongXa">Phường/Xã</Label>
-                            <Input type="select" name="selectPhuongXa" id="examplePhuongXa" onChange={onChangeSelectedPhuongXa} >
-                                {
-                                    phuongXaList.phuongXa.map(async (phuongxa, i) => {
-                                        if (phuongxa.DistrictID === parseInt(quanHuyen_id))
-                                            return (
-                                                <option key={i} value={phuongxa.WardCode} >{phuongxa.WardName}</option>
-                                            )
-                                    })
-                                }
-                            </Input>
+                            <Label for="exampleTieude">Tiêu đề <span style={{ color: 'red' }}>*</span></Label>
+                            <Input type="text" name="txtTieuDe" id="exampleTieude" placeholder="Diền tiêu đề" onChange={onChangeTieuDe} />
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                            <FormText>Lưu ý: Tối thiểu 10 ký tự, tối đa 70 ký tự. Không nhập số điện thoại, giá tiền. Không nhập [mua], [bán].</FormText>
                         </FormGroup>
+                        <Row form>
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="exampleGia">Giá <span style={{ color: 'red' }}>*</span></Label>
+                                    <Input type="text" name="textGia" id="exampleGia" placeholder="Chỉ nhập số (VD:200000)" onChange={onChangeGia} />
+                                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                                    <FormText>Thương lượng</FormText>
+                                </FormGroup>
+                            </Col>
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="exampleTuKhoa">Từ khóa <span style={{ color: 'red' }}>*</span></Label>
+                                    <Input type="text" name="textTuKhoa" id="exampleTuKhoa" placeholder="Nhập từ khóa muốn khách hàng tìm thấy" onChange={ongChangeTuKhoa} />
+                                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                                    <FormText>Gợi ý: Hỗ trợ tìm kiếm, Ví dụ: iphone, iphone 6</FormText>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <Row form style={{ border: '1px solid #ccc', padding: '10px' }}>
+                            <Col md={4}>
+                                <FormGroup>
+                                    <Label for="exampleTinhThanh">Tỉnh/Thành <span style={{ color: 'red' }}>*</span></Label>
+                                    <Input type="select" name="selectTinhThanh" id="exampleTinhThanh" onChange={onChangeSelectedTinhThanh}>
+                                        {
+                                            tinhThanhList.tinhThanh.map((tinhthanh, i) => (
+                                                <option key={i} value={tinhthanh.ProvinceID} >{tinhthanh.ProvinceName}</option>
+                                            ))
+                                        }
+                                    </Input>
+                                </FormGroup>
+                            </Col>
+                            <Col md={4}>
+                                <FormGroup>
+                                    <Label for="exampleQuanHuyen">Quận/Huyện <span style={{ color: 'red' }}>*</span></Label>
+                                    <Input type="select" name="selectQuanHuyen" id="exampleQuanHuyen" onChange={onChangeSelectedQuanHuyen}>
+                                        {
 
-                    </Col>
-                </Row>
-                <h4>3.<Badge color="primary">Nội dung</Badge></h4>
-                <FormGroup>
-                    <Label for="exampleText">Text Area</Label>
-                    <Input style={{
-                        height: '250px',
-                    }} type="textarea" name="text" id="exampleText" onChange={onChangeNoiDung} />
-                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
-                    <FormText>Nội dung tối đa 1000 ký tự</FormText>
-                </FormGroup>
-                <h4>4.<Badge color="primary">Hình ảnh & Video</Badge></h4>
-                <FormGroup>
-                    <FormText>Ghi chú: Dung lượng hình ảnh cho phép tối đa 5MB. Số lượng hình ảnh tối đa cho phép 6 hình ảnh.</FormText>
-                    <Label for="exampleCustomFileBrowser">File Browser</Label>
-                    <CustomInput type="file" multiple id="exampleCustomFileBrowser" name="imgCollection" onChange={onChangeHinhAnh} />
-                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
-                </FormGroup>
-                <FormGroup>
-                    <Label for="exampleLinkVideo">Video youtube</Label>
-                    <Input
-                        type="text"
-                        name="txtLinkVideo"
-                        id="exampleLinkVideo"
-                        placeholder="Dán link video youtube vào đây, VD: https://www.youtube.com/watch?v=**********"
-                        onChange={onChangeLinkYoutube}
-                    />
-                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
-                </FormGroup>
-                <h4>5.<Badge color="primary">Thông tin liên hệ</Badge></h4>
-                <Row form >
-                    <Col md={4}>
+                                            quanHuyenList.quanHuyen.map((quanhuyen, i) => {
+                                                if (quanhuyen.ProvinceID === parseInt(tinhThanh_id))
+                                                    return (
+                                                        <option key={i} value={quanhuyen.DistrictID} >{quanhuyen.DistrictName}</option>
+                                                    )
+                                            })
+                                        }
+                                    </Input>
+                                </FormGroup>
+
+                            </Col>
+                            <Col md={4}>
+                                <FormGroup>
+                                    <Label for="examplePhuongXa">Phường/Xã <span style={{ color: 'red' }}>*</span></Label>
+                                    <Input type="select" name="selectPhuongXa" id="examplePhuongXa" onChange={onChangeSelectedPhuongXa} >
+                                        {
+                                            phuongXaList.phuongXa.map((phuongxa, i) => {
+                                                if (phuongxa.DistrictID === parseInt(quanHuyen_id))
+                                                    return (
+                                                        <option key={i} value={phuongxa.WardCode} >{phuongxa.WardName}</option>
+                                                    )
+                                            })
+                                        }
+                                    </Input>
+                                </FormGroup>
+
+                            </Col>
+                        </Row>
+                        <h4>3.<Badge color="primary">Nội dung </Badge></h4>
                         <FormGroup>
-                            <Label for="exampleHoTen">Họ tên</Label>
+                            <Label for="exampleText">Text Area <span style={{ color: 'red' }}>*</span></Label>
+                            <Input style={{
+                                height: '250px',
+                            }} type="textarea" name="text" id="exampleText" onChange={onChangeNoiDung} />
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                            <FormText>Nội dung tối đa 1000 ký tự</FormText>
+                        </FormGroup>
+                        <h4>4.<Badge color="primary">Hình ảnh & Video</Badge></h4>
+                        <FormGroup>
+                            <FormText>Ghi chú: Dung lượng hình ảnh cho phép tối đa 5MB. Số lượng hình ảnh tối đa cho phép 6 hình ảnh.</FormText>
+                            <Label for="exampleCustomFileBrowser">File Browser <span style={{ color: 'red' }}>*</span></Label>
+                            <CustomInput type="file" multiple id="exampleCustomFileBrowser" name="imgCollection" onChange={onChangeHinhAnh} />
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="exampleLinkVideo">Video youtube </Label>
                             <Input
                                 type="text"
                                 name="txtLinkVideo"
-                                id="exampleHoTen"
-                                placeholder="Điền họ tên"
-                                onChange={onChangeHoten}
+                                id="exampleLinkVideo"
+                                placeholder="Dán link video youtube vào đây, VD: https://www.youtube.com/watch?v=**********"
+                                onChange={onChangeLinkYoutube}
                             />
                             <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                         </FormGroup>
+                        <h4>5.<Badge color="primary">Thông tin liên hệ <span style={{ color: 'red' }}>*</span></Badge></h4>
+                        <Row form >
+                            <Col md={4}>
+                                <FormGroup>
+                                    <Label for="exampleHoTen">Họ tên <span style={{ color: 'red' }}>*</span></Label>
+                                    <Input
+                                        type="text"
+                                        name="txtLinkVideo"
+                                        id="exampleHoTen"
+                                        placeholder="Điền họ tên"
+                                        onChange={onChangeHoten}
+                                    />
+                                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                                </FormGroup>
 
-                    </Col>
-                    <Col md={4}>
-                        <FormGroup>
-                            <Label for="examplePhone">Số điện thoại</Label>
-                            <Input
-                                type="text"
-                                name="txtLinkVideo"
-                                id="examplePhone"
-                                placeholder="Điền số điện thoại"
-                                onChange={onChangePhone}
-                            />
-                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
-                        </FormGroup>
+                            </Col>
+                            <Col md={4}>
+                                <FormGroup>
+                                    <Label for="examplePhone">Số điện thoại <span style={{ color: 'red' }}>*</span></Label>
+                                    <Input
+                                        type="text"
+                                        name="txtLinkVideo"
+                                        id="examplePhone"
+                                        placeholder="Điền số điện thoại"
+                                        onChange={onChangePhone}
+                                    />
+                                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                                </FormGroup>
 
-                    </Col>
-                    <Col md={4}>
-                        <FormGroup>
-                            <Label for="exampleEmail">Email</Label>
-                            <Input
-                                type="email"
-                                name="txtEmail"
-                                id="exampleEmail"
-                                placeholder="Điền email"
-                                onChange={onChangeEmail}
-                            />
-                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
-                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
-                        </FormGroup>
+                            </Col>
+                            <Col md={4}>
+                                <FormGroup>
+                                    <Label for="exampleEmail">Email <span style={{ color: 'red' }}>*</span></Label>
+                                    <Input
+                                        type="email"
+                                        name="txtEmail"
+                                        id="exampleEmail"
+                                        placeholder="Điền email"
+                                        onChange={onChangeEmail}
+                                    />
+                                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                                </FormGroup>
 
-                    </Col>
-                </Row>
-                <Row form>
-                    <Col md={6}>
-                        <FormGroup>
-                            <Label for="exampleDiaChi">Địa chỉ</Label>
-                            <Input type="text" name="txtDiachi" id="exampleDiaChi" placeholder="Nhập địa chỉ" onChange={onChangeDiaChi} />
-                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                            </Col>
+                        </Row>
+                        <Row form>
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="exampleDiaChi">Địa chỉ <span style={{ color: 'red' }}>*</span></Label>
+                                    <Input type="text" name="txtDiachi" id="exampleDiaChi" placeholder="Nhập địa chỉ" onChange={onChangeDiaChi} />
+                                    <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
+                                </FormGroup>
+                            </Col>
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="exampleLienHe">Thời gian liên hệ tốt nhất <span style={{ color: 'red' }}>* </span></Label>
+                                    <Input type="text" name="textLienhe" id="exampleLienHe" placeholder="Điền thời gian liên hệ" onChange={onChangeThoiGianLienHe} />
+                                    <p style={{ color: 'red' }}>{validatetionMsg.email}</p>
+                                </FormGroup>
+                            </Col>
+                        </Row>
+                        <FormGroup style={{ textAlign: 'center' }}>
+                            <Button type="submit" color="success">Đăng tin</Button>
                         </FormGroup>
-                    </Col>
-                    <Col md={6}>
-                        <FormGroup>
-                            <Label for="exampleLienHe">Thời gian liên hệ tốt nhất</Label>
-                            <Input type="text" name="textLienhe" id="exampleLienHe" placeholder="Điền thời gian liên hệ" onChange={onChangeThoiGianLienHe} />
-                            <p style={{ color: 'red' }}>{validatetionMsg.email}</p>
-                        </FormGroup>
-                    </Col>
-                </Row>
-                <FormGroup style={{ textAlign: 'center' }}>
-                    <Button type="submit" color="success">Đăng tin</Button>
-                </FormGroup>
-            </Form>
+                    </Form>
+                </Col>
+                <Col md={{ size: 4, order: 1 }} sm={{ order: 0 }}>
+                    <div>
+                        <Card>
+                            <CardHeader>HƯỚNG DẪN ĐĂNG TIN HIỆU QUẢ</CardHeader>
+                            <CardBody>
+                                <CardTitle>
+                                    <span style={{ color: 'red', fontSize: '10px' }}>
+                                        <FontAwesomeIcon icon={faSquare} className="mr-2" />
+                                    </span>Thông tin có dấu sao <span style={{ color: 'red' }}>*</span>
+                                    là bắt buộc
+                                    </CardTitle>
+                                <CardText>
+                                    <span style={{ color: 'red', fontSize: '10px' }}>
+                                        <FontAwesomeIcon icon={faSquare} className="mr-2" />
+                                    </span>
+                                    Đăng tin bằng tài khoản đăng ký để dễ dàng quản lý bài đăng và được xét duyệt nhanh hơn.
+                                </CardText>
+                                <CardText>
+                                    <span style={{ color: 'red', fontSize: '10px' }}>
+                                        <FontAwesomeIcon icon={faSquare} className="mr-2" />
+                                    </span>
+                                    Điền đầy đủ thông tin một cách chính xác để người xem dễ tiếp cận và đưa ra quyết định giao dịch.
+                                </CardText>
+                                <CardText>
+                                    <span style={{ color: 'red', fontSize: '10px' }}>
+                                        <FontAwesomeIcon icon={faSquare} className="mr-2" />
+                                    </span>
+                                    Nội dung Tiếng Việt có dấu và không viết tắt, mô tả đầy đủ về tài sản đăng mua bán/cho thuê.
+                                </CardText>
+                                <CardText>
+                                    <span style={{ color: 'red', fontSize: '10px' }}>
+                                        <FontAwesomeIcon icon={faSquare} className="mr-2" />
+                                    </span>
+                                    Số điện thoại liên hệ phải ở tình trạng liên lạc được.
+                                </CardText>
+                                <CardText>
+                                    <span style={{ color: 'red', fontSize: '10px' }}>
+                                        <FontAwesomeIcon icon={faSquare} className="mr-2" />
+                                    </span>
+                                    Các ảnh đại diện và ảnh chi tiết phải đúng là ảnh của tài sản, các tin vi phạm sẽ không được duyệt lên website.
+                                </CardText>
+                                <CardText>
+                                    <span style={{ color: 'red', fontSize: '10px' }}>
+                                        <FontAwesomeIcon icon={faSquare} className="mr-2" />
+                                    </span>
+                                    Các ảnh đại diện và ảnh chi tiết phải đúng là ảnh của tài sản, các tin vi phạm sẽ không được duyệt lên website.
+                                </CardText>
+                                <CardText>
+                                    <span style={{ color: 'red', fontSize: '10px' }}>
+                                        <FontAwesomeIcon icon={faSquare} className="mr-2" />
+                                    </span>
+                                    Không chèn link website trong bài, các bài vi phạm sẽ bị xoá link website khỏi nội dung.
+                                </CardText>
+                                <CardText>
+                                    <span style={{ color: 'red', fontSize: '10px' }}>
+                                        <FontAwesomeIcon icon={faSquare} className="mr-2" />
+                                    </span>
+                                    Không chèn link website trong bài, các bài vi phạm sẽ bị xoá link website khỏi nội dung.
+                                </CardText>
+                                <CardText>
+                                    <span style={{ color: 'red', fontSize: '10px' }}>
+                                        <FontAwesomeIcon icon={faSquare} className="mr-2" />
+                                    </span>
+                                    Không đăng tin trùng lặp dưới bất kỳ hình thức tin đăng nào. Các tin trùng sẽ bị từ chối.
+                                </CardText>
+
+                            </CardBody>
+                        </Card>
+                    </div>
+                </Col>
+            </Row>
+
 
         </Container >
     );

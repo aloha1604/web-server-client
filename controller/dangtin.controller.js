@@ -48,7 +48,7 @@ exports.dangTin = async (req, res) => {
     const tindang_quanhuyen = req.body.quanHuyen;
     const tindang_phuongxa = req.body.phuongXa;
     const tindang_noidung = req.body.noiDung;
-    const tindang_linkyoutube = req.body.linkYoutube;
+    const tindang_linkyoutube = req.body.linkYoutube ? req.body.linkYoutube : 'Không có link youtube';
     const tindang_hoten = req.body.hoTen;
     const tindang_email = req.body.email;
     const tindang_phone = req.body.phone;

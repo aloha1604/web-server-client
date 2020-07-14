@@ -13,7 +13,7 @@ exports.getEmail = (email, result) => {
             result(null, err);
             return;
         } else {
-            console.log('lấy ra all user get all user');
+            // console.log('lấy ra all user get all user');
             result(null, res);
         }
     })
@@ -27,7 +27,7 @@ exports.updateActiveUser = (user_id, result) => {
             result(null, err);
             return;
         } else {
-            console.log('update active tài khoản');
+            // console.log('update active tài khoản');
             result(null, res);
         }
     })
@@ -42,7 +42,7 @@ exports.updateRefreshTokenUser = (refreshtoken, user_id, result) => {
             result(null, err);
             return;
         } else {
-            console.log('update RefreshToken success');
+            // console.log('update RefreshToken success');
             result(null, res);
         }
     })
@@ -56,7 +56,7 @@ exports.updateAccessTokenUser = (accesstoken, user_id, result) => {
             result(null, err);
             return;
         } else {
-            console.log('update AccessToken success');
+            // console.log('update AccessToken success');
             result(null, res);
         }
     })
@@ -71,7 +71,7 @@ exports.getAllUser = (result) => {
             result(null, err);
             return;
         } else {
-            console.log('get All user');
+            
             result(null, res);
         }
     })
@@ -86,7 +86,7 @@ exports.getAllUserChuaActive = (result) => {
             result(null, err);
             return;
         } else {
-            console.log('get All user');
+           
             result(null, res);
         }
     })
@@ -115,7 +115,7 @@ exports.baoCaoViPhamUser = (user_id, result) => {
             result(null, err);
             return;
         } else {
-            console.log('get All user');
+           
             result(null, res);
         }
     })
@@ -129,7 +129,7 @@ exports.baoCaoHetViPhamUser = (user_id, result) => {
             result(null, err);
             return;
         } else {
-            console.log('get All user');
+            
             result(null, res);
         }
     })

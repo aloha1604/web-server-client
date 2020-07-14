@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Table, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, CardImg, ModalFooter } from "reactstrap";
 import { useRouteMatch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTinViPham } from './dangTinSlice';
+import { getAllTinViPham, deleteTinDangViPham } from './dangTinSlice';
 import imgUserNone from '../../../../asset/images/usernone.jpg';
 const TinViPham = (props) => {
 
@@ -31,6 +31,12 @@ const TinViPham = (props) => {
     useEffect(() => {
         dispatch(getAllTinViPham());
     }, [])
+
+    const handleClickXoaTin = (event) => {
+        const tindang_id = event.target.value;
+        dispatch(deleteTinDangViPham(tindang_id));
+        dispatch(getAllTinViPham());
+    }
 
     return (
         <Container fluid className="content">
@@ -149,6 +155,7 @@ const TinViPham = (props) => {
                                         }
 
                                     </Modal>
+                                    <Button color="danger" value={tindang.tindang_id} onClick={handleClickXoaTin}>Xóa tin</Button>
                                 </td>
                             </tr>
                         ))

@@ -27,7 +27,7 @@ exports.insertHinhAnhByIdTin = (file, result) => {
             result(null, err);
             return;
         } else {
-            console.log('insert user');
+      
             result(null, res);
         }
     })

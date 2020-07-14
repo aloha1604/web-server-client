@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Table, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, CardImg, ModalFooter } from "reactstrap";
 import { useRouteMatch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTinDaDuyet } from './dangTinSlice';
+import { getAllTinDaDuyet, deleteTinDang } from './dangTinSlice';
 import imgUserNone from '../../../../asset/images/usernone.jpg';
 const TinDaDuyet = (props) => {
 
@@ -27,6 +27,11 @@ const TinDaDuyet = (props) => {
         dispatch(getAllTinDaDuyet());
     }, [])
 
+    const handleClickXoaTin = (event) => {
+        const tindang_id = event.target.value;
+        dispatch(deleteTinDang(tindang_id));
+        dispatch(getAllTinDaDuyet());
+    }
     return (
         <Container fluid className="content">
             <Breadcrumb tag="nav" listTag="div">
@@ -117,7 +122,7 @@ const TinDaDuyet = (props) => {
                                     </Modal>
                                 </td>
                                 <td>
-                                    <Button color="danger">Xóa tin</Button>
+                                    <Button color="danger" value={tindang.tindang_id} onClick={handleClickXoaTin}>Xóa tin</Button>
                                 </td>
                             </tr>
                         ))

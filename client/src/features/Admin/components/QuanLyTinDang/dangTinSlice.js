@@ -143,6 +143,36 @@ export const updateTinDangViPham = ({ tindang_idd, lyDoViPham }) => async dispat
     }
 }
 
+export const deleteTinDang = (tindang_id) => async dispatch => {
+    try {
+        const res = await api.delete(`apiAdmin/deleteTinDang/${tindang_id}`)
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(deleteTin(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
+export const deleteTinDangViPham = (tindang_id) => async dispatch => {
+    try {
+        const res = await api.delete(`apiAdmin/deleteTinDangViPham/${tindang_id}`)
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(deleteTin(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
 // export const updateTinDang = () => async dispatch => {
 //     try {
 //         const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')

@@ -53,7 +53,7 @@ exports.updateRefreshTokenAdmin = (refreshtoken, admin_id, result) => {
             result(null, err);
             return;
         } else {
-            console.log('update RefreshToken success');
+            // console.log('update RefreshToken success');
             result(null, res);
         }
     })
@@ -67,7 +67,7 @@ exports.updateAccessTokenAdmin = (accesstoken, admin_id, result) => {
             result(null, err);
             return;
         } else {
-            console.log('update AccessToken success');
+            // console.log('update AccessToken success');
             result(null, res);
         }
     })
@@ -83,7 +83,7 @@ exports.getAdmin = (result) => {
             result(null, err);
             return;
         }
-        console.log("admin :", res);
+        // console.log("admin :", res);
         result(null, res);
     })
     // const users = await db.query(sql);

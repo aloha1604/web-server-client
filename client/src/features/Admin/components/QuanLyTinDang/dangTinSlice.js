@@ -39,7 +39,7 @@ const slice = createSlice({
             toast.success("Xóa tin Thành công !!");
         },
         getAllFail: (state, action) => {
-            toast.warn("Load Tin thất bại !!!");
+            toast.warn(" Thất bại !!!");
         }, updateTinFail: (state, action) => {
             toast.warn("Cập nhật tin tin thất bại !!");
         }
@@ -104,7 +104,7 @@ export const addTinDang = (value) => async dispatch => {
         if (!res.data) {
             dispatch(getAllFail(res.data));
         } else {
-            dispatch(getAll(res.data));
+            dispatch(addTin(res.data));
 
         }
 

@@ -146,7 +146,6 @@ function DangTin(props) {
             && isEmpty(tuKhoa)
             && isEmpty(noiDung)
             && isEmpty(imgCollection)
-            && isEmpty(linkYoutube)
             && isEmpty(hoTen)
             && isEmpty(phone)
             && isEmpty(email)
@@ -183,7 +182,7 @@ function DangTin(props) {
         formData.append('quanHuyen', quanHuyen)
         formData.append('phuongXa', phuongXa)
         formData.append('noiDung', nhom_id)
-        formData.append('linkYoutube', nhom_id)
+        formData.append('linkYoutube', linkYoutube)
         formData.append('hoTen', hoTen)
         formData.append('email', email)
         formData.append('phone', phone)
@@ -338,7 +337,7 @@ function DangTin(props) {
                             <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="exampleLinkVideo">Video youtube </Label>
+                            <Label for="exampleLinkVideo">Video youtube (không cần thiết) </Label>
                             <Input
                                 type="text"
                                 name="txtLinkVideo"

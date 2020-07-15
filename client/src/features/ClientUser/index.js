@@ -33,7 +33,7 @@ function ClienUser(props) {
                         <ProtectedRouteUser path={`${math.url}/dangtin`} component={DangTin} />
                         {/* <Route path={`${math.url}/dangxuat`} component={Main} /> */}
                     </Switch>
-
+                    {/* <Footer /> */}
                 </div>
                 <Footer />
 

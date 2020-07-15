@@ -12,7 +12,7 @@ import { useRouteMatch } from 'react-router-dom'
 function TinDangChoDuyet(props) {
     const math = useRouteMatch();
     return (
-        <Container>
+        <Container style={{ minHeight: '100vh' }}>
             <Row>
                 <Col>
                     <Breadcrumb>

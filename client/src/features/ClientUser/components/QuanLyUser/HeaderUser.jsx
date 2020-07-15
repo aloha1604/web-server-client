@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-    Container
+    Container, Col
 } from "reactstrap";
 
 import {
@@ -14,6 +14,7 @@ function HeaderUser(props) {
     return (
         <Container >
             <div className="headeruser">
+
                 <div className="headeruser-right">
                     <div className="headeruser-right-img">
                         <img src="https://picsum.photos/id/237/200/300" alt="" width="100%" />

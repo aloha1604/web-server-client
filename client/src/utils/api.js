@@ -19,7 +19,7 @@ api.interceptors.request.use(
         if (user) {
             config.headers['y-access-token'] = user.accessToken;
         }
-        config.headers['token'] = '637170d5-942b-11ea-9821-0281a26fb5d4';
+        config.headers['token'] = '80958562-c5a3-11ea-8d4d-9203c105b02e';
         return config
     },
     error => Promise.reject(error)

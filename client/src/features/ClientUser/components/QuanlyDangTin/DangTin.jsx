@@ -29,7 +29,7 @@ function DangTin(props) {
 
     const [validatetionMsg, setValidatetionMsg] = useState({});
     const [danhmuc_id, setDanhmuc_id] = useState(12);
-    const [nhom_id, setNhom_id] = useState('');
+    const [nhom_id, setNhom_id] = useState(11);
     const [tinhThanh_id, settinhThanh_id] = useState(201);
     const [quanHuyen_id, setQuanHuyen_id] = useState(1542);
     const [tieude, setTieude] = useState('');
@@ -323,7 +323,7 @@ function DangTin(props) {
                         </Row>
                         <h4>3.<Badge color="primary">Nội dung </Badge></h4>
                         <FormGroup>
-                            <Label for="exampleText">Text Area <span style={{ color: 'red' }}>*</span></Label>
+                            <Label for="exampleText">Miêu tả thông tin <span style={{ color: 'red' }}>*</span></Label>
                             <Input style={{
                                 height: '250px',
                             }} type="textarea" name="text" id="exampleText" onChange={onChangeNoiDung} />

@@ -53,7 +53,7 @@ const TatCaNhom = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {nhomList.nhom.map(async (nhom, i) => {
+                            {nhomList.nhom.map((nhom, i) => {
                                 if (nhom.danhmuc_id === danhmuc.danhmuc_id)
                                     return (
                                         <tr key={i}>

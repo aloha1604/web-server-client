@@ -8,12 +8,11 @@ import { useDispatch } from 'react-redux';
 
 import ShowTinMoi from '../QuanlyDangTin/ShowTinMoi'
 import ShowDanhMuc from '../QuanlyDangTin/ShowDanhMuc'
-import SearchTin from '../QuanlyDangTin/SearchTin'
+import SearchTin from '../QuanlyDangTin/SearchTin';
+
 
 function HomeMain(props) {
     const dispatch = useDispatch();
-
-
 
     return (
         <Container>

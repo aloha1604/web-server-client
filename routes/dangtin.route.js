@@ -7,5 +7,7 @@ router.get('/getAllTinChoDuyet', dangTinController.getAllTinChoDuyet);
 router.get('/getAllTinViPham', dangTinController.getAllTinViPham);
 router.get('/getAllTinDaDuyet', dangTinController.getAllTinDaDuyet);
 router.get('/getTinMoi', dangTinController.getTinMoi);
+router.get('/getTinByIdNhom/:nhom_id/:page', dangTinController.getTinByIdNhom);
+
 module.exports = router;
 

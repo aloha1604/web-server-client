@@ -64,6 +64,22 @@ exports.getAllTinDaDuyet = (result) => {
     })
 }
 
+exports.getTinMoi = (result) => {
+
+    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id ASC LIMIT 5;"
+    con.query(sql, [1, 0], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
+
 
 exports.updateTinDangActive = (tindang_id, result) => {
 

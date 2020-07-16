@@ -101,17 +101,18 @@ const TinViPham = (props) => {
                                                                         display: 'flex',
                                                                         flexDirection: 'column'
                                                                     }} >
-                                                                        <div style={{
-                                                                            width: '100%',
+                                                                        {item.hinhanh.map(hinhanh => (
+                                                                            <div style={{
+                                                                                width: '100%',
 
-                                                                            margin: '5px'
-                                                                        }}>
-                                                                            {item.hinhanh.map(hinhanh => (
+                                                                                margin: '5px'
+                                                                            }}>
+
                                                                                 <CardImg top width="100%" src={hinhanh ? hinhanh : imgUserNone} alt="image tin " />
-                                                                            ))}
 
-                                                                        </div>
 
+                                                                            </div>
+                                                                        ))}
                                                                     </div>
 
                                                                 </FormGroup>

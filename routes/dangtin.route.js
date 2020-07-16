@@ -6,6 +6,6 @@ const { route } = require("./user.route");
 router.get('/getAllTinChoDuyet', dangTinController.getAllTinChoDuyet);
 router.get('/getAllTinViPham', dangTinController.getAllTinViPham);
 router.get('/getAllTinDaDuyet', dangTinController.getAllTinDaDuyet);
-
+router.get('/getTinMoi', dangTinController.getTinMoi);
 module.exports = router;
 

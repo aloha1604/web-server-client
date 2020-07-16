@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Media, TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col, Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Media, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 var imgStyle = {
     maxWidth: "64px",

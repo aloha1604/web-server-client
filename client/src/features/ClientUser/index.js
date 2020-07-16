@@ -8,7 +8,7 @@ const Footer = React.lazy(() => import('./components/Footer'));
 const HomeMain = React.lazy(() => import('./components/HomeMain/HomeMain'));
 const MainUser = React.lazy(() => import('./components/QuanLyUser/MainUser'));
 const QuanLyTin = React.lazy(() => import('./components/QuanlyDangTin/index'));
-const ShowOneTin = React.lazy(() => import('./components/QuanlyDangTin/ShowOneTin'));
+const ShowOneTin = React.lazy(() => import('./components/HomeMain/HomeTinDangOne'));
 const DangTin = React.lazy(() => import('./components/QuanlyDangTin/DangTin'));
 const ProtectedRouteUser = React.lazy(() => import('./components/ProtectedRouteUser'));
 

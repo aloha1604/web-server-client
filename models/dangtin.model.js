@@ -79,6 +79,51 @@ exports.getTinMoi = (result) => {
     })
 }
 
+exports.getOneTinByIdTinDang = (tindang_id, result) => {
+
+    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.tindang_id = ? ORDER BY tbl_tindang.tindang_id ASC LIMIT 5;"
+    con.query(sql, [1, 0, tindang_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
+exports.getTinByIdNhom = (nhom_id, start, limit, result) => {
+
+    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.nhom_id = ? ORDER BY tbl_tindang.tindang_id ASC LIMIT ?,?"
+    con.query(sql, [1, 0, nhom_id, start, limit], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
+exports.getCountTinByIdNhom = (nhom_id, result) => {
+
+    const sql = "SELECT count(tindang_id) FROM tbl_tindang  WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.nhom_id = ? "
+    con.query(sql, [1, 0, nhom_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
 
 
 exports.updateTinDangActive = (tindang_id, result) => {

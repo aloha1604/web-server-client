@@ -13,7 +13,6 @@ function HomeTinDang(props) {
     return (
         <Container>
             <Row className="mt-3">
-
                 <Col md={{ size: 8, order: 0 }} xs={{ order: 1 }} className="pr-md-0 ">
                     <ShowTin />
                 </Col>

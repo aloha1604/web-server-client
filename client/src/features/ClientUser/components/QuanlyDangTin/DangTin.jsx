@@ -181,7 +181,7 @@ function DangTin(props) {
         formData.append('tinhThanh', tinhThanh)
         formData.append('quanHuyen', quanHuyen)
         formData.append('phuongXa', phuongXa)
-        formData.append('noiDung', nhom_id)
+        formData.append('noiDung', noiDung)
         formData.append('linkYoutube', linkYoutube)
         formData.append('hoTen', hoTen)
         formData.append('email', email)

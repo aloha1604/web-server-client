@@ -13,7 +13,7 @@ const ShowTin = () => {
         if (activeTab !== tab) setActiveTab(tab);
     }
     return (
-        <div>
+        <div style={{ minHeight: '100vh' }}>
             <Nav tabs>
                 <NavItem>
                     <NavLink

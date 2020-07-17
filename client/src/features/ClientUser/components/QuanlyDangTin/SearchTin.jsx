@@ -133,7 +133,7 @@ function SearchTin(props) {
                         submitForm(event)
                     }} >
                         <Alert color="primary">
-                            <h5><Badge color="secondary">Tìm kiếm</Badge></h5>
+                            <h5><Badge color="secondary">Tìm kiếm nâng cao</Badge></h5>
                         </Alert>
 
                         <Row form style={{ border: '1px solid #ccc', padding: '10px', boxShadow: ' 0px 0px 16px 0px rgba(204, 204, 204, 1)' }}>

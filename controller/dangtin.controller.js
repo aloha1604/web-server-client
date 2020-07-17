@@ -269,7 +269,9 @@ exports.getAllTinDaDuyet = (req, res) => {
 }
 
 exports.getOneTinByIdTinDang = (req, res) => {
-    dangTinModel.getOneTinByIdTinDang((err, data) => {
+    let tindang_id = req.params.tindang_id;
+
+    dangTinModel.getOneTinByIdTinDang(tindang_id, (err, data) => {
         if (err) {
             res.status(500).send({
                 message:

@@ -41,7 +41,7 @@ function HomeTinDangOne(props) {
                             color: '#c00',
                             fontWeight: 'bolder',
                             fontSize: '16px',
-                        }}>75000</p>
+                        }}>8555550</p>
                     </div>
 
                 </Col>

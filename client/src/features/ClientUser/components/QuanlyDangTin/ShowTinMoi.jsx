@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Media, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllTinMoi } from '../../../Admin/components/QuanLyTinDang/dangTinSlice';
+
 var imgStyle = {
-    maxWidth: "64px",
-    heightWidth: "64px",
+    maxWidth: "100px",
+    heightWidth: "100px",
 
 };
-const ShowTinMoi = () => {
-    const [activeTab, setActiveTab] = useState('1');
 
+const ShowTinMoi = () => {
+    const dispatch = useDispatch();
+    const [activeTab, setActiveTab] = useState('1');
+    const tinDangList = useSelector(state => state.tinDang); // get admin in reducer
     const toggle = tab => {
         if (activeTab !== tab) setActiveTab(tab);
     }
+    useEffect(() => {
+        dispatch(getAllTinMoi());
+    }, [])
     return (
         <div>
             <Nav tabs>
@@ -31,69 +39,30 @@ const ShowTinMoi = () => {
                     <Row>
                         <Col sm="12">
                             <div className="mt-3" >
-                                <Media className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                    <Media left href="">
-                                        <Media style={imgStyle} object src="https://picsum.photos/id/237/200/300" alt="Generic placeholder image" />
-                                    </Media>
-                                    <Media body className="ml-3">
-                                        <Media >
-                                            <h6>Media heading</h6>
-                                        </Media>
-                                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                     </Media>
-                                </Media>
-                                <Media className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                    <Media left href="">
-                                        <Media style={imgStyle} object src="https://picsum.photos/id/237/200/300" alt="Generic placeholder image" />
-                                    </Media>
-                                    <Media body className="ml-3">
-                                        <Media >
-                                            <h6>Media heading</h6>
-                                        </Media>
-                                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                     </Media>
-                                </Media>
-                                <Media className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                    <Media left href="">
-                                        <Media style={imgStyle} object src="https://picsum.photos/id/237/200/300" alt="Generic placeholder image" />
-                                    </Media>
-                                    <Media body className="ml-3">
-                                        <Media >
-                                            <h6>Media heading</h6>
-                                        </Media>
-                                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                     </Media>
-                                </Media>
-                                <Media className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                    <Media left href="">
-                                        <Media style={imgStyle} object src="https://picsum.photos/id/237/200/300" alt="Generic placeholder image" />
-                                    </Media>
-                                    <Media body className="ml-3">
-                                        <Media >
-                                            <h6>Media heading</h6>
-                                        </Media>
-                                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                     </Media>
-                                </Media>
-                                <Media className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                    <Media left href="">
-                                        <Media style={imgStyle} object src="https://picsum.photos/id/237/200/300" alt="Generic placeholder image" />
-                                    </Media>
-                                    <Media body className="ml-3">
-                                        <Media >
-                                            <h6>Media heading</h6>
-                                        </Media>
-                                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                     </Media>
-                                </Media>
-                            </div>
+                                {
+                                    tinDangList.tinMoi.map((tindang, i) => (
+                                        <Media key={i} className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
+                                            <Media left href="">
 
+                                                <NavLink href={`/home/showonetin${tindang.tindang_id}`} style={{ padding: '0' }}><Media style={imgStyle} object src={tindang.hinhanh[0]} alt="Generic placeholder image" /></NavLink>
+                                            </Media>
+                                            <Media body className="ml-3">
+                                                <Media >
+                                                    <h6><NavLink href={`/home/showonetin/${tindang.tindang_id}`} style={{ padding: '0' }}>{tindang.tindang_tieude}</NavLink></h6>
+                                                </Media>
+                                                <p>{tindang.tindang_tinhthanh} <br></br> {tindang.tindang_quanhuyen} </p>
+
+                                            </Media>
+                                        </Media>
+                                    ))
+                                }
+                            </div>
                         </Col>
                     </Row>
                 </TabPane>
 
             </TabContent>
-        </div>
+        </div >
 
 
 

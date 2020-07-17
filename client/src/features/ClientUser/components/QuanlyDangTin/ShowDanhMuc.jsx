@@ -29,8 +29,8 @@ const ShowDanhMuc = () => {
     return (
         <div>
             {
-                danhMucList.danhMuc.map(danhmuc => (
-                    <>
+                danhMucList.danhMuc.map((danhmuc, i) => (
+                    <div key={i}>
                         <Nav tabs>
                             <NavItem >
                                 <NavLink
@@ -48,10 +48,10 @@ const ShowDanhMuc = () => {
                                 <Row>
                                     <Col sm="12">
                                         <div className="mt-3" >
-                                            {nhomList.nhom.map((nhom) => {
+                                            {nhomList.nhom.map((nhom, i) => {
                                                 if (nhom.danhmuc_id === danhmuc.danhmuc_id)
                                                     return (
-                                                        <Media className="mb-4 pb-2 chil" style={{ borderBottom: '1px solid #ccc' }}>
+                                                        <Media key={i} className="mb-4 pb-2 chil" style={{ borderBottom: '1px solid #ccc' }}>
                                                             <Media left href="">
                                                                 <span style={{ fontSize: '35px', color: '#8BC34A' }}><FontAwesomeIcon icon={faStickyNote} />{' '}</span>
                                                             </Media>
@@ -83,11 +83,11 @@ const ShowDanhMuc = () => {
                             </TabPane>
 
                         </TabContent>
-                    </>
+                    </div>
                 ))
             }
 
-        </div>
+        </div >
 
 
 

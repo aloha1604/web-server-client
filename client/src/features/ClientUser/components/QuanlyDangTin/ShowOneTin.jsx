@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllTinDangOne } from '../../../Admin/components/QuanLyTinDang/dangTinSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useParams } from 'react-router-dom';
-import { formatVND } from '../../../../utils/format'
+import { formatVND } from '../../../../utils/format';
+import parser from 'html-react-parser';
 
 import {
     faUser, faMapMarkerAlt, faPhone, faFlag, faEnvelopeSquare
@@ -96,34 +97,7 @@ function ShowOneTin(props) {
                                         </Modal>
                                     </span>
                                 ))}
-                                {/* 
 
-                                <span>
-                                    <a style={
-                                        {
-                                            display: 'inline-block',
-                                            border: '1px solid #ccc',
-                                            padding: '5px 0',
-                                            textAlign: 'center',
-                                            marginRight: '10px',
-                                            marginTop: "10px"
-
-                                        }
-                                    }
-                                        color="danger" onClick={toggle}><img width="40%" height="36%" src="https://picsum.photos/200/300?grayscale" alt="" /></a>
-                                    <Modal isOpen={modal} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }}
-                                        toggle={toggle} >
-                                        <ModalHeader toggle={toggle}>Hình ảnh </ModalHeader>
-                                        <ModalBody>
-                                            <div style={{ textAlign: 'center' }}>
-                                                <img width="75%" src="https://picsum.photos/200/300?grayscale" alt="" />
-                                            </div>
-                                        </ModalBody>
-                                        <ModalFooter>
-                                            <Button color="secondary" onClick={toggle}>Cancel</Button>
-                                        </ModalFooter>
-                                    </Modal>
-                                </span> */}
 
 
 
@@ -172,7 +146,7 @@ function ShowOneTin(props) {
                             <Col>
                                 <h4>Nội dung</h4>
                                 <p>
-                                    {tindang.tindang_noidung}
+                                    {parser(tindang.tindang_noidung)}
                                 </p>
                             </Col>
 

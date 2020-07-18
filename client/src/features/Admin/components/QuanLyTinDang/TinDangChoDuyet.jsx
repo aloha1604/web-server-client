@@ -6,6 +6,7 @@ import { getAllTinChoDuyet, updateTinDangActive, updateTinDangViPham } from './d
 import imgUserNone from '../../../../asset/images/usernone.jpg';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import parser from 'html-react-parser';
 
 const TinDangChoDuyet = (props) => {
 
@@ -110,7 +111,7 @@ const TinDangChoDuyet = (props) => {
                                                                         <Label for="exampleText"><h6>Tỉnh Thành</h6>{item.tindang_tinhthanh}</Label><br />
                                                                         <Label for="exampleText"><h6>Quận Huyện</h6>{item.tindang_quanhuyen}</Label><br />
                                                                         <Label for="exampleText"><h6>Phường Xã</h6>{item.tindang_phuongxa}</Label><br />
-                                                                        <Label for="exampleText"><h6>Nội Dung</h6>{item.tindang_noidung}</Label><br />
+                                                                        <Label for="exampleText"><h6>Nội Dung</h6>{parser(item.tindang_noidung)}</Label><br />
                                                                         <Label for="exampleText"><h6>Link youtube</h6>{item.tindang_linkyoutube}</Label><br />
                                                                         <Label for="exampleText"><h6>Email</h6>{item.tindang_email}</Label><br />
                                                                         <Label for="exampleText"><h6>Địa chỉ</h6>{item.tindang_diachi}</Label><br />

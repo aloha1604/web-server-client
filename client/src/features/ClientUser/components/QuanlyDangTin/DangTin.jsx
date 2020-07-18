@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 
+import CKEditor from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -33,7 +36,7 @@ function DangTin(props) {
     const [tinhThanh_id, settinhThanh_id] = useState(201);
     const [quanHuyen_id, setQuanHuyen_id] = useState(1542);
     const [tieude, setTieude] = useState('');
-    const [gia, setGia] = useState('');
+    const [gia, setGia] = useState(0);
     const [tuKhoa, setTuKhoa] = useState('');
     const [tinhThanh, setTinhThanh] = useState('');
     const [quanHuyen, setQuanHuyen] = useState('');
@@ -69,10 +72,11 @@ function DangTin(props) {
         setTuKhoa(value);
     }
 
-    const onChangeNoiDung = (event) => {
-        const value = event.target.value;
-        setNoiDung(value);
+    const onChangeNoiDung = (event, editor) => {
+        const data = editor.getData();
+        setNoiDung(data);
     }
+
 
     const onChangeHinhAnh = (event) => {
         const value = event.target.files;
@@ -209,7 +213,7 @@ function DangTin(props) {
 
     }, [])
 
-
+    console.log(noiDung);
     return (
         <Container className="mt-3">
 
@@ -226,6 +230,7 @@ function DangTin(props) {
                         <FormGroup>
                             <Label for="exampleSelectDanhMuc">Danh mục <span style={{ color: 'red' }}>*</span></Label>
                             <Input type="select" name="selectDanhMuc" id="exampleSelectDanhMuc" onChange={onChangeSelectedDanhMuc}>
+                                <option value="NAN" active>Chọn Danh mục</option>
                                 {
                                     danhMucList.danhMuc.map((danhmuc, i) => (
                                         <option key={i} value={danhmuc.danhmuc_id}>{danhmuc.danhmuc_ten}</option>
@@ -237,6 +242,7 @@ function DangTin(props) {
                         <FormGroup>
                             <Label for="exampleSelectNhom">Nhóm <span style={{ color: 'red' }}>*</span></Label>
                             <Input type="select" name="selectNhom" id="exampleSelectNhom" onChange={onChangeNhom}>
+                                <option value="NAN" active>Chọn nhóm theo danh mục</option>
                                 {
                                     nhomList.nhom.map((nhom, i) => {
                                         if (nhom.danhmuc_id === parseInt(danhmuc_id))
@@ -261,7 +267,7 @@ function DangTin(props) {
                                     <Label for="exampleGia">Giá <span style={{ color: 'red' }}>*</span></Label>
                                     <Input type="text" name="textGia" id="exampleGia" placeholder="Chỉ nhập số (VD:200000)" onChange={onChangeGia} />
                                     <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
-                                    <FormText>Thương lượng</FormText>
+                                    <FormText>Giá được tính theo VND ví dụ: 1 triệu = 1000000 vnd</FormText>
                                 </FormGroup>
                             </Col>
                             <Col md={6}>
@@ -278,6 +284,7 @@ function DangTin(props) {
                                 <FormGroup>
                                     <Label for="exampleTinhThanh">Tỉnh/Thành <span style={{ color: 'red' }}>*</span></Label>
                                     <Input type="select" name="selectTinhThanh" id="exampleTinhThanh" onChange={onChangeSelectedTinhThanh}>
+                                        <option value="NAN" active>Chọn Tỉnh/thành</option>
                                         {
                                             tinhThanhList.tinhThanh.map((tinhthanh, i) => (
                                                 <option key={i} value={tinhthanh.ProvinceID} >{tinhthanh.ProvinceName}</option>
@@ -290,6 +297,7 @@ function DangTin(props) {
                                 <FormGroup>
                                     <Label for="exampleQuanHuyen">Quận/Huyện <span style={{ color: 'red' }}>*</span></Label>
                                     <Input type="select" name="selectQuanHuyen" id="exampleQuanHuyen" onChange={onChangeSelectedQuanHuyen}>
+                                        <option value="NAN" active>Chọn Quận/huyện</option>
                                         {
 
                                             quanHuyenList.quanHuyen.map((quanhuyen, i) => {
@@ -307,6 +315,7 @@ function DangTin(props) {
                                 <FormGroup>
                                     <Label for="examplePhuongXa">Phường/Xã <span style={{ color: 'red' }}>*</span></Label>
                                     <Input type="select" name="selectPhuongXa" id="examplePhuongXa" onChange={onChangeSelectedPhuongXa} >
+                                        <option value="NAN" active>Chọn phường/xã</option>
                                         {
                                             phuongXaList.phuongXa.map((phuongxa, i) => {
                                                 if (phuongxa.DistrictID === parseInt(quanHuyen_id))
@@ -323,9 +332,20 @@ function DangTin(props) {
                         <h4>3.<Badge color="primary">Nội dung </Badge></h4>
                         <FormGroup>
                             <Label for="exampleText">Miêu tả thông tin <span style={{ color: 'red' }}>*</span></Label>
-                            <Input style={{
+                            {/* <Input style={{
                                 height: '250px',
                             }} type="textarea" name="text" id="exampleText" onChange={onChangeNoiDung} />
+                            <p style={{ color: 'red' }}>{validatetionMsg.empty}</p> */}
+                            <span style={{
+                                height: '250px'
+                            }}>
+                                <CKEditor
+                                    editor={ClassicEditor}
+                                    data={noiDung}
+                                    onChange={onChangeNoiDung}
+                                />
+
+                            </span>
                             <p style={{ color: 'red' }}>{validatetionMsg.empty}</p>
                             <FormText>Nội dung tối đa 1000 ký tự</FormText>
                         </FormGroup>

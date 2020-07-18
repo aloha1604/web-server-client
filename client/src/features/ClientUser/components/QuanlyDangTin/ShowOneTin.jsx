@@ -125,7 +125,7 @@ function ShowOneTin(props) {
                                             <ModalBody>
                                                 <Form>
                                                     <FormGroup>
-                                                        <Label for="exampleText">Text Area</Label>
+                                                        <Label for="exampleText">Gửi báo cáo vi phạm</Label>
                                                         <Input style={
                                                             {
                                                                 height: '250px'

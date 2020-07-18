@@ -3,6 +3,7 @@ import { Media, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'rea
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTinMoi } from '../../../Admin/components/QuanLyTinDang/dangTinSlice';
+import { formatVND } from '../../../../utils/format';
 
 var imgStyle = {
     maxWidth: "100px",
@@ -50,7 +51,10 @@ const ShowTinMoi = () => {
                                                 <Media >
                                                     <h6><NavLink href={`/home/showonetin/${tindang.tindang_id}`} style={{ padding: '0' }}>{tindang.tindang_tieude}</NavLink></h6>
                                                 </Media>
-                                                <p>{tindang.tindang_tinhthanh} <br></br> {tindang.tindang_quanhuyen} </p>
+                                                <div style={{ display: 'flex', justifyContent: "space-between" }}>
+                                                    <p>{tindang.tindang_tinhthanh} <br></br> {tindang.tindang_quanhuyen}</p> <h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5>
+                                                </div>
+
 
                                             </Media>
                                         </Media>

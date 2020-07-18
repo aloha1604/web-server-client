@@ -4,6 +4,9 @@ import { useRouteMatch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTinViPham, deleteTinDangViPham } from './dangTinSlice';
 import imgUserNone from '../../../../asset/images/usernone.jpg';
+import parser from 'html-react-parser';
+import {formatVND} from '../../../../utils/format'
+
 const TinViPham = (props) => {
 
     const dispatch = useDispatch();
@@ -84,12 +87,12 @@ const TinViPham = (props) => {
                                                                     <Label for="exampleText"><h6>Nhóm</h6>{item.nhom_ten}</Label><br />
                                                                     <Label for="exampleText"><h6>Tiêu đề</h6>{item.tindang_tieude}</Label><br />
                                                                     <Label for="exampleText"><h6>Id Tin</h6>{item.tindang_id}</Label><br />
-                                                                    <Label for="exampleText"><h6>Giá</h6>{item.tindang_gia}</Label><br />
+                                                                    <Label for="exampleText"><h6>Giá</h6>{formatVND(item.tindang_gia, 'VND')}</Label><br />
                                                                     <Label for="exampleText"><h6>Từ khóa</h6>{item.tindang_tukhoa}</Label><br />
                                                                     <Label for="exampleText"><h6>Tỉnh Thành</h6>{item.tindang_tinhthanh}</Label><br />
                                                                     <Label for="exampleText"><h6>Quận Huyện</h6>{item.tindang_quanhuyen}</Label><br />
                                                                     <Label for="exampleText"><h6>Phường Xã</h6>{item.tindang_phuongxa}</Label><br />
-                                                                    <Label for="exampleText"><h6>Nội Dung</h6>{item.tindang_noidung}</Label><br />
+                                                                    <Label for="exampleText"><h6>Nội Dung</h6>{parser(item.tindang_noidung)}</Label><br />
                                                                     <Label for="exampleText"><h6>Link youtube</h6>{item.tindang_linkyoutube}</Label><br />
                                                                     <Label for="exampleText"><h6>Email</h6>{item.tindang_email}</Label><br />
                                                                     <Label for="exampleText"><h6>Địa chỉ</h6>{item.tindang_diachi}</Label><br />

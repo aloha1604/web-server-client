@@ -7,6 +7,7 @@ import imgUserNone from '../../../../asset/images/usernone.jpg';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import parser from 'html-react-parser';
+import { formatVND } from '../../../../utils/format';
 
 const TinDangChoDuyet = (props) => {
 
@@ -106,7 +107,7 @@ const TinDangChoDuyet = (props) => {
                                                                         <Label for="exampleText"><h6>Nhóm</h6>{item.nhom_ten}</Label><br />
                                                                         <Label for="exampleText"><h6>Tiêu đề</h6>{item.tindang_tieude}</Label><br />
                                                                         <Label for="exampleText"><h6>Id Tin</h6>{item.tindang_id}</Label><br />
-                                                                        <Label for="exampleText"><h6>Giá</h6>{item.tindang_gia}</Label><br />
+                                                                        <Label for="exampleText"><h6>Giá</h6>{formatVND(item.tindang_gia, 'VND')}</Label><br />
                                                                         <Label for="exampleText"><h6>Từ khóa</h6>{item.tindang_tukhoa}</Label><br />
                                                                         <Label for="exampleText"><h6>Tỉnh Thành</h6>{item.tindang_tinhthanh}</Label><br />
                                                                         <Label for="exampleText"><h6>Quận Huyện</h6>{item.tindang_quanhuyen}</Label><br />

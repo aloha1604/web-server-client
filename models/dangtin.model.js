@@ -64,6 +64,50 @@ exports.getAllTinDaDuyet = (result) => {
     })
 }
 
+exports.getAllTinChoDuyetByIdUser = (user_id, result) => {
+
+    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.user_id = ?"
+    con.query(sql, [0, 0, user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
+exports.getAllTinViPhamByIdUser = (user_id, result) => {
+
+    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id JOIN tbl_thongbaovipham on tbl_tindang.tindang_id = tbl_thongbaovipham.tindang_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.user_id = ?"
+    con.query(sql, [0, 1, user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+exports.getAllTinDaDuyetByIdUser = (user_id, result) => {
+
+    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.user_id = ?"
+    con.query(sql, [1, 0, user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
 exports.getTinMoi = (result) => {
 
     const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC LIMIT 5;"

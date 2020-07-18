@@ -10,7 +10,10 @@ const slice = createSlice({
         tinChoDuyet: initialTinDang,
         tinDaDuyet: initialTinDang,
         tinMoi: initialTinDang,
-        tinDangOne: initialTinDang
+        tinDangOne: initialTinDang,
+        tinChoDuyetByIdUser: initialTinDang,
+        tinDaDuyetByIdUser: initialTinDang,
+        tinViPhamByIdUser: initialTinDang,
 
     },
     reducers: {
@@ -26,6 +29,21 @@ const slice = createSlice({
             state.tinDaDuyet = action.payload.dataTin;
             // toast.success("Load tin thành công !!");
         },
+        getTinChoDuyetByIdUser: (state, action) => {
+            state.tinChoDuyetByIdUser = action.payload.dataTin;
+            // toast.success("Load tin thành công !!");
+        }
+        ,
+        getTinDaDuyetByIdUser: (state, action) => {
+            state.tinDaDuyetByIdUser = action.payload.dataTin;
+            // toast.success("Load tin thành công !!");
+        }
+        ,
+        getTinViPhamByIdUser: (state, action) => {
+            state.tinViPhamByIdUser = action.payload.dataTin;
+            // toast.success("Load tin thành công !!");
+        }
+        ,
         getTinMoi: (state, action) => {
             state.tinMoi = action.payload.dataTin;
             // toast.success("Load tin thành công !!");
@@ -62,7 +80,22 @@ const slice = createSlice({
 const { reducer, actions } = slice;
 export default reducer;
 //lấy ra các action
-export const { getAll, addTin, updateTin, deleteTin, getAllFail, updateTinFail, updateTinViPham, getTinChoDuyet, getTinDaDuyet, getTinViPham, getTinMoi, getTinDangOne } = actions;
+export const { getAll,
+    addTin,
+    updateTin,
+    deleteTin,
+    getAllFail,
+    updateTinFail,
+    updateTinViPham,
+    getTinChoDuyet,
+    getTinDaDuyet,
+    getTinViPham,
+    getTinMoi,
+    getTinDangOne,
+    getTinChoDuyetByIdUser,
+    getTinDaDuyetByIdUser,
+    getTinViPhamByIdUser
+} = actions;
 
 export const getAllTinChoDuyet = () => async dispatch => {
     try {
@@ -108,6 +141,52 @@ export const getAllTinDaDuyet = () => async dispatch => {
         return console.error(e.message);
     }
 }
+
+export const getAllTinChoDuyetByIdUser = ({ user_id }) => async dispatch => {
+    try {
+        const res = await api.get(`apiDangTin/getAllTinChoDuyetByIdUser/${user_id}`)
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getTinChoDuyetByIdUser(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
+export const getAllTinViPhamByIdUser = ({ user_id }) => async dispatch => {
+    try {
+        const res = await api.get(`apiDangTin/getAllTinViPhamByIdUser/${user_id}`)
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getTinViPhamByIdUser(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
+export const getAllTinDaDuyetByIdUser = ({ user_id }) => async dispatch => {
+    try {
+        const res = await api.get(`apiDangTin/getAllTinDaDuyetByIdUser/${user_id}`)
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getTinDaDuyetByIdUser(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
 export const getAllTinMoi = () => async dispatch => {
     try {
         const res = await api.get('apiDangTin/getTinMoi')

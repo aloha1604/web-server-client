@@ -80,11 +80,11 @@ function ShowOneTin(props) {
                                             }}
 
                                             color="danger" onClick={toggle} >
-                                            <img width="40%" height="50%" src={hinhanh} alt={hinhanh} />
+                                            <img width="350px" height="300px    " src={hinhanh} alt={hinhanh} />
                                         </a>
 
                                         <Modal isOpen={modal} modalTransition={{ timeout: 700 }} backdropTransition={{ timeout: 1300 }}
-                                            toggle={toggle} >
+                                            toggle={toggle} size="lg" >
                                             <ModalHeader toggle={toggle}>Hình ảnh </ModalHeader>
                                             <ModalBody>
                                                 <div style={{ textAlign: 'center' }}>

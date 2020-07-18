@@ -44,7 +44,6 @@ const ShowTinMoi = () => {
                                     tinDangList.tinMoi.map((tindang, i) => (
                                         <Media key={i} className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
                                             <Media left href="">
-
                                                 <NavLink href={`/home/showonetin${tindang.tindang_id}`} style={{ padding: '0' }}><Media style={imgStyle} object src={tindang.hinhanh[0]} alt="Generic placeholder image" /></NavLink>
                                             </Media>
                                             <Media body className="ml-3">
@@ -52,7 +51,7 @@ const ShowTinMoi = () => {
                                                     <h6><NavLink href={`/home/showonetin/${tindang.tindang_id}`} style={{ padding: '0' }}>{tindang.tindang_tieude}</NavLink></h6>
                                                 </Media>
                                                 <div style={{ display: 'flex', justifyContent: "space-between" }}>
-                                                    <p>{tindang.tindang_tinhthanh} <br></br> {tindang.tindang_quanhuyen}</p> <h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5>
+                                                    <p>{tindang.tindang_tinhthanh} <br></br> {new Date(tindang.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</p> <h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5>
                                                 </div>
 
 

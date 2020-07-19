@@ -220,10 +220,10 @@ function Header(props) {
                                                     <NavLink href={`${math.url}/mainuser`}>Thông tin cá nhân</NavLink>
                                                 </DropdownItem>
                                                 <DropdownItem>
-                                                    <NavLink href={`${math.url}/quanlydangtin/tindadang`}>Quản lý tin đăng</NavLink>
+                                                    <NavLink href={`${math.url}/quanlydangtin/tindadang`}>Quản lý tin đã đăng</NavLink>
                                                 </DropdownItem>
                                                 <DropdownItem>
-                                                    <NavLink href={`${math.url}/quanlydangtin/tindangchoduyet`}>Quản lý tin đăng duyệt</NavLink>
+                                                    <NavLink href={`${math.url}/quanlydangtin/tindangchoduyet`}>Quản lý tin đăng chờ duyệt</NavLink>
                                                 </DropdownItem>
                                                 <DropdownItem>
                                                     <NavLink href={`${math.url}/quanlydangtin/tinbiloi`}>Quản lý tin lỗi</NavLink>

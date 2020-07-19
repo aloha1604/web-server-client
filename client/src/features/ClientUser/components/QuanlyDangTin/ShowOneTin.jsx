@@ -29,7 +29,6 @@ function ShowOneTin(props) {
         setModal(!modal)
     };
     const toggleViPham = () => setModalViPham(!modalViPham);
-    console.log(tindang_id)
     useEffect(() => {
         dispatch(getAllTinDangOne({ tindang_id }));
     }, [])
@@ -39,7 +38,7 @@ function ShowOneTin(props) {
         <Container className="mt-3">
             {
                 tinDangList.tinDangOne.map((tindang, i) => (
-                    <div>
+                    <div key={i}>
                         <Row>
                             <Col>
                                 <Breadcrumb>
@@ -145,9 +144,9 @@ function ShowOneTin(props) {
 
                             <Col>
                                 <h4>Nội dung</h4>
-                                <p>
+                                <div>
                                     {parser(tindang.tindang_noidung)}
-                                </p>
+                                </div>
                             </Col>
 
 

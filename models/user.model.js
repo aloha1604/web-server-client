@@ -4,6 +4,20 @@ const moment = require('../lib/moment.lib');
 // module to do 
 // insert User
 
+exports.insert = (email, password, result) => {
+    const sql = "INSERT INTO user (email, password) VALUES (?,?)";
+    con.query(sql, [email, password], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log('lấy ra all user get all user');
+            result(null, res);
+        }
+    })
+}
+
 //  lấy ra get aLL usser điều kiện là email để xác nhận có tồn tại hay chưa
 exports.getEmail = (email, result) => {
     const sql = "SELECT * FROM user WHERE email = ?";
@@ -71,7 +85,7 @@ exports.getAllUser = (result) => {
             result(null, err);
             return;
         } else {
-            
+
             result(null, res);
         }
     })
@@ -86,7 +100,7 @@ exports.getAllUserChuaActive = (result) => {
             result(null, err);
             return;
         } else {
-           
+
             result(null, res);
         }
     })
@@ -115,7 +129,7 @@ exports.baoCaoViPhamUser = (user_id, result) => {
             result(null, err);
             return;
         } else {
-           
+
             result(null, res);
         }
     })
@@ -129,7 +143,7 @@ exports.baoCaoHetViPhamUser = (user_id, result) => {
             result(null, err);
             return;
         } else {
-            
+
             result(null, res);
         }
     })

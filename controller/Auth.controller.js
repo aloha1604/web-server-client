@@ -45,7 +45,8 @@ let userDangky = async (req, res) => {
         email: req.body.email,
         password: req.body.password
     }
-    // console.log(userData) kiem tra du lieu
+    //kiem tra du lieu
+    // console.log(userData)
 
     if (userData.email && userData.password) {
 
@@ -84,6 +85,7 @@ let userDangky = async (req, res) => {
             }
 
             const insertUserData = await insertUser(userData.email, hash);
+            console.log(insertUserData)
             if (insertUserData.affectedRows > 0) {
                 const option = nodeMail.createOption();
                 const createTransportMail = nodeMail.createTransportMail(option);

@@ -94,6 +94,7 @@ function Header(props) {
 
 
     }
+    // console.log(email)
 
     const handleClickDangNhap = () => {
         const isValidate = validateAll();

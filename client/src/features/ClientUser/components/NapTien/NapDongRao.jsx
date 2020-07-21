@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Row, Col, Form, Breadcrumb, BreadcrumbItem, Button, FormGroup, Label, Input, FormText } from 'reactstrap';
+import React, { useState } from 'react';
+import { Container, Row, Col, Form, Breadcrumb, BreadcrumbItem, Button, FormGroup, Label, Input, FormText, Modal, ModalHeader, ModalBody, ModalFooter, Media } from 'reactstrap';
 import QuyDinhNapTien from './QuyDinhNapTien';
 import { useRouteMatch } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,8 +7,20 @@ import {
     faEuroSign,
 } from "@fortawesome/free-solid-svg-icons";
 // fa-euro-sign
+var imgStyle = {
+    maxWidth: "100px",
+    heightWidth: "100px",
+
+};
 function NapDongRao(props) {
     const math = useRouteMatch();
+    const {
+        buttonLabel,
+        className
+    } = props;
+    const [modal, setModal] = useState(false);
+
+    const toggle = () => setModal(!modal);
 
     const submitForm = (event) => {
         event.preventDefault();
@@ -26,7 +38,7 @@ function NapDongRao(props) {
         <Container className="mt-3">
 
             <Row>
-                <Col md={{ size: 8, order: 0 }} sm={{ order: 1 }}>
+                <Col md={{ size: 8, order: 0 }} sm={{ order: 1 }} >
                     <Form onSubmit={(event) => {
                         submitForm(event)
                     }} >
@@ -77,7 +89,39 @@ function NapDongRao(props) {
                                     </FormGroup>
                                 </FormGroup>
                                 <FormGroup style={{ textAlign: 'center' }}>
-                                    <Button color="success" style={{ width: '100%' }}>Thanh Toán</Button>{' '}
+                                    <Button color="success" style={{ width: '100%' }} onClick={toggle}>Thanh Toán</Button>{' '}
+                                    <Modal isOpen={modal} toggle={toggle} className={className}>
+                                        <ModalHeader toggle={toggle}>Hình Thức thanh toán</ModalHeader>
+                                        <ModalBody>
+                                            <Media>
+                                                <Media left href="#" className="mr-2" style={{
+                                                    margin: 'auto 0',
+                                                }}>
+                                                    <Media style={imgStyle} object src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRImGSnRuso0QfbqRU2xlFfobVNtVzmmzNN5w&usqp=CAU' alt="Generic placeholder image" />
+                                                </Media>
+                                                <Media body style={{
+                                                    marginLeft: '15px'
+                                                }}>
+                                                    <Media heading>
+                                                        Dịch vụ
+                                                    </Media>
+                                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                </Media>
+                                            </Media>
+                                            <div
+                                                style={{
+                                                    marginLeft: '150px'
+                                                }}
+                                            >
+                                                Thanh toán
+                                            </div>
+
+                                        </ModalBody>
+                                        <ModalFooter>
+                                            <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
+                                            <Button color="secondary" onClick={toggle}>Cancel</Button>
+                                        </ModalFooter>
+                                    </Modal>
                                 </FormGroup>
                             </row>
                         </Row>

@@ -27,6 +27,12 @@ const slice = createSlice({
             localStorage.setItem('user', JSON.stringify(state.user))
 
         },
+        resetPassword: (state, action) => {
+            toast.success("Đã reset Password vui lòng check mai!!");
+        },
+        resetPasswordFail: (state, action) => {
+            toast.warn(action.payload.error);
+        },
         loginFail: (state, action) => {
             state.user = action.payload;
             state.user.logged = false;
@@ -52,12 +58,12 @@ export default slice.reducer
 
 //Actions
 
-const { singInSuccess, loginSuccess, logoutSuccess, loginFail, singInFail } = slice.actions
+const { singInSuccess, loginSuccess, logoutSuccess, loginFail, singInFail, resetPassword, resetPasswordFail } = slice.actions
 
 export const singIn = ({ email, password }) => async dispatch => {
     try {
         const res = await api.post('apiUser/userdangky', { email, password })
-        console.log(res.data.message)
+
         if (res.data.message) {
             dispatch(singInSuccess(res.data));
         } else {
@@ -72,7 +78,7 @@ export const singIn = ({ email, password }) => async dispatch => {
 export const login = ({ email, password }) => async dispatch => {
     try {
         const res = await api.post('apiUser/userdangnhap', { email, password })
-        console.log(res.data)
+
         if (res.data.error) {
             dispatch(loginFail(res.data));
         } else {
@@ -83,6 +89,22 @@ export const login = ({ email, password }) => async dispatch => {
         return console.error(e.message);
     }
 }
+
+export const resetPasswordUser = ({ email }) => async dispatch => {
+    try {
+        const res = await api.post('apiUser/userResetPassword', { email })
+
+        if (res.data.error) {
+            dispatch(resetPasswordFail(res.data));
+        } else {
+            dispatch(resetPassword(res.data));
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
 
 export const logout = () => async dispatch => {
     try {

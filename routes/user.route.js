@@ -13,6 +13,7 @@ const categoryController = require('../controller/category.controller');
 router.get('/activeuser/:user_id', AuthController.updateAciveUser);
 router.post('/userdangky', AuthController.userDangky);
 router.post('/userdangnhap', AuthController.loginUser);
+router.post('/userResetPassword', AuthController.userResetPassword);
 // router.use(AuthMiddleWare.isAuth);
 // //category router
 router.get('/getAllCategory', categoryController.getAllCategory);

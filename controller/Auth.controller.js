@@ -7,6 +7,7 @@ const debug = console.log.bind(console);
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const generator = require('generate-password');
 
 const nodeMail = require('../helpers/nodeMail');
 
@@ -117,6 +118,89 @@ let userDangky = async (req, res) => {
     }
 
 }
+let userResetPassword = async (req, res) => {
+    const password = generator.generate({
+        length: 10,
+        numbers: true
+    });
+
+    let userData = {
+        email: req.body.email,
+        password: req.body.password ? req.body.password : password
+    }
+    //kiem tra du lieu
+    console.log(userData)
+
+    if (userData.email && userData.password) {
+
+        try {
+            var getEmail = function (email) {
+                return new Promise((resolve, reject) => {
+                    userModel.getEmail(email, (err, data) => {
+                        if (err)
+                            reject(err);
+                        else {
+                            resolve(data);
+                        }
+
+                    })
+                })
+            }
+            const getEmailData = await getEmail(userData.email);
+
+            console.log(getEmailData)
+            if (getEmailData.length === 0) {
+                return res.status(200).json({ error: 'Email không tồn tại!!' });
+            }
+
+            const hash = bcrypt.hashSync(userData.password, saltRounds);
+            var resetPassword = function (mail, password) {
+                return new Promise((resolve, reject) => {
+                    userModel.userResetPassword(mail, password, (err, data) => {
+                        if (err)
+                            reject(err);
+                        else {
+                            resolve(data);
+                        }
+
+                    })
+                })
+            }
+
+            const updatePasswordUserData = await resetPassword(userData.email, hash);
+            console.log(updatePasswordUserData)
+            if (updatePasswordUserData.affectedRows > 0) {
+                const option = nodeMail.createOption();
+                const createTransportMail = nodeMail.createTransportMail(option);
+
+                let from = 'webdoan20192019@gmail.com';// Địa chỉ email của người gửi
+                let to = userData.email; // Địa chỉ email của người gửi
+                let subject = 'Thư gửi ResetPassword'; // Tiêu đề mail
+                let text = "Nhấp vào link để xác nhận tài khoản, cảm ơn bạn đã tham gia sàn thương mại của chúng tôi !!!";// Nội dung mail dạng text
+                let html = `<p>Password đã resset là : !!!</p> <h3> ${userData.password}</h3>`; // Nội dung mail dạng html
+
+                const createMail = nodeMail.createMail(from, to, subject, text, html);
+
+                const sendMailer = nodeMail.sendMailer(createMail, createTransportMail);
+
+                console.log('đã tới được mục mail');
+                return res.status(200).json({ message: 'Reset Password thành công' })
+            } else {
+                return res.status(500).json({ error: 'Reset password thất bại user thất bại' });
+            }
+        } catch (error) {
+            return res.status(500).json(error);
+        }
+
+
+    } else {
+        return res.status(403).send({
+            message: 'không tìm thấy mail trong request',
+        });
+    }
+
+}
+
 
 let loginAdmin = async (req, res) => {
     try {
@@ -400,6 +484,7 @@ module.exports = {
     userDangky: userDangky,
     loginAdmin: loginAdmin,
     loginUser: loginUser,
+    userResetPassword: userResetPassword,
     updateAciveUser: updateAciveUser,
     refreshTokenAdmin: refreshTokenAdmin
 }

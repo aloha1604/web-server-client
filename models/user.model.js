@@ -46,6 +46,20 @@ exports.updateActiveUser = (user_id, result) => {
         }
     })
 }
+// reset Password
+exports.userResetPassword = (email, new_password, result) => {
+    const sql = "UPDATE user SET password=?,update_at=? WHERE email = ?";
+    con.query(sql, [new_password, moment.mysqlTimestamp, email], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            console.log('reset password tài khoản');
+            result(null, res);
+        }
+    })
+}
 
 //update accesstoken and refreshtoken
 exports.updateRefreshTokenUser = (refreshtoken, user_id, result) => {

@@ -12,6 +12,8 @@ const ShowOneTin = React.lazy(() => import('./components/QuanlyDangTin/ShowOneTi
 const DangTin = React.lazy(() => import('./components/QuanlyDangTin/DangTin'));
 const ProtectedRouteUser = React.lazy(() => import('./components/ProtectedRouteUser'));
 
+const ResetPassword = React.lazy(() => import('./components/QuanLyUser/ResetPassword'))
+
 
 function ClienUser(props) {
     const math = useRouteMatch();
@@ -24,6 +26,7 @@ function ClienUser(props) {
 
                     <Switch>
                         <Route exact path={`${math.url}`} component={HomeMain} />
+                        <Route exact path={`${math.url}/resetpassword`} component={ResetPassword} />
                         <Route exact path={`${math.url}/showonetin/:tindang_id`} component={ShowOneTin} />
                         {/* <Route exact path={`${math.url}/mainuser`} component={MainUser} /> */}
                         <ProtectedRouteUser exact path={`${math.url}/mainuser`} component={MainUser} />

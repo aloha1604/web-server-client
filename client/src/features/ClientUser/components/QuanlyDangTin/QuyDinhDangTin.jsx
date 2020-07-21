@@ -11,7 +11,7 @@ import {
 
 const QuyDinhDangTin = props => {
     return (
-        <Col md={{ size: 4, order: 1 }} sm={{ order: 0 }}>
+        <Col md={{ size: 4, order: 1 }} sm={{ order: 0 }} >
             <div>
                 <Card>
                     <CardHeader>HƯỚNG DẪN ĐĂNG TIN HIỆU QUẢ</CardHeader>

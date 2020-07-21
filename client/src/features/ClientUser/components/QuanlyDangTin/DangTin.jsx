@@ -213,7 +213,7 @@ function DangTin(props) {
 
     }, [])
 
-    console.log(noiDung);
+    // console.log(noiDung);
     return (
         <Container className="mt-3">
 

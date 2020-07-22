@@ -165,7 +165,7 @@ exports.baoCaoHetViPhamUser = (user_id, result) => {
 
 // dong rao
 exports.getDongRaoByIdUser = (user_id, result) => {
-    const sql = "SELECT dongrao from user WHERE user_id =?";
+    const sql = "SELECT dongrao,email from user WHERE user_id =?";
     con.query(sql, [user_id], (err, res) => {
         if (err) {
             console.log("error:", err);

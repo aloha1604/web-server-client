@@ -1,6 +1,8 @@
 const stripe = require('../helpers/stripe');
 const userModel = require('../models/user.model');
 const giaoDichModel = require('../models/giaodich.model');
+const nodeMail = require('../helpers/nodeMail');
+
 
 const postStripeCharge = (req, res) => (stripeErr, stripeRes) => {
     if (stripeErr) {
@@ -11,6 +13,7 @@ const postStripeCharge = (req, res) => (stripeErr, stripeRes) => {
     }
 }
 
+// get xu ly tao giao dich moi, them dongrao
 getDongRao = async (req) => {
     //get data
     const user_id = req.body.user_id;
@@ -63,6 +66,22 @@ getDongRao = async (req) => {
         })
     }
     const dataInsertGiaoDich = await insertGiaoDich(user_id, noiDungGiaoDich);
+
+    if (dataInsertGiaoDich.affectedRows && dataUpdateDongRao.affectedRows) {
+        const option = nodeMail.createOption();
+        const createTransportMail = nodeMail.createTransportMail(option);
+
+        let from = 'webdoan20192019@gmail.com';// Địa chỉ email của người gửi
+        let to = dataDongRao[0].email; // Địa chỉ email của người gửi
+        let subject = 'Thư gửi để xác nhận tài khoản'; // Tiêu đề mail
+        let text = "Nhấp vào link để xác nhận tài khoản, cảm ơn bạn đã tham gia sàn thương mại của chúng tôi !!!";// Nội dung mail dạng text
+        let html = `<p>Cảm ơn bạn đã nạp thêm Đồng rao vào web Raovat.vn của chúng tôi !!! số tiền nạp : ${dataGiaDongRao} Dr</p> <br> <h3>Tổng đồng rao :</h3> ${newDongRao} Dr`; // Nội dung mail dạng html
+
+        const createMail = nodeMail.createMail(from, to, subject, text, html);
+
+        const sendMailer = nodeMail.sendMailer(createMail, createTransportMail);
+    }
+
 }
 
 

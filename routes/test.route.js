@@ -13,7 +13,7 @@ const danhMucController = require('../controller/danhMuc.controller');
 const nhomController = require('../controller/nhom.controller');
 const userController = require('../controller/user.controller');
 const test = require('../controller/test.controller');
-
+const PaymentApi = require('../controller/payment.controller');
 
 // // router.post("/login", AuthController.login);
 // // router.post("/refresh-token", AuthController.refreshToken);
@@ -54,7 +54,7 @@ router.get('/getAllNhom', nhomController.getAllNhom);
 router.get('/getAllNhomByIdDanhMuc/:danhmuc_id', nhomController.getAllNhomByIdDanhMuc);
 router.post('/addNhomByIdDanhMuc', nhomController.addNhomByIdDanhMuc); // { body: danhmuc_id, nhom_ten }
 // router.put('/updateNhomByIdNhom/:id/:nhom_ten', nhomController.updateNhomByIdNhom);
-router.put('/updateNhomByIdNhom/:id/:nhom_ten', (req,res)=>{
+router.put('/updateNhomByIdNhom/:id/:nhom_ten', (req, res) => {
     res.send(req.params.id)
 });
 router.delete('/deleteNhomByIdNhom/:id/', nhomController.deleteNhomByIdNhom);
@@ -65,6 +65,8 @@ router.get('/getAllUserChuaActive', userController.getAllUserChuaActive);
 router.get('/getAllUserViPham', userController.getAllUserViPham);
 router.put('/baoCaoViPhamUser/:id', userController.baoCaoViPhamUser);
 router.put('/baoCaoHetViPhamUser/:id', userController.baoCaoHetViPhamUser);
+router.get('/getPaymentApi', PaymentApi.getPaymentApi);
+router.post('/postPaymentApi', PaymentApi.postPaymentApi)
 // router.get('/baoCaoViPhamUser',)
 
 // start dang anh

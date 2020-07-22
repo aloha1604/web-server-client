@@ -163,3 +163,30 @@ exports.baoCaoHetViPhamUser = (user_id, result) => {
     })
 }
 
+// dong rao
+exports.getDongRaoByIdUser = (user_id, result) => {
+    const sql = "SELECT dongrao from user WHERE user_id =?";
+    con.query(sql, [user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            result(null, res);
+        }
+    })
+}
+
+// dong rao
+exports.updateDongRaoByIdUser = (user_id, newDongRao, result) => {
+    const sql = "UPDATE user set dongrao =? WHERE user_id =?";
+    con.query(sql, [newDongRao, user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            result(null, res);
+        }
+    })
+}

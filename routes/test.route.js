@@ -67,6 +67,7 @@ router.put('/baoCaoViPhamUser/:id', userController.baoCaoViPhamUser);
 router.put('/baoCaoHetViPhamUser/:id', userController.baoCaoHetViPhamUser);
 router.get('/getPaymentApi', PaymentApi.getPaymentApi);
 router.post('/postPaymentApi', PaymentApi.postPaymentApi)
+// router.get('/getDongRao/:user_id/:dataGiaDongRao/:noiDungGiaoDich', PaymentApi.getDongRao)
 // router.get('/baoCaoViPhamUser',)
 
 // start dang anh

@@ -17,23 +17,26 @@ const errorPayment = data => {
 };
 
 
-const onToken = (amount, description) => token =>
+const onToken = (amount, description, user_id, noiDungGiaoDich, dataGiaDongRao) => token =>
   api.post('test/postPaymentApi',
     {
       description,
       source: token.id,
       currency: CURRENCY,
-      amount: amount
+      amount: amount,
+      user_id: user_id,
+      noiDungGiaoDich: noiDungGiaoDich,
+      dataGiaDongRao: dataGiaDongRao
     })
     .then(successPayment)
     .catch(errorPayment);
 
-const Checkout = ({ name, description, amount }) =>
+const Checkout = ({ name, description, amount, user_id, noiDungGiaoDich, dataGiaDongRao }) =>
   <StripeCheckout
     name={name}
     description={description}
     amount={amount}
-    token={onToken(amount, description)}
+    token={onToken(amount, description, user_id, noiDungGiaoDich, dataGiaDongRao)}
     currency={CURRENCY}
     stripeKey={STRIPE_PUBLISHABLE}
     email

@@ -29,6 +29,10 @@ function NapDongRao(props) {
     const [dataGiaDongRao, setDataGiaDongRao] = useState("");
     const [dataGiaPayViSa, setDataGiaDongRaoPayViSa] = useState(0);
     const [validatetionMsg, setValidatetionMsg] = useState({});
+    const [noiDungGiaoDich, SetNoiDungGiaoDich] = useState("");
+    const user = JSON.parse(localStorage.getItem('user'));
+    const user_id = user.userFakeData._id;
+
 
     const validateAll = () => {
         const msg = {};
@@ -40,6 +44,7 @@ function NapDongRao(props) {
         if (Object.keys(msg).length > 0) return false;
         return true;
     }
+
     const toggle = () => {
         const isValidate = validateAll();
         if (!isValidate) return;
@@ -47,11 +52,11 @@ function NapDongRao(props) {
     }
 
 
-
-
     const onChangeRaido = (event) => {
         let value = event.target.value;
         let paydata = Number.parseFloat((value / 23000)).toFixed(2);
+        let noidung = `Nạp thêm  ${value} Đồng Rao vào tài khoản`;
+        SetNoiDungGiaoDich(noidung);
         setDataGiaDongRao(value);
         setDataGiaDongRaoPayViSa(paydata);
     }
@@ -152,6 +157,9 @@ function NapDongRao(props) {
                                                         <Checkout
                                                             amount={Number.parseFloat(dataGiaPayViSa).toFixed(2) * 100}
                                                             name={'Visa/MasterCard'}
+                                                            user_id={user_id}
+                                                            noiDungGiaoDich={noiDungGiaoDich}
+                                                            dataGiaDongRao={dataGiaDongRao}
                                                         ></Checkout>
                                                     </div>
 

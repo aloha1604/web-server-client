@@ -190,3 +190,31 @@ exports.updateDongRaoByIdUser = (user_id, newDongRao, result) => {
         }
     })
 }
+// get dong rao and tin co phi
+exports.getCountTinMienPhiAndDongRao = (user_id, result) => {
+    const sql = "SELECT tinmienphi,dongrao FROM user WHERE user_id = ?";
+    con.query(sql, [user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log('lấy ra all user get all user');
+            result(null, res);
+        }
+    })
+}
+
+// update count tinmienphi
+exports.updateCountTinMienPhiByIdUser = (user_id, newtinmienphi, result) => {
+    const sql = "UPDATE user set tinmienphi =? WHERE user_id =?";
+    con.query(sql, [newtinmienphi, user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            result(null, res);
+        }
+    })
+}

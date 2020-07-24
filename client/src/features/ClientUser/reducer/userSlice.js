@@ -58,7 +58,7 @@ export default slice.reducer
 
 //Actions
 
-const { singInSuccess, loginSuccess, logoutSuccess, loginFail, singInFail, resetPassword, resetPasswordFail } = slice.actions
+const { singInSuccess, loginSuccess, logoutSuccess, loginFail, singInFail, resetPassword, resetPasswordFail, } = slice.actions
 
 export const singIn = ({ email, password }) => async dispatch => {
     try {
@@ -114,6 +114,8 @@ export const logout = () => async dispatch => {
         return console.error(e.message);
     }
 }
+
+
 
 
 

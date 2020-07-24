@@ -1,6 +1,7 @@
 //declare model
 const userModel = require('../models/user.model');
 
+
 //controller module
 // GET :http://localhost:5000/api.../getAllUser
 exports.getAllUser = (req, res) => {
@@ -117,7 +118,21 @@ exports.baoCaoHetViPhamUser = async (req, res) => {
     }
 }
 
+// getCountTinMienPhiAndDongRao
+exports.getCountTinMienPhiAndDongRao = async (req, res) => {
+    const user_id = req.params.user_id;
 
+    userModel.getCountTinMienPhiAndDongRao(user_id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message:
+                    err.message || "Lỗi get all user active!!"
+            });
+        } else {
+            res.json({ data: data });
+        }
+    })
+}
 
 //module test
 exports.test = (req, res) => {

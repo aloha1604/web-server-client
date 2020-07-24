@@ -17,7 +17,10 @@ import { getAllTinhThanh } from '../../../ClientUser/reducer/apiTinhThanhSlice';
 import { getAllQuanHuyen } from '../../../ClientUser/reducer/apiQuanHuyenSlice';
 import { getAllPhuongXa } from '../../../ClientUser/reducer/apiPhuongXaSlice';
 import { addTinDang } from '../../../../features/Admin/components/QuanLyTinDang/dangTinSlice';
+import { getCountTinMienPhiAndDongRao } from '../../reducer/dongraoSlice';
 import { isEmpty, isEmail } from "validator";
+import { formatVND } from '../../../../utils/format'
+
 
 function DangTin(props) {
     const math = useRouteMatch();
@@ -27,7 +30,9 @@ function DangTin(props) {
     const tinhThanhList = useSelector(state => state.tinhThanh); // get nhom in reducer
     const quanHuyenList = useSelector(state => state.quanHuyen); // get nhom in reducer
     const phuongXaList = useSelector(state => state.phuongXa); // get nhom in reducer
+    const dongRaoReducer = useSelector(state => state.dongRao); // get admin in reducer
     const user = JSON.parse(localStorage.getItem('user'));
+    const dongRaoLocal = JSON.parse(localStorage.getItem('dongRao'));
     const user_id = user.userFakeData._id;
 
     const [validatetionMsg, setValidatetionMsg] = useState({});
@@ -49,8 +54,11 @@ function DangTin(props) {
     const [email, setEmail] = useState('');
     const [diachi, setDiaChi] = useState('');
     const [thoiGianLienHe, setThoiGianLienHe] = useState('');
+    const [tinMienPhi, setTinMienPhi] = useState(dongRaoLocal[0].tinmienphi);
+    const [dongRao, setDongRao] = useState(dongRaoLocal[0].dongrao)
 
-
+    console.log(dongRao)
+    console.log(tinMienPhi)
     const onChangeNhom = (event) => {
         var index = event.nativeEvent.target.selectedIndex;
         var value = event.nativeEvent.target[index].value;
@@ -193,12 +201,23 @@ function DangTin(props) {
         formData.append('thoiGianLienHe', thoiGianLienHe)
         formData.append('diachi', diachi)
 
+        if (tinMienPhi < 3) {
+            let countTinminPhi = tinMienPhi + 1;
+            setTinMienPhi(countTinminPhi)
+            formData.append('tinhPhiTin', '0')
+            dispatch(addTinDang(formData));
+        } else {
+            formData.append('tinhPhiTin', '5000')
+            let countTinminPhi = tinMienPhi + 1;
+            let tinhToanDongRao = parseInt(dongRao) - 5000;
+            setDongRao(tinhToanDongRao)
+            setTinMienPhi(countTinminPhi)
+            dispatch(addTinDang(formData));
+        }
+        // lay so tien dang miễn phí làm gốc, nếu tinmuphien < 3 thì sẽ gửi data tien neu khong data tien sẽ là 0
+        //neu day co phi thi sẽ them data tiền, rồi sẽ gửi lên server , server sẽ trừ tiền tin này trong tài khoảng
+        // ở server sẽ xet xem có data tiền tồn tại datatien thì thực hiện việc trừ tiền
 
-        // api.post('apiUser/dangtin', formData)
-        // for (var pair of formData.entries()) {
-        //     console.log(pair[0] + ', ' + pair[1]);
-        // }
-        dispatch(addTinDang(formData));
 
     }
 
@@ -210,6 +229,10 @@ function DangTin(props) {
         dispatch(getAllTinhThanh());
         dispatch(getAllQuanHuyen());
         dispatch(getAllPhuongXa());
+        dispatch(getCountTinMienPhiAndDongRao({ user_id }));
+        // setTinMienPhi(dongRaoLocal[0].tinmienphi);
+        // setDongRao(dongRaoLocal[0].dongrao)
+
 
     }, [])
 
@@ -226,6 +249,25 @@ function DangTin(props) {
                             <BreadcrumbItem><a href="/">Home</a></BreadcrumbItem>
                             <BreadcrumbItem ><a href={math.url}>Đăng tin</a></BreadcrumbItem>
                         </Breadcrumb>
+                        {/* <KiemSoatTinDang
+                            onChangeTinMienPhi={onChangeTinMienPhi}
+                            onChangeDongRao={onChangeDongRao}
+
+                        /> */}
+
+
+
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                        }}>
+                            {/* <Input onChange={onChangeDongRao} /> */}
+                            <h5 >Tin miễn phí : <Badge color="secondary"  >{tinMienPhi}</Badge></h5>
+                            <h5  >Tổng Đồng rao: <Badge color="secondary"  >{dongRao}</Badge> {' '} DR</h5>
+
+                        </div>
+
+
                         <h4>1.<Badge color="primary">Danh mục</Badge></h4>
                         <FormGroup>
                             <Label for="exampleSelectDanhMuc">Danh mục <span style={{ color: 'red' }}>*</span></Label>
@@ -430,11 +472,13 @@ function DangTin(props) {
                             </Col>
                         </Row>
                         <FormGroup style={{ textAlign: 'center' }}>
-                            <Button type="submit" color="success">Đăng tin</Button>
+                            <Button type="submit" color="success">{tinMienPhi < 3 ? 'Đăng tin miễn phí' : 'Đăng tin có phí'}</Button>
                         </FormGroup>
                     </Form>
                 </Col>
-                <QuyDinhDangTin />
+                <Col md={{ size: 4, order: 1 }} sm={{ order: 0 }} >
+                    <QuyDinhDangTin />
+                </Col>
             </Row>
 
 

@@ -1,6 +1,9 @@
 const hinhAnhModel = require('../models/hinhAnh.model');
 const dangTinModel = require('../models/dangtin.model');
 const ThongBaoViPhamModel = require('../models/thongbaovipham.model');
+const tinhToanDongRao = require('../helpers/tinhToanDongRao');
+const tinhToanTinMienPhi = require('../helpers/tinhToanTinMienPhi');
+
 
 // dang tin
 exports.insertHinhAnh = (req, res, next) => {
@@ -56,6 +59,7 @@ exports.dangTin = async (req, res) => {
     const tindang_thoigianlienhe = req.body.thoiGianLienHe;
     const tindang_active = 0;
     const tindang_vipham = 0;
+    const tinhPhiTin = req.body.tinhPhiTin;
 
     const dataTinDang1 = [];
     dataTinDang1.push(nhom_id)
@@ -75,8 +79,11 @@ exports.dangTin = async (req, res) => {
     dataTinDang1.push(tindang_thoigianlienhe)
     dataTinDang1.push(tindang_active)
     dataTinDang1.push(tindang_vipham)
+    parseInt(tinhPhiTin) === 0 ? dataTinDang1.push(0) : dataTinDang1.push(1);
+
 
     console.log(dataTinDang1);
+
 
     try {
         const flagInsert = (data) => {
@@ -117,8 +124,16 @@ exports.dangTin = async (req, res) => {
         var dataHinhAnh = await flagInsertHinhAnhByIdTin(reqFiles);
 
         console.log(dataHinhAnh);
+        // update tinh phi tin
+        // user_idd, dataGiaDongRao0, noiDungGiaoDichh, tuychon
+        let noiDungGiaoDichh = tinhPhiTin === parseInt(0) ? 'Đăng tinh miễn phí!!' : 'Dăng tin có tính phí!!!';
+        tinhToanDongRao.xuLyDongRao(user_id, tinhPhiTin, noiDungGiaoDichh, 1)
+        // update count tinmienphi
+        tinhToanTinMienPhi.tinhToanTinMienPhi(user_id, 0)
+
 
         if (dataDangTin.affectedRows > 0 && dataHinhAnh.affectedRows > 0) {
+            console.log('Đăng tin thành công !!')
             return res.status(200).json({ message: 'Đăng tin thành công !!', data: dataDangTin.insertId })
         } else {
             return res.status(200).json({ error: 'thêm tin vào dtb thất bại!!' })

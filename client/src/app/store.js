@@ -14,11 +14,11 @@ import userAuth from '../features/ClientUser/reducer/userSlice';
 import tinhThanh from '../features/ClientUser/reducer/apiTinhThanhSlice';
 import quanHuyen from '../features/ClientUser/reducer/apiQuanHuyenSlice';
 import phuongXa from '../features/ClientUser/reducer/apiPhuongXaSlice';
-
+import dongRao from '../features/ClientUser/reducer/dongraoSlice';
 
 //root Reducer
 const rootReducer = combineReducers({
-    adminAuth, danhMuc, nhom, user, tinDang, userAuth, tinhThanh, quanHuyen, phuongXa
+    adminAuth, danhMuc, nhom, user, tinDang, userAuth, tinhThanh, quanHuyen, phuongXa, dongRao
 })
 
 //config store

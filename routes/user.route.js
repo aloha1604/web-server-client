@@ -9,6 +9,7 @@ const AuthController = require("../controller/Auth.controller");
 
 const dangTinController = require("../controller/dangtin.controller");
 const categoryController = require('../controller/category.controller');
+const userController = require('../controller/user.controller');
 
 router.get('/activeuser/:user_id', AuthController.updateAciveUser);
 router.post('/userdangky', AuthController.userDangky);
@@ -55,9 +56,10 @@ router.get("/gethinhanh", dangTinController.getHinhAnh);
 //quan ly tin dangtin, xoatin, getAllTin user
 // post dang tim gòm body: tbl_tindang and iduser
 router.post('/dangtin', upload.array('imgCollection', 6), dangTinController.dangTin);
-// router.post('/dangtin', upload.array('imgCollection', 6), function (req, res) {
-//     res.send(req.body.imgCollection)
-// });
+
+// getCountTinMienPhiAndDongRao
+
+router.get('/getCountTinMienPhiAndDongRao/:user_id', userController.getCountTinMienPhiAndDongRao);
 
 
 

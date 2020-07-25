@@ -81,13 +81,13 @@ const TinDangChoDuyet = (props) => {
                             return (
                                 <tr key={i}>
                                     <td >{tindang.tindang_id}</td>
-                                    <td >{tindang.tindang_tieude}</td>
+                                    <td >{tindang.tindang_tieude.length > 25 ? tindang.tindang_tieude.slice(0, 25) + '....' : (tindang.tindang_tieude)}</td>
                                     <td style={{
                                         width: '10rem',
                                         height: '4rem'
                                     }}><CardImg top width="40rem" height="50rem" src={tindang.hinhanh[0] ? tindang.hinhanh[0] : imgUserNone} alt="image tin " /></td>
                                     <td >
-                                        <Button color="info" onClick={toggle} value={tindang.tindang_id}>xem chi tiêt</Button>
+                                        <Button color="info" onClick={toggle} value={tindang.tindang_id}>Chi tiêt</Button>
 
                                         <Modal isOpen={modal} toggle={toggle} >
                                             {

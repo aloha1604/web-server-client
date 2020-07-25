@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllTinViPham, deleteTinDangViPham } from './dangTinSlice';
 import imgUserNone from '../../../../asset/images/usernone.jpg';
 import parser from 'html-react-parser';
-import {formatVND} from '../../../../utils/format'
+import { formatVND } from '../../../../utils/format'
 
 const TinViPham = (props) => {
 
@@ -62,7 +62,7 @@ const TinViPham = (props) => {
                         tinDangList.tinViPham.map((tindang, i) => (
                             <tr key={i}>
                                 <td >{tindang.tindang_id}</td>
-                                <td >{tindang.tindang_tieude}</td>
+                                <td >{tindang.tindang_tieude.length > 25 ? tindang.tindang_tieude.slice(0, 25) + '....' : (tindang.tindang_tieude)}</td>
                                 <td style={{
                                     width: '10rem',
                                     height: '4rem'

@@ -56,7 +56,7 @@ const TinDaDuyet = (props) => {
                         tinDangList.tinDaDuyet.map((tindang, i) => (
                             <tr key={i}>
                                 <td >{tindang.tindang_id}</td>
-                                <td >{tindang.tindang_tieude}</td>
+                                <td >{tindang.tindang_tieude.length > 25 ? tindang.tindang_tieude.slice(0, 25) + '....' : (tindang.tindang_tieude)}</td>
                                 <td style={{
                                     width: '10rem',
                                     height: '4rem'

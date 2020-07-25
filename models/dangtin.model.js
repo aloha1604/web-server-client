@@ -153,6 +153,7 @@ exports.getTinByIdNhom = (nhom_id, start, limit, result) => {
     })
 }
 
+// lay so tien theo Id tin
 exports.getCountTinByIdNhom = (nhom_id, result) => {
 
     const sql = "SELECT count(tindang_id) FROM tbl_tindang  WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.nhom_id = ? "
@@ -169,7 +170,7 @@ exports.getCountTinByIdNhom = (nhom_id, result) => {
 }
 
 
-
+// update active tin
 exports.updateTinDangActive = (tindang_id, result) => {
 
     const sql = "UPDATE tbl_tindang SET tindang_active=? WHERE tindang_id = ? "
@@ -185,6 +186,7 @@ exports.updateTinDangActive = (tindang_id, result) => {
     })
 }
 
+// update tin vi pham
 exports.updateTinDangViPham = (tindang_id, result) => {
 
     const sql = "UPDATE tbl_tindang SET tindang_vipham= ? WHERE tindang_id = ? "
@@ -199,7 +201,7 @@ exports.updateTinDangViPham = (tindang_id, result) => {
         }
     })
 }
-
+// xoa tin
 exports.deleteTinDang = (tindang_id, result) => {
 
     const sql = "DELETE FROM tbl_tindang WHERE tindang_id =? "
@@ -214,3 +216,5 @@ exports.deleteTinDang = (tindang_id, result) => {
         }
     })
 }
+
+

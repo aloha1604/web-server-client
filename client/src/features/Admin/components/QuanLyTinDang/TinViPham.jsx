@@ -83,6 +83,7 @@ const TinViPham = (props) => {
                                                             <Form>
 
                                                                 <FormGroup>
+                                                                    <Label for="exampleText"><h6>Loại tin </h6>{parseInt(item.tindang_mienphi) === 0 ? 'Tin miễn phí' : 'Tin có phí'}</Label><br />
                                                                     <Label for="exampleText"><h6>Danh mục</h6>{item.danhmuc_ten}</Label><br />
                                                                     <Label for="exampleText"><h6>Nhóm</h6>{item.nhom_ten}</Label><br />
                                                                     <Label for="exampleText"><h6>Tiêu đề</h6>{item.tindang_tieude}</Label><br />

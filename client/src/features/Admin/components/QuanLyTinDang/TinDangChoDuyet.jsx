@@ -15,8 +15,7 @@ const TinDangChoDuyet = (props) => {
     const tinDangList = useSelector(state => state.tinDang); // get danhmuc in reducer
     const [tinDang_id, settinDang_id] = useState('');
     const [lyDoViPham, setLyDoViPham] = useState('');
-
-
+    // const [user_id, setUser_id] = useState('')
     const [modal, setModal] = useState(false);
     const [modalTow, setModalTow] = useState(false);
 
@@ -48,13 +47,19 @@ const TinDangChoDuyet = (props) => {
 
     }
 
-    const handleClickGuiThongBaoLoi = (event) => {
-        let tindang_idd = event.target.value;// get tindang_id tại dòng đó
-        const value = { tindang_idd, lyDoViPham }
+    // const onChangeUserId = (event) => {
+    //     let value = event.target.value;// get tindang_id tại dòng đó
+    //     setUser_id(value);
+    // }
+    // console.log(user_id)
 
+    const handleClickGuiThongBaoLoi = (event) => {
+        let tindang_idd = event.target.value;//ưư get tindang_id tại dòng đó
+        const value = { tindang_idd, lyDoViPham }
         dispatch(updateTinDangViPham(value));
         dispatch(getAllTinChoDuyet());
         setModalTow(!modalTow)
+
     }
 
     return (
@@ -97,12 +102,9 @@ const TinDangChoDuyet = (props) => {
                                                         return (<div>
                                                             <ModalHeader toggle={toggle}>{item.tindang_tieude}</ModalHeader>
                                                             <ModalBody>
-
-
-
                                                                 <Form>
-
                                                                     <FormGroup>
+                                                                        <Label for="exampleText"><h6>Loại tin </h6>{parseInt(item.tindang_mienphi) === 0 ? 'Tin miễn phí' : 'Tin có phí'}</Label><br />
                                                                         <Label for="exampleText"><h6>Danh mục</h6>{item.danhmuc_ten}</Label><br />
                                                                         <Label for="exampleText"><h6>Nhóm</h6>{item.nhom_ten}</Label><br />
                                                                         <Label for="exampleText"><h6>Tiêu đề</h6>{item.tindang_tieude}</Label><br />
@@ -165,9 +167,15 @@ const TinDangChoDuyet = (props) => {
                                                             <>
                                                                 <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
                                                                 <ModalBody>
+                                                                    {/* <Form>
+                                                                        <FormGroup>
+                                                                            <Label for="exampleText1">{item.tindang_tieude}</Label>
+                                                                            <Input type="text" name="text" id="exampleText1" value={item.user_id} onChange={onChangeUserId} />
+                                                                        </FormGroup>
+                                                                    </Form> */}
                                                                     <Form>
                                                                         <FormGroup>
-                                                                            <Label for="exampleText">Text Area</Label>
+                                                                            <Label for="exampleText">Nội dung</Label>
                                                                             <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" onChange={onchangeLyDoViPham} />
                                                                         </FormGroup>
                                                                     </Form>

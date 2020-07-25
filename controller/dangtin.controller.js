@@ -3,6 +3,7 @@ const dangTinModel = require('../models/dangtin.model');
 const ThongBaoViPhamModel = require('../models/thongbaovipham.model');
 const tinhToanDongRao = require('../helpers/tinhToanDongRao');
 const tinhToanTinMienPhi = require('../helpers/tinhToanTinMienPhi');
+const userModel = require('../models/user.model')
 
 
 // dang tin
@@ -621,13 +622,38 @@ exports.updateTinDangViPham = async (req, res) => {
     let thongBaoViPham_noidung = req.params.thongbaotinvipham_noidung;
     let tinDang_id = req.params.tindang_id;
 
-    console.log(req.params.thongbaotinvipham_noidung);
-    console.log(req.params.tindang_id);
+    // console.log(req.params.thongbaotinvipham_noidung);
+    // console.log(req.params.tindang_id);
     if (!tinDang_id && !thongBaoViPham_noidung) {
         return res.status(200).json({ error: 'Không tìm thấy dangtin_id, noi dung' })
     }
 
     try {
+        //get user_id ,tincomienphi hay khong
+        const flagGetOneTinByIdTinDang = (tinDang_id) => {
+            return new Promise((resolve, reject) => {
+                dangTinModel.getOneTinByIdTinDang(tinDang_id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+
+        const dataFlagGetOneTinByIdTinDang = await flagGetOneTinByIdTinDang(tinDang_id);
+        // console.log(dataFlagGetOneTinByIdTinDang[0].tindang_mienphi)
+        if (dataFlagGetOneTinByIdTinDang[0].tindang_mienphi === 0) {
+            // kiểm tra tin có miễn phí hay không, nếu có miễn phí khi tin bị lỗi sẽ trừ tin mien phi user
+            tinhToanTinMienPhi.tinhToanTinMienPhi(dataFlagGetOneTinByIdTinDang[0].user_id, 1);
+        } else if (dataFlagGetOneTinByIdTinDang[0].tindang_mienphi === 1) {
+            // kiểm tra tin có miễn phí hay không, nếu có miễn phí khi tin bị lỗi sẽ trừ ra sô đồng rao 
+            const dataDongrao = 5000;
+            const noidung = `Tin không được duyệt vì lý do ${thongBaoViPham_noidung} và đã trả lại 5000 DR cho user`
+            tinhToanDongRao.xuLyDongRao(dataFlagGetOneTinByIdTinDang[0].user_id, dataDongrao, noidung, 1);
+        }
+
         const flagUpdate = (tinDang_id) => {
             return new Promise((resolve, reject) => {
                 dangTinModel.updateTinDangViPham(tinDang_id, (err, data) => {

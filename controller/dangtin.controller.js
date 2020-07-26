@@ -608,6 +608,7 @@ exports.updateTinDangActive = async (req, res) => {
         var dataTinDang = await flagUpdate(tinDang_id);
         // console.log(dataDanhMuc)
         if (dataTinDang.affectedRows > 0) {
+
             return res.status(200).json({ message: 'Duyệt tin chờ đăng thành công !!' })
         } else {
             return res.status(200).json({ error: 'Duyệt tin chờ đăng thất bại!!' })
@@ -651,7 +652,7 @@ exports.updateTinDangViPham = async (req, res) => {
             // kiểm tra tin có miễn phí hay không, nếu có miễn phí khi tin bị lỗi sẽ trừ ra sô đồng rao 
             const dataDongrao = 5000;
             const noidung = `Tin không được duyệt vì lý do ${thongBaoViPham_noidung} và đã trả lại 5000 DR cho user`
-            tinhToanDongRao.xuLyDongRao(dataFlagGetOneTinByIdTinDang[0].user_id, dataDongrao, noidung, 1);
+            tinhToanDongRao.xuLyDongRao(dataFlagGetOneTinByIdTinDang[0].user_id, dataDongrao, noidung, 0);
         }
 
         const flagUpdate = (tinDang_id) => {
@@ -826,8 +827,27 @@ exports.updateTinDangUuTien = async (req, res) => {
             })
         }
         var dataTinDang = await flagUpdate(tinDang_id);
+
+        //get user_id ,tincomienphi hay khong
+        const flagGetOneTinByIdTinDang = (tinDang_id) => {
+            return new Promise((resolve, reject) => {
+                dangTinModel.getOneTinByIdTinDang(tinDang_id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+
+        const dataFlagGetOneTinByIdTinDang = await flagGetOneTinByIdTinDang(tinDang_id);
         // console.log(dataDanhMuc)
         if (dataTinDang.affectedRows > 0) {
+            const dataDongrao = 10000;
+            const noidung = `Thanh Toán tin ưu tiền thành công và đã -10000 DR cho user`
+            tinhToanDongRao.xuLyDongRao(dataFlagGetOneTinByIdTinDang[0].user_id, dataDongrao, noidung, 1);
+
             return res.status(200).json({ message: 'Update Tin ưu tiên thành công !!' })
         } else {
             return res.status(200).json({ error: 'Update tin uu tien that bai thất bại!!' })

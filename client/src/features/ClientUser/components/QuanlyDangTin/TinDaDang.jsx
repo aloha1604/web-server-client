@@ -27,7 +27,7 @@ function TinDaDang(props) {
         let tindang_idd = event.target.value;
         console.log(tindang_idd)
         //goi api
-        dispatch(updateTinDangUuTien( tindang_idd ));
+        dispatch(updateTinDangUuTien(tindang_idd));
         dispatch(getAllTinDaDuyetByIdUser({ user_id }));
 
     }
@@ -47,7 +47,7 @@ function TinDaDang(props) {
                         <Container fluid>
                             <h5 className="display-4">Để sản phẩm có cơ hội tiếp cận đến người dùng nhiều hơn!</h5>
                             <p className="lead">1. Đăng tin tiêu đề đúng mô tả cụ thể về tin.</p>
-                            <p className="lead">2. Ưu tiên tin, đầy là cách nhanh nhất để có thể tiếp cận người mua nhanh hơn qua việc ưu tiên tin của mình .
+                            <p className="lead">2. Ưu tiên tin (10000 DR), đầy là cách nhanh nhất để có thể tiếp cận người mua nhanh hơn qua việc ưu tiên tin của mình .
                             Tuỳ theo từng chuyên mục và khu vực, số lượng các vị trí đầu trang dành cho Tin Ưu Tiên sẽ khác nhau (từ 1 vị trí, 2 vị trí đến 5 vị trí) và số lượng trang hiển thị Tin Ưu Tiên cũng sẽ khác nhau (trang 1 hoặc trang 2). Trong trường hợp có 10 vị trí Tin Ưu Tiên hiển thị ở trang 1 và trang 2 (5 vị trí mỗi trang), các tin đăng đang được thực hiện dịch vụ sẽ chia sẻ lượt hiển thị và xuất hiện ngẫu nhiên ở 1 trong 10 vị trí ở 2 trang này
                             </p>
                         </Container>

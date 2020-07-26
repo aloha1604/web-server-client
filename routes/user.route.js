@@ -60,7 +60,7 @@ router.post('/dangtin', upload.array('imgCollection', 6), dangTinController.dang
 // getCountTinMienPhiAndDongRao
 
 router.get('/getCountTinMienPhiAndDongRao/:user_id', userController.getCountTinMienPhiAndDongRao);
-router.put('/updateTinDangUuTien/:user_id',dangTinController.updateTinDangUuTien);
+router.put('/updateTinDangUuTien/:tindang_id', dangTinController.updateTinDangUuTien);
 
 
 

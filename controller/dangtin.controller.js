@@ -808,7 +808,7 @@ exports.deleteTinDangViPham = async (req, res) => {
 
 exports.updateTinDangUuTien = async (req, res) => {
     let tinDang_id = req.params.tindang_id;
-
+    console.log(tinDang_id)
     if (!tinDang_id) {
         return res.status(200).json({ error: 'Không tìm thấy dangtin_id' })
     }

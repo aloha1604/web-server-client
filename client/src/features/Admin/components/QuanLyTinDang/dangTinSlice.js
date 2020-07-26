@@ -291,6 +291,20 @@ export const deleteTinDangViPham = (tindang_id) => async dispatch => {
     }
 }
 
+export const updateTinDangUuTien = (tindang_idd) => async dispatch => {
+    try {
+        const res = await api.put(`apiUser/updateTinDangUuTien/${tindang_idd}`)
+        if (!res.data) {
+            dispatch(updateTinFail(res.data));
+        } else {
+            dispatch(updateTin(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
 // export const updateTinDang = () => async dispatch => {
 //     try {
 //         const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')

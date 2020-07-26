@@ -217,4 +217,40 @@ exports.deleteTinDang = (tindang_id, result) => {
     })
 }
 
+// get tin uu tien
+
+
+//update tin uu tien -> 1
+exports.updateTinDangUuTien = (tindang_id, result) => {
+
+    const sql = "UPDATE tbl_tindang SET tindang_uutien = ?,tindang_thoigianuutien=? WHERE tindang_id = ? "
+    con.query(sql, [1, moment.mysqlTimestamp, tindang_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
+//update tin uu tien het han -> 0
+exports.updateTinDangUuTienHetHan = (tindang_id, result) => {
+
+    const sql = "UPDATE tbl_tindang SET tindang_uutien = ? WHERE tindang_id = ? "
+    con.query(sql, [0, tindang_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
+
+
 

@@ -805,3 +805,35 @@ exports.deleteTinDangViPham = async (req, res) => {
         return res.status(500).json(error);
     }
 }
+
+exports.updateTinDangUuTien = async (req, res) => {
+    let tinDang_id = req.params.tindang_id;
+
+    if (!tinDang_id) {
+        return res.status(200).json({ error: 'Không tìm thấy dangtin_id' })
+    }
+
+    try {
+        const flagUpdate = (tinDang_id) => {
+            return new Promise((resolve, reject) => {
+                dangTinModel.updateTinDangUuTien(tinDang_id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+        var dataTinDang = await flagUpdate(tinDang_id);
+        // console.log(dataDanhMuc)
+        if (dataTinDang.affectedRows > 0) {
+            return res.status(200).json({ message: 'Update Tin ưu tiên thành công !!' })
+        } else {
+            return res.status(200).json({ error: 'Update tin uu tien that bai thất bại!!' })
+        }
+
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}

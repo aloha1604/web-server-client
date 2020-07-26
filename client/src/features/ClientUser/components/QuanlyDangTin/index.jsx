@@ -12,11 +12,7 @@ function QuanLyTin(props) {
     const math = useRouteMatch();
     return (
         <Suspense>
-            <div>
-                <HeaderUser />
-                {/* ở đây sẽ là headerUser, drowDown quản lý tin */}
-
-
+            <div className="mt-3">
                 <Switch >
                     {/* môi route sẽ hiển thị mỗi tín năng của quản lý tin,vd: tin đã đăng, tin bị bị lỗi, tin đang chờ duyệt.... 
                 sau này se sẽ có thanh toán */}

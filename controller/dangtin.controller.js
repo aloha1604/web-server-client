@@ -537,6 +537,102 @@ exports.getTinMoi = (req, res) => {
     })
 }
 
+exports.getTinUuTienByIdNhom = async (req, res) => {
+
+    // get nhom_id o params
+    let nhom_id = req.params.nhom_id;
+
+    //get tin uu tien by id nhom
+    dangTinModel.getAllTinUuTienByIdNhom(nhom_id, async (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message:
+                    err.message || "Some loi get tin Uu tien by nhom _id."
+            });
+        } else {
+            //get data tin kiem tra tin lan 1
+            let dataTin1 = [...data];
+            for (let i = 0; i < dataTin1.length; i++) {
+                // console.log(dataTin1[i])
+                kiemTraTinUuTien.kiemTraTinUutien(dataTin1[i].tindang_id, dataTin1[i].tindang_thoigianuutien);
+            }
+
+            //get data tat ca tin va phan trang
+
+
+            //get data tin uu tien lan 2 sau khi kiem tra tin uu tien xong
+            const getAllTinUuTienByIDNhom1 = (nhom_id) => {
+                return new Promise((resolve, reject) => {
+                    dangTinModel.getAllTinUuTienByIdNhom(nhom_id, (err, data) => {
+                        if (err)
+                            reject(err);
+                        else {
+                            resolve(data);
+                        }
+                    })
+                })
+            }
+
+            const dataGetAllTinUuTienByIDNhom1 = await getAllTinUuTienByIDNhom1(nhom_id);
+            let arrRandom = [];
+            // res.json({ dataTin: data });
+            let dataTin = [];
+            console.log(dataGetAllTinUuTienByIDNhom1.length)
+            while (arrRandom.length <= 4 && arrRandom.length < dataGetAllTinUuTienByIDNhom1.length) {
+                let random = Math.floor(Math.random() * dataGetAllTinUuTienByIDNhom1.length);
+                if (arrRandom.length === 0) {
+                    arrRandom.push(random)
+                } else {
+                    if (!arrRandom.includes(random)) {
+                        arrRandom.push(random)
+                    }
+                }
+            }
+
+            for (let i = 0; i < arrRandom.length; i++) {
+                let vitri = arrRandom[i];
+                dataTin.push(dataGetAllTinUuTienByIDNhom1[vitri]);
+            }
+
+
+            // sort hinh anh của tin
+            hinhAnhModel.getHinhAnh((err, dataa) => {
+                if (err) {
+                    res.status(500).send({
+                        message:
+                            err.message || "Some error occurred while retrieving customers."
+                    });
+                } else {
+                    let dataHinhAnh = [...dataa];
+                    var hinhAnh = [];
+
+                    let datanew = dataTin.map(tin => {
+                        let copytin = { ...tin }
+                        hinhAnh = [];
+                        copytin.hinhanh = [];
+                        copytin.hinhanh.length = 0;
+                        hinhAnh.length = 0;
+                        for (let i = 0; i < dataHinhAnh.length; i++) {
+                            if (copytin.tindang_id === dataHinhAnh[i].tindang_id) {
+                                hinhAnh.push(dataHinhAnh[i].hinhanh_ten)
+                            }
+                        }
+
+                        copytin.hinhanh = [...hinhAnh];
+                        return { ...copytin };
+                    })
+
+                    res.json({ dataTin: datanew });
+
+                }
+            })
+
+        }
+    })
+
+
+}
+
 exports.getTinByIdNhom = async (req, res) => {
 
     let currentPage = req.params.page ? req.params.page : 1;

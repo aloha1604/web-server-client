@@ -11,6 +11,7 @@ router.get('/getAllTinViPhamByIdUser/:user_id', dangTinController.getAllTinViPha
 router.get('/getAllTinDaDuyetByIdUser/:user_id', dangTinController.getAllTinDaDuyetByIdUser);
 router.get('/getTinMoi', dangTinController.getTinMoi);
 router.get('/getTinByIdNhom/:nhom_id/:page', dangTinController.getTinByIdNhom);
+router.get('/getTinUuTienByIdNhom/:nhom_id/', dangTinController.getTinUuTienByIdNhom);
 router.get('/getOneTinByIdTinDang/:tindang_id', dangTinController.getOneTinByIdTinDang);
 
 module.exports = router;

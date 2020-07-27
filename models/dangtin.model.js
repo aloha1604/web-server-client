@@ -140,7 +140,7 @@ exports.getOneTinByIdTinDang = (tindang_id, result) => {
 
 exports.getTinByIdNhom = (nhom_id, start, limit, result) => {
 
-    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.nhom_id = ? ORDER BY tbl_tindang.tindang_id ASC LIMIT ?,?"
+    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.nhom_id = ? ORDER BY tbl_tindang.tindang_id DESC LIMIT ?,?"
     con.query(sql, [1, 0, nhom_id, start, limit], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -234,7 +234,7 @@ exports.getAllTinUuTienById = (user_id, result) => {
     })
 }
 // get tin uu tien by nhom_id
-exports.getAllTinUuTienByIdNhom = (nhom_id, start, limit, result) => {
+exports.getAllTinUuTienByIdNhom = (nhom_id, result) => {
 
     const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.nhom_id = ? AND tbl_tindang.tindang_uutien = ? ORDER BY tbl_tindang.tindang_id DESC"
     con.query(sql, [1, 0, nhom_id, 1], (err, res) => {

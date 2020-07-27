@@ -221,7 +221,7 @@ exports.deleteTinDang = (tindang_id, result) => {
 // get tin uu tien by user_id
 exports.getAllTinUuTienById = (user_id, result) => {
 
-    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.user_id = ? AND tbl_tindang.tindang_uutien = ? ORDER BY tbl_tindang.tindang_id DESC"
+    const sql = "SELECT * FROM tbl_tindang WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.user_id = ? AND tbl_tindang.tindang_uutien = ? ORDER BY tbl_tindang.tindang_id DESC"
     con.query(sql, [1, 0, user_id, 1], (err, res) => {
         if (err) {
             console.log("error:", err);

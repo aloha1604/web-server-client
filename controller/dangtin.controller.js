@@ -379,7 +379,7 @@ exports.getAllTinViPhamByIdUser = (req, res) => {
 
 exports.getAllTinDaDuyetByIdUser = (req, res) => {
     let user_id = req.params.user_id;
-    dangTinModel.getAllTinDaDuyetByIdUser(user_id, (err, data) => {
+    dangTinModel.getAllTinUuTienById(user_id, (err, data) => {
         if (err) {
             res.status(500).send({
                 message:

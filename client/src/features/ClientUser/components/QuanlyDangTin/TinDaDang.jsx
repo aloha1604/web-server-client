@@ -8,7 +8,7 @@ import {
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTinDaDuyetByIdUser, updateTinDangUuTien } from '../../../../features/Admin/components/QuanLyTinDang/dangTinSlice';
-import { formatVND } from '../../../../utils/format';
+import { formatVND, formatThoiGianUuTien } from '../../../../utils/format';
 
 
 function TinDaDang(props) {
@@ -67,7 +67,7 @@ function TinDaDang(props) {
                                     <CardTitle> <h6><NavLink href={`/home/showonetin/${tindang.tindang_id}`} style={{ padding: '0' }}>{tindang.tindang_tieude}</NavLink></h6></CardTitle>
                                     <CardSubtitle>{new Date(tindang.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</CardSubtitle>
                                     <CardText>{tindang.tindang_tinhthanh}<br></br><h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5></CardText>
-                                    <Button color="danger">Xóa</Button>{' '}{parseInt(tindang.tindang_uutien) === 0 ? <Button color="warning" value={tindang.tindang_id} onClick={handleClicUuTien}>Ưu tiên</Button> : 'đang ưu tiên'}
+                                    <Button color="danger">Xóa</Button>{' '}{parseInt(tindang.tindang_uutien) === 0 ? <Button color="warning" value={tindang.tindang_id} onClick={handleClicUuTien}>Ưu tiên</Button> : ('Ưu Tiên ' + formatThoiGianUuTien(tindang.tindang_thoigianuutien))}
                                 </CardBody>
                             </Card>
                         </Col>

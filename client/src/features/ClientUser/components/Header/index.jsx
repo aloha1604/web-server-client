@@ -221,6 +221,9 @@ function Header(props) {
                                                     <NavLink href={`${math.url}/mainuser`}>Thông tin cá nhân</NavLink>
                                                 </DropdownItem>
                                                 <DropdownItem>
+                                                    <NavLink href={`${math.url}/napdongrao`}>Nạp đồng rao</NavLink>
+                                                </DropdownItem>
+                                                <DropdownItem>
                                                     <NavLink href={`${math.url}/quanlydangtin/tindadang`}>Quản lý tin đã đăng</NavLink>
                                                 </DropdownItem>
                                                 <DropdownItem>

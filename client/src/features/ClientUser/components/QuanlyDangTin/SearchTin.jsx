@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     Container, Button, Form, FormGroup, Label, Input, Badge, FormText, Col, Row, Alert
 } from 'reactstrap';
-import QuyDinhDangTin from './QuyDinhDangTin';
+
 import { getAllNhom } from '../../../Admin/components/NhomSanPham/nhomSlice';
 import { getAllDanhMuc } from '../../../Admin/components/DanhMucSanPham/danhMucSlice';
 import { getAllTinhThanh } from '../../../ClientUser/reducer/apiTinhThanhSlice';

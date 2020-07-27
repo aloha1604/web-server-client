@@ -5,7 +5,8 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom'
 const TinDangChoDuyet = React.lazy(() => import('./TinDangChoDuyet'));
 const TinDaDang = React.lazy(() => import('./TinDaDang'));
 const TinBiLoi = React.lazy(() => import('./TinBiLoi'));
-const HeaderUser = React.lazy(() => import('../QuanLyUser/HeaderUser'));
+const ShowTin = React.lazy(() => import('./ShowTin'))
+
 
 
 function QuanLyTin(props) {
@@ -22,6 +23,8 @@ function QuanLyTin(props) {
                     <Route exact path={`${math.url}/tindadang`} component={TinDaDang} />
                     <Route exact path={`${math.url}/tinbiloi`} component={TinBiLoi} />
                     <Route exact path={`${math.url}/tindangchoduyet`} component={TinDangChoDuyet} />
+                    <Route exact path={`${math.url}/tindangchoduyet`} component={TinDangChoDuyet} />
+                    
                 </Switch>
             </div>
         </Suspense>

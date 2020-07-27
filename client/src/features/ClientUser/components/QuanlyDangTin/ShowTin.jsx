@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Media, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllTinMoi } from '../../../Admin/components/QuanLyTinDang/dangTinSlice';
+import { formatVND } from '../../../../utils/format';
 var imgStyle = {
-    maxWidth: "64px",
-    heightWidth: "64px",
+    maxWidth: "100px",
+    heightWidth: "100px",
 
 };
-const ShowTin = () => {
-    const [activeTab, setActiveTab] = useState('1');
 
+const ShowTin = () => {
+    const dispatch = useDispatch();
+    const [activeTab, setActiveTab] = useState('1');
+    const tinDangList = useSelector(state => state.tinDang); // get admin in reducer
     const toggle = tab => {
         if (activeTab !== tab) setActiveTab(tab);
     }
+    useEffect(() => {
+        dispatch(getAllTinMoi());
+    }, [])
     return (
-        <div style={{ minHeight: '100vh' }}>
+        <div>
             <Nav tabs>
                 <NavItem>
                     <NavLink
@@ -31,110 +39,32 @@ const ShowTin = () => {
                     <Row>
                         <Col sm="12">
                             <div className="mt-3" >
-                                <Media className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                    <Media left href="">
-                                        <Media style={imgStyle} object src="https://picsum.photos/id/237/200/300" alt="Generic placeholder image" />
-                                    </Media>
-                                    <Media body className="ml-3">
-                                        <Media >
-                                            <h6>Media heading</h6>
-                                        </Media>
-                                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                     </Media>
-                                </Media>
-                                <Media className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                    <Media left href="">
-                                        <Media style={imgStyle} object src="https://picsum.photos/id/237/200/300" alt="Generic placeholder image" />
-                                    </Media>
-                                    <Media body className="ml-3">
-                                        <Media >
-                                            <h6>Media heading</h6>
-                                        </Media>
-                                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                     </Media>
-                                </Media>
-                                <Media className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                    <Media left href="">
-                                        <Media style={imgStyle} object src="https://picsum.photos/id/237/200/300" alt="Generic placeholder image" />
-                                    </Media>
-                                    <Media body className="ml-3">
-                                        <Media >
-                                            <h6>Media heading</h6>
-                                        </Media>
-                                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                     </Media>
-                                </Media>
-                                <Media className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                    <Media left href="">
-                                        <Media style={imgStyle} object src="https://picsum.photos/id/237/200/300" alt="Generic placeholder image" />
-                                    </Media>
-                                    <Media body className="ml-3">
-                                        <Media >
-                                            <h6>Media heading</h6>
-                                        </Media>
-                                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                     </Media>
-                                </Media>
-                                <Media className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                    <Media left href="">
-                                        <Media style={imgStyle} object src="https://picsum.photos/id/237/200/300" alt="Generic placeholder image" />
-                                    </Media>
-                                    <Media body className="ml-3">
-                                        <Media >
-                                            <h6>Media heading</h6>
-                                        </Media>
-                                         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                     </Media>
-                                </Media>
-                            </div>
+                                {
+                                    tinDangList.tinMoi.map((tindang, i) => (
+                                        <Media key={i} className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
+                                            <Media left href="">
+                                                <NavLink href={`/home/showonetin${tindang.tindang_id}`} style={{ padding: '0' }}><Media style={imgStyle} object src={tindang.hinhanh[0]} alt="Generic placeholder image" /></NavLink>
+                                            </Media>
+                                            <Media body className="ml-3">
+                                                <Media >
+                                                    <h6><NavLink href={`/home/showonetin/${tindang.tindang_id}`} style={{ padding: '0' }}>{tindang.tindang_tieude}</NavLink></h6>
+                                                </Media>
+                                                <div style={{ display: 'flex', justifyContent: "space-between" }}>
+                                                    <p>{tindang.tindang_tinhthanh} <br></br> {new Date(tindang.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</p> <h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5>
+                                                </div>
 
+
+                                            </Media>
+                                        </Media>
+                                    ))
+                                }
+                            </div>
                         </Col>
                     </Row>
                 </TabPane>
 
             </TabContent>
-            <div className="d-flex justify-content-center">
-                <Pagination aria-label="Page navigation example">
-                    <PaginationItem>
-                        <PaginationLink first href="#" />
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink previous href="#" />
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">
-                            1
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">
-                            2
-                         </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">
-                            3
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">
-                            4
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">
-                            5
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink next href="#" />
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink last href="#" />
-                    </PaginationItem>
-                </Pagination>
-            </div>
-        </div>
+        </div >
 
 
 
@@ -142,4 +72,3 @@ const ShowTin = () => {
 };
 
 export default ShowTin;
-

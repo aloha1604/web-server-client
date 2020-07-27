@@ -4,6 +4,7 @@ const ThongBaoViPhamModel = require('../models/thongbaovipham.model');
 const tinhToanDongRao = require('../helpers/tinhToanDongRao');
 const tinhToanTinMienPhi = require('../helpers/tinhToanTinMienPhi');
 const userModel = require('../models/user.model')
+const kiemTraTinUuTien = require('../helpers/kiemTraTinUuTien');
 
 
 // dang tin
@@ -387,40 +388,63 @@ exports.getAllTinDaDuyetByIdUser = (req, res) => {
         } else {
 
             // res.json({ dataTin: data });
-            let dataTin = [...data];
-            hinhAnhModel.getHinhAnh((err, dataa) => {
+            let dataTin1 = [...data];
+            for (let i = 0; i < dataTin1.length; i++) {
+                // console.log(dataTin1[i])
+                kiemTraTinUuTien.kiemTraTinUutien(dataTin1[i].tindang_id, dataTin1[i].tindang_thoigianuutien);
+            }
+            // console.log(dataTin1.length)
+
+            // get lai data
+            dangTinModel.getAllTinDaDuyetByIdUser(user_id, (err, data) => {
                 if (err) {
                     res.status(500).send({
                         message:
                             err.message || "Some error occurred while retrieving customers."
                     });
                 } else {
-                    let dataHinhAnh = [...dataa];
-                    var hinhAnh = [];
 
-                    let datanew = dataTin.map(tin => {
-                        let copytin = { ...tin }
-                        hinhAnh = [];
-                        copytin.hinhanh = [];
-                        copytin.hinhanh.length = 0;
-                        hinhAnh.length = 0;
-                        for (let i = 0; i < dataHinhAnh.length; i++) {
-                            if (copytin.tindang_id === dataHinhAnh[i].tindang_id) {
-                                hinhAnh.push(dataHinhAnh[i].hinhanh_ten)
-                            }
+                    let dataTin = [...data];
+
+                    hinhAnhModel.getHinhAnh((err, dataa) => {
+                        if (err) {
+                            res.status(500).send({
+                                message:
+                                    err.message || "Some error occurred while retrieving customers."
+                            });
+                        } else {
+                            let dataHinhAnh = [...dataa];
+                            var hinhAnh = [];
+
+                            let datanew = dataTin.map(tin => {
+                                let copytin = { ...tin }
+                                hinhAnh = [];
+                                copytin.hinhanh = [];
+                                copytin.hinhanh.length = 0;
+                                hinhAnh.length = 0;
+                                for (let i = 0; i < dataHinhAnh.length; i++) {
+                                    if (copytin.tindang_id === dataHinhAnh[i].tindang_id) {
+                                        hinhAnh.push(dataHinhAnh[i].hinhanh_ten)
+                                    }
+                                }
+
+                                copytin.hinhanh = [...hinhAnh];
+                                return { ...copytin };
+                            })
+
+                            res.json({ dataTin: datanew });
+
                         }
-
-                        copytin.hinhanh = [...hinhAnh];
-                        return { ...copytin };
                     })
-
-                    res.json({ dataTin: datanew });
 
                 }
             })
+            // 
+
         }
     })
 }
+
 exports.getOneTinByIdTinDang = (req, res) => {
     let tindang_id = req.params.tindang_id;
 
@@ -686,39 +710,6 @@ exports.updateTinDangViPham = async (req, res) => {
             return res.status(200).json({ message: 'Đã đưa tin vào tin vi phạm  !!' })
         } else {
             return res.status(200).json({ error: 'Không thể đưa vào tin vi phạm!!' })
-        }
-
-    } catch (error) {
-        return res.status(500).json(error);
-    }
-}
-
-exports.updateTinDangActive = async (req, res) => {
-    let tinDang_id = req.params.tindang_id;
-    console.log(req.params.tindang_id)
-
-    if (!tinDang_id) {
-        return res.status(200).json({ error: 'Không tìm thấy dangtin_id' })
-    }
-
-    try {
-        const flagUpdate = (tinDang_id) => {
-            return new Promise((resolve, reject) => {
-                dangTinModel.updateTinDangActive(tinDang_id, (err, data) => {
-                    if (err)
-                        reject(err);
-                    else {
-                        resolve(data);
-                    }
-                })
-            })
-        }
-        var dataTinDang = await flagUpdate(tinDang_id);
-        // console.log(dataDanhMuc)
-        if (dataTinDang.affectedRows > 0) {
-            return res.status(200).json({ message: 'Duyệt tin chờ đăng thành công !!' })
-        } else {
-            return res.status(200).json({ error: 'Duyệt tin chờ đăng thất bại!!' })
         }
 
     } catch (error) {

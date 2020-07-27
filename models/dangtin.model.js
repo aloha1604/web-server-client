@@ -236,11 +236,12 @@ exports.updateTinDangUuTien = (tindang_id, result) => {
     })
 }
 
+//  cập nhật tin đăng -> thoigianuutien và tắt tin ưu tiên
 //update tin uu tien het han -> 0
 exports.updateTinDangUuTienHetHan = (tindang_id, result) => {
 
-    const sql = "UPDATE tbl_tindang SET tindang_uutien = ? WHERE tindang_id = ? "
-    con.query(sql, [0, tindang_id], (err, res) => {
+    const sql = "UPDATE tbl_tindang SET tindang_uutien = ?,tindang_thoigianuutien=? WHERE tindang_id = ? "
+    con.query(sql, [0, null, tindang_id], (err, res) => {
         if (err) {
             console.log("error:", err);
             result(null, err);
@@ -251,6 +252,10 @@ exports.updateTinDangUuTienHetHan = (tindang_id, result) => {
         }
     })
 }
+
+
+
+
 
 
 

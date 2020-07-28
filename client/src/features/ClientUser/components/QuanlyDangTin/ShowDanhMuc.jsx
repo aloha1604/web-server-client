@@ -58,7 +58,7 @@ const ShowDanhMuc = () => {
                                                             <Media body className="ml-3">
                                                                 <Row>
                                                                     <Col sm='4'>
-                                                                        <h6><NavLink href={`home/showtin/${nhom.nhom_id}/${1}`}>{nhom.nhom_ten}</NavLink><span style={{ color: '#fff', background: '#8BC34A', fontSize: '12px', borderRadius: '3px', paddingTop: '1px', paddingRight: '4px', paddingBottom: '1px', paddingLeft: '4px' }}>Mới đăng</span></h6>
+                                                                        <h6><NavLink href={`home/showtin/${nhom.nhom_id}/${nhom.nhom_ten}/${1}`}>{nhom.nhom_ten}</NavLink><span style={{ color: '#fff', background: '#8BC34A', fontSize: '12px', borderRadius: '3px', paddingTop: '1px', paddingRight: '4px', paddingBottom: '1px', paddingLeft: '4px' }}>Mới đăng</span></h6>
                                                                     </Col>
                                                                     <Col sm='8'>
                                                                         <Row>

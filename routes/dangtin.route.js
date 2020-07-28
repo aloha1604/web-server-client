@@ -13,6 +13,7 @@ router.get('/getTinMoi', dangTinController.getTinMoi);
 router.get('/getTinByIdNhom/:nhom_id/:page', dangTinController.getTinByIdNhom);
 router.get('/getTinUuTienByIdNhom/:nhom_id/', dangTinController.getTinUuTienByIdNhom);
 router.get('/getOneTinByIdTinDang/:tindang_id', dangTinController.getOneTinByIdTinDang);
+router.get('/searchTinDang/:nhom_id/:tieude/:tinhThanh/:quanHuyen/:phuongXa/:page', dangTinController.searchTindang);
 
 module.exports = router;
 

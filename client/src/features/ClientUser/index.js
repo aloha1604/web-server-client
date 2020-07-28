@@ -7,6 +7,7 @@ const Header = React.lazy(() => import('./components/Header'));
 const Footer = React.lazy(() => import('./components/Footer'));
 const HomeMain = React.lazy(() => import('./components/HomeMain/HomeMain'));
 const HomMainTinDang = React.lazy(() => import('./components/HomeMain/HomeTinDang'));
+const HomeMainSearch = React.lazy(() => import('./components/HomeMain/HomeMainSearch'));
 const MainUser = React.lazy(() => import('./components/QuanLyUser/MainUser'));
 const QuanLyTin = React.lazy(() => import('./components/QuanlyDangTin/index'));
 const ShowOneTin = React.lazy(() => import('./components/QuanlyDangTin/ShowOneTin'));
@@ -16,6 +17,7 @@ const ProtectedRouteUser = React.lazy(() => import('./components/ProtectedRouteU
 const ResetPassword = React.lazy(() => import('./components/QuanLyUser/ResetPassword'))
 const NapDongRao = React.lazy(() => import('./components/NapTien/NapDongRao'));
 const ThanhToan = React.lazy(() => import('./components/NapTien/ThanhToan'));
+
 
 
 function ClienUser(props) {
@@ -31,8 +33,9 @@ function ClienUser(props) {
                         <Route exact path={`${math.url}`} component={HomeMain} />
                         <Route exact path={`${math.url}/napdongrao`} component={NapDongRao} />
                         <Route exact path={`${math.url}/thanhtoan`} component={ThanhToan} />
-                        <Route exact path={`${math.url}/showtin/:nhom_id/:page`} component={HomMainTinDang} />
+                        <Route exact path={`${math.url}/showtin/:nhom_id/:nhom_ten/:page`} component={HomMainTinDang} />
                         <Route exact path={`${math.url}/showonetin/:tindang_id`} component={ShowOneTin} />
+                        <Route exact path={`${math.url}/showtinsearch/:nhom_id/:tieude/:tinhThanh/:quanHuyen/:phuongXa/:page`} component={HomeMainSearch} />
                         {/* <Route exact path={`${math.url}/mainuser`} component={MainUser} /> */}
                         <ProtectedRouteUser exact path={`${math.url}/mainuser`} component={MainUser} />
                         {/* <Route path={`${math.url}/quanlydangtin`} component={QuanLyTin} /> */}

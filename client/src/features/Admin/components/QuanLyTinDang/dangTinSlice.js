@@ -15,7 +15,8 @@ const slice = createSlice({
         tinDaDuyetByIdUser: initialTinDang,
         tinViPhamByIdUser: initialTinDang,
         tinDangUuTienByIdNhom: initialTinDang,
-        tinDangByIdNhom: initialTinDang
+        tinDangByIdNhom: initialTinDang,
+        tinDangSearch: initialTinDang,
 
     },
     reducers: {
@@ -62,6 +63,10 @@ const slice = createSlice({
             state.tinDangByIdNhom = action.payload.dataTin;
             // toast.success("Load tin thành công !!");
         },
+        getTinDangSearch: (state, action) => {
+            state.tinDangSearch = action.payload.dataTin;
+            // toast.success("Load tin thành công !!");
+        },
         addTin: (state, action) => {
             state.tinDang = action.payload.dataTin;
             toast.success("Thêm tin thành công !!");
@@ -106,7 +111,8 @@ export const { getAll,
     getTinDaDuyetByIdUser,
     getTinViPhamByIdUser,
     getTinDangUuTienByIdNhom,
-    getTinDangByIdNhom
+    getTinDangByIdNhom,
+    getTinDangSearch
 } = actions;
 
 export const getAllTinChoDuyet = () => async dispatch => {
@@ -228,6 +234,7 @@ export const getAllTinDangOne = ({ tindang_id }) => async dispatch => {
         return console.error(e.message);
     }
 }
+
 export const getAllTinDangUuTienByIdNhom = (nhom_id) => async dispatch => {
     try {
         const res = await api.get(`apiDangTin/getTinUuTienByIdNhom/${nhom_id}`)
@@ -242,6 +249,7 @@ export const getAllTinDangUuTienByIdNhom = (nhom_id) => async dispatch => {
         return console.error(e.message);
     }
 }
+
 export const getAllTinDangByIdNhom = (nhom_id, pagePer) => async dispatch => {
     try {
         const res = await api.get(`apiDangTin/getTinByIdNhom/${nhom_id}/${pagePer}`)
@@ -249,6 +257,21 @@ export const getAllTinDangByIdNhom = (nhom_id, pagePer) => async dispatch => {
             dispatch(getAllFail(res.data));
         } else {
             dispatch(getTinDangByIdNhom(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
+export const getAllTinDangSearch = (nhom_id, tieude, tinhThanh, quanHuyen, phuongXa, page) => async dispatch => {
+    try {
+        const res = await api.get(`apiDangTin/searchTinDang/${nhom_id}/${tieude}/${tinhThanh}/${quanHuyen}/${phuongXa}/${page}`)
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getTinDangSearch(res.data));
 
         }
 
@@ -346,6 +369,8 @@ export const updateTinDangUuTien = (tindang_idd) => async dispatch => {
         return console.error(e.message);
     }
 }
+
+
 // export const updateTinDang = () => async dispatch => {
 //     try {
 //         const res = await api.get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward')

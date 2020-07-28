@@ -282,7 +282,18 @@ exports.updateTinDangUuTienHetHan = (tindang_id, result) => {
     })
 }
 
-
+exports.searchTinDang = (sql, result) => {
+    con.query(sql, (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log(res);
+            result(null, res);
+        }
+    })
+}
 
 
 

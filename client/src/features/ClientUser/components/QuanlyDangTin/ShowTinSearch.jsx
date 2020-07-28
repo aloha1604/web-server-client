@@ -2,14 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Media, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Button, ButtonGroup } from 'reactstrap';
 import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTinDangUuTienByIdNhom, getAllTinDangByIdNhom } from '../../../Admin/components/QuanLyTinDang/dangTinSlice';
+import { getAllTinDangSearch } from '../../../Admin/components/QuanLyTinDang/dangTinSlice';
 import { formatVND } from '../../../../utils/format';
 import { useParams, useHistory } from 'react-router-dom';
 import { formatThoiGianDangTin } from '../../../../utils/format';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faAward
-} from "@fortawesome/free-solid-svg-icons";
+
 var imgStyle = {
     maxWidth: "100px",
     heightWidth: "100px",
@@ -18,10 +15,10 @@ var imgStyle = {
 
 
 
-const ShowTin = () => {
+const ShowTinSearch = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { nhom_id, page, nhom_ten } = useParams();
+    const { nhom_id, tieude, tinhThanh, quanHuyen, phuongXa, page } = useParams();
 
     const [activeTab, setActiveTab] = useState('1');
     // const [pagePer, setPagePer] = useState(page);
@@ -34,8 +31,7 @@ const ShowTin = () => {
     useEffect(() => {
         // call tin uu tien
         // call tin thuong
-        dispatch(getAllTinDangUuTienByIdNhom(nhom_id));
-        dispatch(getAllTinDangByIdNhom(nhom_id, page));
+        dispatch(getAllTinDangSearch(nhom_id, tieude, tinhThanh, quanHuyen, phuongXa, page));
     }, [])
     const handleClickPrev = () => {
         const value = parseInt(page) - 1;
@@ -43,17 +39,15 @@ const ShowTin = () => {
             value = 1
         }
         // setPagePer(value);
-        history.push(`/home/showtin/${nhom_id}/${nhom_ten}/${value}`)
-        dispatch(getAllTinDangUuTienByIdNhom(nhom_id));
-        dispatch(getAllTinDangByIdNhom(nhom_id, value));
+        history.push(`/home/showtinsearch/${nhom_id}/${tieude}/${tinhThanh}/${quanHuyen}/${phuongXa}/${value}`)
+        dispatch(getAllTinDangSearch(nhom_id, tieude, tinhThanh, quanHuyen, phuongXa, value));
     }
 
     const handleClickNext = () => {
         const value = parseInt(page) + 1;
         // setPagePer(value);
-        history.push(`/home/showtin/${nhom_id}/${nhom_ten}/${value}`)
-        dispatch(getAllTinDangUuTienByIdNhom(nhom_id));
-        dispatch(getAllTinDangByIdNhom(nhom_id, value));
+        history.push(`/home/showtinsearch/${nhom_id}/${tieude}/${tinhThanh}/${quanHuyen}/${phuongXa}/${value}`)
+        dispatch(getAllTinDangSearch(nhom_id, tieude, tinhThanh, quanHuyen, phuongXa, value));
     }
     return (
         <div>
@@ -64,7 +58,7 @@ const ShowTin = () => {
                         onClick={() => { toggle('1'); }}
                         style={{ background: '#F37E21' }}
                     >
-                        <h6 style={{ color: '#5C5C5C' }}>Tin {nhom_ten}</h6>
+                        <h6 style={{ color: '#5C5C5C' }}>Kết quả tìm kiếm</h6>
                     </NavLink>
                 </NavItem>
 
@@ -74,27 +68,9 @@ const ShowTin = () => {
                     <Row>
                         <Col sm="12">
                             <div className="mt-3" >
-                                {
-                                    tinDangList.tinDangUuTienByIdNhom.map((tindang, i) => (
-                                        <Media key={i} className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
-                                            <Media left href="">
-                                                <NavLink href={`/home/showonetin${tindang.tindang_id}`} style={{ padding: '0' }}><Media style={imgStyle} object src={tindang.hinhanh[0]} alt="Generic placeholder image" /></NavLink>
-                                            </Media>
-                                            <Media body className="ml-3">
-                                                <Media >
-                                                    <h6><NavLink href={`/home/showonetin/${tindang.tindang_id}`} style={{ padding: '0' }}>{tindang.tindang_tieude}</NavLink></h6><sub style={{ marginLeft: '5px', color: 'rgb(243, 126, 33)' }}><FontAwesomeIcon icon={faAward} /> ưu tiên</sub>
-                                                </Media>
-                                                <div style={{ display: 'flex', justifyContent: "space-between" }}>
-                                                    <p>{tindang.tindang_tinhthanh} <br></br> {formatThoiGianDangTin(tindang.create_at)}</p> <h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5>
-                                                </div>
 
-
-                                            </Media>
-                                        </Media>
-                                    ))
-                                }
                                 {
-                                    tinDangList.tinDangByIdNhom.map((tindang, i) => (
+                                    tinDangList.tinDangSearch.map((tindang, i) => (
                                         <Media key={i} className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
                                             <Media left href="">
                                                 <NavLink href={`/home/showonetin${tindang.tindang_id}`} style={{ padding: '0' }}><Media style={imgStyle} object src={tindang.hinhanh[0]} alt="Generic placeholder image" /></NavLink>
@@ -121,7 +97,7 @@ const ShowTin = () => {
                                         </Button>
                                         <Button color="primary">Page: {page}</Button>
                                         <Button
-                                            disabled={tinDangList.tinDangByIdNhom.length < 10}
+                                            disabled={tinDangList.tinDangSearch.length < 10}
                                             onClick={handleClickNext}
                                         >Next</Button>
                                     </ButtonGroup>
@@ -141,4 +117,4 @@ const ShowTin = () => {
     );
 };
 
-export default ShowTin;
+export default ShowTinSearch;

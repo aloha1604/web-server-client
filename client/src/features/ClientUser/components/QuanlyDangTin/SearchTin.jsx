@@ -3,7 +3,7 @@ import { useRouteMatch } from 'react-router-dom';
 
 
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useHistory } from 'react-router-dom';
 import {
     Container, Button, Form, FormGroup, Label, Input, Badge, FormText, Col, Row, Alert
 } from 'reactstrap';
@@ -13,10 +13,10 @@ import { getAllDanhMuc } from '../../../Admin/components/DanhMucSanPham/danhMucS
 import { getAllTinhThanh } from '../../../ClientUser/reducer/apiTinhThanhSlice';
 import { getAllQuanHuyen } from '../../../ClientUser/reducer/apiQuanHuyenSlice';
 import { getAllPhuongXa } from '../../../ClientUser/reducer/apiPhuongXaSlice';
-import { addTinDang } from '../../../../features/Admin/components/QuanLyTinDang/dangTinSlice';
 import { isEmpty } from "validator";
 
 function SearchTin(props) {
+    const history = useHistory();
     const math = useRouteMatch();
     const dispatch = useDispatch();
     const danhMucList = useSelector(state => state.danhMuc); // get admin in reducer
@@ -80,8 +80,9 @@ function SearchTin(props) {
     const validateAll = () => {
         const msg = {};
         if (isEmpty(tieude)) {
-            msg.empty = 'Bạn không được trống thông tin yêu cầu!!!'
+            msg.empty = 'Bạn không được trống yêu cầu tìm kiếm!!!'
         }
+
 
         setValidatetionMsg(msg);
         if (Object.keys(msg).length > 0) return false;
@@ -94,21 +95,7 @@ function SearchTin(props) {
         const isValidate = validateAll();
         if (!isValidate) return;
 
-        var formData = new FormData();
-
-        formData.append('nhom_id', nhom_id);
-        formData.append('tieude', tieude)
-        formData.append('tinhThanh', tinhThanh)
-        formData.append('quanHuyen', quanHuyen)
-        formData.append('phuongXa', phuongXa)
-        formData.append('noiDung', nhom_id)
-        formData.append('linkYoutube', nhom_id)
-
-        // api.post('apiUser/dangtin', formData)
-        // for (var pair of formData.entries()) {
-        //     console.log(pair[0] + ', ' + pair[1]);
-        // }
-        dispatch(addTinDang(formData));
+        history.push(`/home/showtinsearch/${nhom_id ? nhom_id : 0}/${tieude ? tieude : 0}/${tinhThanh ? tinhThanh : 0}/${quanHuyen ? quanHuyen : 0}/${phuongXa ? phuongXa : 0}/${1}`)
 
     }
 
@@ -141,6 +128,7 @@ function SearchTin(props) {
                                 <FormGroup>
                                     <Label for="exampleTinhThanh">Tỉnh/Thành <span style={{ color: 'red' }}>*</span></Label>
                                     <Input type="select" name="selectTinhThanh" id="exampleTinhThanh" onChange={onChangeSelectedTinhThanh}>
+                                        <option value="NAN" active>Chọn Tỉnh/thành</option>
                                         {
                                             tinhThanhList.tinhThanh.map((tinhthanh, i) => (
                                                 <option key={i} value={tinhthanh.ProvinceID} >{tinhthanh.ProvinceName}</option>
@@ -153,6 +141,7 @@ function SearchTin(props) {
                                 <FormGroup>
                                     <Label for="exampleQuanHuyen">Quận/Huyện <span style={{ color: 'red' }}>*</span></Label>
                                     <Input type="select" name="selectQuanHuyen" id="exampleQuanHuyen" onChange={onChangeSelectedQuanHuyen}>
+                                        <option value="NAN" active>Chọn Quận/huyện</option>
                                         {
 
                                             quanHuyenList.quanHuyen.map((quanhuyen, i) => {
@@ -170,6 +159,7 @@ function SearchTin(props) {
                                 <FormGroup>
                                     <Label for="examplePhuongXa">Phường/Xã <span style={{ color: 'red' }}>*</span></Label>
                                     <Input type="select" name="selectPhuongXa" id="examplePhuongXa" onChange={onChangeSelectedPhuongXa} >
+                                        <option value="NAN" active>Chọn phường/xã</option>
                                         {
                                             phuongXaList.phuongXa.map((phuongxa, i) => {
                                                 if (phuongxa.DistrictID === parseInt(quanHuyen_id))
@@ -186,6 +176,7 @@ function SearchTin(props) {
                         <FormGroup>
                             <Label for="exampleSelectDanhMuc">Danh mục <span style={{ color: 'red' }}>*</span></Label>
                             <Input type="select" name="selectDanhMuc" id="exampleSelectDanhMuc" onChange={onChangeSelectedDanhMuc}>
+                                <option value="NAN" active>Chọn Danh mục</option>
                                 {
                                     danhMucList.danhMuc.map((danhmuc, i) => (
                                         <option key={i} value={danhmuc.danhmuc_id}>{danhmuc.danhmuc_ten}</option>
@@ -197,6 +188,7 @@ function SearchTin(props) {
                         <FormGroup>
                             <Label for="exampleSelectNhom">Nhóm <span style={{ color: 'red' }}>*</span></Label>
                             <Input type="select" name="selectNhom" id="exampleSelectNhom" onChange={onChangeNhom}>
+                                <option value="NAN" active>Chọn nhóm theo danh mục</option>
                                 {
                                     nhomList.nhom.map((nhom, i) => {
                                         if (nhom.danhmuc_id === parseInt(danhmuc_id))
@@ -206,6 +198,7 @@ function SearchTin(props) {
                                     })
                                 }
                             </Input>
+
                         </FormGroup>
                         <FormGroup>
                             <Label for="exampleTieude">Tiêu đề <span style={{ color: 'red' }}>*</span></Label>

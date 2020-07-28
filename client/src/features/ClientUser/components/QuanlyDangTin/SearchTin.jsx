@@ -17,7 +17,6 @@ import { isEmpty } from "validator";
 
 function SearchTin(props) {
     const history = useHistory();
-    const math = useRouteMatch();
     const dispatch = useDispatch();
     const danhMucList = useSelector(state => state.danhMuc); // get admin in reducer
     const nhomList = useSelector(state => state.nhom); // get nhom in reducer

@@ -70,7 +70,7 @@ const ShowTinSearch = () => {
                             <div className="mt-3" >
 
                                 {
-                                    tinDangList.tinDangSearch.map((tindang, i) => (
+                                    tinDangList.tinDangSearch.length > 0 ? tinDangList.tinDangSearch.map((tindang, i) => (
                                         <Media key={i} className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
                                             <Media left href="">
                                                 <NavLink href={`/home/showonetin${tindang.tindang_id}`} style={{ padding: '0' }}><Media style={imgStyle} object src={tindang.hinhanh[0]} alt="Generic placeholder image" /></NavLink>
@@ -86,7 +86,7 @@ const ShowTinSearch = () => {
 
                                             </Media>
                                         </Media>
-                                    ))
+                                    )) : 'Không tìm thấy tin cần tìm'
                                 }
                                 <div style={{ textAlign: 'center' }}>
                                     <ButtonGroup >

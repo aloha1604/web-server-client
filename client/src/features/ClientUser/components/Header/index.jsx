@@ -18,7 +18,7 @@ import {
 
 import { isEmpty } from "validator";
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, useHistory } from 'react-router-dom';
 import { login, singIn, logout } from '../../reducer/userSlice';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,8 +27,10 @@ import Logo from '../../../../asset/images/raovat.png'
 
 function Header(props) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const userReducer = useSelector(state => state.userAuth); // get admin in reducer
     const math = useRouteMatch();
+
     // console.log(math.url);
 
 
@@ -38,7 +40,7 @@ function Header(props) {
     const [modalDangKy, setModalDangKy] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [tieude, setTieude] = useState('');
     const [validatetionMsg, setValidatetionMsg] = useState({});
 
 
@@ -112,6 +114,15 @@ function Header(props) {
         dispatch(action);
     }
 
+    const onChangeSearch = (event) => {
+        let value = event.target.value;
+        setTieude(value);
+    }
+
+    const handleClickSearch = () => {
+        history.push(`/home/showtinsearch/${0}/${tieude ? tieude : 0}/${0}/${0}/${0}/${1}`)
+    }
+
     return (
         <Container className="themed-container header" fluid={true} style={{ background: ' #21F3E7' }}>
             <Container >
@@ -128,8 +139,19 @@ function Header(props) {
                                     <NavItem style={{
                                         display: 'flex'
                                     }}>
-                                        <Input type="text" style={{ width: '16rem' }} name="textSearch" id="exampleSearch" placeholder="Nhập nội dung cần tìm " />
-                                        <Button style={{ marginLeft: '3px', padding: '0 25px', height: '40px', background: ' #F37E21' }}>Tìm </Button>
+                                        <Input
+                                            type="text"
+                                            style={{ width: '16rem' }}
+                                            name="textSearch"
+                                            id="exampleSearch"
+                                            placeholder="Nhập nội dung cần tìm "
+                                            onChange={onChangeSearch}
+                                        />
+                                        <Button
+                                            style={{ marginLeft: '3px', padding: '0 25px', height: '40px', background: ' #F37E21' }}
+                                            onClick={handleClickSearch}
+                                        >Tìm
+                                        </Button>
 
                                     </NavItem>
                                     <NavItem>

@@ -14,6 +14,8 @@ const slice = createSlice({
         tinChoDuyetByIdUser: initialTinDang,
         tinDaDuyetByIdUser: initialTinDang,
         tinViPhamByIdUser: initialTinDang,
+        tinDangUuTienByIdNhom: initialTinDang,
+        tinDangByIdNhom: initialTinDang
 
     },
     reducers: {
@@ -50,6 +52,14 @@ const slice = createSlice({
         },
         getTinDangOne: (state, action) => {
             state.tinDangOne = action.payload.dataTin;
+            // toast.success("Load tin thành công !!");
+        },
+        getTinDangUuTienByIdNhom: (state, action) => {
+            state.tinDangUuTienByIdNhom = action.payload.dataTin;
+            // toast.success("Load tin thành công !!");
+        },
+        getTinDangByIdNhom: (state, action) => {
+            state.tinDangByIdNhom = action.payload.dataTin;
             // toast.success("Load tin thành công !!");
         },
         addTin: (state, action) => {
@@ -94,7 +104,9 @@ export const { getAll,
     getTinDangOne,
     getTinChoDuyetByIdUser,
     getTinDaDuyetByIdUser,
-    getTinViPhamByIdUser
+    getTinViPhamByIdUser,
+    getTinDangUuTienByIdNhom,
+    getTinDangByIdNhom
 } = actions;
 
 export const getAllTinChoDuyet = () => async dispatch => {
@@ -201,6 +213,7 @@ export const getAllTinMoi = () => async dispatch => {
         return console.error(e.message);
     }
 }
+
 export const getAllTinDangOne = ({ tindang_id }) => async dispatch => {
     try {
         const res = await api.get(`apiDangTin/getOneTinByIdTinDang/${tindang_id}`)
@@ -208,6 +221,34 @@ export const getAllTinDangOne = ({ tindang_id }) => async dispatch => {
             dispatch(getAllFail(res.data));
         } else {
             dispatch(getTinDangOne(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+export const getAllTinDangUuTienByIdNhom = ({ nhom_id }) => async dispatch => {
+    try {
+        const res = await api.get(`apiDangTin/getTinUuTienByIdNhom/${nhom_id}`)
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getTinDangUuTienByIdNhom(res.data));
+
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+export const getAllTinDangByIdNhom = ({ nhom_id,pagePer }) => async dispatch => {
+    try {
+        const res = await api.get(`apiDangTin/getTinByIdNhom/${nhom_id}/${pagePer}`)
+        if (!res.data) {
+            dispatch(getAllFail(res.data));
+        } else {
+            dispatch(getTinDangByIdNhom(res.data));
 
         }
 

@@ -4,7 +4,8 @@ import classnames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTinDangUuTienByIdNhom, getAllTinDangByIdNhom } from '../../../Admin/components/QuanLyTinDang/dangTinSlice';
 import { formatVND } from '../../../../utils/format';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import { formatThoiGianDangTin } from '../../../../utils/format';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faAward
@@ -15,12 +16,15 @@ var imgStyle = {
 
 };
 
+
+
 const ShowTin = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const { nhom_id, page } = useParams();
-    const pageClone = page;
+
     const [activeTab, setActiveTab] = useState('1');
-    const [pagePer, setPagePer] = useState(pageClone);
+    // const [pagePer, setPagePer] = useState(page);
     const tinDangList = useSelector(state => state.tinDang); // get admin in reducer
 
     const toggle = tab => {
@@ -30,21 +34,26 @@ const ShowTin = () => {
     useEffect(() => {
         // call tin uu tien
         // call tin thuong
-        dispatch(getAllTinDangUuTienByIdNhom({ nhom_id }));
-        dispatch(getAllTinDangByIdNhom({ nhom_id, pagePer }));
+        dispatch(getAllTinDangUuTienByIdNhom(nhom_id));
+        dispatch(getAllTinDangByIdNhom(nhom_id, page));
     }, [])
     const handleClickPrev = () => {
-        const value = pagePer - 1;
-        setPagePer(value);
-        dispatch(getAllTinDangUuTienByIdNhom({ nhom_id }));
-        dispatch(getAllTinDangByIdNhom({ nhom_id, pagePer }));
+        const value = parseInt(page) - 1;
+        if (value === 0) {
+            value = 1
+        }
+        // setPagePer(value);
+        history.push(`/home/showtin/${nhom_id}/${value}`)
+        dispatch(getAllTinDangUuTienByIdNhom(nhom_id));
+        dispatch(getAllTinDangByIdNhom(nhom_id, value));
     }
 
     const handleClickNext = () => {
-        const value = pagePer + 1;
-        setPagePer(value);
-        dispatch(getAllTinDangUuTienByIdNhom({ nhom_id }));
-        dispatch(getAllTinDangByIdNhom({ nhom_id, pagePer }));
+        const value = parseInt(page) + 1;
+        // setPagePer(value);
+        history.push(`/home/showtin/${nhom_id}/${value}`)
+        dispatch(getAllTinDangUuTienByIdNhom(nhom_id));
+        dispatch(getAllTinDangByIdNhom(nhom_id, value));
     }
     return (
         <div>
@@ -76,7 +85,7 @@ const ShowTin = () => {
                                                     <h6><NavLink href={`/home/showonetin/${tindang.tindang_id}`} style={{ padding: '0' }}>{tindang.tindang_tieude}</NavLink></h6><sub style={{ marginLeft: '5px', color: 'rgb(243, 126, 33)' }}><FontAwesomeIcon icon={faAward} /> ưu tiên</sub>
                                                 </Media>
                                                 <div style={{ display: 'flex', justifyContent: "space-between" }}>
-                                                    <p>{tindang.tindang_tinhthanh} <br></br> {new Date(tindang.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</p> <h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5>
+                                                    <p>{tindang.tindang_tinhthanh} <br></br> {formatThoiGianDangTin(tindang.create_at)}</p> <h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5>
                                                 </div>
 
 
@@ -95,7 +104,7 @@ const ShowTin = () => {
                                                     <h6><NavLink href={`/home/showonetin/${tindang.tindang_id}`} style={{ padding: '0' }}>{tindang.tindang_tieude}</NavLink></h6>
                                                 </Media>
                                                 <div style={{ display: 'flex', justifyContent: "space-between" }}>
-                                                    <p>{tindang.tindang_tinhthanh} <br></br> {new Date(tindang.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</p> <h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5>
+                                                    <p>{tindang.tindang_tinhthanh} <br></br> {formatThoiGianDangTin(tindang.create_at)}</p> <h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5>
                                                 </div>
 
 
@@ -106,13 +115,13 @@ const ShowTin = () => {
                                 <div style={{ textAlign: 'center' }}>
                                     <ButtonGroup >
                                         <Button
-                                            disabled={pagePer <= 1}
+                                            disabled={page <= 1}
                                             onClick={handleClickPrev}>
                                             Prev
                                         </Button>
-                                        <Button color="primary">Page: {pagePer}</Button>
+                                        <Button color="primary">Page: {page}</Button>
                                         <Button
-                                            disabled={tinDangList.tinDangByIdNhom.length < 1}
+                                            disabled={tinDangList.tinDangByIdNhom.length < 10}
                                             onClick={handleClickNext}
                                         >Next</Button>
                                     </ButtonGroup>

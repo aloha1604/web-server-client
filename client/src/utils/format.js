@@ -15,3 +15,8 @@ exports.formatThoiGianUuTien = (thoigiansudung) => {
     }
 
 }
+
+exports.formatThoiGianDangTin = (thoigian) => {
+    var a = moment(thoigian).format('LLLL');
+    return a;
+}

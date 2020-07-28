@@ -228,7 +228,7 @@ export const getAllTinDangOne = ({ tindang_id }) => async dispatch => {
         return console.error(e.message);
     }
 }
-export const getAllTinDangUuTienByIdNhom = ({ nhom_id }) => async dispatch => {
+export const getAllTinDangUuTienByIdNhom = (nhom_id) => async dispatch => {
     try {
         const res = await api.get(`apiDangTin/getTinUuTienByIdNhom/${nhom_id}`)
         if (!res.data) {
@@ -242,7 +242,7 @@ export const getAllTinDangUuTienByIdNhom = ({ nhom_id }) => async dispatch => {
         return console.error(e.message);
     }
 }
-export const getAllTinDangByIdNhom = ({ nhom_id,pagePer }) => async dispatch => {
+export const getAllTinDangByIdNhom = (nhom_id, pagePer) => async dispatch => {
     try {
         const res = await api.get(`apiDangTin/getTinByIdNhom/${nhom_id}/${pagePer}`)
         if (!res.data) {

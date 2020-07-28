@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllTinDaDuyet, deleteTinDang } from './dangTinSlice';
 import imgUserNone from '../../../../asset/images/usernone.jpg';
 import parser from 'html-react-parser';
-import {formatVND} from '../../../../utils/format'
+import { formatVND, formatThoiGianDangTin } from '../../../../utils/format'
+
 
 const TinDaDuyet = (props) => {
 
@@ -77,7 +78,7 @@ const TinDaDuyet = (props) => {
                                                             <Form>
 
                                                                 <FormGroup>
-                                                                <Label for="exampleText"><h6>Loại tin </h6>{parseInt(item.tindang_mienphi) === 0 ? 'Tin miễn phí' : 'Tin có phí'}</Label><br />
+                                                                    <Label for="exampleText"><h6>Loại tin </h6>{parseInt(item.tindang_mienphi) === 0 ? 'Tin miễn phí' : 'Tin có phí'}</Label><br />
                                                                     <Label for="exampleText"><h6>Danh mục</h6>{item.danhmuc_ten}</Label><br />
                                                                     <Label for="exampleText"><h6>Nhóm</h6>{item.nhom_ten}</Label><br />
                                                                     <Label for="exampleText"><h6>Tiêu đề</h6>{item.tindang_tieude}</Label><br />
@@ -93,7 +94,7 @@ const TinDaDuyet = (props) => {
                                                                     <Label for="exampleText"><h6>Địa chỉ</h6>{item.tindang_diachi}</Label><br />
                                                                     <Label for="exampleText"><h6>Thời gian liên hệ</h6>{item.tindang_thoigianlienhe}</Label><br />
                                                                     <Label for="exampleText"><h6>Trạng thái</h6>{item.tindang_active === 0 ? 'Chờ duyệt' : null}</Label><br />
-                                                                    <Label for="exampleText"><h6>Ngày tạo</h6>{new Date(item.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</Label><br />
+                                                                    <Label for="exampleText"><h6>Ngày tạo</h6>{formatThoiGianDangTin(tindang.create_at)}</Label><br />
                                                                     <Label for="exampleText"><h6>Hình ảnh</h6>{item.hinhanh ? ':' : 'Không có hình ảnh'}</Label><br />
                                                                     <div style={{
                                                                         display: 'flex',

@@ -969,30 +969,27 @@ exports.searchTindang = async (req, res) => {
     let start = (currentPage - 1) * limit;
 
     // tìm kiếm theo tiêu đề,
-    let sql = `SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_tieude like ('%${dangTin_tieuDe}%')`
+    let sql = `SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ${tindang_active} AND tbl_tindang.tindang_vipham = ${tindang_vipham} `
 
+    if (parseInt(dangTin_tieuDe) !== 0) {
+        sql = sql + ' ' + `AND tbl_tindang.tindang_tieude like ('%${dangTin_tieuDe}%')`
+    }
     if (parseInt(nhom_id) !== 0) {
         sql = sql + ' ' + `AND tbl_nhom.nhom_id = ${nhom_id}`;
     }
     if (parseInt(tindang_tinhthanh) !== 0) {
-        sql = sql + ' ' + `AND tbl_tindang.tindang_quanhuyen = '${tindang_tinhthanh}'`;
+        sql = sql + ' ' + `AND tbl_tindang.tindang_tinhthanh = '${tindang_tinhthanh}'`;
     }
     if (parseInt(tindang_quanhuyen) !== 0) {
-        sql = sql + ' ' + `AND tbl_tindang.tindang_phuongxa = '${tindang_quanhuyen}'`;
+        sql = sql + ' ' + `AND tbl_tindang.tindang_quanhuyen = '${tindang_quanhuyen}'`;
     }
     if (parseInt(tindang_phuongxa) !== 0) {
         sql = sql + ' ' + `AND tbl_tindang.tindang_phuongxa = '${tindang_phuongxa}'`;
     }
-    if (tindang_active) {
-        sql = sql + ' ' + `AND tbl_tindang.tindang_active = ${tindang_active}`;
-    }
-    if (parseInt(tindang_vipham) === 0) {
-        sql = sql + ' ' + `AND tbl_tindang.tindang_vipham = ${tindang_vipham}`;
-    }
     if (start) {
         sql = sql + ' ' + `ORDER BY tbl_tindang.tindang_id DESC LIMIT ${start},${limit}`;
     }
-    console.log(sql);
+    // console.log(sql);
 
     // khi nào có req đúng yêu cầu thì sẽ + string Sql vào
     dangTinModel.searchTinDang(sql, (err, data) => {

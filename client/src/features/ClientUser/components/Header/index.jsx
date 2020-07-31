@@ -22,7 +22,8 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 import { login, singIn, logout } from '../../reducer/userSlice';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Logo from '../../../../asset/images/raovat.png'
+import Logo from '../../../../asset/images/raovat.png';
+import { getAllTinDangSearch } from '../../../Admin/components/QuanLyTinDang/dangTinSlice';
 
 
 function Header(props) {
@@ -121,6 +122,7 @@ function Header(props) {
 
     const handleClickSearch = () => {
         history.push(`/home/showtinsearch/${0}/${tieude ? tieude : 0}/${0}/${0}/${0}/${1}`)
+        dispatch(getAllTinDangSearch(0, tieude ? tieude : 0, 0, 0, 0, 1));
     }
 
     return (

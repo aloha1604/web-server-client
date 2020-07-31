@@ -80,8 +80,8 @@ function MainUser(props) {
                                         <img src="https://picsum.photos/id/237/200/300" alt="" width="100%" />
                                     </div> */}
                                     <div className="headeruser-right-name">
-                                        <h6><span><FontAwesomeIcon icon={faUser} />{' '}</span>{user.hoten}</h6>
-                                        <h6><span><FontAwesomeIcon icon={faDollarSign} />{' '}</span>Số đồng rao: {formatVND(user.dongrao, 'DR')} </h6>
+                                        <h6><span><FontAwesomeIcon icon={faUser} />{' '}</span>{user.hoten ? user.hoten : 'Chưa cập nhật '}</h6>
+                                        <h6><span><FontAwesomeIcon icon={faDollarSign} />{' '}</span>Số đồng rao: {user.dongrao ? formatVND(user.dongrao, 'DR') : 'Chưa nạp DR'} </h6>
 
                                     </div>
                                 </div>

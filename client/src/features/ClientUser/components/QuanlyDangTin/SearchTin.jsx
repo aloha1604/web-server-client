@@ -13,6 +13,7 @@ import { getAllDanhMuc } from '../../../Admin/components/DanhMucSanPham/danhMucS
 import { getAllTinhThanh } from '../../../ClientUser/reducer/apiTinhThanhSlice';
 import { getAllQuanHuyen } from '../../../ClientUser/reducer/apiQuanHuyenSlice';
 import { getAllPhuongXa } from '../../../ClientUser/reducer/apiPhuongXaSlice';
+import { getAllTinDangSearch } from '../../../Admin/components/QuanLyTinDang/dangTinSlice';
 import { isEmpty } from "validator";
 
 function SearchTin(props) {
@@ -78,10 +79,6 @@ function SearchTin(props) {
 
     const validateAll = () => {
         const msg = {};
-        if (isEmpty(tieude)) {
-            msg.empty = 'Bạn không được trống yêu cầu tìm kiếm!!!'
-        }
-
 
         setValidatetionMsg(msg);
         if (Object.keys(msg).length > 0) return false;
@@ -95,7 +92,7 @@ function SearchTin(props) {
         if (!isValidate) return;
 
         history.push(`/home/showtinsearch/${nhom_id ? nhom_id : 0}/${tieude ? tieude : 0}/${tinhThanh ? tinhThanh : 0}/${quanHuyen ? quanHuyen : 0}/${phuongXa ? phuongXa : 0}/${1}`)
-
+        dispatch(getAllTinDangSearch(nhom_id ? nhom_id : 0, tieude ? tieude : 0, tinhThanh ? tinhThanh : 0, quanHuyen ? quanHuyen : 0, phuongXa ? phuongXa : 0, 1));
     }
 
 

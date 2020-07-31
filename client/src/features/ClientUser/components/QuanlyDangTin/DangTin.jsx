@@ -206,13 +206,15 @@ function DangTin(props) {
             setTinMienPhi(countTinminPhi)
             formData.append('tinhPhiTin', '0')
             dispatch(addTinDang(formData));
-        } else {
+        } else if (tinMienPhi > 2 && parseInt(dongRao) > 5000) {
             formData.append('tinhPhiTin', '5000')
             let countTinminPhi = tinMienPhi + 1;
             let tinhToanDongRao = parseInt(dongRao) - 5000;
             setDongRao(tinhToanDongRao)
             setTinMienPhi(countTinminPhi)
             dispatch(addTinDang(formData));
+        } else {
+            alert('Cần nạp Đồng rao để có thể đăng tin có phí !');
         }
         // lay so tien dang miễn phí làm gốc, nếu tinmuphien < 3 thì sẽ gửi data tien neu khong data tien sẽ là 0
         //neu day co phi thi sẽ them data tiền, rồi sẽ gửi lên server , server sẽ trừ tiền tin này trong tài khoảng

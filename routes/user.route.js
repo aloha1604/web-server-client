@@ -62,8 +62,9 @@ router.post('/dangtin', upload.array('imgCollection', 6), dangTinController.dang
 router.get('/getCountTinMienPhiAndDongRao/:user_id', userController.getCountTinMienPhiAndDongRao);
 router.put('/updateTinDangUuTien/:tindang_id', dangTinController.updateTinDangUuTien);
 
-
-
+// xu ly quan ly thong tin ca nhan by user_id
+router.get('/getThongTinUserByIdUser/:user_id', userController.getThongTinUserByIdUser);
+router.post('/updateThongTinUserByIdUser', userController.updateThongTinUserByIdUser);
 
 
 module.exports = router;

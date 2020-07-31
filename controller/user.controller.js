@@ -134,6 +134,70 @@ exports.getCountTinMienPhiAndDongRao = async (req, res) => {
     })
 }
 
+// get Thong tin user
+exports.getThongTinUserByIdUser = (req, res) => {
+    const user_id = req.params.user_id;
+
+    if (!user_id) {
+        return res.status(200).json({ error: 'Không tìm thấy id user' })
+    }
+
+    userModel.getThongTinUserByIdUser(user_id, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message:
+                    err.message || "Lỗi get thông tin user!!"
+            });
+        } else {
+            res.json({ dataUser: data });
+        }
+    })
+}
+
+//update Thong tin user
+exports.updateThongTinUserByIdUser = async (req, res) => {
+
+    const user_id = req.body.user_id
+    const hoten = req.body.hoTen;
+    const phone = req.body.phone;
+    const diachi = req.body.diachi;
+    const ngaysinh = req.body.ngaysinh;
+    const gioitinh = req.body.gioitinh;
+    const cmnd = req.body.cmnd;
+    const ngaycap = req.body.ngaycap;
+    const noicap = req.body.noicap;
+
+    // console.log(req.params.id);
+    if (!user_id) {
+        return res.status(200).json({ error: 'Không tìm thấy id user' })
+    }
+
+    try {
+        const flagUpdate = (user_id, hoten, phone, diachi, ngaysinh, gioitinh, cmnd, ngaycap, noicap) => {
+            return new Promise((resolve, reject) => {
+                userModel.updateThongTinUserByIdUser(user_id, hoten, phone, diachi, ngaysinh, gioitinh, cmnd, ngaycap, noicap, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+        var dataUser = await flagUpdate(user_id, hoten, phone, diachi, ngaysinh, gioitinh, cmnd, ngaycap, noicap);
+        // console.log(dataDanhMuc)
+        if (dataUser.affectedRows > 0) {
+            return res.status(200).json({ message: ' Đưa user vào danh sách vi phạm thành công !!' })
+        } else {
+            return res.status(200).json({ error: 'Đưa user vào danh sách vi phạm thành công dtb thất bại!!' })
+        }
+
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
+
+
 //module test
 exports.test = (req, res) => {
     res.send(process.env.VIETNAM);

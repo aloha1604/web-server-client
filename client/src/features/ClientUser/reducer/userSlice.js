@@ -12,6 +12,7 @@ const slice = createSlice({
     name: 'user',
     initialState: {
         user: initiaUser,
+        thongTinUser: []
     },
     reducers: {
         singInSuccess: (state, action) => {
@@ -25,6 +26,14 @@ const slice = createSlice({
             state.user.logged = true;
             toast.success("Đăng nhập thành công!!");
             localStorage.setItem('user', JSON.stringify(state.user))
+
+        },
+        getThongTinUserSuccess: (state, action) => {
+            state.thongTinUser = action.payload.dataUser;
+
+        },
+        updateThongTinUserSuccess: (state, action) => {
+            toast.success("Lưu lại thông tin user thành công!!");
 
         },
         resetPassword: (state, action) => {
@@ -51,6 +60,15 @@ const slice = createSlice({
             toast.success('Đã đăng xuất tài khoản !!');
             localStorage.removeItem('user')
         },
+        getThongTinUserFail: (state, action) => {
+            state.thongTinUser = action.payload.dataUser;
+            toast.warn("Load thông tin user thất bại!!");
+
+        },
+        updateThongTinUserFail: (state, action) => {
+            toast.success("Lưu lại thông tin user thất bại!!");
+
+        },
     },
 });
 
@@ -58,7 +76,20 @@ export default slice.reducer
 
 //Actions
 
-const { singInSuccess, loginSuccess, logoutSuccess, loginFail, singInFail, resetPassword, resetPasswordFail, } = slice.actions
+const {
+    singInSuccess,
+    loginSuccess,
+    logoutSuccess,
+    loginFail,
+    singInFail,
+    resetPassword,
+    resetPasswordFail,
+    getThongTinUserSuccess,
+    getThongTinUserFail,
+    updateThongTinUserSuccess,
+    updateThongTinUserFail
+
+} = slice.actions
 
 export const singIn = ({ email, password }) => async dispatch => {
     try {
@@ -115,6 +146,35 @@ export const logout = () => async dispatch => {
     }
 }
 
+export const getAllThongtinUser = (user_id) => async dispatch => {
+    try {
+        const res = await api.get(`apiUser/getThongTinUserByIdUser/${user_id}`)
+
+        if (res.data.error) {
+            dispatch(getThongTinUserFail(res.data));
+        } else {
+            dispatch(getThongTinUserSuccess(res.data));
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
+export const updateThongtinUser = (user_id, hoTen, phone, diachi, ngaysinh, gioitinh, cmnd, ngaycap, noicap) => async dispatch => {
+    try {
+        const res = await api.post(`apiUser/updateThongTinUserByIdUser`, { user_id, hoTen, phone, diachi, ngaysinh, gioitinh, cmnd, ngaycap, noicap })
+
+        if (res.data.error) {
+            dispatch(updateThongTinUserFail(res.data));
+        } else {
+            dispatch(updateThongTinUserSuccess(res.data));
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
 
 
 

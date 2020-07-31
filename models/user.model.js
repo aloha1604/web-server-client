@@ -5,8 +5,8 @@ const moment = require('../lib/moment.lib');
 // insert User
 
 exports.insert = (email, password, result) => {
-    const sql = "INSERT INTO user (email, password) VALUES (?,?)";
-    con.query(sql, [email, password], (err, res) => {
+    const sql = "INSERT INTO user (email, password,create_at) VALUES (?,?,?)";
+    con.query(sql, [email, password, moment.mysqlTimestamp], (err, res) => {
         if (err) {
             console.log("error:", err);
             result(null, err);
@@ -209,6 +209,62 @@ exports.getCountTinMienPhiAndDongRao = (user_id, result) => {
 exports.updateCountTinMienPhiByIdUser = (user_id, newtinmienphi, result) => {
     const sql = "UPDATE user set tinmienphi =? WHERE user_id =?";
     con.query(sql, [newtinmienphi, user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            result(null, res);
+        }
+    })
+}
+
+// get thông tin user 
+exports.getThongTinUserByIdUser = (user_id, result) => {
+    const sql = "SELECT email,active,tinmienphi,dongrao,create_at,hoten,phone,diachi,ngaysinh,gioitinh,ngaycap,cmnd,noicap FROM user WHERE user_id = ? ";
+    con.query(sql, [user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            result(null, res);
+        }
+    })
+}
+
+// update thông tin user 
+exports.updateThongTinUserByIdUser = (user_id, hoten, phone, diachi, ngaysinh, gioitinh, cmnd, ngaycap, noicap, result) => {
+    let sql = "UPDATE user set ";
+    if (hoten) {
+        sql = sql + ' ' + `hoten = '${hoten}'`
+    }
+    if (phone) {
+        sql = sql + ' ,' + `phone = '${phone}'`
+    }
+    if (diachi) {
+        sql = sql + ', ' + `diachi = '${diachi}'`
+    }
+    if (ngaysinh) {
+        sql = sql + ' ,' + `ngaysinh = '${ngaysinh}'`
+    }
+    if (gioitinh) {
+        sql = sql + ', ' + `gioitinh = ${gioitinh}`
+    }
+    if (cmnd) {
+        sql = sql + ', ' + `cmnd = '${cmnd}'`
+    }
+    if (ngaycap) {
+        sql = sql + ', ' + `ngaycap = '${ngaycap}'`
+    }
+    if (noicap) {
+        sql = sql + ', ' + `noicap = '${noicap}'`
+    }
+    if (user_id) {
+        sql = sql + ' ' + `WHERE user_id = ${user_id}`
+    }
+    // let sql1 = "UPDATE user set hoten =?,phone=?,diachi=?,ngaysinh=?,gioitinh=?,cmnd=?,ngaycap=?,noicap=? WHERE user_id =? ";
+    con.query(sql, (err, res) => {
         if (err) {
             console.log("error:", err);
             result(null, err);

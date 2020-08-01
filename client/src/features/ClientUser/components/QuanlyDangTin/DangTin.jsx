@@ -201,17 +201,20 @@ function DangTin(props) {
         formData.append('thoiGianLienHe', thoiGianLienHe)
         formData.append('diachi', diachi)
 
-        if (tinMienPhi < 3) {
+        if (tinMienPhi <= 2) {
             let countTinminPhi = tinMienPhi + 1;
+            dongRaoLocal[0].tinmienphi = countTinminPhi;
+            // dongRaoLocal.dongRao
+            localStorage.setItem('dongRao', JSON.stringify(dongRaoLocal))
             setTinMienPhi(countTinminPhi)
             formData.append('tinhPhiTin', '0')
             dispatch(addTinDang(formData));
         } else if (tinMienPhi > 2 && parseInt(dongRao) > 5000) {
             formData.append('tinhPhiTin', '5000')
-            let countTinminPhi = tinMienPhi + 1;
             let tinhToanDongRao = parseInt(dongRao) - 5000;
+            dongRaoLocal[0].dongrao = tinhToanDongRao;
+            localStorage.setItem('dongRao', JSON.stringify(dongRaoLocal))
             setDongRao(tinhToanDongRao)
-            setTinMienPhi(countTinminPhi)
             dispatch(addTinDang(formData));
         } else {
             alert('Cần nạp Đồng rao để có thể đăng tin có phí !');

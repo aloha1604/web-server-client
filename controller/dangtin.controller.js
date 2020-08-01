@@ -128,10 +128,12 @@ exports.dangTin = async (req, res) => {
         console.log(dataHinhAnh);
         // update tinh phi tin
         // user_idd, dataGiaDongRao0, noiDungGiaoDichh, tuychon
-        let noiDungGiaoDichh = tinhPhiTin === parseInt(0) ? 'Đăng tinh miễn phí!!' : 'Dăng tin có tính phí!!!';
+        let noiDungGiaoDichh = parseInt(tinhPhiTin) === parseInt(0) ? 'Đăng tinh miễn phí!!' : 'Dăng tin có tính phí!!!';
         tinhToanDongRao.xuLyDongRao(user_id, tinhPhiTin, noiDungGiaoDichh, 1)
         // update count tinmienphi
-        tinhToanTinMienPhi.tinhToanTinMienPhi(user_id, 0)
+        if (parseInt(tinhPhiTin) === parseInt(0)) {
+            tinhToanTinMienPhi.tinhToanTinMienPhi(user_id, 0)
+        }
 
 
         if (dataDangTin.affectedRows > 0 && dataHinhAnh.affectedRows > 0) {

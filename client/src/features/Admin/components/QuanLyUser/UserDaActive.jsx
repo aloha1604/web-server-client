@@ -31,7 +31,7 @@ const UserDaActive = (props) => {
                         <th>Email</th>
                         <th>Hình ảnh</th>
                         <th>Chi tiết</th>
-                        <th>Chức năng</th>
+                
                     </tr>
                 </thead>
                 <tbody>
@@ -75,25 +75,7 @@ const UserDaActive = (props) => {
                                         </ModalBody>
                                     </Modal>
                                 </td>
-                                <td>
-
-                                    <Button color="warning" onClick={toggleTow}>Thông báo</Button>{' '}
-                                    <Modal isOpen={modalTow} toggle={toggleTow} >
-                                        <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
-                                        <ModalBody>
-                                            <Form>
-                                                <FormGroup>
-                                                    <Label for="exampleText">Text Area</Label>
-                                                    <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" disabled />
-                                                </FormGroup>
-                                            </Form>
-                                        </ModalBody>
-                                        <ModalFooter>
-                                            <Button color="secondary" onClick={toggleTow}>Thoát</Button>
-                                        </ModalFooter>
-                                    </Modal>
-                                    <Button color="danger">Block</Button>
-                                </td>
+                               
                             </tr>
                         );
                     })}

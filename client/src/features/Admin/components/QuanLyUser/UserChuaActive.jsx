@@ -31,7 +31,7 @@ const UserChuaActive = (props) => {
                         <th>Email</th>
                         <th>Hình ảnh</th>
                         <th>Chi tiết</th>
-                        <th>Chức năng</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -73,24 +73,6 @@ const UserChuaActive = (props) => {
                                             </Form>
                                             {/* end form xem chi tiet */}
                                         </ModalBody>
-                                    </Modal>
-                                </td>
-                                <td>
-
-                                    <Button color="warning" onClick={toggleTow}>Gửi mail</Button>{' '}
-                                    <Modal isOpen={modalTow} toggle={toggleTow} >
-                                        <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
-                                        <ModalBody>
-                                            <Form>
-                                                <FormGroup>
-                                                    <Label for="exampleText">Text Area</Label>
-                                                    <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" disabled />
-                                                </FormGroup>
-                                            </Form>
-                                        </ModalBody>
-                                        <ModalFooter>
-                                            <Button color="secondary" onClick={toggleTow}>Thoát</Button>
-                                        </ModalFooter>
                                     </Modal>
                                 </td>
                             </tr>

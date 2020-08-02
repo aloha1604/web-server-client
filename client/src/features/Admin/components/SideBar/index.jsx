@@ -108,10 +108,6 @@ const submenus = [
     ],
     [
         {
-            title: "User vi phạm",
-            target: "/admin/uservipham",
-        },
-        {
             title: "User chưa active",
             target: "/admin/userchuaactive",
         },

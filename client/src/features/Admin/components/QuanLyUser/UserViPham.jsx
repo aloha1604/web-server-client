@@ -76,23 +76,8 @@ const UserChuaActive = (props) => {
                                 </Modal>
                             </td>
                             <td>
-
-                                <Button color="warning" onClick={toggleTow}>Thông báo</Button>{' '}
-                                <Modal isOpen={modalTow} toggle={toggleTow} >
-                                    <ModalHeader toggle={toggleTow}>Lý do vi phạm</ModalHeader>
-                                    <ModalBody>
-                                        <Form>
-                                            <FormGroup>
-                                                <Label for="exampleText">Text Area</Label>
-                                                <Input style={{ height: '300px' }} type="textarea" name="text" id="exampleText" disabled />
-                                            </FormGroup>
-                                        </Form>
-                                    </ModalBody>
-                                    <ModalFooter>
-                                        <Button color="secondary" onClick={toggleTow}>Thoát</Button>
-                                    </ModalFooter>
-                                </Modal>
                                 <Button color="success"> Mở Block</Button>
+                                <Button color="danger">Xóa</Button>
                             </td>
                         </tr>
                         );

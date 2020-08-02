@@ -92,7 +92,7 @@ exports.updateAccessTokenUser = (accesstoken, user_id, result) => {
 
 // get user_id,email,active,vipham,create_at,update_at,hinhanh,hoten,phone,diachi,ngaysinh,tinhthanh,quanhuyen,phuongxa,gioitinh,cmnd,ngaycap,noicap
 exports.getAllUser = (result) => {
-    const sql = "SELECT user_id,email,active,vipham,create_at,update_at,hinhanh,hoten,phone,diachi,ngaysinh,tinhthanh,quanhuyen,phuongxa,gioitinh,cmnd,ngaycap,noicap FROM user WHERE active=? AND vipham=?"
+    const sql = "SELECT user_id,email,active,vipham,create_at,update_at,hoten,phone,diachi,ngaysinh,gioitinh,cmnd,ngaycap,noicap FROM user WHERE active=? AND vipham=?"
     con.query(sql, [1, 0], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -107,7 +107,7 @@ exports.getAllUser = (result) => {
 
 // get user_id,email,active,vipham,create_at,update_at,hinhanh,hoten,phone,diachi,ngaysinh,tinhthanh,quanhuyen,phuongxa,gioitinh,cmnd,ngaycap,noicap
 exports.getAllUserChuaActive = (result) => {
-    const sql = "SELECT user_id,email,active,vipham,create_at,update_at,hinhanh,hoten,phone,diachi,ngaysinh,tinhthanh,quanhuyen,phuongxa,gioitinh,cmnd,ngaycap,noicap FROM user WHERE active=? AND vipham=?"
+    const sql = "SELECT user_id,email,active,vipham,create_at,update_at,hoten,phone,diachi,ngaysinh,gioitinh,cmnd,ngaycap,noicap FROM user WHERE active=? AND vipham=?"
     con.query(sql, [0, 0], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -122,7 +122,7 @@ exports.getAllUserChuaActive = (result) => {
 
 // get user_id,email,active,vipham,create_at,update_at,hinhanh,hoten,phone,diachi,ngaysinh,tinhthanh,quanhuyen,phuongxa,gioitinh,cmnd,ngaycap,noicap
 exports.getAllUserViPham = (result) => {
-    const sql = "SELECT user_id,email,active,vipham,create_at,update_at,hinhanh,hoten,phone,diachi,ngaysinh,tinhthanh,quanhuyen,phuongxa,gioitinh,cmnd,ngaycap,noicap FROM user WHERE active=? AND vipham=?"
+    const sql = "SELECT user_id,email,active,vipham,create_at,update_at,hoten,phone,diachi,ngaysinh,gioitinh,cmnd,ngaycap,noicap FROM user WHERE active=? AND vipham=?"
     con.query(sql, [1, 1], (err, res) => {
         if (err) {
             console.log("error:", err);

@@ -65,6 +65,7 @@ router.put('/updateTinDangUuTien/:tindang_id', dangTinController.updateTinDangUu
 // xu ly quan ly thong tin ca nhan by user_id
 router.get('/getThongTinUserByIdUser/:user_id', userController.getThongTinUserByIdUser);
 router.post('/updateThongTinUserByIdUser', userController.updateThongTinUserByIdUser);
+router.post('/doiMatKhauUser', userController.doiMatKhauUser);
 
 
 module.exports = router;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Container, Row, Col, Button, Form, FormGroup, Label, Input, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { isEmpty, isEmail } from "validator";
-import { resetPasswordUser } from '../../reducer/userSlice';
+import { doiMatKhauUser } from '../../reducer/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -10,6 +10,9 @@ function ResetPassword(props) {
     const [matkhaucu, setMatkhaucu] = useState('');
     const [matkhaumoi, setMatkhaumoi] = useState('');
     const [nhaplaimatkhaumoi, setNhaplaimatkhaumoi] = useState('');
+    const user = JSON.parse(localStorage.getItem('user'));
+    const user_id = user.userFakeData._id;
+
     const dispatch = useDispatch();
     const [validatetionMsg, setValidatetionMsg] = useState({});
 
@@ -46,10 +49,10 @@ function ResetPassword(props) {
         if (!isValidate) {
             return;
         };
-        // //call api
-        // const value = { email };
-        // const action = resetPasswordUser(value);
-        // dispatch(action);
+        //call api
+        const value = { user_id, matkhaucu, matkhaumoi };
+        const action = doiMatKhauUser(value);
+        dispatch(action);
 
     }
 

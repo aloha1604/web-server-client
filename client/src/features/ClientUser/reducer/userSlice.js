@@ -39,6 +39,9 @@ const slice = createSlice({
         resetPassword: (state, action) => {
             toast.success("Đã reset Password vui lòng check mai!!");
         },
+        doiMatKhauSuccess: (state, action) => {
+            toast.success("Đã đổi mật khẩu thành công!!");
+        },
         resetPasswordFail: (state, action) => {
             toast.warn(action.payload.error);
         },
@@ -69,6 +72,9 @@ const slice = createSlice({
             toast.success("Lưu lại thông tin user thất bại!!");
 
         },
+        doiMatKhauFail: (state, action) => {
+            toast.warn("Đổi mật khẩu thất bại!!");
+        }
     },
 });
 
@@ -87,7 +93,9 @@ const {
     getThongTinUserSuccess,
     getThongTinUserFail,
     updateThongTinUserSuccess,
-    updateThongTinUserFail
+    updateThongTinUserFail,
+    doiMatKhauSuccess,
+    doiMatKhauFail
 
 } = slice.actions
 
@@ -129,6 +137,21 @@ export const resetPasswordUser = ({ email }) => async dispatch => {
             dispatch(resetPasswordFail(res.data));
         } else {
             dispatch(resetPassword(res.data));
+        }
+
+    } catch (e) {
+        return console.error(e.message);
+    }
+}
+
+export const doiMatKhauUser = ({ user_id, matkhaucu, matkhaumoi }) => async dispatch => {
+    try {
+        const res = await api.post('apiUser/doiMatKhauUser', { user_id, matkhaucu, matkhaumoi })
+
+        if (res.data.error) {
+            dispatch(doiMatKhauFail(res.data));
+        } else {
+            dispatch(doiMatKhauSuccess(res.data));
         }
 
     } catch (e) {

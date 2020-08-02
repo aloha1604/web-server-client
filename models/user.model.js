@@ -32,6 +32,20 @@ exports.getEmail = (email, result) => {
         }
     })
 }
+// lây password by id user
+exports.getPassword = (user_id, result) => {
+    const sql = "SELECT * FROM user WHERE user_id = ?";
+    con.query(sql, [user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            // console.log('lấy ra all user get all user');
+            result(null, res);
+        }
+    })
+}
 // update active tài khoản
 exports.updateActiveUser = (user_id, result) => {
     const sql = "UPDATE user SET active=?,update_at=? WHERE user_id = ?";
@@ -50,6 +64,20 @@ exports.updateActiveUser = (user_id, result) => {
 exports.userResetPassword = (email, new_password, result) => {
     const sql = "UPDATE user SET password=?,update_at=? WHERE email = ?";
     con.query(sql, [new_password, moment.mysqlTimestamp, email], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            console.log('reset password tài khoản');
+            result(null, res);
+        }
+    })
+}
+//
+exports.userResetPasswordByid = (user_id, new_password, result) => {
+    const sql = "UPDATE user SET password=?,update_at=? WHERE user_id = ?";
+    con.query(sql, [new_password, moment.mysqlTimestamp, user_id], (err, res) => {
         if (err) {
             console.log("error:", err);
             result(null, err);

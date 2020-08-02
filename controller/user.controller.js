@@ -1,6 +1,7 @@
 //declare model
 const userModel = require('../models/user.model');
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 //controller module
 // GET :http://localhost:5000/api.../getAllUser
@@ -197,6 +198,70 @@ exports.updateThongTinUserByIdUser = async (req, res) => {
     }
 }
 
+exports.doiMatKhauUser = async (req, res) => {
+    // get data
+    const user_id = req.body.user_id
+    const matkhaucu = req.body.matkhaucu;
+    const matkhaumoi = req.body.matkhaumoi;
+    console.log(user_id)
+    console.log(matkhaucu)
+    console.log(matkhaumoi)
+
+    if (!user_id) {
+        return res.status(200).json({ error: 'Không tìm thấy id user' })
+    }
+    if (!matkhaucu) {
+        return res.status(200).json({ error: 'Không tìm thấy matkhaucu' })
+    }
+    if (!matkhaumoi) {
+        return res.status(200).json({ error: 'Không tìm thấy matkhaumoi' })
+    }
+    // get data user để so sánh mật khẩu
+    try {
+        const getPassword = (user_id) => {
+            return new Promise((resolve, reject) => {
+                userModel.getPassword(user_id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+
+        var dataUser = await getPassword(user_id);
+        console.log(dataUser)
+        if (dataUser.length > 0) {
+            const flagHash = bcrypt.compareSync(matkhaucu, dataUser[0].password);
+            if (flagHash) {
+                // mã hóa mk mới
+                const hash = bcrypt.hashSync(matkhaumoi, saltRounds);
+                // promise update
+                const flagUpdate = (user_id, hash) => {
+                    return new Promise((resolve, reject) => {
+                        userModel.userResetPasswordByid(user_id, hash, (err, data) => {
+                            if (err)
+                                reject(err);
+                            else {
+                                resolve(data);
+                            }
+                        })
+                    })
+                }
+                var dataUpdateUser = await flagUpdate(user_id, hash);
+                // console.log(dataDanhMuc)
+                if (dataUpdateUser.affectedRows > 0) {
+                    return res.status(200).json({ message: ' đổi mật khẩu thành công !!' })
+                } else {
+                    return res.status(200).json({ error: 'Đổi mật khẩu thất bại!!' })
+                }
+            }
+        }
+    } catch (error) {
+        return res.status(500).json(error);
+    }
+}
 
 //module test
 exports.test = (req, res) => {

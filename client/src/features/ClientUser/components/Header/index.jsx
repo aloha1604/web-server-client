@@ -257,8 +257,8 @@ function Header(props) {
                                                     <NavLink href={`${math.url}/quanlydangtin/tinbiloi`}>Quản lý tin lỗi</NavLink>
                                                 </DropdownItem>
                                                 <DropdownItem>
-                                                    Tin lưu trữ
-                                            </DropdownItem>
+                                                    <NavLink href={`${math.url}/doimatkhau`}>Đổi mật khẩu</NavLink>
+                                                </DropdownItem>
                                                 <DropdownItem divider />
                                                 <DropdownItem onClick={handleClickLogout}>
                                                     Thoát tài khoản

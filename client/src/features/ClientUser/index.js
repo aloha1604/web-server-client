@@ -17,7 +17,8 @@ const ProtectedRouteUser = React.lazy(() => import('./components/ProtectedRouteU
 const ResetPassword = React.lazy(() => import('./components/QuanLyUser/ResetPassword'))
 const NapDongRao = React.lazy(() => import('./components/NapTien/NapDongRao'));
 const ThanhToan = React.lazy(() => import('./components/NapTien/ThanhToan'));
-const LienHe = React.lazy(() => import('./components/Header/LienHe'))
+const LienHe = React.lazy(() => import('./components/Header/LienHe'));
+const Doimatkhau = React.lazy(() => import('./components/QuanLyUser/Doimatkhau'));
 
 
 
@@ -35,6 +36,7 @@ function ClienUser(props) {
                         <Route exact path={`${math.url}/napdongrao`} component={NapDongRao} />
                         <Route exact path={`${math.url}/thanhtoan`} component={ThanhToan} />
                         <Route exact path={`${math.url}/lienhe`} component={LienHe} />
+                        <Route exact path={`${math.url}/doimatkhau`} component={Doimatkhau} />
                         <Route exact path={`${math.url}/showtin/:nhom_id/:nhom_ten/:page`} component={HomMainTinDang} />
                         <Route exact path={`${math.url}/showonetin/:tindang_id`} component={ShowOneTin} />
                         <Route exact path={`${math.url}/showtinsearch/:nhom_id/:tieude/:tinhThanh/:quanHuyen/:phuongXa/:page`} component={HomeMainSearch} />

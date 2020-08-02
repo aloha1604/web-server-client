@@ -36,10 +36,11 @@ function ClienUser(props) {
                         <Route exact path={`${math.url}/napdongrao`} component={NapDongRao} />
                         <Route exact path={`${math.url}/thanhtoan`} component={ThanhToan} />
                         <Route exact path={`${math.url}/lienhe`} component={LienHe} />
-                        <Route exact path={`${math.url}/doimatkhau`} component={Doimatkhau} />
+                        <Route exact path={`${math.url}/quenmatkhau`} component={ResetPassword} />
                         <Route exact path={`${math.url}/showtin/:nhom_id/:nhom_ten/:page`} component={HomMainTinDang} />
                         <Route exact path={`${math.url}/showonetin/:tindang_id`} component={ShowOneTin} />
                         <Route exact path={`${math.url}/showtinsearch/:nhom_id/:tieude/:tinhThanh/:quanHuyen/:phuongXa/:page`} component={HomeMainSearch} />
+                        <ProtectedRouteUser exact path={`${math.url}/doimatkhau`} component={Doimatkhau} />
                         {/* <Route exact path={`${math.url}/mainuser`} component={MainUser} /> */}
                         <ProtectedRouteUser exact path={`${math.url}/mainuser`} component={MainUser} />
                         {/* <Route path={`${math.url}/quanlydangtin`} component={QuanLyTin} /> */}

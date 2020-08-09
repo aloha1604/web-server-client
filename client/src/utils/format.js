@@ -1,7 +1,7 @@
 const moment = require('moment')
 
 exports.formatVND = (n, currency) => {
-    return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' ' + currency;
+    return String(n).replace(/(.)(?=(\d{3})+$)/g, '$1,') + ' ' + currency;
 }
 
 exports.formatThoiGianUuTien = (thoigiansudung) => {

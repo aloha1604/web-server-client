@@ -125,6 +125,11 @@ function Header(props) {
         dispatch(getAllTinDangSearch(0, tieude ? tieude : 0, 0, 0, 0, 1));
     }
 
+    const handleClickQuenMatKhau = () => {
+        history.push('/home/quenmatkhau');
+        setModalDangNhap(!modalDangNhap);
+    }
+
     return (
         <Container className="themed-container header" fluid={true} style={{ background: ' #21F3E7' }}>
             <Container >
@@ -191,7 +196,7 @@ function Header(props) {
                                                         </FormGroup>
                                                         <FormGroup>
                                                             <Button color="primary" size="sm" onClick={handleClickDangNhap}>Đăng nhập</Button>{' '}
-                                                            <Button color="secondary" size="sm">Quên mật khẩu</Button>
+                                                            <Button color="secondary" size="sm" onClick={handleClickQuenMatKhau}>Quên mật khẩu</Button>
                                                         </FormGroup>
                                                     </Form>
                                                 </ModalBody>

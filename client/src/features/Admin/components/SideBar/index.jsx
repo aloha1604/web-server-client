@@ -7,12 +7,17 @@ import {
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
 import { Link } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
 import SubMenu from "./SubMenu.jsx";
+import { logout } from '../Auth/authSlice'
 
 
 const SideBar = ({ isOpen, toggle, nameAdmin }) => {
-
+    const dispatch = useDispatch();
+    const handleClickLogout = () => {
+        const action = logout();
+        dispatch(action);
+    }
 
     return (
         <div className={classNames("sidebar", { "is-open": isOpen })}>
@@ -50,7 +55,7 @@ const SideBar = ({ isOpen, toggle, nameAdmin }) => {
                         </NavLink>
                     </NavItem> */}
                     <NavItem>
-                        <NavLink tag={Link} to={"/admin/thoat"}>
+                        <NavLink onClick={handleClickLogout} tag={Link} to='/admin'>
                             <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
                             Thoát
                         </NavLink>

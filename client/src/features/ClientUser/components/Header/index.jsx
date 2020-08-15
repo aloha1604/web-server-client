@@ -178,7 +178,7 @@ function Header(props) {
                                     {!userReducer.user.logged ?
                                         <NavItem>
 
-                                            <NavLink onClick={toggleModalDangNhap}><h6>Đăng tin</h6></NavLink>
+                                            <NavLink onClick={toggleModalDangNhap}><h5><Badge color="warning">Đăng tin</Badge></h5></NavLink>
                                             {/* <Button color="danger" onClick={toggleModalDangNhap}>dang nhap</Button> */}
                                             <Modal isOpen={modalDangNhap} toggle={toggleModalDangNhap} >
                                                 <ModalHeader toggle={toggleModalDangNhap}>Đăng nhập</ModalHeader>

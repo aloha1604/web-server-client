@@ -268,7 +268,7 @@ function DangTin(props) {
                         }}>
                             {/* <Input onChange={onChangeDongRao} /> */}
                             <h5 >Tin miễn phí : <Badge color="secondary"  >{tinMienPhi}</Badge></h5>
-                            <h5  >Tổng Đồng rao: <Badge color="secondary"  >{dongRao}</Badge> {' '} DR</h5>
+                            <h5  >Tổng Đồng rao: <Badge color="secondary"  >{formatVND(dongRao, 'DR')}</Badge></h5>
 
                         </div>
 

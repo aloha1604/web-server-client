@@ -251,9 +251,10 @@ exports.getAllTinUuTienByIdNhom = (nhom_id, result) => {
 
 //update tin uu tien -> 1
 exports.updateTinDangUuTien = (tindang_id, result) => {
-
+    let getTime = moment.mysqlTimestamp1();
+    console.log(getTime);
     const sql = "UPDATE tbl_tindang SET tindang_uutien = ?, tindang_thoigianuutien= ? WHERE tindang_id = ? "
-    con.query(sql, [1, moment.mysqlTimestamp, tindang_id], (err, res) => {
+    con.query(sql, [1, getTime, tindang_id], (err, res) => {
         if (err) {
             console.log("error:", err);
             result(null, err);

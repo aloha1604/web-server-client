@@ -337,6 +337,11 @@ let loginUser = async (req, res) => {
         }
 
         const getEmailData = await getEmail(userData.email);
+
+        if (getEmailData.length === 0) {
+            return res.status(200).json({ error: 'Tài khoản không tồn tại!!' });
+        }
+
         if (getEmailData[0].active === 0) {
             return res.status(200).json({ error: 'Tài khoản chưa xác nhận mail' });
         }

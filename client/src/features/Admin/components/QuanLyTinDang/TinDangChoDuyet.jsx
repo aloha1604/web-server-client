@@ -65,7 +65,7 @@ const TinDangChoDuyet = (props) => {
 
     return (
         <Container fluid className="content">
-            <ToastContainer autoClose={2000} />
+            <ToastContainer autoClose={8000} />
             <Breadcrumb tag="nav" listTag="div">
                 <BreadcrumbItem active tag="span">Admin</BreadcrumbItem>
                 <BreadcrumbItem tag="a" href={math.url} active >Tin đang chờ duyệt</BreadcrumbItem>

@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-
+import { Spinner } from 'reactstrap';
 import './ClientUser.scss';
 
 const Header = React.lazy(() => import('./components/Header'));
@@ -26,7 +26,7 @@ function ClienUser(props) {
     const math = useRouteMatch();
     return (
         <div >
-            <Suspense fallback={<div>Loading ...</div>}>
+            <Suspense fallback={<div><Spinner style={{ width: '3rem', height: '3rem' }} color="success" /></div>}>
                 <Header />
 
                 <div className="appclient">

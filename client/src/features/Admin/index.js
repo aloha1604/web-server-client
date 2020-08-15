@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-
+import { Spinner } from 'reactstrap';
 import { useSelector } from 'react-redux';
 
 import ProtectedRoute from './components/ProtectedRoute'
@@ -33,7 +33,7 @@ function Admin(props) {
     return (
         <div>
 
-            <Suspense fallback={<div>Loading ...</div>}>
+            <Suspense fallback={<div>  <Spinner style={{ width: '3rem', height: '3rem' }} color="success" />{' '}</div>}>
                 <div className="App wrapper">
                     {adminReducer.admin.logged ? <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} nameAdmin={adminReducer.admin.userFakeData.name} /> : null}
 

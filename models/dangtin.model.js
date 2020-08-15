@@ -36,7 +36,7 @@ exports.getAllTinChoDuyet = (result) => {
 
 exports.getAllTinViPham = (result) => {
 
-    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id JOIN tbl_thongbaovipham on tbl_tindang.tindang_id = tbl_thongbaovipham.tindang_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ?"
+    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id JOIN tbl_thongbaovipham on tbl_tindang.tindang_id = tbl_thongbaovipham.tindang_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
     con.query(sql, [0, 1], (err, res) => {
         if (err) {
             console.log("error:", err);

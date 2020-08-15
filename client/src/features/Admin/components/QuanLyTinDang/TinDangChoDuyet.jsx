@@ -58,7 +58,8 @@ const TinDangChoDuyet = (props) => {
         const value = { tindang_idd, lyDoViPham }
         dispatch(updateTinDangViPham(value));
         dispatch(getAllTinChoDuyet());
-        setModalTow(!modalTow)
+        setModalTow(!modalTow);
+        window.location.reload(false);
 
     }
 

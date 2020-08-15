@@ -10,7 +10,7 @@ exports.formatThoiGianUuTien = (thoigiansudung) => {
         var thoiGianSuDungTinUuTien = moment(thoigiansudung).valueOf() + 18000000;
         var result = now - thoiGianSuDungTinUuTien
         var tempTime = moment.duration(result);
-        var y = -1 * parseInt(tempTime.hours()) + "Giờ" + ":" + -1 * parseInt(tempTime.minutes()) + "Phút";
+        var y = -1 * parseInt(tempTime.hours()) + "Giờ" + ":" + -1 * (tempTime.minutes()) + "Phút";
         return y;
     }
 

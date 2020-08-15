@@ -471,10 +471,11 @@ let updateAciveUser = async (req, res) => {
         }
         const dataFlagActive = await flagActive(user_id);
         if (dataFlagActive.changedRows > 0) {
-            return res.status(200).json({ message: 'Mở tài Active user thành công !!' })
+            return res.send('<p>Mở tài Active user thành công !!</p>');
+            // return res.status(200).json({ message: 'Mở tài Active user thành công !!' })
             //  res.redirect('http://localhost:3000/');
         } else {
-            return res.status(200).json({ error: 'Mở tài Active user thành công !!' })
+            return res.status(200).json({ error: 'Mở tài Active user thất bại !!' })
             //  res.redirect('http://localhost:3000/');
         }
     } catch (error) {

@@ -27,7 +27,7 @@ exports.insertHinhAnhByIdTin = (file, result) => {
             result(null, err);
             return;
         } else {
-      
+
             result(null, res);
         }
     })
@@ -37,6 +37,19 @@ exports.insertHinhAnhByIdTin = (file, result) => {
 exports.getHinhAnh = (result) => {
     const sql = "SELECT * FROM tbl_hinhanh"
     con.query(sql, (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            result(null, res);
+        }
+    })
+}
+
+exports.deleteHinhAnh = (tindang_id, result) => {
+    const sql = "DELETE FROM tbl_hinhanh WHERE tindang_id = ? "
+    con.query(sql, tindang_id, (err, res) => {
         if (err) {
             console.log("error:", err);
             result(null, err);

@@ -7,12 +7,13 @@ import {
 
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTinChoDuyetByIdUser } from '../../../../features/Admin/components/QuanLyTinDang/dangTinSlice';
+import { getAllTinChoDuyetByIdUser, deleteTinDang } from '../../../../features/Admin/components/QuanLyTinDang/dangTinSlice';
 import { formatVND } from '../../../../utils/format';
 
 
 function TinDangChoDuyet(props) {
     const dispatch = useDispatch();
+    const math = useRouteMatch();
     const tinDangList = useSelector(state => state.tinDang); // get admin in reducer tinDangOne
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -21,7 +22,14 @@ function TinDangChoDuyet(props) {
         dispatch(getAllTinChoDuyetByIdUser({ user_id }));
     }, [])
 
-    const math = useRouteMatch();
+
+    const handleClickXoaTin = (event) => {
+        const tindang_id = event.target.value;
+        dispatch(deleteTinDang(tindang_id));
+        dispatch(getAllTinChoDuyetByIdUser({ user_id }));
+        window.location.reload('flase');
+    }
+
     return (
         <Container style={{ minHeight: '100vh' }}>
             <Row>
@@ -44,7 +52,7 @@ function TinDangChoDuyet(props) {
                                     <CardTitle> <h6><NavLink href={`/home/showonetin/${tindang.tindang_id}`} style={{ padding: '0' }}>{tindang.tindang_tieude}</NavLink></h6></CardTitle>
                                     <CardSubtitle>{new Date(tindang.create_at).toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' })}</CardSubtitle>
                                     <CardText>{tindang.tindang_tinhthanh}<br></br><h5 style={{ marginRight: '25px', color: '#c00' }}> {formatVND(tindang.tindang_gia, 'VNĐ')}</h5></CardText>
-                                    <Button color="danger">Xóa</Button>
+                                    <Button color="danger" value={tindang.tindang_id} onClick={handleClickXoaTin} >Xóa</Button>
                                 </CardBody>
                             </Card>
                         </Col>

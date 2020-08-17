@@ -818,6 +818,7 @@ exports.updateTinDangViPham = async (req, res) => {
 exports.deleteTinDang = async (req, res) => {
     let tinDang_id = req.params.tindang_id;
 
+
     if (!tinDang_id) {
         return res.status(200).json({ error: 'Không tìm thấy dangtin_id' })
     }
@@ -834,6 +835,20 @@ exports.deleteTinDang = async (req, res) => {
                 })
             })
         }
+
+        const flagdeleteHinhAnh = (tinDang_id) => {
+            return new Promise((resolve, reject) => {
+                hinhAnhModel.deleteHinhAnh(tinDang_id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+
+        var dataTinDangHinhAnh = await flagdeleteHinhAnh(tinDang_id);
 
         var dataTinDang = await flagdelete(tinDang_id);
 
@@ -880,6 +895,21 @@ exports.deleteTinDangViPham = async (req, res) => {
                 })
             })
         }
+
+        const flagdeleteHinhAnh = (tinDang_id) => {
+            return new Promise((resolve, reject) => {
+                hinhAnhModel.deleteHinhAnh(tinDang_id, (err, data) => {
+                    if (err)
+                        reject(err);
+                    else {
+                        resolve(data);
+                    }
+                })
+            })
+        }
+
+        var dataTinDangHinhAnh = await flagdeleteHinhAnh(tinDang_id);
+
         var dataThongBao = await flagdelete1(tinDang_id)
 
         var dataTinDang = await flagdelete(tinDang_id);

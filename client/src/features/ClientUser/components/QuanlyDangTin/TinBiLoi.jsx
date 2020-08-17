@@ -7,7 +7,7 @@ import {
 
 import { useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTinViPhamByIdUser } from '../../../../features/Admin/components/QuanLyTinDang/dangTinSlice';
+import { getAllTinViPhamByIdUser, deleteTinDangViPham } from '../../../../features/Admin/components/QuanLyTinDang/dangTinSlice';
 import { formatVND } from '../../../../utils/format';
 
 
@@ -20,6 +20,13 @@ function TinBiLoi(props) {
     useEffect(() => {
         dispatch(getAllTinViPhamByIdUser({ user_id }));
     }, [])
+
+    const handleClickXoaTin = (event) => {
+        const tindang_id = event.target.value;
+        dispatch(deleteTinDangViPham(tindang_id));
+        dispatch(getAllTinViPhamByIdUser({ user_id }));
+        window.location.reload('flase');
+    }
 
     const math = useRouteMatch();
     return (
@@ -47,7 +54,7 @@ function TinBiLoi(props) {
                                         <p><h6>Lý do lỗi :</h6> {tindang.thongbaovipham_noidung}</p>
                                     </CardText>
 
-                                    <Button color="danger">Xóa</Button>
+                                    <Button color="danger" value={tindang.tindang_id} onClick={handleClickXoaTin} >Xóa</Button>
                                 </CardBody>
                             </Card>
                         </Col>

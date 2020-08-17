@@ -35,6 +35,7 @@ const TinDaDuyet = (props) => {
         const tindang_id = event.target.value;
         dispatch(deleteTinDang(tindang_id));
         dispatch(getAllTinDaDuyet());
+        window.location.reload('flase');
     }
     return (
         <Container fluid className="content">

@@ -44,7 +44,7 @@ const ShowTinMoi = () => {
                                     tinDangList.tinMoi.map((tindang, i) => (
                                         <Media key={i} className="mb-3 pb-2" style={{ borderBottom: '1px solid #ccc' }}>
                                             <Media left href="">
-                                                <NavLink href={`/home/showonetin${tindang.tindang_id}`} style={{ padding: '0' }}><Media style={imgStyle} object src={tindang.hinhanh[0]} alt="Generic placeholder image" /></NavLink>
+                                                <NavLink href={`/home/showonetin/${tindang.tindang_id}`} style={{ padding: '0' }}><Media style={imgStyle} object src={tindang.hinhanh[0]} alt="Generic placeholder image" /></NavLink>
                                             </Media>
                                             <Media body className="ml-3">
                                                 <Media >

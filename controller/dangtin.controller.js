@@ -1001,7 +1001,7 @@ exports.searchTindang = async (req, res) => {
     let start = (currentPage - 1) * limit;
 
     // tìm kiếm theo tiêu đề,
-    let sql = `SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ${tindang_active} AND tbl_tindang.tindang_vipham = ${tindang_vipham} `
+    let sql = `SELECT tbl_tindang.tindang_id, tbl_tindang.nhom_id,tbl_tindang.user_id, tbl_tindang.tindang_tieude, tbl_tindang.tindang_gia, tbl_tindang.tindang_tukhoa, tbl_tindang.tindang_tinhthanh,tbl_tindang.tindang_quanhuyen,tbl_tindang.tindang_phuongxa,tbl_tindang.tindang_noidung,tbl_tindang.tindang_linkyoutube,tbl_tindang.tindang_hoten,tbl_tindang.tindang_phone, tbl_tindang.tindang_email,tbl_tindang.tindang_diachi,tbl_tindang.tindang_thoigianlienhe,tbl_tindang.tindang_active,tbl_tindang.tindang_vipham,tbl_tindang.tindang_mienphi,tbl_tindang.tindang_uutien,tbl_tindang.tindang_thoigianuutien,tbl_tindang.create_at,tbl_tindang.update_at,tbl_danhmuc.danhmuc_id,tbl_danhmuc.danhmuc_ten,tbl_nhom.nhom_ten FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ${tindang_active} AND tbl_tindang.tindang_vipham = ${tindang_vipham} `
 
     if (parseInt(dangTin_tieuDe) !== 0) {
         sql = sql + ' ' + `AND tbl_tindang.tindang_tieude like ('%${dangTin_tieuDe}%')`

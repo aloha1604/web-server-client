@@ -25,9 +25,7 @@ Email: trogiup@chotot.vn - Đường dây nóng: (028)3866404</p>
                     <p>Mỗi người trong chúng ta đều có những sản phẩm đã qua sử dụng và không cần dùng tới nữa. Vậy còn chần chừ gì nữa mà không để nó trở nên giá trị hơn với người khác. Rất đơn giản, bạn chỉ cần chụp hình lại, mô tả cụ thể về sản phẩm và sử dụng ứng dụng Đăng tin miễn phí của Rao vặt là đã có thể đến gần hơn với người cần nó.</p>
                     <p>Không những thế, Rao vặt còn cung cấp cho bạn thông tin về giá cả các mặt hàng để bạn có thể tham khảo. Đồng thời, thông qua <a href="https://www.chotot.com/kinhnghiem/">Blog kinh nghiệm</a>, Rao vặt sẽ tư vấn, chia sẻ cho bạn những thông tin bổ ích, bí quyết, mẹo vặt giúp bạn có những giao dịch mua bán an toàn, đảm bảo. Rao vặt cũng sẵn sàng hỗ trợ bạn trong mọi trường hợp cần thiết.</p>
                     <p>Chúc các bạn có những trải nghiệm mua bán tuyệt vời trên Rao vặt.</p>
-                    <p className="lead">
-                        <Button color="primary">Learn More</Button>
-                    </p>
+
                 </Jumbotron>
             </Container>
         );

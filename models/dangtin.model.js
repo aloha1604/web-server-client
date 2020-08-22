@@ -2,8 +2,9 @@ const con = require("./db");
 const moment = require('../lib/moment.lib');
 // 17 muc can them
 exports.add = (tinDang, result) => {
-    tinDang.push(moment.mysqlTimestamp);
-    tinDang.push(moment.mysqlTimestamp);
+    let getTime = moment.mysqlTimestamp1();
+    tinDang.push(getTime);
+    tinDang.push(getTime);
     // console.log(tinDang);
     //;?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?:,tindang_gia,tindang_tukhoa,tindang_tinhthanh,tindang_quanhuyen,tindang_phuongxa,tindang_noidung,tindang_linkyoutube,tindang_hoten,tindang_phone,tindang_email,tindang_diachi,tindang_thoigianlienhe,tindang_active,tindang_vipham,create_at,update_at
     const sql = "INSERT INTO tbl_tindang (nhom_id,user_id,tindang_tieude,tindang_gia,tindang_tukhoa,tindang_tinhthanh,tindang_quanhuyen,tindang_phuongxa,tindang_noidung,tindang_linkyoutube,tindang_hoten,tindang_email,tindang_phone,tindang_diachi,tindang_thoigianlienhe,tindang_active,tindang_vipham,tindang_mienphi,create_at,update_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
@@ -21,7 +22,8 @@ exports.add = (tinDang, result) => {
 
 exports.getAllTinChoDuyet = (result) => {
 
-    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
+    // const sql = "SELECT * FROM tbl_tindang LEFT JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id LEFT JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
+    const sql = "SELECT tbl_tindang.tindang_id, tbl_tindang.nhom_id,tbl_tindang.user_id, tbl_tindang.tindang_tieude, tbl_tindang.tindang_gia, tbl_tindang.tindang_tukhoa, tbl_tindang.tindang_tinhthanh,tbl_tindang.tindang_quanhuyen,tbl_tindang.tindang_phuongxa,tbl_tindang.tindang_noidung,tbl_tindang.tindang_linkyoutube,tbl_tindang.tindang_hoten,tbl_tindang.tindang_phone, tbl_tindang.tindang_email,tbl_tindang.tindang_diachi,tbl_tindang.tindang_thoigianlienhe,tbl_tindang.tindang_active,tbl_tindang.tindang_vipham,tbl_tindang.tindang_mienphi,tbl_tindang.tindang_uutien,tbl_tindang.tindang_thoigianuutien,tbl_tindang.create_at,tbl_tindang.update_at,tbl_danhmuc.danhmuc_id,tbl_danhmuc.danhmuc_ten,tbl_nhom.nhom_ten FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
     con.query(sql, [0, 0], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -36,7 +38,7 @@ exports.getAllTinChoDuyet = (result) => {
 
 exports.getAllTinViPham = (result) => {
 
-    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id JOIN tbl_thongbaovipham on tbl_tindang.tindang_id = tbl_thongbaovipham.tindang_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
+    const sql = "SELECT tbl_tindang.tindang_id, tbl_tindang.nhom_id,tbl_tindang.user_id, tbl_tindang.tindang_tieude, tbl_tindang.tindang_gia, tbl_tindang.tindang_tukhoa, tbl_tindang.tindang_tinhthanh,tbl_tindang.tindang_quanhuyen,tbl_tindang.tindang_phuongxa,tbl_tindang.tindang_noidung,tbl_tindang.tindang_linkyoutube,tbl_tindang.tindang_hoten,tbl_tindang.tindang_phone, tbl_tindang.tindang_email,tbl_tindang.tindang_diachi,tbl_tindang.tindang_thoigianlienhe,tbl_tindang.tindang_active,tbl_tindang.tindang_vipham,tbl_tindang.tindang_mienphi,tbl_tindang.tindang_uutien,tbl_tindang.tindang_thoigianuutien,tbl_tindang.create_at,tbl_tindang.update_at,tbl_danhmuc.danhmuc_id,tbl_danhmuc.danhmuc_ten,tbl_nhom.nhom_ten FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id JOIN tbl_thongbaovipham on tbl_tindang.tindang_id = tbl_thongbaovipham.tindang_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
     con.query(sql, [0, 1], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -51,7 +53,7 @@ exports.getAllTinViPham = (result) => {
 
 exports.getAllTinDaDuyet = (result) => {
 
-    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ?  ORDER BY tbl_tindang.tindang_id DESC"
+    const sql = "SELECT tbl_tindang.tindang_id, tbl_tindang.nhom_id,tbl_tindang.user_id, tbl_tindang.tindang_tieude, tbl_tindang.tindang_gia, tbl_tindang.tindang_tukhoa, tbl_tindang.tindang_tinhthanh,tbl_tindang.tindang_quanhuyen,tbl_tindang.tindang_phuongxa,tbl_tindang.tindang_noidung,tbl_tindang.tindang_linkyoutube,tbl_tindang.tindang_hoten,tbl_tindang.tindang_phone, tbl_tindang.tindang_email,tbl_tindang.tindang_diachi,tbl_tindang.tindang_thoigianlienhe,tbl_tindang.tindang_active,tbl_tindang.tindang_vipham,tbl_tindang.tindang_mienphi,tbl_tindang.tindang_uutien,tbl_tindang.tindang_thoigianuutien,tbl_tindang.create_at,tbl_tindang.update_at,tbl_danhmuc.danhmuc_id,tbl_danhmuc.danhmuc_ten,tbl_nhom.nhom_ten FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ?  ORDER BY tbl_tindang.tindang_id DESC"
     con.query(sql, [1, 0], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -110,7 +112,7 @@ exports.getAllTinDaDuyetByIdUser = (user_id, result) => {
 
 exports.getTinMoi = (result) => {
 
-    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC LIMIT 5"
+    const sql = "SELECT tbl_tindang.tindang_id, tbl_tindang.nhom_id,tbl_tindang.user_id, tbl_tindang.tindang_tieude, tbl_tindang.tindang_gia, tbl_tindang.tindang_tukhoa, tbl_tindang.tindang_tinhthanh,tbl_tindang.tindang_quanhuyen,tbl_tindang.tindang_phuongxa,tbl_tindang.tindang_noidung,tbl_tindang.tindang_linkyoutube,tbl_tindang.tindang_hoten,tbl_tindang.tindang_phone, tbl_tindang.tindang_email,tbl_tindang.tindang_diachi,tbl_tindang.tindang_thoigianlienhe,tbl_tindang.tindang_active,tbl_tindang.tindang_vipham,tbl_tindang.tindang_mienphi,tbl_tindang.tindang_uutien,tbl_tindang.tindang_thoigianuutien,tbl_tindang.create_at,tbl_tindang.update_at,tbl_danhmuc.danhmuc_id,tbl_danhmuc.danhmuc_ten,tbl_nhom.nhom_ten FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC LIMIT 5"
     con.query(sql, [1, 0], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -125,7 +127,7 @@ exports.getTinMoi = (result) => {
 
 exports.getOneTinByIdTinDang = (tindang_id, result) => {
 
-    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_id = ? ORDER BY tbl_tindang.tindang_id"
+    const sql = "SELECT tbl_tindang.tindang_id, tbl_tindang.nhom_id,tbl_tindang.user_id, tbl_tindang.tindang_tieude, tbl_tindang.tindang_gia, tbl_tindang.tindang_tukhoa, tbl_tindang.tindang_tinhthanh,tbl_tindang.tindang_quanhuyen,tbl_tindang.tindang_phuongxa,tbl_tindang.tindang_noidung,tbl_tindang.tindang_linkyoutube,tbl_tindang.tindang_hoten,tbl_tindang.tindang_phone, tbl_tindang.tindang_email,tbl_tindang.tindang_diachi,tbl_tindang.tindang_thoigianlienhe,tbl_tindang.tindang_active,tbl_tindang.tindang_vipham,tbl_tindang.tindang_mienphi,tbl_tindang.tindang_uutien,tbl_tindang.tindang_thoigianuutien,tbl_tindang.create_at,tbl_tindang.update_at,tbl_danhmuc.danhmuc_id,tbl_danhmuc.danhmuc_ten,tbl_nhom.nhom_ten FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_id = ? ORDER BY tbl_tindang.tindang_id"
     con.query(sql, [tindang_id], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -140,7 +142,7 @@ exports.getOneTinByIdTinDang = (tindang_id, result) => {
 
 exports.getTinByIdNhom = (nhom_id, start, limit, result) => {
 
-    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.nhom_id = ? ORDER BY tbl_tindang.tindang_id DESC LIMIT ?,?"
+    const sql = "SELECT tbl_tindang.tindang_id, tbl_tindang.nhom_id,tbl_tindang.user_id, tbl_tindang.tindang_tieude, tbl_tindang.tindang_gia, tbl_tindang.tindang_tukhoa, tbl_tindang.tindang_tinhthanh,tbl_tindang.tindang_quanhuyen,tbl_tindang.tindang_phuongxa,tbl_tindang.tindang_noidung,tbl_tindang.tindang_linkyoutube,tbl_tindang.tindang_hoten,tbl_tindang.tindang_phone, tbl_tindang.tindang_email,tbl_tindang.tindang_diachi,tbl_tindang.tindang_thoigianlienhe,tbl_tindang.tindang_active,tbl_tindang.tindang_vipham,tbl_tindang.tindang_mienphi,tbl_tindang.tindang_uutien,tbl_tindang.tindang_thoigianuutien,tbl_tindang.create_at,tbl_tindang.update_at,tbl_danhmuc.danhmuc_id,tbl_danhmuc.danhmuc_ten,tbl_nhom.nhom_ten FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.nhom_id = ? ORDER BY tbl_tindang.tindang_id DESC LIMIT ?,?"
     con.query(sql, [1, 0, nhom_id, start, limit], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -236,7 +238,7 @@ exports.getAllTinUuTienById = (user_id, result) => {
 // get tin uu tien by nhom_id
 exports.getAllTinUuTienByIdNhom = (nhom_id, result) => {
 
-    const sql = "SELECT * FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.nhom_id = ? AND tbl_tindang.tindang_uutien = ? ORDER BY tbl_tindang.tindang_id DESC"
+    const sql = "SELECT tbl_tindang.tindang_id, tbl_tindang.nhom_id,tbl_tindang.user_id, tbl_tindang.tindang_tieude, tbl_tindang.tindang_gia, tbl_tindang.tindang_tukhoa, tbl_tindang.tindang_tinhthanh,tbl_tindang.tindang_quanhuyen,tbl_tindang.tindang_phuongxa,tbl_tindang.tindang_noidung,tbl_tindang.tindang_linkyoutube,tbl_tindang.tindang_hoten,tbl_tindang.tindang_phone, tbl_tindang.tindang_email,tbl_tindang.tindang_diachi,tbl_tindang.tindang_thoigianlienhe,tbl_tindang.tindang_active,tbl_tindang.tindang_vipham,tbl_tindang.tindang_mienphi,tbl_tindang.tindang_uutien,tbl_tindang.tindang_thoigianuutien,tbl_tindang.create_at,tbl_tindang.update_at,tbl_danhmuc.danhmuc_id,tbl_danhmuc.danhmuc_ten,tbl_nhom.nhom_ten FROM tbl_tindang JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? AND tbl_tindang.nhom_id = ? AND tbl_tindang.tindang_uutien = ? ORDER BY tbl_tindang.tindang_id DESC"
     con.query(sql, [1, 0, nhom_id, 1], (err, res) => {
         if (err) {
             console.log("error:", err);

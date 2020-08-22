@@ -967,6 +967,9 @@ exports.updateTinDangUuTien = async (req, res) => {
             const noidung = `Thanh Toán tin ưu tiền thành công và đã -10000 DR cho user`
             tinhToanDongRao.xuLyDongRao(dataFlagGetOneTinByIdTinDang[0].user_id, dataDongrao, noidung, 1);
 
+            // update tiền ưu tiên
+            tinhToanDongRao.tienUuTien(dataFlagGetOneTinByIdTinDang[0].user_id, dataDongrao);
+
             return res.status(200).json({ message: 'Update Tin ưu tiên thành công !!' })
         } else {
             return res.status(200).json({ error: 'Update tin uu tien that bai thất bại!!' })

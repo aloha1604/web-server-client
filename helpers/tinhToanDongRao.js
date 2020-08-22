@@ -84,3 +84,43 @@ exports.xuLyDongRao = async (user_idd, dataGiaDongRao0, noiDungGiaoDichh, tuycho
     }
 
 }
+
+exports.tienUuTien = async (user_idd, giaUuTienn) => {
+
+    //get data
+    const user_id = user_idd;
+    const giaUuTien = giaUuTienn;
+
+    // get tiền ưu tiên hiện tại
+    const getFlagTienUuTien = (user_id) => {
+        return new Promise((resolve, reject) => {
+            userModel.getTienUuTienByIdUser(user_id, (err, data) => {
+                if (err)
+                    reject(err);
+                else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+
+    const dataTienUuTien = await getFlagTienUuTien(user_id);
+    let dongRao = dataTienUuTien[0].tienuutien ? dataTienUuTien[0].tienuutien : 0;
+    let newDongRao = parseInt(dongRao) + parseInt(giaUuTien);
+
+    //update tiền ưu tiên
+    const updateFlagTienUuTien = (user_id, newDongRao) => {
+        return new Promise((resolve, reject) => {
+            userModel.updateTienUuTienByIdUser(user_id, newDongRao, (err, data) => {
+                if (err)
+                    reject(err);
+                else {
+                    resolve(data);
+                }
+            })
+        })
+    }
+
+    const dataUpdateTienUuTien = await updateFlagTienUuTien(user_id, newDongRao);
+
+}

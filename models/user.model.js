@@ -206,6 +206,20 @@ exports.getDongRaoByIdUser = (user_id, result) => {
 }
 
 // dong rao
+exports.getTienUuTienByIdUser = (user_id, result) => {
+    const sql = "SELECT tienuutien,email from user WHERE user_id =?";
+    con.query(sql, [user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            result(null, res);
+        }
+    })
+}
+
+// dong rao
 exports.updateDongRaoByIdUser = (user_id, newDongRao, result) => {
     const sql = "UPDATE user set dongrao =? WHERE user_id =?";
     con.query(sql, [newDongRao, user_id], (err, res) => {
@@ -218,6 +232,21 @@ exports.updateDongRaoByIdUser = (user_id, newDongRao, result) => {
         }
     })
 }
+
+// dong rao
+exports.updateTienUuTienByIdUser = (user_id, newDongRao, result) => {
+    const sql = "UPDATE user set tienuutien =? WHERE user_id =?";
+    con.query(sql, [newDongRao, user_id], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+            result(null, res);
+        }
+    })
+}
+
 // get dong rao and tin co phi
 exports.getCountTinMienPhiAndDongRao = (user_id, result) => {
     const sql = "SELECT tinmienphi,dongrao FROM user WHERE user_id = ?";

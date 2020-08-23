@@ -331,3 +331,64 @@ exports.updateThongTinUserByIdUser = (user_id, hoten, phone, diachi, ngaysinh, g
         }
     })
 }
+
+//get count user chưa active
+exports.getCountUserChuaActive = (result) => {
+    const sql = "SELECT COUNT(user.user_id) FROM user WHERE active=? AND vipham=?"
+    con.query(sql, [0, 0], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+
+            result(null, res);
+        }
+    })
+}
+
+// get count user đã active
+exports.getCountUserDaActive = (result) => {
+    const sql = "SELECT COUNT(user.user_id) FROM user WHERE active=? AND vipham=?"
+    con.query(sql, [1, 0], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+
+            result(null, res);
+        }
+    })
+}
+
+//get tổng đồng rao
+exports.getSumDongRaoUserDaActive = (result) => {
+    const sql = "SELECT SUM(user.dongrao) FROM user WHERE active=1 AND vipham=0"
+    con.query(sql, [1, 0], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+
+            result(null, res);
+        }
+    })
+}
+
+//get tổng tiền ưu tiên
+exports.getSumTienUutienUserDaActive = (result) => {
+    const sql = "SELECT SUM(user.tienuutien) FROM user WHERE active=1 AND vipham=0"
+    con.query(sql, [1, 0], (err, res) => {
+        if (err) {
+            console.log("error:", err);
+            result(null, err);
+            return;
+        } else {
+
+            result(null, res);
+        }
+    })
+}
+

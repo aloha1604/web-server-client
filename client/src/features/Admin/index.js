@@ -23,6 +23,8 @@ const TinDaDuyet = React.lazy(() => import('./components/QuanLyTinDang/TinDaDuye
 const UserViPham = React.lazy(() => import('./components/QuanLyUser/UserViPham'));
 const UserChuaActive = React.lazy(() => import('./components/QuanLyUser/UserChuaActive'));
 const UserDaActive = React.lazy(() => import('./components/QuanLyUser/UserDaActive'))
+const ThongKe = React.lazy(() => import('./components/Thongke'));
+
 
 function Admin(props) {
     const match = useRouteMatch();
@@ -92,6 +94,8 @@ function Admin(props) {
                             path={`${match.url}/tindaduyet`}
                             component={TinDaDuyet} uservipham
                         />
+
+                        {/* route Quản lý user */}
                         <ProtectedRoute
                             exact
                             path={`${match.url}/uservipham`}
@@ -108,6 +112,12 @@ function Admin(props) {
                             component={UserDaActive}
                         />
 
+                        {/* route Quản lý thống kê */}
+                        <ProtectedRoute
+                            exact
+                            path={`${match.url}/dashBoard`}
+                            component={ThongKe}
+                        />
 
                         {/* phải dùng cách proteced 1 router thì xài 1 pagecomponent và bỏ side bar vào */}
                         <Route path="/admin/*" component={NotFound} />

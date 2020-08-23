@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faSignOutAlt,
     faCopy,
+    faChartLine,
+    faList,
+    faBars,
+    faUsers
 } from "@fortawesome/free-solid-svg-icons";
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
@@ -30,12 +34,17 @@ const SideBar = ({ isOpen, toggle, nameAdmin }) => {
             <div className="side-menu">
                 <Nav vertical className="list-unstyled pb-3">
                     <p>Chào mừng {nameAdmin} đến với admin</p>
-
+                    <NavItem>
+                        <NavLink tag={Link} to='/admin/dashBoard'>
+                            <FontAwesomeIcon icon={faChartLine} className="mr-2" />
+                            Thống kê
+                        </NavLink>
+                    </NavItem>
                     {/* <SubMenu title="Admin" icon={faHome} items={submenus[0]} /> */}
-                    <SubMenu title="QLDanh mục" icon={faCopy} items={submenus[1]} />
-                    <SubMenu title="QL Nhóm" icon={faCopy} items={submenus[2]} />
+                    <SubMenu title="QLDanh mục" icon={faList} items={submenus[1]} />
+                    <SubMenu title="QL Nhóm" icon={faBars} items={submenus[2]} />
                     <SubMenu title="QL Đăng Tin" icon={faCopy} items={submenus[3]} />
-                    <SubMenu title="QL UserClient" icon={faCopy} items={submenus[4]} />
+                    <SubMenu title="QL UserClient" icon={faUsers} items={submenus[4]} />
 
                     {/* <NavItem>
                         <NavLink tag={Link} to={"/faq"}>

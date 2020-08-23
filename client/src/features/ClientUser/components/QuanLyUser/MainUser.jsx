@@ -14,6 +14,7 @@ function MainUser(props) {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('user'));
     const user_id = user.userFakeData._id;
+    const email = user.userFakeData.email;
     const userList = useSelector(state => state.userAuth); // get admin in reducer
     const [hoTen, setHoTen] = useState('');
     const [phone, setPhone] = useState('');
@@ -82,7 +83,7 @@ function MainUser(props) {
                                     <div className="headeruser-right-name">
                                         <h6><span><FontAwesomeIcon icon={faUser} />{' '}</span>{user.hoten ? user.hoten : 'Chưa cập nhật '}</h6>
                                         <h6><span><FontAwesomeIcon icon={faDollarSign} />{' '}</span>Số đồng rao: {user.dongrao ? formatVND(user.dongrao, 'DR') : 'Chưa nạp DR'} </h6>
-
+                                        <h6><span><FontAwesomeIcon icon={faDollarSign} />{' '}</span>Số tiền ưu tiên: {user.tienuutien ? formatVND(user.tienuutien, 'DR') : 'Chưa dùng ưu tiên'} </h6>
                                     </div>
                                 </div>
                                 <div className="headeruser-left">
@@ -111,7 +112,7 @@ function MainUser(props) {
 
                                 <FormGroup>
                                     <Label for="exampleEmail" >Email</Label>
-                                    <Input type="email" name="email" id="exampleEmail" placeholder="Quynamele@gmail.com" disabled />
+                                    <Input type="email" name="email" id="exampleEmail" placeholder={email} disabled />
                                 </FormGroup>
 
                                 <FormGroup>

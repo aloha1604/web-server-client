@@ -278,7 +278,7 @@ exports.updateCountTinMienPhiByIdUser = (user_id, newtinmienphi, result) => {
 
 // get thông tin user 
 exports.getThongTinUserByIdUser = (user_id, result) => {
-    const sql = "SELECT email,active,tinmienphi,dongrao,create_at,hoten,phone,diachi,ngaysinh,gioitinh,ngaycap,cmnd,noicap FROM user WHERE user_id = ? ";
+    const sql = "SELECT email,active,tinmienphi,dongrao,create_at,hoten,phone,diachi,ngaysinh,gioitinh,ngaycap,cmnd,noicap,tienuutien FROM user WHERE user_id = ? ";
     con.query(sql, [user_id], (err, res) => {
         if (err) {
             console.log("error:", err);

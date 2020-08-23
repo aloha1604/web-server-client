@@ -161,7 +161,7 @@ exports.thongKeAdmin = async (req, res) => {
     // doanh thu
     let doanhThu = parseInt(thongKe.tongTienUuTien) + parseInt(thongKe.tongTienDangTin);
     thongKe.doanhThu = doanhThu;
-    console.log(thongKe)
+
 
     return res.status(200).json({ thongKe: thongKe })
 

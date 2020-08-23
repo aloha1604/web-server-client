@@ -8,6 +8,7 @@ import danhMuc from '../features/Admin/components/DanhMucSanPham/danhMucSlice';
 import nhom from '../features/Admin/components/NhomSanPham/nhomSlice';
 import user from '../features/Admin/components/QuanLyUser/userSlice';
 import tinDang from '../features/Admin/components/QuanLyTinDang/dangTinSlice';
+import thongKe from '../features/Admin/components/Thongke/thongKeSlice';
 
 //some Reducer client
 import userAuth from '../features/ClientUser/reducer/userSlice';
@@ -18,7 +19,7 @@ import dongRao from '../features/ClientUser/reducer/dongraoSlice';
 
 //root Reducer
 const rootReducer = combineReducers({
-    adminAuth, danhMuc, nhom, user, tinDang, userAuth, tinhThanh, quanHuyen, phuongXa, dongRao
+    adminAuth, danhMuc, nhom, user, tinDang, userAuth, tinhThanh, quanHuyen, phuongXa, dongRao, thongKe
 })
 
 //config store

@@ -334,7 +334,7 @@ exports.updateThongTinUserByIdUser = (user_id, hoten, phone, diachi, ngaysinh, g
 
 //get count user chưa active
 exports.getCountUserChuaActive = (result) => {
-    const sql = "SELECT COUNT(user.user_id) FROM user WHERE active=? AND vipham=?"
+    const sql = "SELECT COUNT(user.user_id) as CountUserChuaActive FROM user WHERE active=? AND vipham=?"
     con.query(sql, [0, 0], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -349,7 +349,7 @@ exports.getCountUserChuaActive = (result) => {
 
 // get count user đã active
 exports.getCountUserDaActive = (result) => {
-    const sql = "SELECT COUNT(user.user_id) FROM user WHERE active=? AND vipham=?"
+    const sql = "SELECT COUNT(user.user_id) as CountUserDaActive FROM user WHERE active=? AND vipham=?"
     con.query(sql, [1, 0], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -364,7 +364,7 @@ exports.getCountUserDaActive = (result) => {
 
 //get tổng đồng rao
 exports.getSumDongRaoUserDaActive = (result) => {
-    const sql = "SELECT SUM(user.dongrao) FROM user WHERE active=1 AND vipham=0"
+    const sql = "SELECT SUM(user.dongrao) as SumDongRaoUserDaActive  FROM user WHERE active=1 AND vipham=0"
     con.query(sql, [1, 0], (err, res) => {
         if (err) {
             console.log("error:", err);
@@ -379,7 +379,7 @@ exports.getSumDongRaoUserDaActive = (result) => {
 
 //get tổng tiền ưu tiên
 exports.getSumTienUutienUserDaActive = (result) => {
-    const sql = "SELECT SUM(user.tienuutien) FROM user WHERE active=1 AND vipham=0"
+    const sql = "SELECT SUM(user.tienuutien) as SumTienUutienUserDaActive FROM user WHERE active=1 AND vipham=0"
     con.query(sql, [1, 0], (err, res) => {
         if (err) {
             console.log("error:", err);

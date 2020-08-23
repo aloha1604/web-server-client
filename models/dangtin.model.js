@@ -301,7 +301,7 @@ exports.searchTinDang = (sql, result) => {
 // láy số lượng tin chưa duyệt
 exports.getCountTinChuaDuyet = (result) => {
 
-    const sql = "SELECT count(tbl_tindang.tindang_id) FROM tbl_tindang LEFT JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id LEFT JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
+    const sql = "SELECT count(tbl_tindang.tindang_id) as CountTinChuaDuyet FROM tbl_tindang LEFT JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id LEFT JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
 
     con.query(sql, [0, 0], (err, res) => {
         if (err) {
@@ -318,7 +318,7 @@ exports.getCountTinChuaDuyet = (result) => {
 // lấy số lượng tin đã duyệt
 exports.getCountTinDaDuyet = (result) => {
 
-    const sql = "SELECT count(tbl_tindang.tindang_id) FROM tbl_tindang LEFT JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id LEFT JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
+    const sql = "SELECT count(tbl_tindang.tindang_id) as CountTinDaDuyet FROM tbl_tindang LEFT JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id LEFT JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
 
     con.query(sql, [1, 0], (err, res) => {
         if (err) {
@@ -336,7 +336,7 @@ exports.getCountTinDaDuyet = (result) => {
 // lây số lượng tin bị lỗi
 exports.getCountTinViPham = (result) => {
 
-    const sql = "SELECT count(tbl_tindang.tindang_id) FROM tbl_tindang LEFT JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id LEFT JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
+    const sql = "SELECT count(tbl_tindang.tindang_id) as CountTinViPham FROM tbl_tindang LEFT JOIN tbl_nhom on tbl_tindang.nhom_id = tbl_nhom.nhom_id LEFT JOIN tbl_danhmuc on tbl_nhom.danhmuc_id = tbl_danhmuc.danhmuc_id WHERE tbl_tindang.tindang_active = ? AND tbl_tindang.tindang_vipham = ? ORDER BY tbl_tindang.tindang_id DESC"
 
     con.query(sql, [0, 1], (err, res) => {
         if (err) {
